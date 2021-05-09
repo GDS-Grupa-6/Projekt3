@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     public bool playerIsShooting;
+    private float xRotation;
 
     private void Awake()
     {
@@ -76,10 +77,16 @@ public class Movement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             characterController.Move(moveDir.normalized * speed * Time.deltaTime);
         }
-        else if (direction.magnitude >= 0.1f && playerIsShooting)
+        else if (playerIsShooting)
         {
-            Debug.Log("Shoot move");
-            ShootMovement(direction);
+            Vector2 mouseDelta = inputManager.GetMouseDelta() * 100f * Time.deltaTime;
+            transform.Rotate(Vector3.up * mouseDelta.x);
+
+            if (direction.magnitude >= 0.1f)
+            {
+                Debug.Log("Shoot move");
+                ShootMovement(direction);
+            }
         }
     }
 
