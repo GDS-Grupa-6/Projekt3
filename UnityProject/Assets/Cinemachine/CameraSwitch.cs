@@ -48,9 +48,7 @@ public class CameraSwitch : MonoBehaviour
         {
             player.playerIsShooting = false;
             Vector3 pos = player.transform.rotation.eulerAngles;
-            Debug.Log(pos);
             tppCamera.m_XAxis.Value = pos.y;
-            Debug.Log(tppCamera.m_XAxis.Value);
             animator.Play("TppCamera");
         }
     }

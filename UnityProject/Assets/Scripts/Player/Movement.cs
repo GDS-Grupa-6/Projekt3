@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     [Space(10)]
+    [SerializeField] private Animator animator;
     [Tooltip("Prędkość poruszania się gracza")] [SerializeField] private float speed = 1;
     [SerializeField] private float jumpHeight = 3f;
     [Header("Camera options")]
@@ -19,6 +20,7 @@ public class Movement : MonoBehaviour
 
     private InputManager inputManager;
     private CharacterController characterController;
+    private ShootCamera shootCamera;
     private float turnSmoothVelocity;
     private Vector3 velocity;
     private bool isGrounded;
@@ -28,6 +30,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        shootCamera = FindObjectOfType<ShootCamera>();
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -60,6 +63,7 @@ public class Movement : MonoBehaviour
     {
         if (isGrounded && inputManager.PlayerJumpedThisFrame())
         {
+            animator.SetTrigger("Jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
@@ -67,10 +71,10 @@ public class Movement : MonoBehaviour
     private void TPPMovement(Vector2 input)
     {
         Vector3 direction = new Vector3(input.x, 0f, input.y).normalized;
+        animator.SetFloat("MoveSpeed", direction.magnitude);
 
         if (direction.magnitude >= 0.1f && !playerIsShooting)
         {
-            Debug.Log("TPP move");
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -79,12 +83,11 @@ public class Movement : MonoBehaviour
         }
         else if (playerIsShooting)
         {
-            Vector2 mouseDelta = inputManager.GetMouseDelta() * 100f * Time.deltaTime;
+            Vector2 mouseDelta = inputManager.GetMouseDelta() * shootCamera.horizontalSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up * mouseDelta.x);
 
             if (direction.magnitude >= 0.1f)
             {
-                Debug.Log("Shoot move");
                 ShootMovement(direction);
             }
         }
