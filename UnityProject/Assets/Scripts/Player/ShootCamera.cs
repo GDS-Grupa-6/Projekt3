@@ -14,6 +14,7 @@ public class ShootCamera : CinemachineExtension
     private InputManager inputManager;
     private Vector3 startingRotation;
 
+
     void Awake()
     {
         inputManager = InputManager.Instance;
@@ -27,8 +28,8 @@ public class ShootCamera : CinemachineExtension
     }
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
-    {
-        if (vcam.Follow)
+    {  
+        if (vcam.Follow && player.GetComponent<Movement>().playerIsShooting)
         {
             if (stage == CinemachineCore.Stage.Aim)
             {
@@ -37,14 +38,9 @@ public class ShootCamera : CinemachineExtension
                 startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
                 startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
 
-                float angle = Mathf.SmoothDampAngle(player.eulerAngles.y, startingRotation.x, ref turnSmoothVelocity, turnSmoothTime);
-                state.RawOrientation = Quaternion.Euler(-startingRotation.y, angle, 0);
-
-                if (player.GetComponent<Movement>().playerIsShooting)
-                {
-                    player.rotation = Quaternion.Euler(0, startingRotation.x, 0);
-                }
-            }
+               state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
+            //   player.rotation = Quaternion.Euler(0, angle, 0);
+            }   
         }
     }
 }
