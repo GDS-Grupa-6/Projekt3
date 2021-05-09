@@ -3,12 +3,16 @@ using UnityEngine.InputSystem;
 
 public class CameraSwitch : MonoBehaviour
 {
-    [SerializeField] private InputAction action;
+    [Space(10)]
     [SerializeField] private Movement player;
-    [SerializeField] private ShootCamera shootCamera;
+    [Header("Switch camera input")]
+    [SerializeField] private InputAction action;
+    [Header("Cameras")]
+    [SerializeField] private Transform shootCamera;
+    [SerializeField] private Transform tppCamera;
+    [SerializeField] private Vector2 camerasDelta;
 
     private Animator animator;
-    private bool tppCamera;
 
     private void Awake()
     {
@@ -19,7 +23,6 @@ public class CameraSwitch : MonoBehaviour
     {
         action.performed += _ => SwitchState();
 
-        tppCamera = true;
         player.playerIsShooting = false;
     }
 
@@ -34,7 +37,7 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchState()
     {
-        if (tppCamera)
+        if (!player.playerIsShooting)
         {
             player.playerIsShooting = true;
             animator.Play("ShootCamera");
@@ -44,7 +47,5 @@ public class CameraSwitch : MonoBehaviour
             player.playerIsShooting = false;
             animator.Play("TppCamera");
         }
-
-        tppCamera = !tppCamera;
     }
 }
