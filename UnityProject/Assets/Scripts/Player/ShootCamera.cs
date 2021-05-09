@@ -3,11 +3,12 @@ using Cinemachine;
 
 public class ShootCamera : CinemachineExtension
 {
-    [Tooltip("Wygładzenie obrotu kamery")] [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private Transform player;
-    [SerializeField] private float horizontalSpeed = 10;
-    [SerializeField] private float verticalSpeed = 10f;
-    [SerializeField] private float clampAngle = 80f;
+    [Space(10)]
+    [Tooltip("Wygładzenie obrotu kamery")] [SerializeField] private float turnSmoothTime = 0.1f;
+    [Tooltip("Szybkość myszki horyzontalnie")] [SerializeField] private float horizontalSpeed = 10;
+    [Tooltip("Szybkość myszki wertykalnie")] [SerializeField] private float verticalSpeed = 10f;
+    [Tooltip("Zablokowanie myszki wertykalnie")] [SerializeField] private float clampAngle = 80f;
 
     private float turnSmoothVelocity;
     private InputManager inputManager;
