@@ -39,8 +39,8 @@ public class CameraSwitch : MonoBehaviour
     {
         if (!player.playerIsShooting)
         {
-            player.playerIsShooting = true;
             animator.Play("ShootCamera");
+            player.playerIsShooting = true;
         }
         else
         {
