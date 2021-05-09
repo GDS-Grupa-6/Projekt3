@@ -39,7 +39,6 @@ public class ShootCamera : CinemachineExtension
                 startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
 
                state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
-            //   player.rotation = Quaternion.Euler(0, angle, 0);
             }   
         }
     }
