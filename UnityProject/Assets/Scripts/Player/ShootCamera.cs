@@ -5,8 +5,7 @@ public class ShootCamera : CinemachineExtension
 {
     [SerializeField] private Transform player;
     [Space(10)]
-    [Tooltip("Wygładzenie obrotu kamery")] [SerializeField] private float turnSmoothTime = 0.1f;
-    [Tooltip("Szybkość myszki horyzontalnie")] [SerializeField] private float horizontalSpeed = 10;
+    [Tooltip("Szybkość myszki horyzontalnie")] public float horizontalSpeed = 10;
     [Tooltip("Szybkość myszki wertykalnie")] [SerializeField] private float verticalSpeed = 10f;
     [Tooltip("Zablokowanie myszki wertykalnie")] [SerializeField] private float clampAngle = 80f;
 
@@ -28,7 +27,7 @@ public class ShootCamera : CinemachineExtension
     }
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
-    {  
+    {
         if (vcam.Follow && player.GetComponent<Movement>().playerIsShooting)
         {
             if (stage == CinemachineCore.Stage.Aim)
@@ -38,8 +37,8 @@ public class ShootCamera : CinemachineExtension
                 startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
                 startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
 
-               state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
-            }   
+                state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
+            }
         }
     }
 }

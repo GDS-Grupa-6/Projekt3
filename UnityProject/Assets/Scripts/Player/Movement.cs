@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
 
     private InputManager inputManager;
     private CharacterController characterController;
+    private ShootCamera shootCamera;
     private float turnSmoothVelocity;
     private Vector3 velocity;
     private bool isGrounded;
@@ -28,6 +29,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        shootCamera = FindObjectOfType<ShootCamera>();
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -79,7 +81,7 @@ public class Movement : MonoBehaviour
         }
         else if (playerIsShooting)
         {
-            Vector2 mouseDelta = inputManager.GetMouseDelta() * 100f * Time.deltaTime;
+            Vector2 mouseDelta = inputManager.GetMouseDelta() * shootCamera.horizontalSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up * mouseDelta.x);
 
             if (direction.magnitude >= 0.1f)
