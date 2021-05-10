@@ -21,11 +21,20 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (movement.playerIsInShootPose && inputManager.PlayerShoot())
+        if (movement.playerIsInShootPose)
         {
-            var obj = Instantiate(bulletPrifab);
-            obj.transform.position = shootPoint.position;
-            obj.transform.rotation = shootPoint.rotation;
+            viewfinder.SetActive(true);
+
+            if (inputManager.PlayerShoot())
+            {
+                var obj = Instantiate(bulletPrifab);
+                obj.transform.position = shootPoint.position;
+                obj.transform.rotation = shootPoint.rotation;
+            }
+        }
+        else
+        {
+            viewfinder.SetActive(false);
         }
     }
 }
