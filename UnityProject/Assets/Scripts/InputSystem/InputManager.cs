@@ -48,6 +48,11 @@ public class InputManager : MonoBehaviour
         return inputSystem.Player.Jump.triggered;
     }
 
+    public bool PlayerShoot()
+    {
+        return inputSystem.Player.Shoot.triggered;
+    }
+
     public Vector2 GetMouseDelta()
     {
         return inputSystem.Camera.MouseLook.ReadValue<Vector2>();

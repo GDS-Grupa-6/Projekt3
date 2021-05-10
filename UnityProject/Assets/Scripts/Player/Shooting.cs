@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Movement))]
 public class Shooting : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private GameObject bulletPrifab;
+
+    private InputManager inputManager;
+    private Movement movement;
+
+    void Awake()
     {
-        
+        movement = GetComponent<Movement>();
+        inputManager = InputManager.Instance;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (movement.playerIsInShootPose && inputManager.PlayerShoot())
+        {
+            var obj = Instantiate(bulletPrifab);
+            obj.transform.position = shootPoint.position;
+            obj.transform.rotation = shootPoint.rotation;
+        }
     }
 }

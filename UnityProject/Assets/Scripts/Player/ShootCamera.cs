@@ -28,7 +28,7 @@ public class ShootCamera : CinemachineExtension
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
-        if (vcam.Follow && player.GetComponent<Movement>().playerIsShooting)
+        if (vcam.Follow && player.GetComponent<Movement>().playerIsInShootPose)
         {
             if (stage == CinemachineCore.Stage.Aim)
             {

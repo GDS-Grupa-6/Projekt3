@@ -24,7 +24,7 @@ public class CameraSwitch : MonoBehaviour
     {
         action.performed += _ => SwitchState();
 
-        player.playerIsShooting = false;
+        player.playerIsInShootPose = false;
     }
 
     private void OnEnable()
@@ -38,15 +38,15 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!player.playerIsShooting)
+        if (!player.playerIsInShootPose)
         {
             player.transform.rotation = Quaternion.Euler(0, tppCamera.m_XAxis.Value, 0);
             animator.Play("ShootCamera");
-            player.playerIsShooting = true;
+            player.playerIsInShootPose = true;
         }
         else
         {
-            player.playerIsShooting = false;
+            player.playerIsInShootPose = false;
             Vector3 pos = player.transform.rotation.eulerAngles;
             tppCamera.m_XAxis.Value = pos.y;
             animator.Play("TppCamera");
