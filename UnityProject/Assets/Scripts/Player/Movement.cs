@@ -63,7 +63,11 @@ public class Movement : MonoBehaviour
     {
         if (isGrounded && inputManager.PlayerJumpedThisFrame())
         {
-            animator.SetTrigger("Jump");
+            if (animator.GetFloat("MoveSpeed") > 0.1f)
+            {
+                animator.SetTrigger("Jump");
+            }
+
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
