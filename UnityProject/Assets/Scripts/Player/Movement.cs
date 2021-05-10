@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     private float turnSmoothVelocity;
     private Vector3 velocity;
     private bool isGrounded;
-    public bool playerIsShooting;
+    public bool playerIsInShootPose;
     private float xRotation;
 
     private void Awake()
@@ -63,7 +63,11 @@ public class Movement : MonoBehaviour
     {
         if (isGrounded && inputManager.PlayerJumpedThisFrame())
         {
-            animator.SetTrigger("Jump");
+            if (animator.GetFloat("MoveSpeed") > 0.1f)
+            {
+                animator.SetTrigger("Jump");
+            }
+
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
@@ -73,7 +77,7 @@ public class Movement : MonoBehaviour
         Vector3 direction = new Vector3(input.x, 0f, input.y).normalized;
         animator.SetFloat("MoveSpeed", direction.magnitude);
 
-        if (direction.magnitude >= 0.1f && !playerIsShooting)
+        if (direction.magnitude >= 0.1f && !playerIsInShootPose)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -81,7 +85,7 @@ public class Movement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             characterController.Move(moveDir.normalized * speed * Time.deltaTime);
         }
-        else if (playerIsShooting)
+        else if (playerIsInShootPose)
         {
             Vector2 mouseDelta = inputManager.GetMouseDelta() * shootCamera.horizontalSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up * mouseDelta.x);

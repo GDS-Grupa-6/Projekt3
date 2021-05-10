@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3433670424446046139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2715333663100943720}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2715333663100943720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433670424446046139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.366, y: 0.848, z: 0.568}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3457854633381069685}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3457854631483058801
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +71,8 @@ GameObject:
   - component: {fileID: 3457854633381069685}
   - component: {fileID: 3457854633381069684}
   - component: {fileID: 3457854633381069687}
+  - component: {fileID: 1889538142}
+  - component: {fileID: 7845576992267782259}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -61,6 +93,7 @@ Transform:
   m_Children:
   - {fileID: 2551082024120986635}
   - {fileID: 3457854631483058806}
+  - {fileID: 2715333663100943720}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56895b9a48eee74c97d2ea4345ff439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8468859950160967281}
+  animator: {fileID: 1889538142}
   speed: 10
   jumpHeight: 1
   mainCamera: {fileID: 0}
@@ -104,7 +137,41 @@ MonoBehaviour:
   grounMask:
     serializedVersion: 2
     m_Bits: 256
-  playerIsShooting: 0
+  playerIsInShootPose: 0
+--- !u!95 &1889538142
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457854633381069686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 4610f5c686961954195f57f7cac951a4, type: 3}
+  m_Controller: {fileID: 9100000, guid: c9e3ed79f04cdcf419835c1b48d6ca81, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7845576992267782259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457854633381069686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77db4c79e5256b479ec0e4d02048bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPoint: {fileID: 2715333663100943720}
+  bulletPrifab: {fileID: 4361526237558633485, guid: 5e8cfe7819348d34999a3ba2dd92ff50,
+    type: 3}
 --- !u!1001 &2661058832643443680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,17 +249,12 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 4610f5c686961954195f57f7cac951a4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4610f5c686961954195f57f7cac951a4, type: 3}
 --- !u!4 &2551082024120986635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4610f5c686961954195f57f7cac951a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2661058832643443680}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &8468859950160967281 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4610f5c686961954195f57f7cac951a4,
     type: 3}
   m_PrefabInstance: {fileID: 2661058832643443680}
   m_PrefabAsset: {fileID: 0}
