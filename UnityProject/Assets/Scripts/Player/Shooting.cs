@@ -7,6 +7,7 @@ public class Shooting : MonoBehaviour
 {
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrifab;
+    [SerializeField] private GameObject viewfinder;
 
     private InputManager inputManager;
     private Movement movement;
