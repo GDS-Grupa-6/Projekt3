@@ -78,6 +78,33 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-7996803510953596182
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: stand_to_roll
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -203655887218126122, guid: 199922112647ee04c9cba4536a18a74a,
+    type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-6394109714677121235
 AnimatorState:
   serializedVersion: 5
@@ -174,21 +201,27 @@ AnimatorStateMachine:
     m_Position: {x: 0, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4017374485463534491}
-    m_Position: {x: 240, y: 320, z: 0}
+    m_Position: {x: 380, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8165043184118226409}
     m_Position: {x: -130, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3009282337974557383}
     m_Position: {x: 380, y: 190, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8611990636065538146}
+    m_Position: {x: 380, y: 400, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7996803510953596182}
+    m_Position: {x: 380, y: 470, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 420, y: 80, z: 0}
+  m_AnyStatePosition: {x: 380, y: 60, z: 0}
   m_EntryPosition: {x: 50, y: 80, z: 0}
-  m_ExitPosition: {x: 330, y: 20, z: 0}
+  m_ExitPosition: {x: 290, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -8086828845960810482}
 --- !u!91 &9100000
@@ -460,3 +493,30 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &8611990636065538146
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: sprint_to_roll
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -203655887218126122, guid: 4484be966d91d7f4e8f3c514666fde40,
+    type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
