@@ -31,7 +31,7 @@ public class Shooting : MonoBehaviour
         if (movement.playerIsInShootPose)
         {
             gunGFX.SetActive(true);
-            GunLookAt();
+           // GunLookAt();
 
             if (rigBuilder.enabled == false)
             {
