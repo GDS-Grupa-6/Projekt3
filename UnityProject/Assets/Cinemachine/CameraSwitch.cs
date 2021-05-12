@@ -11,7 +11,6 @@ public class CameraSwitch : MonoBehaviour
     [Header("Cameras")]
     [SerializeField] private Transform shootCamera;
     [SerializeField] private CinemachineFreeLook tppCamera;
-    [SerializeField] private Vector2 camerasDelta;
 
     private Animator animator;
 
@@ -46,10 +45,10 @@ public class CameraSwitch : MonoBehaviour
         }
         else
         {
-            player.playerIsInShootPose = false;
             Vector3 pos = player.transform.rotation.eulerAngles;
             tppCamera.m_XAxis.Value = pos.y;
             animator.Play("TppCamera");
+            player.playerIsInShootPose = false;
         }
     }
 }
