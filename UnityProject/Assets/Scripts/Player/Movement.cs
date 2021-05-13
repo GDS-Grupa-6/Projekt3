@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
 public class Movement : MonoBehaviour
 {
     [Space(10)]
@@ -18,13 +19,13 @@ public class Movement : MonoBehaviour
     [Tooltip("Długość promienia groundCheck")] [SerializeField] private float groundDistance = 0.4f;
     [Tooltip("Nazwy masek obiektów na których może stać gracz")] [SerializeField] private LayerMask grounMask;
 
+    [HideInInspector] public bool playerIsInShootPose;
     private InputManager inputManager;
     private CharacterController characterController;
     private ShootCamera shootCamera;
     private float turnSmoothVelocity;
     private Vector3 velocity;
     private bool isGrounded;
-    public bool playerIsInShootPose;
     private float xRotation;
 
     private void Awake()
