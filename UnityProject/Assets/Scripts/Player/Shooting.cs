@@ -26,7 +26,7 @@ public class Shooting : MonoBehaviour
     {
         movement = GetComponent<Movement>();
         inputManager = InputManager.Instance;
-        gunGFX.SetActive(false);
+        SetGFX(false);
     }
 
     void Update()
