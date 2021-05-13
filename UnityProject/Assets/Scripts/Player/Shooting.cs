@@ -31,7 +31,6 @@ public class Shooting : MonoBehaviour
         if (movement.playerIsInShootPose)
         {
             gunGFX.SetActive(true);
-            // GunLookAt();
 
             if (rigBuilder.enabled == false)
             {
@@ -39,7 +38,6 @@ public class Shooting : MonoBehaviour
             }
 
             viewfinder.SetActive(true);
-            gunRig.weight = 1;
 
             if (inputManager.PlayerShoot())
             {
@@ -50,7 +48,6 @@ public class Shooting : MonoBehaviour
         {
             gunGFX.SetActive(false);
             viewfinder.SetActive(false);
-            gunRig.weight = 0;
 
             if (rigBuilder.enabled == true)
             {
@@ -64,12 +61,5 @@ public class Shooting : MonoBehaviour
         var obj = Instantiate(bulletPrifab, shootPoint.position, Quaternion.identity);
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         rb.velocity = mainCam.transform.forward * shootForce;
-    }
-
-    private void GunLookAt()
-    {
-        gun.transform.LookAt(new Vector3(Camera.main.ScreenToWorldPoint(viewfinder.transform.position).x,
-            Camera.main.ScreenToWorldPoint(viewfinder.transform.position).y,
-            -Camera.main.ScreenToWorldPoint(viewfinder.transform.position).z));
     }
 }

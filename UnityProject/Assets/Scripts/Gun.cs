@@ -9,10 +9,16 @@ public class Gun : MonoBehaviour
     public Transform aimTransform;
     public Transform bone;
 
+    public int iterations = 10;
+
     private void LateUpdate()
     {
         Vector3 targetPosition = targetTransform.position;
-        AimAtTarget(bone, targetPosition);
+
+        for (int i = 0; i < iterations; i++)
+        {
+            AimAtTarget(bone, targetPosition);
+        }
     }
 
     private void AimAtTarget(Transform bone, Vector3 targetPosition)
