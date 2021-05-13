@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8352057189168651536}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7265212756428913411
 MonoBehaviour:
@@ -71,7 +71,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8352057189168651536}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8352057189168651539
 GameObject:
@@ -86,7 +86,7 @@ GameObject:
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -102,7 +102,6 @@ Transform:
   m_LocalScale: {x: 0.7811167, y: 0.78111666, z: 0.3459231}
   m_Children:
   - {fileID: 8386492771889825365}
-  - {fileID: 8352057190173026943}
   - {fileID: 4248431346967702879}
   - {fileID: 7070838338537493907}
   m_Father: {fileID: 0}
@@ -123,36 +122,8 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   aimTransform: {fileID: 7070838338537493907}
   bone: {fileID: 8352057189168651536}
---- !u!1 &8352057190173026942
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8352057190173026943}
-  m_Layer: 0
-  m_Name: ShootPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8352057190173026943
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8352057190173026942}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0208, y: 0.051, z: 0.468}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8352057189168651536}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  shootPoint: {fileID: 0}
+  iterations: 10
 --- !u!1001 &8352057190196093374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,12 +159,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 06f05421d255c4e4497d857ddb259720,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.057
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 06f05421d255c4e4497d857ddb259720,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.478
+      value: -0.487
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 06f05421d255c4e4497d857ddb259720,
         type: 3}

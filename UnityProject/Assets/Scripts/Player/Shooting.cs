@@ -6,15 +6,18 @@ using UnityEngine.Animations.Rigging;
 [RequireComponent(typeof(Movement))]
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private GameObject bulletPrifab;
-    [SerializeField] private GameObject viewfinder;
-    [SerializeField] private Camera mainCam;
     [SerializeField] private float shootForce = 20f;
+    [Header("Gun options")]
     [SerializeField] private Rig gunRig;
-    [SerializeField] private RigBuilder rigBuilder;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject gunGFX;
+    [SerializeField] private GameObject bulletPrifab;
+    [Header("Camera options")]
+    [SerializeField] private Camera mainCam;
+    [SerializeField] private GameObject viewfinder;
+    [Header("Player rig")]
+    [SerializeField] private RigBuilder rigBuilder;
+
 
     private InputManager inputManager;
     private Movement movement;
@@ -28,16 +31,19 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
+        Shoot();
+    }
+
+    private void Shoot()
+    {
         if (movement.playerIsInShootPose)
         {
-            gunGFX.SetActive(true);
+            SetGFX(true);
 
             if (rigBuilder.enabled == false)
             {
                 rigBuilder.enabled = true;
             }
-
-            viewfinder.SetActive(true);
 
             if (inputManager.PlayerShoot())
             {
@@ -46,8 +52,7 @@ public class Shooting : MonoBehaviour
         }
         else
         {
-            gunGFX.SetActive(false);
-            viewfinder.SetActive(false);
+            SetGFX(false);
 
             if (rigBuilder.enabled == true)
             {
@@ -58,8 +63,14 @@ public class Shooting : MonoBehaviour
 
     private void CreateBullet()
     {
-        var obj = Instantiate(bulletPrifab, shootPoint.position, Quaternion.identity);
+        var obj = Instantiate(bulletPrifab, gun.transform.position, Quaternion.identity);
         Rigidbody rb = obj.GetComponent<Rigidbody>();
-        rb.velocity = mainCam.transform.forward * shootForce;
+        rb.velocity = -gun.GetComponent<Gun>().targetTransform.up * shootForce;
+    }
+
+    private void SetGFX(bool setActive)
+    {
+        gunGFX.SetActive(setActive);
+        viewfinder.SetActive(setActive);
     }
 }

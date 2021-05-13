@@ -17,16 +17,6 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(rb.velocity);
     }
 
-    private void Update()
-    {
-        BulletMovement();
-    }
-
-    private void BulletMovement()
-    {
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision != null)

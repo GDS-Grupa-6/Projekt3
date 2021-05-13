@@ -283,8 +283,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3457854633381069685}
   - component: {fileID: 3457854633381069684}
-  - component: {fileID: 3457854633381069687}
   - component: {fileID: 1889538142}
+  - component: {fileID: 3457854633381069687}
   - component: {fileID: 7845576992267782259}
   m_Layer: 0
   m_Name: Player
@@ -327,6 +327,25 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.13, z: 0}
+--- !u!95 &1889538142
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457854633381069686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 4610f5c686961954195f57f7cac951a4, type: 3}
+  m_Controller: {fileID: 9100000, guid: c9e3ed79f04cdcf419835c1b48d6ca81, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3457854633381069687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,25 +369,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerIsInShootPose: 0
---- !u!95 &1889538142
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457854633381069686}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4610f5c686961954195f57f7cac951a4, type: 3}
-  m_Controller: {fileID: 9100000, guid: c9e3ed79f04cdcf419835c1b48d6ca81, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7845576992267782259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,16 +381,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77db4c79e5256b479ec0e4d02048bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPoint: {fileID: 4934921382102811887}
-  bulletPrifab: {fileID: 4361526237558633485, guid: 5e8cfe7819348d34999a3ba2dd92ff50,
-    type: 3}
-  viewfinder: {fileID: 0}
-  mainCam: {fileID: 0}
   shootForce: 50
   gunRig: {fileID: 1346169687}
-  rigBuilder: {fileID: 204438307}
   gun: {fileID: 4934921381362037635}
   gunGFX: {fileID: 5241403850406687359}
+  bulletPrifab: {fileID: 4361526237558633485, guid: 5e8cfe7819348d34999a3ba2dd92ff50,
+    type: 3}
+  mainCam: {fileID: 0}
+  viewfinder: {fileID: 0}
+  rigBuilder: {fileID: 204438307}
 --- !u!1001 &2661058832643443680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1152,21 +1151,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0af3e67f9956e442839989e3ae49c58, type: 3}
---- !u!1 &4934921381362037635 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8352057189168651539, guid: d0af3e67f9956e442839989e3ae49c58,
-    type: 3}
-  m_PrefabInstance: {fileID: 4004873362172374672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5241403850406687359 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9162887981826022639, guid: d0af3e67f9956e442839989e3ae49c58,
     type: 3}
   m_PrefabInstance: {fileID: 4004873362172374672}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4934921382102811887 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8352057190173026943, guid: d0af3e67f9956e442839989e3ae49c58,
+--- !u!1 &4934921381362037635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8352057189168651539, guid: d0af3e67f9956e442839989e3ae49c58,
     type: 3}
   m_PrefabInstance: {fileID: 4004873362172374672}
   m_PrefabAsset: {fileID: 0}

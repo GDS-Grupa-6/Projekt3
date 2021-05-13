@@ -6,10 +6,10 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public Transform targetTransform;
-    public Transform aimTransform;
-    public Transform bone;
+    [SerializeField] private Transform aimTransform;
+    [SerializeField] private Transform bone;
 
-    public int iterations = 10;
+    private int iterations = 10;
 
     private void LateUpdate()
     {
