@@ -7,7 +7,7 @@ public class CSVManager
     private static string reportFileName = "report.csv";
     private static string reportSeparator = ";";
     private static string timeStampHeader = "Play date";
-    private static string[] reportHeaders = new string[2] { "Lp.", "Play time" };
+    private static string[] reportHeaders = new string[1] { "Play time" };
 
     public static void AppendToReport(string[] strings)
     {
