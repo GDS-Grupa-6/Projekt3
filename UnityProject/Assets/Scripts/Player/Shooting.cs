@@ -38,11 +38,9 @@ public class Shooting : MonoBehaviour
     {
         if (movement.playerIsInShootPose)
         {
-            SetGFX(true);
-
             if (rigBuilder.enabled == false)
             {
-                rigBuilder.enabled = true;
+                SetGFX(true);
             }
 
             if (inputManager.PlayerShoot())
@@ -50,14 +48,9 @@ public class Shooting : MonoBehaviour
                 CreateBullet();
             }
         }
-        else
+        else if (!movement.playerIsInShootPose && rigBuilder.enabled == true)
         {
             SetGFX(false);
-
-            if (rigBuilder.enabled == true)
-            {
-                rigBuilder.enabled = false;
-            }
         }
     }
 
@@ -72,5 +65,6 @@ public class Shooting : MonoBehaviour
     {
         gunGFX.SetActive(setActive);
         viewfinder.SetActive(setActive);
+        rigBuilder.enabled = setActive;
     }
 }

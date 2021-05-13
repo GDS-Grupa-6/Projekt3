@@ -7,9 +7,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Rigidbody rb;
-    private float lifeTime = 2f;
-    private float timer;
-    private bool hitSomething;
 
     private void Start()
     {
