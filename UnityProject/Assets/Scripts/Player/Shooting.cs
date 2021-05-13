@@ -31,7 +31,7 @@ public class Shooting : MonoBehaviour
         if (movement.playerIsInShootPose)
         {
             gunGFX.SetActive(true);
-           // GunLookAt();
+            // GunLookAt();
 
             if (rigBuilder.enabled == false)
             {
@@ -51,6 +51,11 @@ public class Shooting : MonoBehaviour
             gunGFX.SetActive(false);
             viewfinder.SetActive(false);
             gunRig.weight = 0;
+
+            if (rigBuilder.enabled == true)
+            {
+                rigBuilder.enabled = false;
+            }
         }
     }
 
