@@ -26,7 +26,7 @@ public class Shooting : MonoBehaviour
     void Awake()
     {
         movement = GetComponent<Movement>();
-        inputManager = InputManager.Instance;
+        inputManager = FindObjectOfType<InputManager>();
         SetGFX(false);
     }
 

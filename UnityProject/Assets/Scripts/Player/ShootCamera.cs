@@ -17,7 +17,7 @@ public class ShootCamera : CinemachineExtension
 
     void Awake()
     {
-        inputManager = InputManager.Instance;
+        inputManager = FindObjectOfType<InputManager>();
 
         if (startingRotation == null)
         {

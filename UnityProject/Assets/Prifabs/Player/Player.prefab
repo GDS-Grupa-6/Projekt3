@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 1889538142}
   - component: {fileID: 3457854633381069687}
   - component: {fileID: 7845576992267782259}
+  - component: {fileID: 1286131578958400676}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -382,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootForce: 50
+  reloadTime: 5
   gunRig: {fileID: 1346169687}
   gun: {fileID: 4934921381362037635}
   gunGFX: {fileID: 5241403850406687359}
@@ -390,6 +392,18 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   viewfinder: {fileID: 0}
   rigBuilder: {fileID: 204438307}
+--- !u!114 &1286131578958400676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457854633381069686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa2bc6b176700f47bc6808e31aa70c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2661058832643443680
 PrefabInstance:
   m_ObjectHideFlags: 0

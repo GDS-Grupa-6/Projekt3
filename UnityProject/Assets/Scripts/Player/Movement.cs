@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
 {
     [Space(10)]
     [SerializeField] private Animator animator;
-    [Tooltip("Prędkość poruszania się gracza")] [SerializeField] private float speed = 1;
+    [Tooltip("Prędkość poruszania się gracza")] public float speed = 10;
     [SerializeField] private float jumpHeight = 3f;
     [Header("Camera options")]
     [SerializeField] private Transform mainCamera;
@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
     [Tooltip("Nazwy masek obiektów na których może stać gracz")] [SerializeField] private LayerMask grounMask;
 
     [HideInInspector] public bool playerIsInShootPose;
+   [HideInInspector] public Vector3 moveDirection;
     private InputManager inputManager;
     private CharacterController characterController;
     private ShootCamera shootCamera;
@@ -35,7 +36,7 @@ public class Movement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        inputManager = InputManager.Instance;
+        inputManager = FindObjectOfType<InputManager>();
     }
 
     private void Update()
@@ -75,33 +76,33 @@ public class Movement : MonoBehaviour
 
     private void TPPMovement(Vector2 input)
     {
-        Vector3 direction = new Vector3(input.x, 0f, input.y).normalized;
-        animator.SetFloat("MoveSpeed", direction.magnitude);
+       Vector3 move = new Vector3(input.x, 0f, input.y).normalized;
+        animator.SetFloat("MoveSpeed", move.magnitude);
 
-        if (direction.magnitude >= 0.1f && !playerIsInShootPose)
+        if (move.magnitude >= 0.1f && !playerIsInShootPose)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            characterController.Move(moveDir.normalized * speed * Time.deltaTime);
+            moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            characterController.Move(moveDirection.normalized * speed * Time.deltaTime);
         }
         else if (playerIsInShootPose)
         {
             Vector2 mouseDelta = inputManager.GetMouseDelta() * shootCamera.horizontalSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up * mouseDelta.x);
 
-            if (direction.magnitude >= 0.1f)
+            if (move.magnitude >= 0.1f)
             {
-                ShootMovement(direction);
+                ShootMovement(move);
             }
         }
     }
 
     private void ShootMovement(Vector3 direction)
     {
-        direction = mainCamera.forward * direction.z + mainCamera.right * direction.x;
-        direction.y = 0f;
-        characterController.Move(direction * Time.deltaTime * speed);
+        moveDirection = mainCamera.forward * direction.z + mainCamera.right * direction.x;
+        moveDirection.y = 0f;
+        characterController.Move(moveDirection * Time.deltaTime * speed);
     }
 }

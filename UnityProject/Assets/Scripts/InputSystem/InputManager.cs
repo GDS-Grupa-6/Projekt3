@@ -2,29 +2,10 @@
 
 public class InputManager : MonoBehaviour
 {
-    private static InputManager _instance;
-
-    public static InputManager Instance
-    {
-        get
-        {
-            return _instance;
-        }
-    }
-
     private InputSystemControls inputSystem;
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-
         inputSystem = new InputSystemControls();
     }
 
@@ -51,6 +32,11 @@ public class InputManager : MonoBehaviour
     public bool PlayerShoot()
     {
         return inputSystem.Player.Shoot.triggered;
+    }
+
+    public bool PlayerDash()
+    {
+        return inputSystem.Player.Dash.triggered;
     }
 
     public Vector2 GetMouseDelta()
