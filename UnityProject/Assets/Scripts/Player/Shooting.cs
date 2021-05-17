@@ -7,7 +7,7 @@ using UnityEngine.Animations.Rigging;
 public class Shooting : MonoBehaviour
 {
     [SerializeField] [Range(0, 100)] private float shootForce = 20f;
-    [SerializeField] [Range(0, 100)] private int reloadTime = 5;
+    [SerializeField] [Range(0, 100)] private float reloadTime = 5;
     [Header("Gun options")]
     [SerializeField] private Rig gunRig;
     [SerializeField] private GameObject gun;
@@ -21,7 +21,7 @@ public class Shooting : MonoBehaviour
 
     private InputManager inputManager;
     private Movement movement;
-    private int actualTime = 0;
+    private float actualTime = 0;
 
     void Awake()
     {
@@ -60,7 +60,7 @@ public class Shooting : MonoBehaviour
     {
         actualTime = reloadTime;
         Debug.Log("Reolading gun: " + actualTime + "s");
-        for (int i = actualTime; i >= 1; i--)
+        for (float i = actualTime; i >= 1; i--)
         {
             if (i > 1)
             {
