@@ -287,9 +287,10 @@ GameObject:
   - component: {fileID: 3457854633381069687}
   - component: {fileID: 7845576992267782259}
   - component: {fileID: 1286131578958400676}
+  - component: {fileID: 3062151370372322937}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,6 +371,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerIsInShootPose: 0
+  moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &7845576992267782259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +406,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa2bc6b176700f47bc6808e31aa70c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashSpeed: 40
+  dashTime: 0.25
+  playerDashing: 0
+--- !u!114 &3062151370372322937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457854633381069686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2552f9f3269c84db2ec075d27f0d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1001 &2661058832643443680
 PrefabInstance:
   m_ObjectHideFlags: 0

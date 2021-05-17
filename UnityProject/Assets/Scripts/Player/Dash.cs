@@ -9,6 +9,7 @@ public class Dash : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime;
 
+    [HideInInspector] public bool playerDashing;
     private Movement movement;
     private CharacterController characterController;
     private InputManager inputManager;
@@ -42,8 +43,10 @@ public class Dash : MonoBehaviour
         while (Time.time < startTime + dashTime)
         {
             characterController.Move(movement.moveDirection * dashSpeed * Time.deltaTime);
-
+            playerDashing = true;
             yield return null;
         }
+
+        playerDashing = false;
     }
 }
