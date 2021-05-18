@@ -10,7 +10,6 @@ public class Shooting : MonoBehaviour
     [SerializeField] [Range(0, 100)] private float shootForce = 20f;
     [SerializeField] [Range(0, 100)] private float reloadTime = 5;
     [Header("Gun options")]
-    [SerializeField] private Rig gunRig;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject gunGFX;
     [SerializeField] private GameObject bulletPrifab;
