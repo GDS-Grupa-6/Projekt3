@@ -6,33 +6,30 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Dash : MonoBehaviour
 {
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashTime;
+    [SerializeField] private float dashSpeed = 40f;
+    [SerializeField] private float dashTime = 0.25f;
+    [SerializeField] private float cooldownTime = 1f;
 
     [HideInInspector] public bool playerDashing;
     private Movement movement;
     private CharacterController characterController;
     private InputManager inputManager;
+    private bool canDash;
 
     void Start()
     {
         movement = GetComponent<Movement>();
         characterController = GetComponent<CharacterController>();
         inputManager = FindObjectOfType<InputManager>();
+        canDash = true;
     }
 
     void Update()
     {
-        if (inputManager.PlayerDash())
+        if (inputManager.PlayerDash() && canDash)
         {
-            if (dashSpeed <= movement.speed)
-            {
-                Debug.Log("Prędkość dasha nie może być mniejsza lub równa prędkości ruchu");
-            }
-            else
-            {
-                StartCoroutine(DashCourutine());
-            }
+            canDash = false;
+            StartCoroutine(DashCourutine());
         }
     }
 
@@ -48,5 +45,12 @@ public class Dash : MonoBehaviour
         }
 
         playerDashing = false;
+        StartCoroutine(CooldownCorutine());
+    }
+
+    IEnumerator CooldownCorutine()
+    {
+        yield return new WaitForSeconds(cooldownTime);
+        canDash = true;
     }
 }

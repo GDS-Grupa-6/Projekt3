@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using System;
 
 [RequireComponent(typeof(Movement))]
 public class Shooting : MonoBehaviour
@@ -60,17 +61,18 @@ public class Shooting : MonoBehaviour
     {
         actualTime = reloadTime;
         Debug.Log("Reolading gun: " + actualTime + "s");
-        for (float i = actualTime; i >= 1; i--)
+        for (float i = actualTime; i >= 0; i -= 0.1f)
         {
-            if (i > 1)
+            if (i > 0)
             {
-                yield return new WaitForSeconds(1f);
-                actualTime--;
+                yield return new WaitForSeconds(0.1f);
+                i = (float)Math.Round(i, 1);
+                actualTime = i;
                 Debug.Log("Reolading gun: " + actualTime + "s");
             }
             else
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.1f);
                 actualTime = 0;
                 Debug.Log("Gun is redy!");
             }

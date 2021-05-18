@@ -2,7 +2,7 @@
 
 public class InputManager : MonoBehaviour
 {
-    private InputSystemControls inputSystem;
+    public InputSystemControls inputSystem;
 
     private void Awake()
     {

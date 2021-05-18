@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "2ae4f9e3-ef5e-4b2d-8223-2dd99c07a470",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -120,10 +128,21 @@
                     "name": "",
                     "id": "616b9544-00ba-49ea-bae6-73cefcd3ffa0",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Tap",
+                    "interactions": "Tap(pressPoint=0.4)",
                     "processors": "",
                     "groups": "Kayboard and mouse",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdc7b997-e1b2-4842-93b8-ef7a5caf2eea",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

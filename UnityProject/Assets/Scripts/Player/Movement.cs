@@ -9,7 +9,8 @@ public class Movement : MonoBehaviour
 {
     [Space(10)]
     [SerializeField] private Animator animator;
-    [Tooltip("Prędkość poruszania się gracza")] public float speed = 10;
+    [SerializeField] private float sprintSpeed = 10f;
+    [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float jumpHeight = 3f;
     [Header("Camera options")]
     [SerializeField] private Transform mainCamera;
@@ -20,7 +21,8 @@ public class Movement : MonoBehaviour
     [Tooltip("Nazwy masek obiektów na których może stać gracz")] [SerializeField] private LayerMask grounMask;
 
     [HideInInspector] public bool playerIsInShootPose;
-   [HideInInspector] public Vector3 moveDirection;
+    [HideInInspector] public Vector3 moveDirection;
+
     private InputManager inputManager;
     private CharacterController characterController;
     private ShootCamera shootCamera;
@@ -28,15 +30,19 @@ public class Movement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float xRotation;
+    private float speed;
 
-    private void Awake()
+    private void Start()
     {
         characterController = GetComponent<CharacterController>();
         shootCamera = FindObjectOfType<ShootCamera>();
 
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         inputManager = FindObjectOfType<InputManager>();
+        inputManager.inputSystem.Player.Sprint.performed += _ => SetPlayerSpeedValue(sprintSpeed);
+        inputManager.inputSystem.Player.Sprint.canceled += _ => SetPlayerSpeedValue(walkSpeed);
     }
 
     private void Update()
@@ -74,9 +80,23 @@ public class Movement : MonoBehaviour
         }
     }
 
+    private void SetPlayerSpeedValue(float value)
+    {
+        if (value == sprintSpeed)
+        {
+            animator.SetBool("Run", true);
+        }
+        else
+        {
+            animator.SetBool("Run", false);
+        }
+
+        speed = value;
+    }
+
     private void TPPMovement(Vector2 input)
     {
-       Vector3 move = new Vector3(input.x, 0f, input.y).normalized;
+        Vector3 move = new Vector3(input.x, 0f, input.y).normalized;
         animator.SetFloat("MoveSpeed", move.magnitude);
 
         if (move.magnitude >= 0.1f && !playerIsInShootPose)
