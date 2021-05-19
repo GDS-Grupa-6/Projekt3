@@ -12,7 +12,6 @@ public class HealingObject : MonoBehaviour
     [SerializeField] private float damageValue = 10f;
     [SerializeField] private float bounceForce = 20f;
     [SerializeField] private float bounceDistance = 4f;
-    [SerializeField] private float hitEffectTime = 2f;
 
     private PlayerData playerData;
     private Dash dash;
