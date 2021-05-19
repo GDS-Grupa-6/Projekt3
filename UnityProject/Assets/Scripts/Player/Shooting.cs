@@ -21,10 +21,12 @@ public class Shooting : MonoBehaviour
 
     private InputManager inputManager;
     private Movement movement;
+    private Gun gunScript;
     private float actualTime = 0;
 
     void Awake()
     {
+        gunScript = gun.GetComponent<Gun>();
         movement = GetComponent<Movement>();
         inputManager = FindObjectOfType<InputManager>();
         SetGFX(false);
@@ -87,6 +89,7 @@ public class Shooting : MonoBehaviour
 
     private void SetGFX(bool setActive)
     {
+        gunScript.enabled = setActive;
         gunGFX.SetActive(setActive);
         viewfinder.SetActive(setActive);
         rigBuilder.enabled = setActive;

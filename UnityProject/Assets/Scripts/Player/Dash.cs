@@ -26,7 +26,7 @@ public class Dash : MonoBehaviour
 
     void Update()
     {
-        if (inputManager.PlayerDash() && canDash)
+        if (inputManager.PlayerDash() && canDash && !movement.offMove)
         {
             canDash = false;
             StartCoroutine(DashCourutine());

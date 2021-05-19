@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
 
     [HideInInspector] public bool playerIsInShootPose;
     [HideInInspector] public Vector3 moveDirection;
+    [HideInInspector] public bool offMove;
 
     private InputManager inputManager;
     private CharacterController characterController;
@@ -43,13 +44,17 @@ public class Movement : MonoBehaviour
         inputManager = FindObjectOfType<InputManager>();
         inputManager.inputSystem.Player.Sprint.performed += _ => SetPlayerSpeedValue(sprintSpeed);
         inputManager.inputSystem.Player.Sprint.canceled += _ => SetPlayerSpeedValue(walkSpeed);
+
+        speed = walkSpeed;
     }
 
     private void Update()
     {
-        Gravity();
-
-        TPPMovement(inputManager.MovementControls());
+        if (!offMove)
+        {
+            Gravity();
+            TPPMovement(inputManager.MovementControls());
+        }
     }
 
     private void Gravity()
