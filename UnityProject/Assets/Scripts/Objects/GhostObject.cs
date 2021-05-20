@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class HealingObject : MonoBehaviour
+public class GhostObject : MonoBehaviour
 {
     [Header("Healing options")]
     [SerializeField] private float healValue = 10f;
