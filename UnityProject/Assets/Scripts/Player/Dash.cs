@@ -9,6 +9,7 @@ public class Dash : MonoBehaviour
     [SerializeField] private float dashSpeed = 40f;
     [SerializeField] private float dashTime = 0.25f;
     [SerializeField] private float cooldownTime = 1f;
+    [SerializeField] private GameObject ghostFormVFX;
 
     [HideInInspector] public bool playerDashing;
     private Movement movement;
@@ -22,6 +23,7 @@ public class Dash : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         inputManager = FindObjectOfType<InputManager>();
         canDash = true;
+        ghostFormVFX.SetActive(false);
     }
 
     void Update()
@@ -36,6 +38,7 @@ public class Dash : MonoBehaviour
     IEnumerator DashCourutine()
     {
         float startTime = Time.time;
+        ghostFormVFX.SetActive(true);
 
         while (Time.time < startTime + dashTime)
         {
@@ -52,5 +55,6 @@ public class Dash : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime);
         canDash = true;
+        ghostFormVFX.SetActive(false);
     }
 }
