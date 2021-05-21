@@ -943,37 +943,37 @@ PrefabInstance:
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.1909258
+      value: 6.0470076
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5638582
+      value: 3.813858
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.7979034
+      value: -0.6651764
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.73556536
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.1736434
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.6373047
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.15044722
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
@@ -1003,7 +1003,7 @@ PrefabInstance:
     - target: {fileID: 786006083912235487, guid: b6b104e8e3c0722489d022fd5ac60ea5,
         type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
@@ -1445,17 +1445,22 @@ PrefabInstance:
     - target: {fileID: 5063736202171776746, guid: 31825b1f179a6014db4daeebb9c67d64,
         type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
-      value: 225
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5063736202171776746, guid: 31825b1f179a6014db4daeebb9c67d64,
         type: 3}
       propertyPath: m_YAxis.m_MaxSpeed
-      value: 0.5
+      value: 0.0025
       objectReference: {fileID: 0}
     - target: {fileID: 5063736202171776746, guid: 31825b1f179a6014db4daeebb9c67d64,
         type: 3}
       propertyPath: m_XAxis.m_SpeedMode
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063736202171776746, guid: 31825b1f179a6014db4daeebb9c67d64,
+        type: 3}
+      propertyPath: m_YAxis.m_SpeedMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5063736202171776746, guid: 31825b1f179a6014db4daeebb9c67d64,
         type: 3}
