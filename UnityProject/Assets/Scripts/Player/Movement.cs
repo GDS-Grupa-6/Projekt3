@@ -55,6 +55,8 @@ public class Movement : MonoBehaviour
             Gravity();
             TPPMovement(inputManager.MovementControls());
 
+            Debug.Log(inputManager.MovementControls().x);
+
             animator.SetFloat("vertical", inputManager.MovementControls().y);
             animator.SetFloat("horizontal", inputManager.MovementControls().x);
         }
