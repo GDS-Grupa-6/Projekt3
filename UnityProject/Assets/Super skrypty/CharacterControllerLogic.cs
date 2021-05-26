@@ -10,13 +10,15 @@ public class CharacterControllerLogic : MonoBehaviour
     [SerializeField]
     private float directionDampTime = 0.25f;
     [SerializeField]
-    private ThirdPersonCamera gamecam;
+    private GameObject gamecam;
     [SerializeField]
     private float directionSpeed = 3.0f;
     [SerializeField]
     private float rotationDegreePerSecond = 120f;
     [SerializeField]
     private float speedDampTime = 0.05f;
+    [SerializeField]
+    private InputManager inputManager;
 
     //Private global only
     private float horizontal = 0.0f;
@@ -75,8 +77,8 @@ public class CharacterControllerLogic : MonoBehaviour
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
             // pull values from controller/keyboard
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
+            horizontal = inputManager.MovementControls().x;
+            vertical = inputManager.MovementControls().y;
 
             charAngle = 0f;
             direction = 0f;
@@ -162,9 +164,5 @@ public class CharacterControllerLogic : MonoBehaviour
       angleRootToMove /= 180f;
         
       directionOut = angleRootToMove * directionSpeed;
-
     }
-
-
-
 }
