@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class CharacterControllerLogic : MonoBehaviour
 {
-    [SerializeField]
-    private Animator animator;
     [SerializeField]
     private float directionDampTime = 0.25f;
     [SerializeField]
@@ -19,13 +18,14 @@ public class CharacterControllerLogic : MonoBehaviour
     [SerializeField]
     private InputManager inputManager;
 
+    private Animator animator;
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
     private AnimatorStateInfo stateInfo;
     private float speed = 0.0f;
     private float direction = 0f;
     private float charAngle = 0f;
-    private bool sprit;
+    private float sprintValue;
 
     private int m_LocomotionId = 0;
     private int m_LocomotionPivotLId = 0;
@@ -49,40 +49,41 @@ public class CharacterControllerLogic : MonoBehaviour
         m_LocomotionPivotLId = Animator.StringToHash("Base Layer.LocomotionPivotL");
         m_LocomotionPivotRId = Animator.StringToHash("Base Layer.LocomotionPivotR");
 
-        inputManager.inputSystem.Player.Sprint.performed += _ => SetSpritnState(true);
-        inputManager.inputSystem.Player.Sprint.canceled += _ => SetSpritnState(false);
+        inputManager.inputSystem.Player.Sprint.performed += _ => SetSpritnState(1);
+        inputManager.inputSystem.Player.Sprint.canceled += _ => SetSpritnState(0);
     }
 
     void Update()
     {
-        if (animator)
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        horizontal = inputManager.MovementControls().x;
+        vertical = inputManager.MovementControls().y;
+
+        charAngle = 0f;
+        direction = 0f;
+
+        StickToWorldspace(this.transform, gamecam.transform, ref direction, ref speed, ref charAngle, IsInPivot());
+
+        if (inputManager.PlayerJumpedThisFrame())
         {
-            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            animator.SetTrigger("Jump");
+        }
 
-            horizontal = inputManager.MovementControls().x;
-            vertical = inputManager.MovementControls().y;
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
+        animator.SetFloat("Direction", direction, directionDampTime, Time.deltaTime);
 
-            charAngle = 0f;
-            direction = 0f;
-
-            StickToWorldspace(this.transform, gamecam.transform, ref direction, ref speed, ref charAngle, IsInPivot());
-
-            animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
-            animator.SetFloat("Direction", direction, directionDampTime, Time.deltaTime);
-
-            if (speed > LocomotionThreshold)
+        if (speed > LocomotionThreshold)
+        {
+            if (!IsInPivot())
             {
-                if (!IsInPivot())
-                {
-                    animator.SetFloat("Angle", charAngle);
-                }
+                animator.SetFloat("Angle", charAngle);
             }
-            if (speed < LocomotionThreshold && Mathf.Abs(horizontal) < 0.05f)
-            {
-                animator.SetFloat("Direction", 0f);
-                animator.SetFloat("Angle", 0f);
-
-            }
+        }
+        if (speed < LocomotionThreshold && Mathf.Abs(horizontal) < 0.05f)
+        {
+            animator.SetFloat("Direction", 0f);
+            animator.SetFloat("Angle", 0f);
         }
     }
 
@@ -112,14 +113,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
         Vector3 stickDirection = new Vector3(horizontal, 0, vertical);
 
-        if (inputManager.MovementControls().magnitude > 0.0f && sprit)
-        {
-            speedOut = stickDirection.sqrMagnitude + 1;
-        }
-        else if (inputManager.MovementControls().magnitude > 0.0f)
-        {
-            speedOut = stickDirection.sqrMagnitude;
-        }
+        speedOut = stickDirection.sqrMagnitude + sprintValue;
 
         Vector3 CameraDirection = camera.forward;
         CameraDirection.y = 0.0f;
@@ -140,8 +134,8 @@ public class CharacterControllerLogic : MonoBehaviour
         directionOut = angleRootToMove * directionSpeed;
     }
 
-    private void SetSpritnState(bool value)
+    private void SetSpritnState(float value)
     {
-        sprit = value;
+        sprintValue = value;
     }
 }
