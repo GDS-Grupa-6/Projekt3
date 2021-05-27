@@ -5,7 +5,7 @@ using Cinemachine;
 public class CameraSwitch : MonoBehaviour
 {
     [Space(10)]
-    [SerializeField] private Movement player;
+    [SerializeField] private CharacterController player;
     [Header("Switch camera input")]
     [SerializeField] private InputAction action;
     [Header("Cameras")]
@@ -13,6 +13,7 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] private CinemachineFreeLook tppCamera;
 
     private Animator animator;
+    [HideInInspector] public bool playerIsInShootPose;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class CameraSwitch : MonoBehaviour
     {
         action.performed += _ => SwitchState();
 
-        player.playerIsInShootPose = false;
+       playerIsInShootPose = false;
     }
 
     private void OnEnable()
@@ -37,18 +38,18 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!player.playerIsInShootPose)
+        if (!playerIsInShootPose)
         {
             player.transform.rotation = Quaternion.Euler(0, tppCamera.m_XAxis.Value, 0);
             animator.Play("ShootCamera");
-            player.playerIsInShootPose = true;
+            playerIsInShootPose = true;
         }
         else
         {
             Vector3 pos = player.transform.rotation.eulerAngles;
             tppCamera.m_XAxis.Value = pos.y;
             animator.Play("TppCamera");
-            player.playerIsInShootPose = false;
+            playerIsInShootPose = false;
         }
     }
 }

@@ -9,6 +9,7 @@ public class ShootCamera : CinemachineExtension
     [Tooltip("Szybkość myszki wertykalnie")] [SerializeField] private float verticalSpeed = 10f;
     [Tooltip("Zablokowanie myszki wertykalnie")] [Range(1, 180)] [SerializeField] private float maxClampAngle = 80f;
     [Tooltip("Zablokowanie myszki wertykalnie")] [Range(-180, -1)] [SerializeField] private float minClampAngle = -40;
+    [SerializeField] private CameraSwitch cameraSwitch;
 
     private float turnSmoothVelocity;
     private InputManager inputManager;
@@ -29,7 +30,7 @@ public class ShootCamera : CinemachineExtension
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
-        if (vcam.Follow && player.GetComponent<Movement>().playerIsInShootPose)
+        if (vcam.Follow && cameraSwitch.playerIsInShootPose)
         {
             if (stage == CinemachineCore.Stage.Aim)
             {
