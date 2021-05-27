@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using System;
 
-[RequireComponent(typeof(Movement))]
 public class Shooting : MonoBehaviour
 {
     [SerializeField] [Range(0, 100)] private float shootForce = 20f;
@@ -20,14 +19,14 @@ public class Shooting : MonoBehaviour
     [SerializeField] private RigBuilder rigBuilder;
 
     private InputManager inputManager;
-    private Movement movement;
+    private CameraSwitch cameraSwitch;
     private Gun gunScript;
     private float actualTime = 0;
 
     void Awake()
     {
         gunScript = gun.GetComponent<Gun>();
-        movement = GetComponent<Movement>();
+        cameraSwitch = FindObjectOfType<CameraSwitch>();
         inputManager = FindObjectOfType<InputManager>();
         SetGFX(false);
     }
@@ -39,7 +38,7 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
-        if (movement.playerIsInShootPose)
+        if (cameraSwitch.playerIsInShootPose)
         {
             if (rigBuilder.enabled == false)
             {
@@ -52,7 +51,7 @@ public class Shooting : MonoBehaviour
                 StartCoroutine(ReloadCourutine());
             }
         }
-        else if (!movement.playerIsInShootPose && rigBuilder.enabled == true)
+        else if (!cameraSwitch.playerIsInShootPose && rigBuilder.enabled == true)
         {
             SetGFX(false);
         }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(CharacterController))]
 public class Dash : MonoBehaviour
 {
@@ -12,14 +11,12 @@ public class Dash : MonoBehaviour
     [SerializeField] private GameObject ghostFormVFX;
 
     [HideInInspector] public bool playerDashing;
-    private Movement movement;
     private CharacterController characterController;
     private InputManager inputManager;
     private bool canDash;
 
     void Start()
     {
-        movement = GetComponent<Movement>();
         characterController = GetComponent<CharacterController>();
         inputManager = FindObjectOfType<InputManager>();
         canDash = true;
@@ -28,7 +25,7 @@ public class Dash : MonoBehaviour
 
     void Update()
     {
-        if (inputManager.PlayerDash() && canDash && !movement.offMove)
+        if (inputManager.PlayerDash() && canDash)
         {
             canDash = false;
             StartCoroutine(DashCourutine());
@@ -42,7 +39,7 @@ public class Dash : MonoBehaviour
 
         while (Time.time < startTime + dashTime)
         {
-            characterController.Move(movement.moveDirection * dashSpeed * Time.deltaTime);
+            characterController.Move(Vector3.forward * dashSpeed * Time.deltaTime);
             playerDashing = true;
             yield return null;
         }

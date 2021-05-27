@@ -16,7 +16,7 @@ public class GhostObject : MonoBehaviour
 
     private PlayerData playerData;
     private Dash dash;
-    private Movement movement;
+    private CharacterController player;
     private Vector3 targetPos;
     private CharacterController characterController;
     private bool hit;
@@ -24,7 +24,7 @@ public class GhostObject : MonoBehaviour
     private void Start()
     {
         characterController = FindObjectOfType<CharacterController>();
-        movement = FindObjectOfType<Movement>();
+        player = FindObjectOfType<CharacterController>();
         playerData = FindObjectOfType<PlayerData>();
         dash = FindObjectOfType<Dash>();
     }
@@ -34,13 +34,12 @@ public class GhostObject : MonoBehaviour
         if (hit)
         {
             float step = bounceForce * Time.deltaTime;
-            movement.gameObject.transform.position = Vector3.MoveTowards(movement.gameObject.transform.position, targetPos, step);
+            player.gameObject.transform.position = Vector3.MoveTowards(player.gameObject.transform.position, targetPos, step);
 
-            if (Vector3.Distance(movement.gameObject.transform.position, targetPos) < 0.1)
+            if (Vector3.Distance(player.gameObject.transform.position, targetPos) < 0.1)
             {
                 characterController.enabled = true;
                 hit = false;
-                movement.offMove = false;
             }
         }
     }
@@ -60,9 +59,8 @@ public class GhostObject : MonoBehaviour
             }
             else if (!dash.playerDashing && thisObjectCanHitPlayer)
             {
-                movement.offMove = true;
                 characterController.enabled = false;
-                other.GetComponent<Animator>().SetFloat("MoveSpeed", 0); // animacja
+                // animacja
                 playerData.TakeDamage(damageValue);
                 targetPos = other.transform.position - other.gameObject.transform.forward * bounceDistance;
                 hit = true;
