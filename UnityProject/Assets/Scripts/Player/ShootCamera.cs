@@ -35,11 +35,12 @@ public class ShootCamera : CinemachineExtension
             if (stage == CinemachineCore.Stage.Aim)
             {
                 Vector2 deltaInput = inputManager.GetMouseDelta();
-                startingRotation.x += deltaInput.x * verticalSpeed * Time.deltaTime;
+                startingRotation.x = deltaInput.x * verticalSpeed * Time.deltaTime;
                 startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
                 startingRotation.y = Mathf.Clamp(startingRotation.y, minClampAngle, maxClampAngle);
 
                 state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
+                player.Rotate(Vector3.up * startingRotation.x);
             }
         }
     }
