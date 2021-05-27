@@ -25,12 +25,13 @@ public class CharacterControllerLogic : MonoBehaviour
     private float speed = 0.0f;
     private float direction = 0f;
     private float charAngle = 0f;
+    private bool sprit;
 
     private int m_LocomotionId = 0;
     private int m_LocomotionPivotLId = 0;
     private int m_LocomotionPivotRId = 0;
 
-    public float LocomotionThreshold { get { return 0.2f; } }
+    private float LocomotionThreshold { get { return 0.2f; } }
 
     void Start()
     {
@@ -48,6 +49,8 @@ public class CharacterControllerLogic : MonoBehaviour
         m_LocomotionPivotLId = Animator.StringToHash("Base Layer.LocomotionPivotL");
         m_LocomotionPivotRId = Animator.StringToHash("Base Layer.LocomotionPivotR");
 
+        inputManager.inputSystem.Player.Sprint.performed += _ => SetSpritnState(true);
+        inputManager.inputSystem.Player.Sprint.canceled += _ => SetSpritnState(false);
     }
 
     void Update()
@@ -93,23 +96,30 @@ public class CharacterControllerLogic : MonoBehaviour
         }
     }
 
-    public bool IsInPivot()
+    private bool IsInPivot()
     {
         return stateInfo.fullPathHash == m_LocomotionPivotLId || stateInfo.fullPathHash == m_LocomotionPivotRId;
     }
 
-    public bool IsInLocomotion()
+    private bool IsInLocomotion()
     {
         return stateInfo.fullPathHash == m_LocomotionId;
     }
 
-    public void StickToWorldspace(Transform root, Transform camera, ref float directionOut, ref float speedOut, ref float angleOut, bool isPivoting)
+    private void StickToWorldspace(Transform root, Transform camera, ref float directionOut, ref float speedOut, ref float angleOut, bool isPivoting)
     {
         Vector3 rootDirection = root.forward;
 
         Vector3 stickDirection = new Vector3(horizontal, 0, vertical);
 
-        speedOut = stickDirection.sqrMagnitude;
+        if (inputManager.MovementControls().magnitude > 0.0f && sprit)
+        {
+            speedOut = stickDirection.sqrMagnitude + 1;
+        }
+        else if (inputManager.MovementControls().magnitude > 0.0f)
+        {
+            speedOut = stickDirection.sqrMagnitude;
+        }
 
         Vector3 CameraDirection = camera.forward;
         CameraDirection.y = 0.0f;
@@ -128,5 +138,10 @@ public class CharacterControllerLogic : MonoBehaviour
         angleRootToMove /= 180f;
 
         directionOut = angleRootToMove * directionSpeed;
+    }
+
+    private void SetSpritnState(bool value)
+    {
+        sprit = value;
     }
 }
