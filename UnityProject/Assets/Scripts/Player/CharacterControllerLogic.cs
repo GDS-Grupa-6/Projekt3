@@ -49,8 +49,8 @@ public class CharacterControllerLogic : MonoBehaviour
         m_LocomotionPivotLId = Animator.StringToHash("Base Layer.LocomotionPivotL");
         m_LocomotionPivotRId = Animator.StringToHash("Base Layer.LocomotionPivotR");
 
-        inputManager.inputSystem.Player.Sprint.performed += _ => SetSpritnState(1);
-        inputManager.inputSystem.Player.Sprint.canceled += _ => SetSpritnState(0);
+        inputManager.inputSystem.Player.Sprint.performed += _ => sprintValue = 1;
+        inputManager.inputSystem.Player.Sprint.canceled += _ => sprintValue = 0;
     }
 
     void Update()
@@ -113,7 +113,14 @@ public class CharacterControllerLogic : MonoBehaviour
 
         Vector3 stickDirection = new Vector3(horizontal, 0, vertical);
 
-        speedOut = stickDirection.sqrMagnitude + sprintValue;
+        if (inputManager.MovementControls().magnitude > 0)
+        {
+            speedOut = stickDirection.sqrMagnitude + sprintValue;
+        }
+        else
+        {
+            speedOut = 0;
+        }
 
         Vector3 CameraDirection = camera.forward;
         CameraDirection.y = 0.0f;
@@ -132,10 +139,5 @@ public class CharacterControllerLogic : MonoBehaviour
         angleRootToMove /= 180f;
 
         directionOut = angleRootToMove * directionSpeed;
-    }
-
-    private void SetSpritnState(float value)
-    {
-        sprintValue = value;
     }
 }
