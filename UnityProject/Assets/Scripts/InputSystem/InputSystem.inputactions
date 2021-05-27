@@ -44,6 +44,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "SwithTppShootState",
+                    "type": "Button",
+                    "id": "4c4a35c0-838f-40a5-a0d4-1606a33d4e68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "722b41d4-2ff7-4c2b-bb69-ca0fb841127d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -143,6 +159,28 @@
                     "processors": "",
                     "groups": "Kayboard and mouse",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b6ae687-a822-40b8-91be-7500f09f2831",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "SwithTppShootState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c522e22-975e-457b-9c78-edad03883caf",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
