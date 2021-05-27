@@ -59,7 +59,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
         StickToWorldspace(this.transform, gamecam.transform, ref direction, ref speed, ref charAngle, IsInPivot());
 
-        if (inputManager.PlayerJumpedThisFrame())
+        if (inputManager.PlayerJumpedThisFrame() && !animator.GetBool("ShootPos"))
         {
             animator.SetTrigger("Jump");
         }

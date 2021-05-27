@@ -39,8 +39,8 @@ public class ShootCamera : CinemachineExtension
                 startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
                 startingRotation.y = Mathf.Clamp(startingRotation.y, minClampAngle, maxClampAngle);
 
-                state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
-                player.Rotate(Vector3.up * startingRotation.x);
+                state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.transform.eulerAngles.y, 0);
+                player.transform.Rotate(Vector3.up * startingRotation.x);
             }
         }
     }
