@@ -4,8 +4,6 @@ using Cinemachine;
 
 public class CameraSwitch : MonoBehaviour
 {
-    [Space(10)]
-    [SerializeField] private CharacterController player;
     [Header("Switch camera input")]
     [SerializeField] private InputAction action;
     [Header("Cameras")]
@@ -13,11 +11,13 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] private CinemachineFreeLook tppCamera;
 
     private Animator animator;
+    private CharacterController player;
     [HideInInspector] public bool playerIsInShootPose;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        player = FindObjectOfType<CharacterController>();
     }
 
     private void Start()
