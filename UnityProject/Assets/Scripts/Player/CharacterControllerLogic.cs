@@ -5,20 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CharacterControllerLogic : MonoBehaviour
 {
-    [SerializeField]
-    private float directionDampTime = 0.25f;
-    [SerializeField]
-    private GameObject gamecam;
-    [SerializeField]
-    private float directionSpeed = 3.0f;
-    [SerializeField]
-    private float rotationDegreePerSecond = 120f;
-    [SerializeField]
-    private float speedDampTime = 0.05f;
-    [SerializeField]
-    private InputManager inputManager;
+    [SerializeField] private float directionDampTime = 0.25f;
+    [SerializeField] private GameObject gamecam;
+    [SerializeField] private float directionSpeed = 3.0f;
+    [SerializeField] private float rotationDegreePerSecond = 120f;
+    [SerializeField] private float speedDampTime = 0.05f;
+    [SerializeField] private InputManager inputManager;
 
-    private Animator animator;
+    [HideInInspector] public Animator animator;
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
     private AnimatorStateInfo stateInfo;
@@ -84,16 +78,6 @@ public class CharacterControllerLogic : MonoBehaviour
         {
             animator.SetFloat("Direction", 0f);
             animator.SetFloat("Angle", 0f);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (IsInLocomotion() && ((direction >= 0 && horizontal >= 0) || (direction < 0 && horizontal < 0)))
-        {
-            Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (horizontal < 0f ? -1f : 1f), 0f), Mathf.Abs(horizontal));
-            Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
-            this.transform.rotation = (this.transform.rotation * deltaRotation);
         }
     }
 
