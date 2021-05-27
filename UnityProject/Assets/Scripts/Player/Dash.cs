@@ -39,7 +39,7 @@ public class Dash : MonoBehaviour
 
         while (Time.time < startTime + dashTime)
         {
-            characterController.Move(Vector3.forward * dashSpeed * Time.deltaTime);
+            characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
             playerDashing = true;
             yield return null;
         }
