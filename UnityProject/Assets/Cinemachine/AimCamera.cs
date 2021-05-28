@@ -4,7 +4,6 @@ using UnityEngine;
 public class AimCamera : CinemachineExtension
 {
     [SerializeField] private Transform player;
-    [SerializeField] private Transform targetEnemy;
     [Space(10)]
     [SerializeField] private float rotationXOffset;
     [SerializeField] private float rotationYOffset;
@@ -20,14 +19,17 @@ public class AimCamera : CinemachineExtension
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
-        if (vcam.Follow && cameraSwitch.playerAim)
+        if (vcam.Follow && cameraSwitch.playerAim && !cameraSwitch.playerIsInShootPose)
         {
             if (stage == CinemachineCore.Stage.Aim)
             {
-                Vector3 target = new Vector3(targetEnemy.transform.position.x, player.transform.position.y, targetEnemy.transform.position.z);
+                if (cameraSwitch.targetEnemy != null)
+                {
+                    Vector3 target = new Vector3(cameraSwitch.targetEnemy.transform.position.x, player.transform.position.y, cameraSwitch.targetEnemy.transform.position.z);
+                    player.LookAt(target);
+                }
 
                 state.RawOrientation = Quaternion.Euler(player.eulerAngles.x + rotationYOffset, player.eulerAngles.y + rotationXOffset, 0);
-                player.LookAt(target);
             }
         }
     }
