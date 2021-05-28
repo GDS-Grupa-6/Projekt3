@@ -68,7 +68,6 @@ public class Shooting : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 i = (float)Math.Round(i, 1);
                 actualTime = i;
-                Debug.Log("Reolading gun: " + actualTime + "s");
             }
             else
             {
