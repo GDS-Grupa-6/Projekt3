@@ -15,6 +15,7 @@ public class CameraSwitch : MonoBehaviour
     private InputManager inputManager;
     [HideInInspector] public bool playerIsInShootPose;
     [HideInInspector] public bool playerAim;
+    [HideInInspector] public Transform targetEnemy;
 
     private void Awake()
     {
@@ -52,16 +53,19 @@ public class CameraSwitch : MonoBehaviour
 
     private void OnOffAim()
     {
-        if (playerAim)
+        targetEnemy = GameObject.FindGameObjectWithTag("Boss").transform;
+
+        if (playerAim && targetEnemy != null)
         {
             playerAim = false;
+            targetEnemy = null;
 
             if (!playerIsInShootPose)
             {
                 SwitchToCamera(CameraID.TPP);
             }
         }
-        else if (!playerAim)
+        else if (!playerAim && targetEnemy != null)
         {
             playerAim = true;
 
@@ -69,6 +73,10 @@ public class CameraSwitch : MonoBehaviour
             {
                 SwitchToCamera(CameraID.AIM);
             }
+        }
+        else if (targetEnemy == null)
+        {
+            Debug.Log("Nie ma bossa na arenie");
         }
     }
 
