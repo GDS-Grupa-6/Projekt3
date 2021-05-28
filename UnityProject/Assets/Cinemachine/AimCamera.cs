@@ -19,17 +19,17 @@ public class AimCamera : CinemachineExtension
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
-        if (vcam.Follow && cameraSwitch.playerAim)
+        if (vcam.Follow && cameraSwitch.playerAim && !cameraSwitch.playerIsInShootPose)
         {
             if (stage == CinemachineCore.Stage.Aim)
             {
-                state.RawOrientation = Quaternion.Euler(player.eulerAngles.x + rotationYOffset, player.eulerAngles.y + rotationXOffset, 0);
-
                 if (cameraSwitch.targetEnemy != null)
                 {
                     Vector3 target = new Vector3(cameraSwitch.targetEnemy.transform.position.x, player.transform.position.y, cameraSwitch.targetEnemy.transform.position.z);
                     player.LookAt(target);
                 }
+
+                state.RawOrientation = Quaternion.Euler(player.eulerAngles.x + rotationYOffset, player.eulerAngles.y + rotationXOffset, 0);
             }
         }
     }
