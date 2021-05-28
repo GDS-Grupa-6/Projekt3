@@ -2,6 +2,8 @@
 using UnityEngine.InputSystem;
 using Cinemachine;
 
+internal enum CameraID { Shoot, TPP, AIM }
+
 public class CameraSwitch : MonoBehaviour
 {
     [Header("Cameras")]
@@ -31,26 +33,20 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!playerIsInShootPose && !playerAim)
+        if (playerIsInShootPose)
         {
-            player.transform.rotation = Quaternion.Euler(0, tppCamera.m_XAxis.Value, 0);
-            animator.Play("ShootCamera");
-            player.animator.SetBool("ShootPos", true);
-            playerIsInShootPose = true;
+            if (playerAim)
+            {
+                SwitchToCamera(CameraID.AIM);
+            }
+            else if (!playerAim)
+            {
+                SwitchToCamera(CameraID.TPP);
+            }
         }
-        else if (playerIsInShootPose && !playerAim)
+        else if (!playerIsInShootPose)
         {
-            Vector3 pos = player.transform.rotation.eulerAngles;
-            tppCamera.m_XAxis.Value = pos.y;
-            player.animator.SetBool("ShootPos", false);
-            animator.Play("TppCamera");
-            playerIsInShootPose = false;
-        }
-        else if (playerIsInShootPose && playerAim)
-        {
-            player.animator.SetBool("ShootPos", false);
-            animator.Play("AimCamera");
-            playerIsInShootPose = false;
+            SwitchToCamera(CameraID.Shoot);
         }
     }
 
@@ -58,22 +54,55 @@ public class CameraSwitch : MonoBehaviour
     {
         if (playerAim)
         {
-            playerAim = false;
-
             if (!playerIsInShootPose)
             {
-                SwitchState();
+                playerAim = false;
+                SwitchToCamera(CameraID.TPP);
+            }
+            else if(playerIsInShootPose)
+            {
+                playerAim = false;
             }
         }
-        else if (!playerAim)
+        else if(!playerAim)
         {
-            playerAim = true;
-
             if (!playerIsInShootPose)
             {
-                player.animator.SetBool("ShootPos", true);
-                animator.Play("AimCamera");
+                playerAim = true;
+                SwitchToCamera(CameraID.AIM);
             }
+            else if (playerIsInShootPose)
+            {
+                playerAim = true;
+            }
+        }
+    }
+
+    private void SwitchToCamera(CameraID camera)
+    {
+        switch (camera)
+        {
+            case CameraID.Shoot:
+                player.transform.rotation = Quaternion.Euler(0, tppCamera.m_XAxis.Value, 0);
+                animator.Play("ShootCamera");
+                player.animator.SetBool("ShootPos", true);
+                playerIsInShootPose = true;
+                break;
+            case CameraID.TPP:
+                Vector3 pos = player.transform.rotation.eulerAngles;
+                tppCamera.m_XAxis.Value = pos.y;
+                player.animator.SetBool("ShootPos", false);
+                animator.Play("TppCamera");
+                playerIsInShootPose = false;
+                break;
+            case CameraID.AIM:
+                //ustawienie rotacji gracza
+                player.animator.SetBool("ShootPos", false);
+                animator.Play("AimCamera");
+                playerIsInShootPose = false;
+                break;
+            default:
+                break;
         }
     }
 }
