@@ -98,7 +98,6 @@ public class CameraSwitch : MonoBehaviour
                 playerIsInShootPose = false;
                 break;
             case CameraID.AIM:
-                //ustawienie startowej rotacji gracza
                 player.animator.SetBool("ShootPos", true); //ewentualna zmiana na animacije AIM
                 animator.Play("AimCamera");
                 playerIsInShootPose = false;
