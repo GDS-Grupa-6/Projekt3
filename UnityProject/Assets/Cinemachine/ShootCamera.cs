@@ -9,8 +9,8 @@ public class ShootCamera : CinemachineExtension
     [Tooltip("Szybkość myszki wertykalnie")] [SerializeField] private float verticalSpeed = 10f;
     [Tooltip("Zablokowanie myszki wertykalnie")] [Range(1, 180)] [SerializeField] private float maxClampAngle = 80f;
     [Tooltip("Zablokowanie myszki wertykalnie")] [Range(-180, -1)] [SerializeField] private float minClampAngle = -40;
-    [SerializeField] private CameraSwitch cameraSwitch;
 
+    private CameraSwitch cameraSwitch;
     private float turnSmoothVelocity;
     private InputManager inputManager;
     private Vector3 startingRotation;
@@ -19,6 +19,7 @@ public class ShootCamera : CinemachineExtension
     void Awake()
     {
         inputManager = FindObjectOfType<InputManager>();
+        cameraSwitch = FindObjectOfType<CameraSwitch>();
 
         if (startingRotation == null)
         {

@@ -54,26 +54,20 @@ public class CameraSwitch : MonoBehaviour
     {
         if (playerAim)
         {
+            playerAim = false;
+
             if (!playerIsInShootPose)
             {
-                playerAim = false;
                 SwitchToCamera(CameraID.TPP);
             }
-            else if(playerIsInShootPose)
-            {
-                playerAim = false;
-            }
         }
-        else if(!playerAim)
+        else if (!playerAim)
         {
+            playerAim = true;
+
             if (!playerIsInShootPose)
             {
-                playerAim = true;
                 SwitchToCamera(CameraID.AIM);
-            }
-            else if (playerIsInShootPose)
-            {
-                playerAim = true;
             }
         }
     }
@@ -96,8 +90,8 @@ public class CameraSwitch : MonoBehaviour
                 playerIsInShootPose = false;
                 break;
             case CameraID.AIM:
-                //ustawienie rotacji gracza
-                player.animator.SetBool("ShootPos", false);
+                //ustawienie startowej rotacji gracza
+                player.animator.SetBool("ShootPos", true); //ewentualna zmiana na animacije AIM
                 animator.Play("AimCamera");
                 playerIsInShootPose = false;
                 break;
