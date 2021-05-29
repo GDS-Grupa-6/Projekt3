@@ -314,7 +314,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -1.5575112e+9, z: 4.5905e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 9.940218e+27, z: 9.314623e-39, w: 51.170105}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -545,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLaserPos: {fileID: 1430753603}
+  bossRotateSpeed: 1
 --- !u!114 &785044865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,6 +1350,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: gamecam
+      value: 
+      objectReference: {fileID: 1788475609}
+    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1788475609}
     - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
