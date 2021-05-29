@@ -667,17 +667,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &1076265336 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3014909498975795479, guid: f499c98ef900efd48a2affe46717fbde, type: 3}
-  m_PrefabInstance: {fileID: 3014909499037436246}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3af32602603eca1479ec12a64ad89d9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1090037939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5068871600465712880, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
@@ -1349,25 +1338,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: gamecam
-      value: 
-      objectReference: {fileID: 1788475609}
-    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1788475609}
-    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: inputManager
-      value: 
-      objectReference: {fileID: 1076265336}
-    - target: {fileID: 3457854631483058806, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.339
-      objectReference: {fileID: 0}
-    - target: {fileID: 3457854631483058806, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.852
-      objectReference: {fileID: 0}
     - target: {fileID: 3457854633381069685, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: m_RootOrder
       value: 7
