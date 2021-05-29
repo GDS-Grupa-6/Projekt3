@@ -314,7 +314,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -1.5575112e+9, z: 4.5905e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 5.3853315e-28, z: 4.5905e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -545,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLaserPos: {fileID: 1430753603}
+  bossRotateSpeed: 1
 --- !u!114 &785044865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,17 +667,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &1076265336 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3014909498975795479, guid: f499c98ef900efd48a2affe46717fbde, type: 3}
-  m_PrefabInstance: {fileID: 3014909499037436246}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3af32602603eca1479ec12a64ad89d9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1090037939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5068871600465712880, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
@@ -1348,13 +1338,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: gamecam
+      propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1788475609}
-    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: inputManager
-      value: 
-      objectReference: {fileID: 1076265336}
     - target: {fileID: 3457854633381069685, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1430,6 +1416,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6626807268576849471, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
   m_PrefabInstance: {fileID: 3457854631788966202}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3457854631788966204 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8068229263547993234, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+  m_PrefabInstance: {fileID: 3457854631788966202}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5063736202884873673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1453,6 +1444,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1730572879}
+    - target: {fileID: 5063736201132507234, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+      propertyPath: cameraArm
+      value: 
+      objectReference: {fileID: 3457854631788966204}
+    - target: {fileID: 5063736201132507235, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.0515877
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063736201132507235, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06971285
+      objectReference: {fileID: 0}
     - target: {fileID: 5063736201415945473, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -6,11 +6,11 @@ using UnityEngine;
 public class CharacterControllerLogic : MonoBehaviour
 {
     [SerializeField] private float directionDampTime = 0.25f;
-    [SerializeField] private GameObject gamecam;
+    [SerializeField] private GameObject mainCamera;
     [SerializeField] private float directionSpeed = 3.0f;
     [SerializeField] private float rotationDegreePerSecond = 120f;
     [SerializeField] private float speedDampTime = 0.05f;
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private float angleDampTime = 0.05f;
 
     [HideInInspector] public Animator animator;
     private float horizontal = 0.0f;
@@ -26,11 +26,17 @@ public class CharacterControllerLogic : MonoBehaviour
     private int m_LocomotionPivotRId = 0;
 
     private float LocomotionThreshold { get { return 0.2f; } }
+    private CameraSwitch cameraSwitch;
+    private InputManager inputManager;
+
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;//przenieœ do gamecontrollera
+
+        cameraSwitch = FindObjectOfType<CameraSwitch>();
+        inputManager = FindObjectOfType<InputManager>();
 
         animator = GetComponent<Animator>();
 
@@ -57,7 +63,7 @@ public class CharacterControllerLogic : MonoBehaviour
         charAngle = 0f;
         direction = 0f;
 
-        StickToWorldspace(this.transform, gamecam.transform, ref direction, ref speed, ref charAngle, IsInPivot());
+        StickToWorldspace(this.transform, mainCamera.transform, ref direction, ref speed, ref charAngle, IsInPivot());
 
         if (inputManager.PlayerJumpedThisFrame() && !animator.GetBool("ShootPos"))
         {
@@ -108,7 +114,17 @@ public class CharacterControllerLogic : MonoBehaviour
 
         Vector3 CameraDirection = camera.forward;
         CameraDirection.y = 0.0f;
-        Quaternion referentialShift = Quaternion.FromToRotation(Vector3.forward, CameraDirection);
+
+        Quaternion referentialShift;
+        if (cameraSwitch.playerIsInShootPose || cameraSwitch.playerAim)
+        {
+            referentialShift = transform.rotation;
+        }
+        else
+        {
+            referentialShift = Quaternion.FromToRotation(Vector3.forward, CameraDirection);
+        }
+
 
         Vector3 moveDirection = referentialShift * stickDirection;
         Vector3 axisSign = Vector3.Cross(moveDirection, rootDirection);
