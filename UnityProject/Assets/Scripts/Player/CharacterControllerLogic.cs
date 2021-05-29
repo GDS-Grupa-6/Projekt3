@@ -75,11 +75,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
         if (speed > LocomotionThreshold)
         {
-           /* if (cameraSwitch.playerAim || cameraSwitch.playerIsInShootPose)
-            {
-                animator.SetFloat("Angle", charAngle, angleDampTime, Time.deltaTime);
-            }
-            else*/ if (!IsInPivot())
+            if (!IsInPivot())
             {
                 animator.SetFloat("Angle", charAngle);
             }
