@@ -314,7 +314,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 9.940218e+27, z: 9.314623e-39, w: 51.170105}
+  m_BoundingSphereOverride: {x: 0, y: 5.3853315e-28, z: 4.5905e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1360,6 +1360,14 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1076265336}
+    - target: {fileID: 3457854631483058806, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.339
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457854631483058806, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.852
+      objectReference: {fileID: 0}
     - target: {fileID: 3457854633381069685, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1435,6 +1443,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6626807268576849471, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
   m_PrefabInstance: {fileID: 3457854631788966202}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3457854631788966204 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8068229263547993234, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+  m_PrefabInstance: {fileID: 3457854631788966202}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5063736202884873673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1458,6 +1471,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1730572879}
+    - target: {fileID: 5063736201132507234, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+      propertyPath: cameraArm
+      value: 
+      objectReference: {fileID: 3457854631788966204}
+    - target: {fileID: 5063736201132507235, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.0515877
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063736201132507235, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06971285
+      objectReference: {fileID: 0}
     - target: {fileID: 5063736201415945473, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
