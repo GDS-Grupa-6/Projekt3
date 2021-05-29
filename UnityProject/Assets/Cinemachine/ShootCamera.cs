@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using Cinemachine;
 
-public class ShootCamera : CinemachineExtension
+public class ShootCamera : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private Transform cameraArm;
     [Space(10)]
     [Tooltip("Szybkość myszki horyzontalnie")] public float horizontalSpeed = 10;
     [Tooltip("Szybkość myszki wertykalnie")] [SerializeField] private float verticalSpeed = 10f;
@@ -23,26 +23,21 @@ public class ShootCamera : CinemachineExtension
 
         if (startingRotation == null)
         {
-            startingRotation = transform.localRotation.eulerAngles;
+            startingRotation = player.rotation.eulerAngles;
         }
-
-        base.Awake();
     }
 
-    protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
+    private void Update()
     {
-        if (vcam.Follow && cameraSwitch.playerIsInShootPose)
+        if (cameraSwitch.playerIsInShootPose)
         {
-            if (stage == CinemachineCore.Stage.Aim)
-            {
-                Vector2 deltaInput = inputManager.GetMouseDelta();
-                startingRotation.x = deltaInput.x * verticalSpeed * Time.deltaTime;
-                startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
-                startingRotation.y = Mathf.Clamp(startingRotation.y, minClampAngle, maxClampAngle);
+            Vector2 deltaInput = inputManager.GetMouseDelta();
+            startingRotation.x += deltaInput.x * verticalSpeed * Time.deltaTime;
+            startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
+            startingRotation.y = Mathf.Clamp(startingRotation.y, minClampAngle, maxClampAngle);
 
-                state.RawOrientation = Quaternion.Euler(-startingRotation.y, player.eulerAngles.y, 0);
-                player.Rotate(Vector3.up * startingRotation.x);
-            }
+            cameraArm.localRotation = Quaternion.Euler(-startingRotation.y, 0, 0);
+            player.rotation = Quaternion.Euler(0, startingRotation.x, 0);
         }
     }
 }
