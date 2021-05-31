@@ -6,9 +6,8 @@ internal enum CameraID { Shoot, TPP, AIM }
 
 public class CameraSwitch : MonoBehaviour
 {
-    [Header("Cameras")]
-    [SerializeField] private Transform shootCamera;
     [SerializeField] private CinemachineFreeLook tppCamera;
+    [SerializeField] private ShootCamera shootCamera;
 
     private Animator animator;
     private CharacterControllerLogic player;
@@ -30,6 +29,7 @@ public class CameraSwitch : MonoBehaviour
         inputManager.inputSystem.Player.Aim.performed += _ => OnOffAim();
 
         playerIsInShootPose = false;
+        playerAim = false;
     }
 
     private void SwitchState()
@@ -89,6 +89,7 @@ public class CameraSwitch : MonoBehaviour
                 animator.Play("ShootCamera");
                 player.animator.SetBool("ShootPos", true);
                 playerIsInShootPose = true;
+                shootCamera.ResetXCameraRotation();
                 break;
             case CameraID.TPP:
                 Vector3 pos = player.transform.rotation.eulerAngles;
