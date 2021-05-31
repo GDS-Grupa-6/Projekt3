@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using Cinemachine;
 
 public class ShootCamera : MonoBehaviour
 {
@@ -15,16 +17,10 @@ public class ShootCamera : MonoBehaviour
     private InputManager inputManager;
     private Vector3 startingRotation;
 
-
     void Awake()
     {
         inputManager = FindObjectOfType<InputManager>();
         cameraSwitch = FindObjectOfType<CameraSwitch>();
-
-        if (startingRotation == null)
-        {
-            startingRotation = player.rotation.eulerAngles;
-        }
     }
 
     private void Update()
@@ -32,12 +28,17 @@ public class ShootCamera : MonoBehaviour
         if (cameraSwitch.playerIsInShootPose)
         {
             Vector2 deltaInput = inputManager.GetMouseDelta();
-            startingRotation.x += deltaInput.x * verticalSpeed * Time.deltaTime;
+            startingRotation.x = deltaInput.x * verticalSpeed * Time.deltaTime;
             startingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
             startingRotation.y = Mathf.Clamp(startingRotation.y, minClampAngle, maxClampAngle);
 
             cameraArm.localRotation = Quaternion.Euler(-startingRotation.y, 0, 0);
-            player.rotation = Quaternion.Euler(0, startingRotation.x, 0);
+            player.Rotate(0, startingRotation.x, 0);
         }
+    }
+
+    public void ResetXCameraRotation()
+    {
+        startingRotation.y = 0;
     }
 }
