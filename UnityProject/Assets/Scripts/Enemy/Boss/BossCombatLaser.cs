@@ -3,28 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class BossCombatLaser : BossCombatLogic
+[RequireComponent(typeof(BossMovement))]
+public class BossCombatLaser : MonoBehaviour
 {
     [SerializeField] private Transform startLaserPos;
     [SerializeField] [Range(0, 3)] private float bossRotateSpeed = 1;
+    [SerializeField] private Transform[] laserBossPositions;
 
     private LineRenderer lineRenderer;
+    private BossMovement bossMovement;
+    private bool spinToLeftSide;
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        bossMovement = GetComponent<BossMovement>();
     }
 
-    private void Update()
-    {
-        if (bossState == BossState.Laser)
-        {
-            CreateLaser();
-            SpinBoss(bossRotateSpeed);
-        }
-    }
-
-    private void CreateLaser()
+    public void CreateLaser()
     {
         lineRenderer.SetPosition(0, startLaserPos.position);
 
@@ -42,8 +38,50 @@ public class BossCombatLaser : BossCombatLogic
         }
     }
 
-    private void SpinBoss(float speed)
+    public void SpinBoss()
     {
-        transform.Rotate(Vector3.up * speed);
+        if (spinToLeftSide)
+        {
+            if (transform.eulerAngles.y <= bossMovement.bossTargetPosition.eulerAngles.y)
+            {
+                spinToLeftSide = false;
+            }
+
+            transform.Rotate(Vector3.up * -bossRotateSpeed);
+        }
+        else
+        {
+            if (transform.eulerAngles.y >= bossMovement.bossTargetPosition.eulerAngles.y + 90)
+            {
+                spinToLeftSide = true;
+            }
+
+            transform.Rotate(Vector3.up * bossRotateSpeed);
+        }
+    }
+
+    public void SelectBossLaserPosition()
+    {
+        Transform largest = laserBossPositions[0];
+        float[] distances = new float[4]
+        {
+            Vector3.Distance(laserBossPositions[0].position, bossMovement.player.position),
+            Vector3.Distance(laserBossPositions[1].position, bossMovement.player.position),
+            Vector3.Distance(laserBossPositions[2].position, bossMovement.player.position),
+            Vector3.Distance(laserBossPositions[3].position, bossMovement.player.position)
+        };
+
+        float largestDistans = distances[0];
+
+        for (int i = 0; i < laserBossPositions.Length; i++)
+        {
+            if (distances[i] > largestDistans)
+            {
+                largestDistans = distances[i];
+                largest = laserBossPositions[i];
+            }
+        }
+
+        bossMovement.bossTargetPosition = largest;
     }
 }
