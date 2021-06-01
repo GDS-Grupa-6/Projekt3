@@ -7,12 +7,16 @@ using UnityEngine;
 public class BossCombatLaser : MonoBehaviour
 {
     [SerializeField] private Transform startLaserPos;
-    [SerializeField] [Range(0, 3)] private float bossRotateSpeed = 1;
+    [SerializeField] [Range(0, 100)] private float bossRotateSpeed = 10;
     [SerializeField] private Transform[] laserBossPositions;
 
+    public int maxNumberOfSpin = 4;
+
+    [HideInInspector] public int spinNumber;
     private LineRenderer lineRenderer;
     private BossMovement bossMovement;
     private bool spinToLeftSide;
+    private Vector3 bossRoatation;
 
     private void Awake()
     {
@@ -38,26 +42,39 @@ public class BossCombatLaser : MonoBehaviour
         }
     }
 
+    public void DestroyLaser()
+    {
+        lineRenderer.SetPosition(0, Vector3.zero);
+        lineRenderer.SetPosition(1, Vector3.zero);
+    }
+
     public void SpinBoss()
     {
+        float maxRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y + 90;
+        float minRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y;
+
         if (spinToLeftSide)
         {
-            if (transform.eulerAngles.y <= bossMovement.bossTargetPosition.eulerAngles.y)
+            if (transform.eulerAngles.y == minRotationDelta)
             {
                 spinToLeftSide = false;
+                spinNumber++;
             }
 
-            transform.Rotate(Vector3.up * -bossRotateSpeed);
+            bossRoatation.x += -bossRotateSpeed * Time.deltaTime;
         }
         else
         {
-            if (transform.eulerAngles.y >= bossMovement.bossTargetPosition.eulerAngles.y + 90)
+            if (transform.eulerAngles.y == maxRotationDelta)
             {
                 spinToLeftSide = true;
             }
 
-            transform.Rotate(Vector3.up * bossRotateSpeed);
+            bossRoatation.x += bossRotateSpeed * Time.deltaTime;
         }
+
+        bossRoatation.x = Mathf.Clamp(bossRoatation.x, minRotationDelta, maxRotationDelta);
+        transform.rotation = Quaternion.Euler(0, bossRoatation.x, 0);
     }
 
     public void SelectBossLaserPosition()

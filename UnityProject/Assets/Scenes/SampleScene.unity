@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 286615387}
   m_Layer: 0
-  m_Name: BossLaserPos180
+  m_Name: BossLaserPos-180
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,13 +189,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286615386}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 11, y: 1, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1552868156}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!4 &381999948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3457854631483058806, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
@@ -280,7 +280,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -2.5949286e+9, z: 4.5904e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 4.0667865e+21, z: 4.5905e-41, w: 1.0801191e+11}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -480,12 +480,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLaserPos: {fileID: 1430753603}
-  bossRotateSpeed: 1
+  bossRotateSpeed: 50
   laserBossPositions:
   - {fileID: 1836410437}
   - {fileID: 1846892238}
   - {fileID: 1396781386}
   - {fileID: 286615387}
+  maxNumberOfSpin: 4
+  spinNumber: 0
 --- !u!114 &785044865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,7 +952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1836410437}
   m_Layer: 0
-  m_Name: BossLaserPos270
+  m_Name: BossLaserPos-90
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -963,13 +965,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836410436}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 11, y: 1, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1552868156}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1846892237
 GameObject:
   m_ObjectHideFlags: 0
