@@ -12,8 +12,7 @@ public class BossCombatLaser : MonoBehaviour
 
     public int maxNumberOfSpin = 4;
 
-    /* [HideInInspector]*/
-    public int spinNumber;
+    [HideInInspector] public int spinNumber;
     private LineRenderer lineRenderer;
     private BossMovement bossMovement;
     private bool spinToLeftSide;
@@ -51,7 +50,7 @@ public class BossCombatLaser : MonoBehaviour
 
     public void SpinBoss()
     {
-        float maxRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y + 90;
+        float maxRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y + 89.99f;
         float minRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y;
 
         Debug.Log($"Min: {minRotationDelta} Max: {maxRotationDelta}");
@@ -69,6 +68,7 @@ public class BossCombatLaser : MonoBehaviour
         }
         else
         {
+            Debug.Log(transform.eulerAngles.y);
             if (transform.eulerAngles.y == maxRotationDelta)
             {
                 Debug.Log(transform.eulerAngles + "1");
