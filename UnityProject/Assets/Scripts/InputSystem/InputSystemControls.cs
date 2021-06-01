@@ -225,6 +225,33 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""55dffa7e-3e3a-4bdb-b3b9-86f9996abbe5"",
+            ""actions"": [
+                {
+                    ""name"": ""ChangeBossState"",
+                    ""type"": ""Button"",
+                    ""id"": ""dae62a2c-5776-4f2f-ae3c-cd16c1a97730"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""832c0f40-6f10-4869-a56e-aee82f8e97c4"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""ChangeBossState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -269,6 +296,9 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MouseLook = m_Camera.FindAction("MouseLook", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_ChangeBossState = m_Debug.FindAction("ChangeBossState", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -428,6 +458,39 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_ChangeBossState;
+    public struct DebugActions
+    {
+        private @InputSystemControls m_Wrapper;
+        public DebugActions(@InputSystemControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeBossState => m_Wrapper.m_Debug_ChangeBossState;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @ChangeBossState.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnChangeBossState;
+                @ChangeBossState.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnChangeBossState;
+                @ChangeBossState.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnChangeBossState;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ChangeBossState.started += instance.OnChangeBossState;
+                @ChangeBossState.performed += instance.OnChangeBossState;
+                @ChangeBossState.canceled += instance.OnChangeBossState;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KayboardandmouseSchemeIndex = -1;
     public InputControlScheme KayboardandmouseScheme
     {
@@ -459,5 +522,9 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
     public interface ICameraActions
     {
         void OnMouseLook(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnChangeBossState(InputAction.CallbackContext context);
     }
 }
