@@ -9,19 +9,46 @@ public class BossCombatLaser : MonoBehaviour
     [SerializeField] private Transform startLaserPos;
     [SerializeField] [Range(0, 100)] private float bossRotateSpeed = 10;
     [SerializeField] private Transform[] laserBossPositions;
-
     public int maxNumberOfSpin = 4;
+    [SerializeField] private float changeModeTime = 5;
+    [SerializeField] private float laserPower = 10;
+    [SerializeField] private float laserHeal = 10;
+    [Space(10)]
+    [SerializeField] Material normalLaserMaretial;
+    [SerializeField] Material ghostLaserMaterial;
 
     [HideInInspector] public int spinNumber;
     private LineRenderer lineRenderer;
     private BossMovement bossMovement;
     private bool spinToLeftSide;
     private Vector3 bossRoatation;
+    private bool isGhostMode;
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         bossMovement = GetComponent<BossMovement>();
+        lineRenderer.material = normalLaserMaretial;
+    }
+
+    private void LaserMode()
+    {
+        if (isGhostMode)
+        {
+            isGhostMode = false;
+            lineRenderer.material = normalLaserMaretial;
+        }
+        else
+        {
+            isGhostMode = true;
+            lineRenderer.material = ghostLaserMaterial;
+        }
+    }
+
+    public IEnumerator ChangeLaserModeCourutine()
+    {
+        yield return new WaitForSeconds(changeModeTime);
+        LaserMode();
     }
 
     public void CreateLaser()
@@ -35,6 +62,21 @@ public class BossCombatLaser : MonoBehaviour
             {
                 lineRenderer.SetPosition(1, hit.point);
             }
+
+            if (hit.collider.tag == "Player")
+            {
+                Dash dash = hit.collider.GetComponent<Dash>();
+                PlayerData playerData = hit.collider.GetComponent<PlayerData>();
+
+                if (isGhostMode && dash.playerDashing && playerData.currentHealth != playerData.maxHealth)
+                {
+                    playerData.Heal(laserHeal);
+                }
+                else
+                {
+                    playerData.TakeDamage(laserPower);
+                }
+            }
         }
         else
         {
@@ -46,6 +88,7 @@ public class BossCombatLaser : MonoBehaviour
     {
         lineRenderer.SetPosition(0, Vector3.zero);
         lineRenderer.SetPosition(1, Vector3.zero);
+        StopAllCoroutines();
     }
 
     public void SpinBoss()
@@ -53,13 +96,10 @@ public class BossCombatLaser : MonoBehaviour
         float maxRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y + 89.99f;
         float minRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y;
 
-        Debug.Log($"Min: {minRotationDelta} Max: {maxRotationDelta}");
-
         if (spinToLeftSide)
         {
             if (transform.eulerAngles.y == minRotationDelta)
             {
-                Debug.Log(transform.eulerAngles);
                 spinToLeftSide = false;
                 spinNumber++;
             }
@@ -68,10 +108,8 @@ public class BossCombatLaser : MonoBehaviour
         }
         else
         {
-            Debug.Log(transform.eulerAngles.y);
             if (transform.eulerAngles.y == maxRotationDelta)
             {
-                Debug.Log(transform.eulerAngles + "1");
                 spinToLeftSide = true;
             }
 

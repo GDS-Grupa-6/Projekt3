@@ -12,6 +12,7 @@ public class LaserAtack : StateMachineBehaviour
         combatLaser = animator.GetComponent<BossCombatLaser>();
         combatLogic = animator.GetComponent<BossCombatLogic>();
         combatLaser.spinNumber = 0;
+        combatLaser.StartCoroutine(combatLaser.ChangeLaserModeCourutine());
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
