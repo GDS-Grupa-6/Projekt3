@@ -5,10 +5,12 @@ using UnityEngine;
 public class LaserAtack : StateMachineBehaviour
 {
     BossCombatLaser combatLaser;
+    BossCombatLogic combatLogic;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         combatLaser = animator.GetComponent<BossCombatLaser>();
+        combatLogic = animator.GetComponent<BossCombatLogic>();
         combatLaser.spinNumber = 0;
     }
 
@@ -22,12 +24,7 @@ public class LaserAtack : StateMachineBehaviour
         else
         {
             combatLaser.DestroyLaser();
-            animator.SetTrigger("Normal");
+            combatLogic.ChangeBossState(BossState.Normal);
         }
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
     }
 }

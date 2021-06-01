@@ -15,7 +15,6 @@ public class BossCombatLogic : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        ChangeBossState(BossState.Normal);
 
         inputManager = FindObjectOfType<InputManager>();
         inputManager.inputSystem.Debug.ChangeBossState.performed += _ => ChangeBossState(BossState.Laser);
@@ -27,6 +26,7 @@ public class BossCombatLogic : MonoBehaviour
         {
             case BossState.Laser:
                 bossState = BossState.Laser;
+                animator.ResetTrigger("Normal");
                 animator.SetTrigger("Laser");
                 break;
             case BossState.CannonFire:
@@ -34,6 +34,8 @@ public class BossCombatLogic : MonoBehaviour
                 break;
             case BossState.Normal:
                 bossState = BossState.Normal;
+                animator.SetTrigger("Normal");
+                animator.ResetTrigger("Atack");
                 break;
             default:
                 break;
