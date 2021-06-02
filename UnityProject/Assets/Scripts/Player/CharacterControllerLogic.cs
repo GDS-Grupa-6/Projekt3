@@ -24,8 +24,6 @@ public class CharacterControllerLogic : MonoBehaviour
     private int m_LocomotionId = 0;
     private int m_LocomotionPivotLId = 0;
     private int m_LocomotionPivotRId = 0;
-    private int hFloat;                                  
-    private int vFloat;                                  
 
     private float LocomotionThreshold { get { return 0.2f; } }
     private CameraSwitch cameraSwitch;
@@ -51,20 +49,19 @@ public class CharacterControllerLogic : MonoBehaviour
         m_LocomotionPivotLId = Animator.StringToHash("Base Layer.LocomotionPivotL");
         m_LocomotionPivotRId = Animator.StringToHash("Base Layer.LocomotionPivotR");
 
-        hFloat = Animator.StringToHash("inputHorizontal");
-        vFloat = Animator.StringToHash("inputVertical");
-
         inputManager.inputSystem.Player.Sprint.performed += _ => sprintValue = 1;
         inputManager.inputSystem.Player.Sprint.canceled += _ => sprintValue = 0;
     }
 
     void Update()
     {
+        // read horizontal and vertical input from keyboard
         horizontal = inputManager.MovementControls().x;
         vertical = inputManager.MovementControls().y;
 
-        animator.SetFloat(hFloat, horizontal, 0.25f, Time.deltaTime);
-        animator.SetFloat(vFloat, vertical, 0.25f, Time.deltaTime);
+        // get horizontal and vertical inputs for animator
+        animator.SetFloat("inputHorizontal", horizontal, 0.25f, Time.deltaTime);
+        animator.SetFloat("inputVertical", vertical, 0.25f, Time.deltaTime);
 
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
