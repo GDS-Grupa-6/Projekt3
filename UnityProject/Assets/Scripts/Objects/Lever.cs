@@ -2,27 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))] //freez object!
 public class Lever : MonoBehaviour
 {
-    [SerializeField] private LayerMask ignoreLayerMask;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator doorAnimator;
 
-    public Transform doorL;
-    public Transform doorR;
-    public bool clicked;
+    private Animator animator;
 
-    private void OnCollisionEnter(Collision collision)
+    private void Awake()
     {
-        if (collision.gameObject.layer != ignoreLayerMask && !clicked)
+        animator = GetComponent<Animator>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player"
+            /* || other.gameObject.tag == "ewentualny inny obiekt" */)
         {
             animator.SetTrigger("Click");
-            clicked = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.layer != ignoreLayerMask)
+        if (other.gameObject.tag == "Player"
+            /* || other.gameObject.tag == "ewentualny inny obiekt" */)
         {
             animator.SetTrigger("UnClick");
         }

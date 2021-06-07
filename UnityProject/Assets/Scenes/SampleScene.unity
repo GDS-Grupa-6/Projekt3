@@ -509,7 +509,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.2013849e-29, z: 4.5905e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 4.4113083e+22, z: 4.5904e-41, w: -78.14288}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1487,7 +1487,6 @@ GameObject:
   - component: {fileID: 1643117028}
   - component: {fileID: 1643117027}
   - component: {fileID: 1643117026}
-  - component: {fileID: 1643117029}
   m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
@@ -1571,25 +1570,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643117024}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1643117029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1643117024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97fd0ad5556c18940abd82b31c7f3b20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  animator: {fileID: 2039578501}
-  doorL: {fileID: 1529716982}
-  doorR: {fileID: 1567420018}
-  clicked: 0
 --- !u!4 &1730572879 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3457854633381069685, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
@@ -1951,6 +1931,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2039578500}
   - component: {fileID: 2039578501}
+  - component: {fileID: 2039578503}
+  - component: {fileID: 2039578502}
+  - component: {fileID: 2039578504}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -1993,6 +1976,53 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2039578502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039578499}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.65, z: 0}
+--- !u!114 &2039578503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039578499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fd0ad5556c18940abd82b31c7f3b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  doorL: {fileID: 0}
+  doorR: {fileID: 0}
+  clicked: 0
+--- !u!54 &2039578504
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039578499}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2045052530
 GameObject:
   m_ObjectHideFlags: 0
