@@ -12,15 +12,19 @@ public class LaserMove : StateMachineBehaviour
         combatLaser = animator.GetComponent<BossCombatLaser>();
         bossMovement = animator.GetComponent<BossMovement>();
         combatLaser.SelectBossLaserPosition();
+        bossMovement.timeParabolaJump = 0;
+        bossMovement.startBossPosition = animator.transform.position;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        bossMovement.Teleport();
-
-        if (animator.transform.position == bossMovement.bossTargetPosition.position)
+        if (Vector3.Distance(animator.transform.position, bossMovement.bossTargetTransform.position) <= 0.5f)
         {
             animator.SetTrigger("Atack");
+        }
+        else
+        {
+            bossMovement.ParabolaJump();
         }
     }
 }
