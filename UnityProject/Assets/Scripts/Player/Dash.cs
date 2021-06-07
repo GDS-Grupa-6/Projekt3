@@ -50,14 +50,14 @@ public class Dash : MonoBehaviour
             float horizontal = inputManager.MovementControls().x;
             float vertical = inputManager.MovementControls().y;
 
-            Vector3 inputs = new Vector3(horizontal, 0, vertical).normalized;
-
-            if (cameraSwitch.playerIsInShootPose)
+            if (cameraSwitch.playerIsInShootPose || cameraSwitch.playerAim)
             {
-                Debug.Log(inputs);
+                Vector3 move = transform.right * horizontal + transform.forward * vertical;
+                characterController.Move(move * dashSpeed * Time.deltaTime);
             }
-            else
+            else if (!cameraSwitch.playerIsInShootPose && !cameraSwitch.playerAim)
             {
+                Vector3 inputs = new Vector3(horizontal, 0, vertical).normalized;
                 float targetAngle = Mathf.Atan2(inputs.x, inputs.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0, targetAngle, 0);
                 characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
