@@ -55,11 +55,9 @@ public class CharacterControllerLogic : MonoBehaviour
 
     void Update()
     {
-        // read horizontal and vertical input from keyboard
         horizontal = inputManager.MovementControls().x;
         vertical = inputManager.MovementControls().y;
 
-        // get horizontal and vertical inputs for animator
         animator.SetFloat("inputHorizontal", horizontal, 0.25f, Time.deltaTime);
         animator.SetFloat("inputVertical", vertical, 0.25f, Time.deltaTime);
 
