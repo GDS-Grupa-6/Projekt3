@@ -2,32 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterControllerLogic))]
 public class Dash : MonoBehaviour
 {
     [SerializeField] private float dashSpeed = 40f;
     [SerializeField] private float dashTime = 0.25f;
     [SerializeField] private float cooldownTime = 1f;
     [SerializeField] private GameObject ghostFormVFX;
-
+    [SerializeField] private Transform mainCam;
+ 
     [HideInInspector] public bool playerDashing;
     private CharacterController characterController;
     private InputManager inputManager;
-    private bool canDash;
+    private Animator animator;
+    private CharacterControllerLogic characterControllerLogic;
+    private CameraSwitch cameraSwitch;
 
     void Start()
     {
+        characterControllerLogic = GetComponent<CharacterControllerLogic>();
+        animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         inputManager = FindObjectOfType<InputManager>();
-        canDash = true;
+        cameraSwitch = FindObjectOfType<CameraSwitch>();
         ghostFormVFX.SetActive(false);
     }
 
     void Update()
     {
-        if (inputManager.PlayerDash() && canDash)
+        if (inputManager.PlayerDash() && !playerDashing)
         {
-            canDash = false;
+            characterControllerLogic.enabled = false;
+            playerDashing = true;
             StartCoroutine(DashCourutine());
         }
     }
@@ -39,19 +47,33 @@ public class Dash : MonoBehaviour
 
         while (Time.time < startTime + dashTime)
         {
-            characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
-            playerDashing = true;
+            float horizontal = inputManager.MovementControls().x;
+            float vertical = inputManager.MovementControls().y;
+
+            if (cameraSwitch.playerIsInShootPose || cameraSwitch.playerAim)
+            {
+                Vector3 move = transform.right * horizontal + transform.forward * vertical;
+                characterController.Move(move * dashSpeed * Time.deltaTime);
+            }
+            else if (!cameraSwitch.playerIsInShootPose && !cameraSwitch.playerAim)
+            {
+                Vector3 inputs = new Vector3(horizontal, 0, vertical).normalized;
+                float targetAngle = Mathf.Atan2(inputs.x, inputs.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
+                transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+                characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+            }
+
             yield return null;
         }
 
-        playerDashing = false;
+        characterControllerLogic.enabled = true;
         StartCoroutine(CooldownCorutine());
     }
 
     IEnumerator CooldownCorutine()
     {
         yield return new WaitForSeconds(cooldownTime);
-        canDash = true;
+        playerDashing = false;
         ghostFormVFX.SetActive(false);
     }
 }
