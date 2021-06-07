@@ -93,8 +93,8 @@ public class BossCombatLaser : MonoBehaviour
 
     public void SpinBoss()
     {
-        float maxRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y + 89.99f;
-        float minRotationDelta = bossMovement.bossTargetPosition.eulerAngles.y;
+        float maxRotationDelta = bossMovement.bossTargetTransform.eulerAngles.y + 89.99f;
+        float minRotationDelta = bossMovement.bossTargetTransform.eulerAngles.y;
 
         if (spinToLeftSide)
         {
@@ -142,6 +142,6 @@ public class BossCombatLaser : MonoBehaviour
             }
         }
 
-        bossMovement.bossTargetPosition = largest;
+        bossMovement.bossTargetTransform = largest;
     }
 }
