@@ -6,11 +6,18 @@ public class Wave : MonoBehaviour
 {
     [HideInInspector] public float power;
 
+    private PlayerData _playerData;
+
+    private void Awake()
+    {
+        _playerData = FindObjectOfType<PlayerData>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Gracz dosta³ z fali: " + this.gameObject.name);
+            _playerData.TakeDamage(power);
         }
     }
 }
