@@ -23,12 +23,26 @@ public class BossCombatLaser : MonoBehaviour
     private bool spinToLeftSide;
     private Vector3 bossRoatation;
     private bool isGhostMode;
+    private bool laserHasHit;
+    private RaycastHit hit;
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         bossMovement = GetComponent<BossMovement>();
         lineRenderer.material = normalLaserMaretial;
+    }
+
+    private void Update()
+    {
+        if (Physics.Raycast(startLaserPos.position, startLaserPos.forward, out hit))
+        {
+            laserHasHit = true;
+        }
+        else
+        {
+            laserHasHit = false;
+        }
     }
 
     private void LaserMode()
@@ -55,8 +69,7 @@ public class BossCombatLaser : MonoBehaviour
     {
         lineRenderer.SetPosition(0, startLaserPos.position);
 
-        RaycastHit hit;
-        if (Physics.Raycast(startLaserPos.position, startLaserPos.forward, out hit))
+        if (laserHasHit)
         {
             if (hit.collider)
             {
