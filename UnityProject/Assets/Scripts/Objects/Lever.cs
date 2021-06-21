@@ -6,13 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))] //freez object!
 public class Lever : MonoBehaviour
 {
-    [SerializeField] private Animator doorAnimator;
+    [SerializeField] private Animator _doorAnimator;
 
-    private Animator animator;
+    private Animator _animator;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +20,7 @@ public class Lever : MonoBehaviour
         if (other.gameObject.tag == "Player"
             /* || other.gameObject.tag == "ewentualny inny obiekt" */)
         {
-            animator.SetTrigger("Click");
+            _animator.SetTrigger("Click");
         }
     }
 
@@ -29,7 +29,7 @@ public class Lever : MonoBehaviour
         if (other.gameObject.tag == "Player"
             /* || other.gameObject.tag == "ewentualny inny obiekt" */)
         {
-            animator.SetTrigger("UnClick");
+            _animator.SetTrigger("UnClick");
         }
     }
 }

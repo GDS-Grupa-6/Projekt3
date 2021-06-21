@@ -6,40 +6,40 @@ using UnityEngine.VFX;
 public class GhostObject : MonoBehaviour
 {
     [Header("Healing options")]
-    [SerializeField] private float healValue = 10f;
-    [SerializeField] private bool destroyAfterDash;
+    [SerializeField] private float _healValue = 10f;
+    [SerializeField] private bool _destroyAfterDash;
     [Header("Damage options")]
-    [SerializeField] private bool thisObjectCanHitPlayer;
-    [SerializeField] private float damageValue = 10f;
-    [SerializeField] private float bounceForce = 20f;
-    [SerializeField] private float bounceDistance = 4f;
+    [SerializeField] private bool _thisObjectCanHitPlayer;
+    [SerializeField] private float _damageValue = 10f;
+    [SerializeField] private float _bounceForce = 20f;
+    [SerializeField] private float _bounceDistance = 4f;
 
-    private PlayerData playerData;
-    private Dash dash;
-    private CharacterController player;
-    private Vector3 targetPos;
-    private CharacterController characterController;
-    private bool hit;
+    private PlayerData _playerData;
+    private Dash _dash;
+    private CharacterController _player;
+    private Vector3 _targetPos;
+    private CharacterController _characterController;
+    private bool _hit;
 
     private void Start()
     {
-        characterController = FindObjectOfType<CharacterController>();
-        player = FindObjectOfType<CharacterController>();
-        playerData = FindObjectOfType<PlayerData>();
-        dash = FindObjectOfType<Dash>();
+        _characterController = FindObjectOfType<CharacterController>();
+        _player = FindObjectOfType<CharacterController>();
+        _playerData = FindObjectOfType<PlayerData>();
+        _dash = FindObjectOfType<Dash>();
     }
 
     private void Update()
     {
-        if (hit)
+        if (_hit)
         {
-            float step = bounceForce * Time.deltaTime;
-            player.gameObject.transform.position = Vector3.MoveTowards(player.gameObject.transform.position, targetPos, step);
+            float step = _bounceForce * Time.deltaTime;
+            _player.gameObject.transform.position = Vector3.MoveTowards(_player.gameObject.transform.position, _targetPos, step);
 
-            if (Vector3.Distance(player.gameObject.transform.position, targetPos) < 0.1)
+            if (Vector3.Distance(_player.gameObject.transform.position, _targetPos) < 0.1)
             {
-                characterController.enabled = true;
-                hit = false;
+                _characterController.enabled = true;
+                _hit = false;
             }
         }
     }
@@ -48,22 +48,22 @@ public class GhostObject : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (dash.playerDashing && playerData.currentHealth != playerData.maxHealth)
+            if (_dash.playerDashing && _playerData.currentHealth != _playerData.maxHealth)
             {
-                playerData.Heal(healValue);
+                _playerData.Heal(_healValue);
 
-                if (destroyAfterDash)
+                if (_destroyAfterDash)
                 {
                     Destroy(this.gameObject);
                 }
             }
-            else if (!dash.playerDashing && thisObjectCanHitPlayer)
+            else if (!_dash.playerDashing && _thisObjectCanHitPlayer)
             {
-                characterController.enabled = false;
+                _characterController.enabled = false;
                 // animacja
-                playerData.TakeDamage(damageValue);
-                targetPos = other.transform.position - other.gameObject.transform.forward * bounceDistance;
-                hit = true;
+                _playerData.TakeDamage(_damageValue);
+                _targetPos = other.transform.position - other.gameObject.transform.forward * _bounceDistance;
+                _hit = true;
             }
         }
     }

@@ -5,34 +5,42 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    [SerializeField] private float parabolaJumpHeight = 10f;
-    [SerializeField] private float jumpSpeed = 5f;
+    [SerializeField] private float _parabolaJumpHeight = 10f;
+    [SerializeField] private float _jumpSpeed = 5f;
 
-    [HideInInspector] public Transform bossTargetTransform;
     [HideInInspector] public Transform player;
     [HideInInspector] public float timeParabolaJump;
-    [HideInInspector] public Vector3 startBossPosition;
+    [HideInInspector] public bool parabolaJumpEnded;
 
     private void Awake()
     {
         player = FindObjectOfType<CharacterControllerLogic>().transform;
     }
 
-    public void Teleport()
+    public void Teleport(Transform target)
     {
-        transform.position = bossTargetTransform.position;
-        transform.rotation = bossTargetTransform.rotation;
+        transform.position = target.position;
+        transform.rotation = target.rotation;
     }
 
-    public void ParabolaJump()
+    public void ParabolaJump(Vector3 target, Vector3 startPos)
     {
         timeParabolaJump += Time.deltaTime;
         timeParabolaJump = timeParabolaJump % 5f;
 
-        transform.position = Parabola(startBossPosition, bossTargetTransform.position, parabolaJumpHeight, (timeParabolaJump / 5) * jumpSpeed);
+        if (Vector3.Distance(transform.position, target) > 1f)
+        {
+            parabolaJumpEnded = false;
+            transform.position = Parabola(startPos, target, _parabolaJumpHeight, (timeParabolaJump / 5) * _jumpSpeed);
+        }
+        else
+        {
+            parabolaJumpEnded = true;
+            return;
+        }
     }
 
-    public static Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
+    private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
     {
         Func<float, float> f = x => -4 * height * x * x + 4 * height * x;
 

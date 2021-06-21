@@ -6,155 +6,157 @@ using UnityEngine;
 [RequireComponent(typeof(BossMovement))]
 public class BossCombatLaser : MonoBehaviour
 {
-    [SerializeField] private Transform startLaserPos;
-    [SerializeField] [Range(0, 100)] private float bossRotateSpeed = 10;
-    [SerializeField] private Transform[] laserBossPositions;
+    [SerializeField] private Transform _startLaserPos;
+    [SerializeField] [Range(0, 100)] private float _bossRotateSpeed = 10;
+    [SerializeField] private Transform[] _laserBossPositions;
     public int maxNumberOfSpin = 4;
-    [SerializeField] private float changeModeTime = 5;
-    [SerializeField] private float laserPower = 10;
-    [SerializeField] private float laserHeal = 10;
+    [SerializeField] private float _changeModeTime = 5;
+    [SerializeField] private float _laserPower = 10;
+    [SerializeField] private float _laserHeal = 10;
     [Space(10)]
-    [SerializeField] Material normalLaserMaretial;
-    [SerializeField] Material ghostLaserMaterial;
+    [SerializeField] Material _normalLaserMaretial;
+    [SerializeField] Material _ghostLaserMaterial;
 
     [HideInInspector] public int spinNumber;
-    private LineRenderer lineRenderer;
-    private BossMovement bossMovement;
-    private bool spinToLeftSide;
-    private Vector3 bossRoatation;
-    private bool isGhostMode;
-    private bool laserHasHit;
-    private RaycastHit hit;
+    [HideInInspector] public Transform targetLaserJump;
+
+    private LineRenderer _lineRenderer;
+    private BossMovement _bossMovement;
+    private bool _spinToLeftSide;
+    private Vector3 _bossRoatation;
+    private bool _isGhostMode;
+    private bool _laserHasHit;
+    private RaycastHit _hit;
 
     private void Awake()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        bossMovement = GetComponent<BossMovement>();
-        lineRenderer.material = normalLaserMaretial;
+        _lineRenderer = GetComponent<LineRenderer>();
+        _bossMovement = GetComponent<BossMovement>();
+        _lineRenderer.material = _normalLaserMaretial;
     }
 
     private void Update()
     {
-        if (Physics.Raycast(startLaserPos.position, startLaserPos.forward, out hit))
+        if (Physics.Raycast(_startLaserPos.position, _startLaserPos.forward, out _hit))
         {
-            laserHasHit = true;
+            _laserHasHit = true;
         }
         else
         {
-            laserHasHit = false;
+            _laserHasHit = false;
         }
     }
 
     private void LaserMode()
     {
-        if (isGhostMode)
+        if (_isGhostMode)
         {
-            isGhostMode = false;
-            lineRenderer.material = normalLaserMaretial;
+            _isGhostMode = false;
+            _lineRenderer.material = _normalLaserMaretial;
         }
         else
         {
-            isGhostMode = true;
-            lineRenderer.material = ghostLaserMaterial;
+            _isGhostMode = true;
+            _lineRenderer.material = _ghostLaserMaterial;
         }
     }
 
     public IEnumerator ChangeLaserModeCourutine()
     {
-        yield return new WaitForSeconds(changeModeTime);
+        yield return new WaitForSeconds(_changeModeTime);
         LaserMode();
     }
 
     public void CreateLaser()
     {
-        lineRenderer.SetPosition(0, startLaserPos.position);
+        _lineRenderer.SetPosition(0, _startLaserPos.position);
 
-        if (laserHasHit)
+        if (_laserHasHit)
         {
-            if (hit.collider)
+            if (_hit.collider)
             {
-                lineRenderer.SetPosition(1, hit.point);
+                _lineRenderer.SetPosition(1, _hit.point);
             }
 
-            if (hit.collider.tag == "Player")
+            if (_hit.collider.tag == "Player")
             {
-                Dash dash = hit.collider.GetComponent<Dash>();
-                PlayerData playerData = hit.collider.GetComponent<PlayerData>();
+                Dash dash = _hit.collider.GetComponent<Dash>();
+                PlayerData playerData = _hit.collider.GetComponent<PlayerData>();
 
-                if (isGhostMode && dash.playerDashing && playerData.currentHealth != playerData.maxHealth)
+                if (_isGhostMode && dash.playerDashing && playerData.currentHealth != playerData.maxHealth)
                 {
-                    playerData.Heal(laserHeal);
+                    playerData.Heal(_laserHeal);
                 }
                 else
                 {
-                    playerData.TakeDamage(laserPower);
+                    playerData.TakeDamage(_laserPower);
                 }
             }
         }
         else
         {
-            lineRenderer.SetPosition(1, startLaserPos.forward * 50000);
+            _lineRenderer.SetPosition(1, _startLaserPos.forward * 50000);
         }
     }
 
     public void DestroyLaser()
     {
-        lineRenderer.SetPosition(0, Vector3.zero);
-        lineRenderer.SetPosition(1, Vector3.zero);
+        _lineRenderer.SetPosition(0, Vector3.zero);
+        _lineRenderer.SetPosition(1, Vector3.zero);
         StopAllCoroutines();
     }
 
     public void SpinBoss()
     {
-        float maxRotationDelta = bossMovement.bossTargetTransform.eulerAngles.y + 89.99f;
-        float minRotationDelta = bossMovement.bossTargetTransform.eulerAngles.y;
+        float maxRotationDelta = targetLaserJump.eulerAngles.y + 89.99f;
+        float minRotationDelta = targetLaserJump.eulerAngles.y;
 
-        if (spinToLeftSide)
+        if (_spinToLeftSide)
         {
             if (transform.eulerAngles.y == minRotationDelta)
             {
-                spinToLeftSide = false;
+                _spinToLeftSide = false;
                 spinNumber++;
             }
 
-            bossRoatation.x += -bossRotateSpeed * Time.deltaTime;
+            _bossRoatation.x += -_bossRotateSpeed * Time.deltaTime;
         }
         else
         {
             if (transform.eulerAngles.y == maxRotationDelta)
             {
-                spinToLeftSide = true;
+                _spinToLeftSide = true;
             }
 
-            bossRoatation.x += bossRotateSpeed * Time.deltaTime;
+            _bossRoatation.x += _bossRotateSpeed * Time.deltaTime;
         }
 
-        bossRoatation.x = Mathf.Clamp(bossRoatation.x, minRotationDelta, maxRotationDelta);
-        transform.rotation = Quaternion.Euler(0, bossRoatation.x, 0);
+        _bossRoatation.x = Mathf.Clamp(_bossRoatation.x, minRotationDelta, maxRotationDelta);
+        transform.rotation = Quaternion.Euler(0, _bossRoatation.x, 0);
     }
 
     public void SelectBossLaserPosition()
     {
-        Transform largest = laserBossPositions[0];
+        Transform largest = _laserBossPositions[0];
         float[] distances = new float[4]
         {
-            Vector3.Distance(laserBossPositions[0].position, bossMovement.player.position),
-            Vector3.Distance(laserBossPositions[1].position, bossMovement.player.position),
-            Vector3.Distance(laserBossPositions[2].position, bossMovement.player.position),
-            Vector3.Distance(laserBossPositions[3].position, bossMovement.player.position)
+            Vector3.Distance(_laserBossPositions[0].position, _bossMovement.player.position),
+            Vector3.Distance(_laserBossPositions[1].position, _bossMovement.player.position),
+            Vector3.Distance(_laserBossPositions[2].position, _bossMovement.player.position),
+            Vector3.Distance(_laserBossPositions[3].position, _bossMovement.player.position)
         };
 
         float largestDistans = distances[0];
 
-        for (int i = 0; i < laserBossPositions.Length; i++)
+        for (int i = 0; i < _laserBossPositions.Length; i++)
         {
             if (distances[i] > largestDistans)
             {
                 largestDistans = distances[i];
-                largest = laserBossPositions[i];
+                largest = _laserBossPositions[i];
             }
         }
 
-        bossMovement.bossTargetTransform = largest;
+        targetLaserJump = largest;
     }
 }
