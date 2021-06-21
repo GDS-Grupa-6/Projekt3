@@ -662,7 +662,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 8, z: 2.3509887e-38, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -691,10 +691,11 @@ GameObject:
   m_Component:
   - component: {fileID: 785044862}
   - component: {fileID: 785044863}
+  - component: {fileID: 785044859}
+  - component: {fileID: 785044861}
   - component: {fileID: 785044865}
   - component: {fileID: 785044864}
   - component: {fileID: 785044860}
-  - component: {fileID: 785044859}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -738,6 +739,22 @@ MonoBehaviour:
   player: {fileID: 0}
   timeParabolaJump: 10
   parabolaJumpEnded: 0
+--- !u!54 &785044861
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785044858}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!4 &785044862
 Transform:
   m_ObjectHideFlags: 0
