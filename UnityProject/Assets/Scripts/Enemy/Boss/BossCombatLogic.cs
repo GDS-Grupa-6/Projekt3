@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BossPhases { empty, First, Second, Third }
-public enum BossFirstPhaseStates { empty, StartPhase, Wave360, TwoStrikes, Wave45, Locked, SpinAttack, Puke, MegaPuke, Tired }
+public enum BossFirstPhaseStates { empty, StartPhase, Wave360, PlayerIsNear, PlayerIsFar }
 
 [RequireComponent(typeof(Animator))]
 public class BossCombatLogic : MonoBehaviour
 {
     public Transform centerOfArena;
 
-    /*[HideInInspector]*/
-    public BossPhases bossPhase;
-    /*[HideInInspector]*/
-    public BossFirstPhaseStates bossFirstPhaseState;
-    [HideInInspector] public float distanceToPlayer;
+    [HideInInspector] public BossPhases bossPhase;
+    [HideInInspector] public BossFirstPhaseStates bossFirstPhaseState;
+
+
     [HideInInspector] public Transform targetTransform;
 
+    private float distanceToPlayer;
     private Animator _animator;
     private Transform _playerTransform;
 
@@ -63,6 +63,7 @@ public class BossCombatLogic : MonoBehaviour
             case BossFirstPhaseStates.StartPhase:
                 _animator.enabled = true;
                 targetTransform = centerOfArena;
+                _animator.SetBool("Start", true);
                 _animator.SetBool("ToPlayer", true);
                 _animator.SetBool("JumpEnd", false);
                 break;
@@ -71,22 +72,11 @@ public class BossCombatLogic : MonoBehaviour
                 targetTransform = _playerTransform;
                 //ustawienie rotacji
                 break;
-            case BossFirstPhaseStates.TwoStrikes:
+            case BossFirstPhaseStates.PlayerIsNear:
+                _animator.SetBool("Start", false);
                 break;
-            case BossFirstPhaseStates.Wave45:
-                break;
-            case BossFirstPhaseStates.Locked:
-                break;
-            case BossFirstPhaseStates.SpinAttack:
-                break;
-            case BossFirstPhaseStates.Puke:
-                _animator.SetBool("JumpEnd", false);
-                targetTransform = _playerTransform;
-                //ustawienie rotacji
-                break;
-            case BossFirstPhaseStates.MegaPuke:
-                break;
-            case BossFirstPhaseStates.Tired:
+            case BossFirstPhaseStates.PlayerIsFar:
+                _animator.SetBool("Start", false);
                 break;
             default:
                 break;

@@ -20,16 +20,4 @@ public class ParabolaJumpAnim : StateMachineBehaviour
         _bossMovement.ParabolaJump(_combatLogic.targetTransform.position, _startBossPos);
         animator.SetBool("JumpEnd", _bossMovement.parabolaJumpEnded);
     }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (animator.GetBool("ToPlayer"))
-        {
-            _combatLogic.ChangeFirstPhaseState(BossFirstPhaseStates.Wave360);
-        }
-        else
-        {
-            _combatLogic.ChangeFirstPhaseState(BossFirstPhaseStates.Puke);
-        }
-    }
 }
