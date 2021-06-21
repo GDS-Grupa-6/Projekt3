@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BossPhases { empty, First, Second, Third }
-public enum BossFirstPhaseStates { empty, StartPhase, Wave360, PlayerIsNear, PlayerIsFar }
+public enum BossFirstPhaseStates { empty, StartPhase, Wave360 }
 
 [RequireComponent(typeof(Animator))]
 public class BossCombatLogic : MonoBehaviour
@@ -63,7 +63,6 @@ public class BossCombatLogic : MonoBehaviour
             case BossFirstPhaseStates.StartPhase:
                 _animator.enabled = true;
                 targetTransform = centerOfArena;
-                _animator.SetBool("Start", true);
                 _animator.SetBool("ToPlayer", true);
                 _animator.SetBool("JumpEnd", false);
                 break;
@@ -71,12 +70,6 @@ public class BossCombatLogic : MonoBehaviour
                 _animator.SetBool("JumpEnd", false);
                 targetTransform = _playerTransform;
                 //ustawienie rotacji
-                break;
-            case BossFirstPhaseStates.PlayerIsNear:
-                _animator.SetBool("Start", false);
-                break;
-            case BossFirstPhaseStates.PlayerIsFar:
-                _animator.SetBool("Start", false);
                 break;
             default:
                 break;
