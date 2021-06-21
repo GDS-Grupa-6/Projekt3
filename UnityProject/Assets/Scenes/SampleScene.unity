@@ -604,7 +604,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.2695423e+31, y: -3189470, z: 4.5904e-41, w: 0}
+  m_BoundingSphereOverride: {x: 8.31e-43, y: -3189470, z: 4.5904e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -675,12 +675,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4939099f749160643adb6cd1dce0161e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parabolaJumpHeight: 10
-  jumpSpeed: 5
-  bossTargetTransform: {fileID: 0}
+  _parabolaJumpHeight: 10
+  _jumpSpeed: 5
+  startBossPosition: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   timeParabolaJump: 10
-  startBossPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &785044862
 Transform:
   m_ObjectHideFlags: 0
@@ -807,20 +806,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414820243e8431044a80bf16d620c2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLaserPos: {fileID: 1430753603}
-  bossRotateSpeed: 50
-  laserBossPositions:
+  _startLaserPos: {fileID: 1430753603}
+  _bossRotateSpeed: 50
+  _laserBossPositions:
   - {fileID: 1836410437}
   - {fileID: 1846892238}
   - {fileID: 1396781386}
   - {fileID: 286615387}
   maxNumberOfSpin: 4
-  changeModeTime: 5
-  laserPower: 10
-  laserHeal: 10
-  normalLaserMaretial: {fileID: 2100000, guid: acf9cf814d5111e41ae14d706e6bcd79, type: 2}
-  ghostLaserMaterial: {fileID: 2100000, guid: 8c7a4024400a72144976c95d9ab06ab2, type: 2}
+  _changeModeTime: 5
+  _laserPower: 10
+  _laserHeal: 10
+  _normalLaserMaretial: {fileID: 2100000, guid: acf9cf814d5111e41ae14d706e6bcd79, type: 2}
+  _ghostLaserMaterial: {fileID: 2100000, guid: 8c7a4024400a72144976c95d9ab06ab2, type: 2}
   spinNumber: 0
+  targetLaserJump: {fileID: 0}
 --- !u!114 &785044865
 MonoBehaviour:
   m_ObjectHideFlags: 0

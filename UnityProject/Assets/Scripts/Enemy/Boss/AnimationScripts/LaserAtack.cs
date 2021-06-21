@@ -5,28 +5,28 @@ using UnityEngine;
 //do zmiany??
 public class LaserAtack : StateMachineBehaviour
 {
-    BossCombatLaser combatLaser;
-    BossCombatLogic combatLogic;
+    private BossCombatLaser _combatLaser;
+    private BossCombatLogic _combatLogic;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        combatLaser = animator.GetComponent<BossCombatLaser>();
-        combatLogic = animator.GetComponent<BossCombatLogic>();
-        combatLaser.spinNumber = 0;
-        combatLaser.StartCoroutine(combatLaser.ChangeLaserModeCourutine());
+        _combatLaser = animator.GetComponent<BossCombatLaser>();
+        _combatLogic = animator.GetComponent<BossCombatLogic>();
+        _combatLaser.spinNumber = 0;
+        _combatLaser.StartCoroutine(_combatLaser.ChangeLaserModeCourutine());
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (combatLaser.spinNumber < combatLaser.maxNumberOfSpin)
+        if (_combatLaser.spinNumber < _combatLaser.maxNumberOfSpin)
         {
-            combatLaser.CreateLaser();
-            combatLaser.SpinBoss();
+            _combatLaser.CreateLaser();
+            _combatLaser.SpinBoss();
         }
         else
         {
-            combatLaser.DestroyLaser();
-           // zmiana stanu??
+            _combatLaser.DestroyLaser();
+            // zmiana stanu??
         }
     }
 }

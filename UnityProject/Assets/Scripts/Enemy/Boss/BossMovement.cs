@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    [SerializeField] private float parabolaJumpHeight = 10f;
-    [SerializeField] private float jumpSpeed = 5f;
+    [SerializeField] private float _parabolaJumpHeight = 10f;
+    [SerializeField] private float _jumpSpeed = 5f;
 
-    [HideInInspector] public Transform bossTargetTransform;
     [HideInInspector] public Vector3 startBossPosition;
     [HideInInspector] public Transform player;
     [HideInInspector] public float timeParabolaJump;
@@ -18,18 +17,18 @@ public class BossMovement : MonoBehaviour
         player = FindObjectOfType<CharacterControllerLogic>().transform;
     }
 
-    public void Teleport()
+    public void Teleport(Transform targetTransform)
     {
-        transform.position = bossTargetTransform.position;
-        transform.rotation = bossTargetTransform.rotation;
+        transform.position = targetTransform.position;
+        transform.rotation = targetTransform.rotation;
     }
 
-    public void ParabolaJump()
+    public void ParabolaJump(Transform targetTransform)
     {
         timeParabolaJump += Time.deltaTime;
         timeParabolaJump = timeParabolaJump % 5f;
 
-        transform.position = Parabola(startBossPosition, bossTargetTransform.position, parabolaJumpHeight, (timeParabolaJump / 5) * jumpSpeed);
+        transform.position = Parabola(startBossPosition, targetTransform.position, _parabolaJumpHeight, (timeParabolaJump / 5) * _jumpSpeed);
     }
 
     private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)

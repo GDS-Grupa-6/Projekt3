@@ -10,10 +10,10 @@ public class BossCombatLogic : MonoBehaviour
 {
     public BossState bossState;
 
-    private Animator animator;
+    private Animator _animator;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 }
