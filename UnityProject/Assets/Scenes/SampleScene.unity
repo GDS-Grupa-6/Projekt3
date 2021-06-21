@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 785044865}
   - component: {fileID: 785044864}
   - component: {fileID: 785044860}
+  - component: {fileID: 785044866}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -915,6 +916,26 @@ MonoBehaviour:
   bossFirstPhaseState: 0
   distanceToPlayer: 0
   targetTransform: {fileID: 0}
+--- !u!114 &785044866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785044858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20faa5b00d5c044e8e31b9701c986ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wave360: {fileID: 919132147602247781}
+  _wave45: {fileID: 919132147479693587}
+  _maxScaleWave360: {x: 0, y: 0, z: 0}
+  _growSpeedWave360: 0
+  _powerWave360: 0
+  _maxScaleWave45: {x: 0, y: 0, z: 0}
+  _growSpeedWave45: 0
+  _powerWave45: 0
 --- !u!1 &957301485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,6 +2434,7 @@ GameObject:
   - component: {fileID: 3469287838083980301}
   - component: {fileID: 1711813855161936071}
   - component: {fileID: 1680241734}
+  - component: {fileID: 919132147479693587}
   m_Layer: 0
   m_Name: Wave45
   m_TagString: Untagged
@@ -2420,6 +2442,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &919132147479693587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147479693586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c825043dbe2e0c468c7f0c369e5d43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0
 --- !u!1 &919132147602247780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,6 +2467,7 @@ GameObject:
   - component: {fileID: 3469287838070474107}
   - component: {fileID: 1711813855083426225}
   - component: {fileID: 1668574520}
+  - component: {fileID: 919132147602247781}
   m_Layer: 0
   m_Name: Wave360
   m_TagString: Untagged
@@ -2439,6 +2475,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &919132147602247781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147602247780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c825043dbe2e0c468c7f0c369e5d43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0
 --- !u!23 &1711813855083426225
 MeshRenderer:
   m_ObjectHideFlags: 0
