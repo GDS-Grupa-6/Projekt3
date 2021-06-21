@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//do zmiany??
 public class LaserAtack : StateMachineBehaviour
 {
     BossCombatLaser combatLaser;
@@ -25,7 +26,7 @@ public class LaserAtack : StateMachineBehaviour
         else
         {
             combatLaser.DestroyLaser();
-            combatLogic.ChangeBossState(BossState.Normal);
+           // zmiana stanu??
         }
     }
 }

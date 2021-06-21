@@ -9,9 +9,9 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private float jumpSpeed = 5f;
 
     [HideInInspector] public Transform bossTargetTransform;
+    [HideInInspector] public Vector3 startBossPosition;
     [HideInInspector] public Transform player;
     [HideInInspector] public float timeParabolaJump;
-    [HideInInspector] public Vector3 startBossPosition;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class BossMovement : MonoBehaviour
         transform.position = Parabola(startBossPosition, bossTargetTransform.position, parabolaJumpHeight, (timeParabolaJump / 5) * jumpSpeed);
     }
 
-    public static Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
+    private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
     {
         Func<float, float> f = x => -4 * height * x * x + 4 * height * x;
 
