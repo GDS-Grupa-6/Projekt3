@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BossPhases { empty, First, Second, Third }
-public enum BossFirstPhaseStates { empty, StartPhase, ParabolaJump, Wave360, TwoStrikes, Wave45, Locked, SpinAttack, Puke, MegaPuke, Tired }
+public enum BossFirstPhaseStates { empty, StartPhase, Wave360, TwoStrikes, Wave45, Locked, SpinAttack, Puke, MegaPuke, Tired }
 
 [RequireComponent(typeof(Animator))]
 public class BossCombatLogic : MonoBehaviour
@@ -15,12 +15,10 @@ public class BossCombatLogic : MonoBehaviour
     /*[HideInInspector]*/
     public BossFirstPhaseStates bossFirstPhaseState;
     [HideInInspector] public float distanceToPlayer;
-    [HideInInspector] public bool findTargetVectorToParabolaJump;
+    [HideInInspector] public Transform targetTransform;
 
     private Animator _animator;
     private Transform _playerTransform;
-    private bool _setAnimatorTrigger;
-    private string _animatorTriggerName;
 
     private void Awake()
     {
@@ -34,12 +32,8 @@ public class BossCombatLogic : MonoBehaviour
     private void Update()
     {
         distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+        _animator.SetFloat("DistanceToPlayer", distanceToPlayer);
 
-        if (_setAnimatorTrigger && _animatorTriggerName != null)
-        {
-            _setAnimatorTrigger = false;
-            _animator.SetTrigger(_animatorTriggerName);
-        }
     }
 
     public void ChangeBossPhase(BossPhases phase)
@@ -49,6 +43,7 @@ public class BossCombatLogic : MonoBehaviour
         switch (phase)
         {
             case BossPhases.First:
+                ChangeFirstPhaseState(BossFirstPhaseStates.StartPhase);
                 break;
             case BossPhases.Second:
                 break;
@@ -66,13 +61,15 @@ public class BossCombatLogic : MonoBehaviour
         switch (state)
         {
             case BossFirstPhaseStates.StartPhase:
-                findTargetVectorToParabolaJump = false;
                 _animator.enabled = true;
-                break;
-            case BossFirstPhaseStates.ParabolaJump:
+                targetTransform = centerOfArena;
+                _animator.SetBool("ToPlayer", true);
+                _animator.SetBool("JumpEnd", false);
                 break;
             case BossFirstPhaseStates.Wave360:
-                findTargetVectorToParabolaJump = true;
+                _animator.SetBool("JumpEnd", false);
+                targetTransform = _playerTransform;
+                //ustawienie rotacji
                 break;
             case BossFirstPhaseStates.TwoStrikes:
                 break;
@@ -81,9 +78,11 @@ public class BossCombatLogic : MonoBehaviour
             case BossFirstPhaseStates.Locked:
                 break;
             case BossFirstPhaseStates.SpinAttack:
-                findTargetVectorToParabolaJump = true;
                 break;
             case BossFirstPhaseStates.Puke:
+                _animator.SetBool("JumpEnd", false);
+                targetTransform = _playerTransform;
+                //ustawienie rotacji
                 break;
             case BossFirstPhaseStates.MegaPuke:
                 break;

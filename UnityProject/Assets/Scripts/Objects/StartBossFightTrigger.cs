@@ -10,7 +10,7 @@ public class StartBossFightTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-         
+            _combatLogic.ChangeBossPhase(BossPhases.First);
         }
     }
 }

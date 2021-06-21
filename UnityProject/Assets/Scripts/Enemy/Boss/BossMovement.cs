@@ -8,7 +8,6 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private float _parabolaJumpHeight = 10f;
     [SerializeField] private float _jumpSpeed = 5f;
 
-    [HideInInspector] public Vector3 startBossPosition;
     [HideInInspector] public Transform player;
     [HideInInspector] public float timeParabolaJump;
     [HideInInspector] public bool parabolaJumpEnded;
@@ -18,21 +17,21 @@ public class BossMovement : MonoBehaviour
         player = FindObjectOfType<CharacterControllerLogic>().transform;
     }
 
-    public void Teleport(Transform targetTransform)
+    public void Teleport(Transform target)
     {
-        transform.position = targetTransform.position;
-        transform.rotation = targetTransform.rotation;
+        transform.position = target.position;
+        transform.rotation = target.rotation;
     }
 
-    public void ParabolaJump(Vector3 target)
+    public void ParabolaJump(Vector3 target, Vector3 startPos)
     {
         timeParabolaJump += Time.deltaTime;
         timeParabolaJump = timeParabolaJump % 5f;
 
-        if (Vector3.Distance(transform.position, target)>5f)
+        if (Vector3.Distance(transform.position, target) > 1f)
         {
             parabolaJumpEnded = false;
-            transform.position = Parabola(startBossPosition, target, _parabolaJumpHeight, (timeParabolaJump / 5) * _jumpSpeed);
+            transform.position = Parabola(startPos, target, _parabolaJumpHeight, (timeParabolaJump / 5) * _jumpSpeed);
         }
         else
         {
