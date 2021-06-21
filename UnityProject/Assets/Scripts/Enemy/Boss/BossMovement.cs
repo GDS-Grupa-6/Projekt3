@@ -11,6 +11,7 @@ public class BossMovement : MonoBehaviour
     [HideInInspector] public Vector3 startBossPosition;
     [HideInInspector] public Transform player;
     [HideInInspector] public float timeParabolaJump;
+    [HideInInspector] public bool parabolaJumpEnded;
 
     private void Awake()
     {
@@ -23,12 +24,21 @@ public class BossMovement : MonoBehaviour
         transform.rotation = targetTransform.rotation;
     }
 
-    public void ParabolaJump(Transform targetTransform)
+    public void ParabolaJump(Vector3 target)
     {
         timeParabolaJump += Time.deltaTime;
         timeParabolaJump = timeParabolaJump % 5f;
 
-        transform.position = Parabola(startBossPosition, targetTransform.position, _parabolaJumpHeight, (timeParabolaJump / 5) * _jumpSpeed);
+        if (Vector3.Distance(transform.position, target)>5f)
+        {
+            parabolaJumpEnded = false;
+            transform.position = Parabola(startBossPosition, target, _parabolaJumpHeight, (timeParabolaJump / 5) * _jumpSpeed);
+        }
+        else
+        {
+            parabolaJumpEnded = true;
+            return;
+        }
     }
 
     private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
