@@ -70,7 +70,7 @@ public class BossWaves : MonoBehaviour
         {
             wave360Transform.localScale = Vector3.Lerp(wave360Transform.transform.localScale, maxScaleWave360, Time.deltaTime * _growSpeedWave360);
 
-            if (wave360Transform.localScale.x >= maxScaleWave360.x - 1f)
+            if (wave360Transform.localScale.x >= maxScaleWave360.x - 10f)
             {
                 DesactiveWave(true);
                 _bossCombatLogic.CheckDistance();
@@ -82,7 +82,7 @@ public class BossWaves : MonoBehaviour
         {
             wave45Transform.localScale = Vector3.Lerp(wave45Transform.transform.localScale, maxScaleWave45, Time.deltaTime * _growSpeedWave45);
 
-            if (wave45Transform.localScale.x >= maxScaleWave45.x - 1f)
+            if (wave45Transform.localScale.x >= maxScaleWave45.x - 10f)
             {
                 DesactiveWave(false);
                 _animator.SetBool("Wave45End", true);
