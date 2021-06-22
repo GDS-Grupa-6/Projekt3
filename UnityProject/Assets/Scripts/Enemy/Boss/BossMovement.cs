@@ -7,6 +7,7 @@ public class BossMovement : MonoBehaviour
 {
     [SerializeField] private float _parabolaJumpHeight = 10f;
     [SerializeField] private float _jumpSpeed = 5f;
+    [SerializeField] private float _speed = 3f;
 
     [HideInInspector] public Transform player;
     [HideInInspector] public float timeParabolaJump;
@@ -15,6 +16,12 @@ public class BossMovement : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<CharacterControllerLogic>().transform;
+    }
+
+    public void Walk()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * _speed);
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
     }
 
     public void Teleport(Transform target)

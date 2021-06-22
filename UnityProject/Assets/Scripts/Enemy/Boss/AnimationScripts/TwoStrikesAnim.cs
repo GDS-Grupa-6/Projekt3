@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wave360Anim : StateMachineBehaviour
+public class TwoStrikesAnim : StateMachineBehaviour
 {
-    private BossWaves _bossWaves;
     private BossCombatLogic _combatLogic;
+    private BossMovement _bossMovement;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _bossWaves = animator.GetComponent<BossWaves>();
+        _bossMovement = animator.GetComponent<BossMovement>();
         _combatLogic = animator.GetComponent<BossCombatLogic>();
-        _bossWaves.ActiveWave(true);
-
-        if (_combatLogic.startPhase)
-        {
-            _combatLogic.startPhase = false;
-            animator.SetBool("ToPlayer", false);
-        }
+        _combatLogic.animationRepeds = Random.Range(1, 4);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _bossWaves.ScaleWave(true);
+        if (_combatLogic.distanceToPlayer > 3)
+        {
+            _bossMovement.Walk();
+        }
     }
 }

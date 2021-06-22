@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wave360Anim : StateMachineBehaviour
+public class Wave45Anim : StateMachineBehaviour
 {
     private BossWaves _bossWaves;
     private BossCombatLogic _combatLogic;
@@ -11,17 +11,11 @@ public class Wave360Anim : StateMachineBehaviour
     {
         _bossWaves = animator.GetComponent<BossWaves>();
         _combatLogic = animator.GetComponent<BossCombatLogic>();
-        _bossWaves.ActiveWave(true);
-
-        if (_combatLogic.startPhase)
-        {
-            _combatLogic.startPhase = false;
-            animator.SetBool("ToPlayer", false);
-        }
+        _bossWaves.ActiveWave(false);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _bossWaves.ScaleWave(true);
+        _bossWaves.ScaleWave(false);
     }
 }

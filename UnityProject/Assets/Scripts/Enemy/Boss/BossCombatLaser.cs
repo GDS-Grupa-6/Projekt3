@@ -8,7 +8,6 @@ public class BossCombatLaser : MonoBehaviour
 {
     [SerializeField] private Transform _startLaserPos;
     [SerializeField] [Range(0, 100)] private float _bossRotateSpeed = 10;
-    [SerializeField] private Transform[] _laserBossPositions;
     public int maxNumberOfSpin = 4;
     [SerializeField] private float _changeModeTime = 5;
     [SerializeField] private float _laserPower = 10;
@@ -133,30 +132,5 @@ public class BossCombatLaser : MonoBehaviour
 
         _bossRoatation.x = Mathf.Clamp(_bossRoatation.x, minRotationDelta, maxRotationDelta);
         transform.rotation = Quaternion.Euler(0, _bossRoatation.x, 0);
-    }
-
-    public void SelectBossLaserPosition()
-    {
-        Transform largest = _laserBossPositions[0];
-        float[] distances = new float[4]
-        {
-            Vector3.Distance(_laserBossPositions[0].position, _bossMovement.player.position),
-            Vector3.Distance(_laserBossPositions[1].position, _bossMovement.player.position),
-            Vector3.Distance(_laserBossPositions[2].position, _bossMovement.player.position),
-            Vector3.Distance(_laserBossPositions[3].position, _bossMovement.player.position)
-        };
-
-        float largestDistans = distances[0];
-
-        for (int i = 0; i < _laserBossPositions.Length; i++)
-        {
-            if (distances[i] > largestDistans)
-            {
-                largestDistans = distances[i];
-                largest = _laserBossPositions[i];
-            }
-        }
-
-        targetLaserJump = largest;
     }
 }
