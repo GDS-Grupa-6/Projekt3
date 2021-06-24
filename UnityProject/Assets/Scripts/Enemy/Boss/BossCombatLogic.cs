@@ -43,9 +43,9 @@ public class BossCombatLogic : MonoBehaviour
 
     private bool Random50()
     {
-        int random = Random.Range(0, 2);
+        int random = Random.Range(0, 100);
 
-        if (random == 0)
+        if (random <= 49)
         {
             return true;
         }
@@ -141,12 +141,12 @@ public class BossCombatLogic : MonoBehaviour
 
             case BossFirstPhaseStates.Wave360:
                 _animator.SetBool("JumpEnd", false);
-                //ustawienie rotacji
+                //ustawienie rotacji??
                 break;
 
             case BossFirstPhaseStates.Puke:
                 _animator.SetBool("JumpEnd", false);
-                //ustawienie rotacji
+                //ustawienie rotacji??
                 break;
 
             case BossFirstPhaseStates.PlayerNear:
@@ -155,7 +155,7 @@ public class BossCombatLogic : MonoBehaviour
 
             case BossFirstPhaseStates.PlayerFar:
                 _animator.SetBool("PlayerNear", false);
-                jumpToPlayer = true /*Random50()*/;
+                jumpToPlayer = Random50();
                 if (jumpToPlayer)
                 {
                     targetPosition = _playerTransform.position;
