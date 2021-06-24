@@ -657,7 +657,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3509887e-38, z: 2.7107536e-20, w: 7.737127e+25}
+  m_BoundingSphereOverride: {x: 0, y: 2.795e-41, z: 100, w: -170}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 751531081}
   m_Layer: 0
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 785044864}
   - component: {fileID: 785044860}
   - component: {fileID: 785044866}
+  - component: {fileID: 785044867}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -876,6 +877,7 @@ Transform:
   - {fileID: 543450652019987368}
   - {fileID: 1430753603}
   - {fileID: 1964218089}
+  - {fileID: 1784743521}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1048,6 +1050,36 @@ MonoBehaviour:
   _powerWave45: 10
   wave360Transform: {fileID: 0}
   wave45Transform: {fileID: 0}
+--- !u!114 &785044867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785044858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbab96bc77647a34294e60d1a91783f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 1730572879}
+  _bullet: {fileID: 1079154908989322109, guid: 1079f8f96ced3994687d90321d1f7e05, type: 3}
+  _bulletStartPos: {fileID: 1784743521}
+  _bulletPower: 10
+  _bulletSpeed: 1
+  _bulletFlyHeight: 10
+  _arenaThreeCornersPositions:
+  - {x: 63, y: 0, z: 0}
+  - {x: 108, y: 10, z: 2}
+  - {x: 0, y: 0, z: 41}
+  _arenaCenter: {fileID: 2011012545}
+  _numberOfRandomBullets: 5
+  _numberOfToPlayerBullets: 5
+  _timeToSpawnNextBullet: 2
+  _nuberOfMegaPukeBullets: 10
+  _timeToSpawnNextBulletInMegaPuke: 0.2
+  pukeEnd: 0
+  megaPukeEnd: 0
 --- !u!1 &957301485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1825,7 @@ GameObject:
   - component: {fileID: 1569320403}
   m_Layer: 0
   m_Name: O_O
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2002,6 +2034,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3457854633381069685, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
   m_PrefabInstance: {fileID: 3457854631788966202}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1784743520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784743521}
+  m_Layer: 0
+  m_Name: PukeBulletStartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784743521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784743520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.265, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 785044862}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1788475609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 786006083912235485, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
@@ -2158,7 +2220,7 @@ GameObject:
   - component: {fileID: 1964218089}
   m_Layer: 0
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2395,7 +2457,7 @@ GameObject:
   - component: {fileID: 2045052532}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2518,31 +2580,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.011623
+      value: 50.898838
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.6119995
+      value: 15.71
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.978447
+      value: 34.3455
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.89837193
+      value: 0.7355653
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.17364348
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.4392357
+      value: -0.63730466
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.1504473
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2562,7 +2624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235487, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}

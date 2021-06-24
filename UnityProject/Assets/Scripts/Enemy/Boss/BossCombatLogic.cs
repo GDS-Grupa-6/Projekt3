@@ -8,10 +8,15 @@ public enum BossFirstPhaseStates { empty, StartPhase, Wave360, Puke, PlayerNear,
 [RequireComponent(typeof(Animator))]
 public class BossCombatLogic : MonoBehaviour
 {
-    [SerializeField] private Transform _centerOfArena;
+    [Header("Player")]
     public float distancePlayerIsNear = 15f;
+    [Header("Arena and weapon")]
+    [SerializeField] private Transform _centerOfArena;
     [SerializeField] private Transform[] _arenaEdges;
     [SerializeField] private Collider _weponCollider;
+    [Header("Randoms")]
+    public int maxRandomOfStrikesNumber = 4;
+    [SerializeField] [Range(1, 100)] private int chanceToJumpBossToPlayer = 49;
 
     [HideInInspector] public BossPhases bossPhase;
     [HideInInspector] public BossFirstPhaseStates bossFirstPhaseState;
@@ -43,9 +48,9 @@ public class BossCombatLogic : MonoBehaviour
 
     private bool Random50()
     {
-        int random = Random.Range(0, 2);
+        int random = Random.Range(0, 100);
 
-        if (random == 0)
+        if (random <= chanceToJumpBossToPlayer)
         {
             return true;
         }
@@ -141,12 +146,12 @@ public class BossCombatLogic : MonoBehaviour
 
             case BossFirstPhaseStates.Wave360:
                 _animator.SetBool("JumpEnd", false);
-                //ustawienie rotacji
+                //ustawienie rotacji??
                 break;
 
             case BossFirstPhaseStates.Puke:
                 _animator.SetBool("JumpEnd", false);
-                //ustawienie rotacji
+                //ustawienie rotacji??
                 break;
 
             case BossFirstPhaseStates.PlayerNear:
@@ -155,7 +160,7 @@ public class BossCombatLogic : MonoBehaviour
 
             case BossFirstPhaseStates.PlayerFar:
                 _animator.SetBool("PlayerNear", false);
-                jumpToPlayer = true /*Random50()*/;
+                jumpToPlayer = Random50();
                 if (jumpToPlayer)
                 {
                     targetPosition = _playerTransform.position;

@@ -11,7 +11,7 @@ public class TwoStrikesAnim : StateMachineBehaviour
     {
         _bossMovement = animator.GetComponent<BossMovement>();
         _combatLogic = animator.GetComponent<BossCombatLogic>();
-        _combatLogic.animationRepeds = Random.Range(1, 4);
+        _combatLogic.animationRepeds = Random.Range(1, _combatLogic.maxRandomOfStrikesNumber);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
