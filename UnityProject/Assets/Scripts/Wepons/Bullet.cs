@@ -21,12 +21,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null)
+        if (collision.gameObject.tag == "Boss")
         {
-            Destroy(this.gameObject);
+            collision.gameObject.GetComponent<BossData>().TakeDamage(damgeValue);
         }
 
-        //dodać logikę zadawania obrażeń
+        Destroy(this.gameObject);
     }
 
     IEnumerator DestroyCorutine()
