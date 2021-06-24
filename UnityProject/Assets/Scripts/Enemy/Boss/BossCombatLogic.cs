@@ -8,10 +8,15 @@ public enum BossFirstPhaseStates { empty, StartPhase, Wave360, Puke, PlayerNear,
 [RequireComponent(typeof(Animator))]
 public class BossCombatLogic : MonoBehaviour
 {
-    [SerializeField] private Transform _centerOfArena;
+    [Header("Player")]
     public float distancePlayerIsNear = 15f;
+    [Header("Arena and weapon")]
+    [SerializeField] private Transform _centerOfArena;
     [SerializeField] private Transform[] _arenaEdges;
     [SerializeField] private Collider _weponCollider;
+    [Header("Randoms")]
+    public int maxRandomOfStrikesNumber = 4;
+    [SerializeField] [Range(1, 100)] private int chanceToJumpBossToPlayer = 49;
 
     [HideInInspector] public BossPhases bossPhase;
     [HideInInspector] public BossFirstPhaseStates bossFirstPhaseState;
@@ -45,7 +50,7 @@ public class BossCombatLogic : MonoBehaviour
     {
         int random = Random.Range(0, 100);
 
-        if (random <= 49)
+        if (random <= chanceToJumpBossToPlayer)
         {
             return true;
         }
