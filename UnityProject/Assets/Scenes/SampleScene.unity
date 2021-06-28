@@ -264,12 +264,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfec1b8c86f88d74dbddd6f2c9f3fa4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 5
   _plateMovingPartTransform: {fileID: 1518354128}
-  _plateSpeed: 0
-  _plateDeltaY: 0
+  _platePressedY: 0
   _doorTransform: {fileID: 623854362}
-  _doorSpeed: 0
-  _doorDeltaY: 0
+  _doorOpenedY: 24
 --- !u!65 &138561959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2511,31 +2510,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.33884
+      value: 35.451626
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.247
+      value: 14.149
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 113.0455
+      value: 113.67845
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7355653
+      value: -0.89837193
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.17364348
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.63730466
+      value: 0.4392357
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.1504473
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2555,7 +2554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235487, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: near clip plane
-      value: 0.001
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
