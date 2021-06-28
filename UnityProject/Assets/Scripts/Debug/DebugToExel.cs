@@ -9,20 +9,22 @@ public class DebugToExel : MonoBehaviour
     private int seconds;
     private string gameTime;
 
+#if UNITY_EDITOR
+
     private void Awake()
     {
-       // EditorApplication.playModeStateChanged += UpdateReport;
+        EditorApplication.playModeStateChanged += UpdateReport;
         StartCoroutine(GameTimerCourutine());
     }
 
-   // [MenuItem("Debug/Reset report %F1")]
+    [MenuItem("Debug/Reset report %F1")]
     private static void ResetReport()
     {
         CSVManager.CreateReport();
         Debug.Log("<color=orange>The report has been reset!</color>");
     }
 
-   /* private void UpdateReport(PlayModeStateChange state)
+    private void UpdateReport(PlayModeStateChange state)
     {
         if (state == PlayModeStateChange.ExitingPlayMode)
         {
@@ -30,7 +32,7 @@ public class DebugToExel : MonoBehaviour
             CSVManager.AppendToReport(new string[] { gameTime });
             Debug.Log("<color=green>Report updated!</color>");
         }
-    }*/
+    }
 
     private void SetGameTime()
     {
@@ -63,4 +65,5 @@ public class DebugToExel : MonoBehaviour
             }
         }
     }
+# endif
 }
