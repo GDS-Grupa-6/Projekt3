@@ -66,13 +66,17 @@ public class PressurePlate : MonoBehaviour
         {
             float timeProgressed = (Time.time - startTime) / _speed;
             _doorTransform.position = Vector3.Lerp(_doorTransform.position, _doorOpenedPosition, timeProgressed);
-            _plateMovingPartTransform.position = Vector3.Lerp(_plateMovingPartTransform.position, _platePressedPosition, timeProgressed);
+            _plateMovingPartTransform.localPosition = Vector3.Lerp(_plateMovingPartTransform.localPosition, _platePressedPosition, timeProgressed);
             yield return new WaitForFixedUpdate();
         }
 
         Vector3 centerPos = _doorTransform.position;
         centerPos.y = _doorOpenedY;
         _doorTransform.position = centerPos;
+
+        centerPos = _plateMovingPartTransform.localPosition;
+        centerPos.y = _platePressedY;
+        _plateMovingPartTransform.localPosition = centerPos;
 
         _doorAreOpen = true;
         _doorOpening = false;
