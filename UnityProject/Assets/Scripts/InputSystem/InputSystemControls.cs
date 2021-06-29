@@ -225,6 +225,33 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Panels"",
+            ""id"": ""9993797d-78e7-4873-909d-450da8eea61f"",
+            ""actions"": [
+                {
+                    ""name"": ""OnOffPausePanel"",
+                    ""type"": ""Button"",
+                    ""id"": ""31b23e90-3449-4bf8-b75d-6502023fab36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7d8bf4ff-6d01-40d3-8f98-62dc94011b05"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""OnOffPausePanel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -269,6 +296,9 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MouseLook = m_Camera.FindAction("MouseLook", throwIfNotFound: true);
+        // Panels
+        m_Panels = asset.FindActionMap("Panels", throwIfNotFound: true);
+        m_Panels_OnOffPausePanel = m_Panels.FindAction("OnOffPausePanel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -428,6 +458,39 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Panels
+    private readonly InputActionMap m_Panels;
+    private IPanelsActions m_PanelsActionsCallbackInterface;
+    private readonly InputAction m_Panels_OnOffPausePanel;
+    public struct PanelsActions
+    {
+        private @InputSystemControls m_Wrapper;
+        public PanelsActions(@InputSystemControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OnOffPausePanel => m_Wrapper.m_Panels_OnOffPausePanel;
+        public InputActionMap Get() { return m_Wrapper.m_Panels; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PanelsActions set) { return set.Get(); }
+        public void SetCallbacks(IPanelsActions instance)
+        {
+            if (m_Wrapper.m_PanelsActionsCallbackInterface != null)
+            {
+                @OnOffPausePanel.started -= m_Wrapper.m_PanelsActionsCallbackInterface.OnOnOffPausePanel;
+                @OnOffPausePanel.performed -= m_Wrapper.m_PanelsActionsCallbackInterface.OnOnOffPausePanel;
+                @OnOffPausePanel.canceled -= m_Wrapper.m_PanelsActionsCallbackInterface.OnOnOffPausePanel;
+            }
+            m_Wrapper.m_PanelsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OnOffPausePanel.started += instance.OnOnOffPausePanel;
+                @OnOffPausePanel.performed += instance.OnOnOffPausePanel;
+                @OnOffPausePanel.canceled += instance.OnOnOffPausePanel;
+            }
+        }
+    }
+    public PanelsActions @Panels => new PanelsActions(this);
     private int m_KayboardandmouseSchemeIndex = -1;
     public InputControlScheme KayboardandmouseScheme
     {
@@ -459,5 +522,9 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
     public interface ICameraActions
     {
         void OnMouseLook(InputAction.CallbackContext context);
+    }
+    public interface IPanelsActions
+    {
+        void OnOnOffPausePanel(InputAction.CallbackContext context);
     }
 }
