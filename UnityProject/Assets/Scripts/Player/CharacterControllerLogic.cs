@@ -32,9 +32,6 @@ public class CharacterControllerLogic : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;//przenieœ do gamecontrollera
-
         cameraSwitch = FindObjectOfType<CameraSwitch>();
         inputManager = FindObjectOfType<InputManager>();
 

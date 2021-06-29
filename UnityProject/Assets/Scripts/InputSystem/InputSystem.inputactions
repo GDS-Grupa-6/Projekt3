@@ -212,6 +212,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Panels",
+            "id": "9993797d-78e7-4873-909d-450da8eea61f",
+            "actions": [
+                {
+                    "name": "OnOffPausePanel",
+                    "type": "Button",
+                    "id": "31b23e90-3449-4bf8-b75d-6502023fab36",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7d8bf4ff-6d01-40d3-8f98-62dc94011b05",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "OnOffPausePanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
