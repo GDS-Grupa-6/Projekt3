@@ -40,7 +40,7 @@ public class PressurePlate : MonoBehaviour
             if (!_doorAreOpen)
             {
                 _doorOpening = true;
-                StartCoroutine(OpeningDoor(_doorTransform.position, _doorOpenedPosition, _speed));
+                StartCoroutine(Opening());
             }
         }
     }
@@ -57,28 +57,16 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    /* private void Update()
-     {
-         if (_doorOpening && !_doorAreOpen)
-         {
-             Opening(_doorTransform.position, _doorOpenedPosition, _speed);
-             Opening(_plateMovingPartTransform.localPosition, _platePressedPosition, _speed);
-         }
-         else if (_doorClosing && _doorAreOpen)
-         {
-
-         }
-     }*/
-
-    private IEnumerator OpeningDoor(Vector3 startPos, Vector3 endPos, float lerpTime)
+    private IEnumerator Opening()
     {
         float startTime = Time.time;
-        float endTime = startTime + lerpTime;
+        float endTime = startTime + _speed;
 
         while (Time.time < endTime)
         {
-            float timeProgressed = (Time.time - startTime) / lerpTime;
-            _doorTransform.position = Vector3.Lerp(startPos, endPos, timeProgressed);
+            float timeProgressed = (Time.time - startTime) / _speed;
+            _doorTransform.position = Vector3.Lerp(_doorTransform.position, _doorOpenedPosition, timeProgressed);
+            _plateMovingPartTransform.position = Vector3.Lerp(_plateMovingPartTransform.position, _platePressedPosition, timeProgressed);
             yield return new WaitForFixedUpdate();
         }
 

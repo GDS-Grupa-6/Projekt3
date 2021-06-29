@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(MeshRenderer))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float lifeTime = 10f;
@@ -19,11 +19,11 @@ public class Bullet : MonoBehaviour
         StartCoroutine(DestroyCorutine());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Boss")
+        if (other.gameObject.tag == "Boss")
         {
-            collision.gameObject.GetComponent<BossData>().TakeDamage(damgeValue);
+            other.gameObject.GetComponent<BossData>().TakeDamage(damgeValue);
         }
 
         Destroy(this.gameObject);
