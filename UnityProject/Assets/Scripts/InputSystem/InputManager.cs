@@ -24,11 +24,6 @@ public class InputManager : MonoBehaviour
         return inputSystem.Player.Movement.ReadValue<Vector2>();
     }
 
-    public bool PlayerJumpedThisFrame()
-    {
-        return inputSystem.Player.Jump.triggered;
-    }
-
     public bool PlayerShoot()
     {
         return inputSystem.Player.Shoot.triggered;

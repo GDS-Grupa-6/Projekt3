@@ -14,14 +14,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "1dcf068f-864d-4359-8d9a-7065c3ff94d5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "41c790eb-b528-4154-b8bb-742ace5ad5e7",
@@ -33,14 +25,6 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "22960287-52c9-4ac5-a88a-fab2d7eaaebf",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "2ae4f9e3-ef5e-4b2d-8223-2dd99c07a470",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -120,17 +104,6 @@
                 },
                 {
                     "name": "",
-                    "id": "fa65a6be-ff0c-4c69-8db7-2ff0678ecf3c",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "Kayboard and mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4cbf59d9-d76b-4ee8-85f8-e20cab09ef52",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
@@ -143,22 +116,11 @@
                 {
                     "name": "",
                     "id": "616b9544-00ba-49ea-bae6-73cefcd3ffa0",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/space",
                     "interactions": "Tap(pressPoint=0.4)",
                     "processors": "",
                     "groups": "Kayboard and mouse",
                     "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bdc7b997-e1b2-4842-93b8-ef7a5caf2eea",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Kayboard and mouse",
-                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
