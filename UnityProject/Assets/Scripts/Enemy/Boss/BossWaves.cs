@@ -10,11 +10,11 @@ public class BossWaves : MonoBehaviour
     [SerializeField] private Wave _wave360;
     [SerializeField] private Wave _wave45;
     public Vector3 maxScaleWave360;
-    [SerializeField] private float _growSpeedWave360;
+    [SerializeField] private float _growTimeWave360;
     [SerializeField] private float _powerWave360;
     [Header("Wave45 options")]
     public Vector3 maxScaleWave45;
-    [SerializeField] private float _growSpeedWave45;
+    [SerializeField] private float _growTimeWave45;
     [SerializeField] private float _powerWave45;
 
     [HideInInspector] public Transform wave360Transform;
@@ -64,30 +64,48 @@ public class BossWaves : MonoBehaviour
         }
     }
 
-    public void ScaleWave(bool wave360)
+    public void StartWave(bool wave360)
     {
         if (wave360)
         {
-            wave360Transform.localScale = Vector3.Lerp(wave360Transform.transform.localScale, maxScaleWave360, Time.deltaTime * _growSpeedWave360);
-
-            if (wave360Transform.localScale.x >= maxScaleWave360.x - 10f)
-            {
-                DesactiveWave(true);
-                _bossCombatLogic.CheckDistance();
-                _animator.SetBool("Wave360End", true);
-                return;
-            }
+            StartCoroutine(Wave360Courutine());
         }
         else
         {
-            wave45Transform.localScale = Vector3.Lerp(wave45Transform.transform.localScale, maxScaleWave45, Time.deltaTime * _growSpeedWave45);
-
-            if (wave45Transform.localScale.x >= maxScaleWave45.x - 10f)
-            {
-                DesactiveWave(false);
-                _animator.SetBool("Wave45End", true);
-                return;
-            }
+            StartCoroutine(Wave45Courutine());
         }
+    }
+
+    private IEnumerator Wave360Courutine()
+    {
+        float startTime = Time.time;
+        float endTime = startTime + _growTimeWave360;
+
+        while (Time.time < endTime && wave360Transform.localScale != maxScaleWave360)
+        {
+            float timeProgressed = (Time.time - startTime) / _growTimeWave360;
+            wave360Transform.localScale = Vector3.Slerp(wave360Transform.localScale, maxScaleWave360, timeProgressed);
+            yield return new WaitForFixedUpdate();
+        }
+
+        DesactiveWave(true);
+        _bossCombatLogic.CheckDistance();
+        _animator.SetBool("Wave360End", true);
+    }
+
+    private IEnumerator Wave45Courutine()
+    {
+        float startTime = Time.time;
+        float endTime = startTime + _growTimeWave45;
+
+        while (Time.time < endTime && wave45Transform.localScale != maxScaleWave45)
+        {
+            float timeProgressed = (Time.time - startTime) / _growTimeWave45;
+            wave45Transform.localScale = Vector3.Slerp(wave45Transform.localScale, maxScaleWave45, timeProgressed);
+            yield return new WaitForFixedUpdate();
+        }
+
+        DesactiveWave(false);
+        _animator.SetBool("Wave45End", true);
     }
 }

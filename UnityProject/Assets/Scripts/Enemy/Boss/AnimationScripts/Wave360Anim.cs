@@ -18,10 +18,7 @@ public class Wave360Anim : StateMachineBehaviour
             _combatLogic.startPhase = false;
             animator.SetBool("ToPlayer", false);
         }
-    }
 
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        _bossWaves.ScaleWave(true);
+        _bossWaves.StartWave(true);
     }
 }
