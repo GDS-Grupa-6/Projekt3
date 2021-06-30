@@ -57,6 +57,14 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Mele"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b115b0f-7d3a-4890-8528-ac2d852ee327"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -158,6 +166,17 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""293da254-78c8-4fbc-8478-f3c5a734ee34"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""Mele"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -253,6 +272,7 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_SwithTppShootState = m_Player.FindAction("SwithTppShootState", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_Mele = m_Player.FindAction("Mele", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MouseLook = m_Camera.FindAction("MouseLook", throwIfNotFound: true);
@@ -313,6 +333,7 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_SwithTppShootState;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_Mele;
     public struct PlayerActions
     {
         private @InputSystemControls m_Wrapper;
@@ -322,6 +343,7 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @SwithTppShootState => m_Wrapper.m_Player_SwithTppShootState;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @Mele => m_Wrapper.m_Player_Mele;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +368,9 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Mele.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMele;
+                @Mele.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMele;
+                @Mele.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMele;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -365,6 +390,9 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Mele.started += instance.OnMele;
+                @Mele.performed += instance.OnMele;
+                @Mele.canceled += instance.OnMele;
             }
         }
     }
@@ -460,6 +488,7 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnSwithTppShootState(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnMele(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

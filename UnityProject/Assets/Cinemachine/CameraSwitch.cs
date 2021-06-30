@@ -9,24 +9,24 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] private CinemachineFreeLook tppCamera;
     [SerializeField] private ShootCamera shootCamera;
 
-    private Animator animator;
-    private CharacterControllerLogic player;
-    private InputManager inputManager;
+    private Animator _animator;
+    private CharacterControllerLogic _player;
+    private InputManager _inputManager;
     [HideInInspector] public bool playerIsInShootPose;
     [HideInInspector] public bool playerAim;
     [HideInInspector] public Transform targetEnemy;
 
     private void Awake()
     {
-        inputManager = FindObjectOfType<InputManager>();
-        animator = GetComponent<Animator>();
-        player = FindObjectOfType<CharacterControllerLogic>();
+        _inputManager = FindObjectOfType<InputManager>();
+        _animator = GetComponent<Animator>();
+        _player = FindObjectOfType<CharacterControllerLogic>();
     }
 
     private void Start()
     {
-        inputManager.inputSystem.Player.SwithTppShootState.performed += _ => SwitchState();
-        inputManager.inputSystem.Player.Aim.performed += _ => OnOffAim();
+        _inputManager.inputSystem.Player.SwithTppShootState.performed += _ => SwitchState();
+        _inputManager.inputSystem.Player.Aim.performed += _ => OnOffAim();
 
         playerIsInShootPose = false;
         playerAim = false;
@@ -85,22 +85,22 @@ public class CameraSwitch : MonoBehaviour
         switch (camera)
         {
             case CameraID.Shoot:
-                player.transform.rotation = Quaternion.Euler(0, tppCamera.m_XAxis.Value, 0);
-                animator.Play("ShootCamera");
-                player.animator.SetBool("ShootPos", true);
+                _player.transform.rotation = Quaternion.Euler(0, tppCamera.m_XAxis.Value, 0);
+                _animator.Play("ShootCamera");
+                _player.animator.SetBool("ShootPos", true);
                 playerIsInShootPose = true;
                 shootCamera.ResetXCameraRotation();
                 break;
             case CameraID.TPP:
-                Vector3 pos = player.transform.rotation.eulerAngles;
+                Vector3 pos = _player.transform.rotation.eulerAngles;
                 tppCamera.m_XAxis.Value = pos.y;
-                player.animator.SetBool("ShootPos", false);
-                animator.Play("TppCamera");
+                _player.animator.SetBool("ShootPos", false);
+                _animator.Play("TppCamera");
                 playerIsInShootPose = false;
                 break;
             case CameraID.AIM:
-                player.animator.SetBool("ShootPos", true); //ewentualna zmiana na animacije AIM
-                animator.Play("AimCamera");
+                _player.animator.SetBool("ShootPos", true); //ewentualna zmiana na animacije AIM
+                _animator.Play("AimCamera");
                 playerIsInShootPose = false;
                 break;
             default:
