@@ -48,8 +48,6 @@ public class PlayerData : MonoBehaviour
         {
             _currentHealth += healValue;
         }
-
-        Debug.Log($"<color=green>Gracz wleczył się o: {healValue} i ma teraz {_currentHealth} życia</color>");
     }
 
     private void SetHealth()
