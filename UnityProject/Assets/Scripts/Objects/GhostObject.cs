@@ -48,7 +48,7 @@ public class GhostObject : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (_dash.playerDashing && _playerData.currentHealth != _playerData.maxHealth)
+            if (_dash.playerDashing)
             {
                 _playerData.Heal(_healValue);
 
