@@ -2,40 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class MeleLogic : MonoBehaviour
 {
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private CameraSwitch _cameraSwitch;
-    [SerializeField] private float _hitPointRadius = 0.1f;
-    [SerializeField] private float _maxSphereRayDistance = 0.1f;
-    [SerializeField] private LayerMask _hitLayerMask;
-    [SerializeField] [Range(1, 10)] private int _maxStack = 4;
+    [Header("Attacks settings")]
+    [SerializeField] private Vector2 _rayCastOffset;
+    [SerializeField] private MeleStates[] _meleStates;
 
-    private int _currentStack;
+    private Animator _animator;
+    private MeleStates _currentState;
+    private Vector3 _rayPos;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _inputManager.inputSystem.Player.Mele.performed += _ => MeleAttack();
-        _currentStack = 0;
+        _currentState = _meleStates[0];
     }
 
     private void MeleAttack()
     {
+        _rayPos = new Vector3(transform.position.x + _rayCastOffset.x, transform.position.y + _rayCastOffset.y, transform.position.z);
         RaycastHit hit;
-
-        if (_currentStack + 1 <= _maxStack)
+        if (Physics.Raycast(_rayPos, transform.forward, out hit, _currentState.range))
         {
-            if (Physics.SphereCast(transform.position, _hitPointRadius, transform.forward, out hit, _maxSphereRayDistance, _hitLayerMask, QueryTriggerInteraction.UseGlobal))
-            {
-                Debug.Log(hit.transform.gameObject.name);
-            }
+            Debug.Log(hit.transform.gameObject.name);
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Debug.DrawLine(transform.position, transform.position + transform.forward * _maxSphereRayDistance);
-        Gizmos.DrawWireSphere(transform.position + transform.forward * 1, _hitPointRadius);
+        _currentState = _meleStates[0];
+        _rayPos = new Vector3(transform.position.x + _rayCastOffset.x, transform.position.y + _rayCastOffset.y, transform.position.z);
+        Debug.DrawLine(_rayPos, _rayPos + transform.forward * _currentState.range);
     }
 }

@@ -13,6 +13,7 @@ public class CharacterControllerLogic : MonoBehaviour
     [Header("Movement options")]
     [SerializeField] private float _speed = 6f;
     [SerializeField] private float _tppTurnSmoothTime = 0.1f;
+    [SerializeField] private float _gravityValue = -20f;
     [Header("Animation options")]
     [SerializeField] private float _animationSpeedDampTime = 0.1f;
 
@@ -20,6 +21,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
     private CharacterController _characterController;
     private float _turnSmoothVelocity;
+    private float _gravity;
 
     private void Awake()
     {
@@ -37,6 +39,8 @@ public class CharacterControllerLogic : MonoBehaviour
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Horizontal", horizontal);
 
+        Gravity();
+
         if (direction.magnitude >= 0.1f)
         {
             if (_cameraSwitch.playerIsInShootPose || _cameraSwitch.playerAim)
@@ -48,6 +52,8 @@ public class CharacterControllerLogic : MonoBehaviour
                 TPPMovement(direction);
             }
         }
+
+        _characterController.Move(new Vector3(0, _gravity, 0) * Time.deltaTime);
     }
 
     private void TPPMovement(Vector3 direction)
@@ -57,12 +63,27 @@ public class CharacterControllerLogic : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        _characterController.Move(moveDir * _speed * Time.deltaTime);
+        _characterController.Move(new Vector3(moveDir.x, 0, moveDir.z) * _speed * Time.deltaTime);
     }
 
     private void AimMovement(Vector3 direction)
     {
         direction = _mainCamera.forward * direction.z + _mainCamera.right * direction.x;
-        _characterController.Move(direction * _speed * Time.deltaTime);
+        _gravity = -9.81f * Time.deltaTime;
+        _characterController.Move(new Vector3(direction.x, 0, direction.z) * _speed * Time.deltaTime);
+    }
+
+    private void Gravity()
+    {
+
+        if (_characterController.isGrounded)
+        {
+            _gravity = -2f;
+            Debug.Log("grounded");
+        }
+        else
+        {
+            _gravity += _gravityValue * Time.deltaTime;
+        }
     }
 }

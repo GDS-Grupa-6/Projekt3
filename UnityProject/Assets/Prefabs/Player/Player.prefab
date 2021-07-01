@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &868875093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 868875094}
-  - component: {fileID: 868875095}
-  m_Layer: 6
-  m_Name: HitPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &868875094
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868875093}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.543, z: 0.53}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3457854633381069685}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &868875095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868875093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c33efd9be9741409d561d60c4e29df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _radius: 0.5
-  _color: {r: 1, g: 0, b: 0, a: 0.2784314}
 --- !u!1 &1346169685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,7 +1582,6 @@ Transform:
   - {fileID: 2551082024120986635}
   - {fileID: 6626807268576849471}
   - {fileID: 8068229263547993234}
-  - {fileID: 868875094}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -52.11, z: 0}
@@ -1662,7 +1616,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c0b22ef04a0954b4884672c6cb5fde0f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1753,6 +1707,7 @@ MonoBehaviour:
   _cameraSwitch: {fileID: 0}
   _speed: 6
   _tppTurnSmoothTime: 0.1
+  _gravityValue: -9.81
   _animationSpeedDampTime: 0.1
   animator: {fileID: 1889538142}
 --- !u!114 &5226204930808561756
@@ -1769,9 +1724,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputManager: {fileID: 0}
   _cameraSwitch: {fileID: 0}
-  _hitPointTransform: {fileID: 868875094}
-  _hitPointRadius: 0.5
-  _maxStack: 4
+  _rayCastOffset: {x: 0, y: 0.5}
+  _meleStates:
+  - state: 0
+    power: 5
+    range: 3
+    pointsForAttack: 2
+  - state: 1
+    power: 10
+    range: 0.5
+    pointsForAttack: 4
+  - state: 2
+    power: 15
+    range: 0.5
+    pointsForAttack: 6
+  - state: 3
+    power: 20
+    range: 0.5
+    pointsForAttack: 8
+  - state: 4
+    power: 30
+    range: 0
+    pointsForAttack: -100
 --- !u!1 &3528294590469404068
 GameObject:
   m_ObjectHideFlags: 0

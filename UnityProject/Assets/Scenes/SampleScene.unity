@@ -1913,31 +1913,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.928841
+      value: 9.4609995
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.02
+      value: 0.92199993
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.3645
+      value: -20.476
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7355653
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.17364341
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.63730466
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.15044725
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235480, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1957,7 +1957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786006083912235487, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: near clip plane
-      value: 0.001
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5068871600465712880, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2231,16 +2231,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 756671423}
     - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: _hitPointRadius
+      propertyPath: _rayCastOffset.y
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: _hitLayerMask.m_Bits
-      value: 384
+      propertyPath: _meleStates.Array.data[0].range
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
-      propertyPath: _maxSphereRayDistance
-      value: 1
+      propertyPath: _meleStates.Array.data[1].range
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: _meleStates.Array.data[2].range
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: _meleStates.Array.data[3].range
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7845576992267782259, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: mainCam
