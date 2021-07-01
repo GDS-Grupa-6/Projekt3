@@ -27,14 +27,6 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""1dcf068f-864d-4359-8d9a-7065c3ff94d5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""41c790eb-b528-4154-b8bb-742ace5ad5e7"",
@@ -46,14 +38,6 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""22960287-52c9-4ac5-a88a-fab2d7eaaebf"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Sprint"",
-                    ""type"": ""Button"",
-                    ""id"": ""2ae4f9e3-ef5e-4b2d-8223-2dd99c07a470"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -133,17 +117,6 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fa65a6be-ff0c-4c69-8db7-2ff0678ecf3c"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4cbf59d9-d76b-4ee8-85f8-e20cab09ef52"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Press"",
@@ -156,22 +129,11 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""616b9544-00ba-49ea-bae6-73cefcd3ffa0"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": ""Tap(pressPoint=0.4)"",
                     ""processors"": """",
                     ""groups"": ""Kayboard and mouse"",
                     ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bdc7b997-e1b2-4842-93b8-ef7a5caf2eea"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -287,10 +249,8 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_SwithTppShootState = m_Player.FindAction("SwithTppShootState", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         // Camera
@@ -349,10 +309,8 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_SwithTppShootState;
     private readonly InputAction m_Player_Aim;
     public struct PlayerActions
@@ -360,10 +318,8 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
         private @InputSystemControls m_Wrapper;
         public PlayerActions(@InputSystemControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @SwithTppShootState => m_Wrapper.m_Player_SwithTppShootState;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -378,18 +334,12 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @SwithTppShootState.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwithTppShootState;
                 @SwithTppShootState.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwithTppShootState;
                 @SwithTppShootState.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwithTppShootState;
@@ -403,18 +353,12 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @Sprint.started += instance.OnSprint;
-                @Sprint.performed += instance.OnSprint;
-                @Sprint.canceled += instance.OnSprint;
                 @SwithTppShootState.started += instance.OnSwithTppShootState;
                 @SwithTppShootState.performed += instance.OnSwithTppShootState;
                 @SwithTppShootState.canceled += instance.OnSwithTppShootState;
@@ -512,10 +456,8 @@ public class @InputSystemControls : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
         void OnSwithTppShootState(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
     }

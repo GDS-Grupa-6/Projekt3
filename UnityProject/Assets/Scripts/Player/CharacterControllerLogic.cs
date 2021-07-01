@@ -3,141 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CharacterController))]
 public class CharacterControllerLogic : MonoBehaviour
 {
-    [SerializeField] private float directionDampTime = 0.25f;
-    [SerializeField] private GameObject mainCamera;
-    [SerializeField] private float directionSpeed = 3.0f;
-    [SerializeField] private float rotationDegreePerSecond = 120f;
-    [SerializeField] private float speedDampTime = 0.05f;
-    [SerializeField] private float angleDampTime = 0.05f;
+    [Header("Other objects")]
+    [SerializeField] private InputManager _inputManager;
+    [SerializeField] private Transform _mainCamera;
+    [SerializeField] private CameraSwitch _cameraSwitch;
+    [Header("Movement options")]
+    [SerializeField] private float _speed = 6f;
+    [SerializeField] private float _tppTurnSmoothTime = 0.1f;
+    [Header("Animation options")]
+    [SerializeField] private float _animationSpeedDampTime = 0.1f;
 
     [HideInInspector] public Animator animator;
-    private float horizontal = 0.0f;
-    private float vertical = 0.0f;
-    private AnimatorStateInfo stateInfo;
-    private float speed = 0.0f;
-    private float direction = 0f;
-    private float charAngle = 0f;
-    private float sprintValue;
 
-    private int m_LocomotionId = 0;
-    private int m_LocomotionPivotLId = 0;
-    private int m_LocomotionPivotRId = 0;
+    private CharacterController _characterController;
+    private float _turnSmoothVelocity;
 
-    private float LocomotionThreshold { get { return 0.2f; } }
-    private CameraSwitch cameraSwitch;
-    private InputManager inputManager;
-
-
-    void Start()
+    private void Awake()
     {
-        cameraSwitch = FindObjectOfType<CameraSwitch>();
-        inputManager = FindObjectOfType<InputManager>();
-
         animator = GetComponent<Animator>();
-
-        if (animator.layerCount >= 2)
-        {
-            animator.SetLayerWeight(1, 1);
-        }
-
-        m_LocomotionId = Animator.StringToHash("Base Layer.Locomotion");
-        m_LocomotionPivotLId = Animator.StringToHash("Base Layer.LocomotionPivotL");
-        m_LocomotionPivotRId = Animator.StringToHash("Base Layer.LocomotionPivotR");
-
-        inputManager.inputSystem.Player.Sprint.performed += _ => sprintValue = 1;
-        inputManager.inputSystem.Player.Sprint.canceled += _ => sprintValue = 0;
+        _characterController = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
-        horizontal = inputManager.MovementControls().x;
-        vertical = inputManager.MovementControls().y;
+        float horizontal = _inputManager.MovementControls().x;
+        float vertical = _inputManager.MovementControls().y;
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
-        animator.SetFloat("inputHorizontal", horizontal, 0.25f, Time.deltaTime);
-        animator.SetFloat("inputVertical", vertical, 0.25f, Time.deltaTime);
+        animator.SetFloat("Speed", direction.magnitude, _animationSpeedDampTime, Time.deltaTime);
+        animator.SetFloat("Vertical", vertical);
+        animator.SetFloat("Horizontal", horizontal);
 
-        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        charAngle = 0f;
-        direction = 0f;
-
-        StickToWorldspace(this.transform, mainCamera.transform, ref direction, ref speed, ref charAngle, IsInPivot());
-
-        if (inputManager.PlayerJumpedThisFrame() && !animator.GetBool("ShootPos"))
+        if (direction.magnitude >= 0.1f)
         {
-            animator.SetTrigger("Jump");
-        }
-
-        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
-        animator.SetFloat("Direction", direction, directionDampTime, Time.deltaTime);
-
-        if (speed > LocomotionThreshold)
-        {
-            if (!IsInPivot())
+            if (_cameraSwitch.playerIsInShootPose || _cameraSwitch.playerAim)
             {
-                animator.SetFloat("Angle", charAngle);
+                AimMovement(direction);
+            }
+            else if (!_cameraSwitch.playerIsInShootPose && !_cameraSwitch.playerAim)
+            {
+                TPPMovement(direction);
             }
         }
-        if (speed < LocomotionThreshold && Mathf.Abs(horizontal) < 0.05f)
-        {
-            animator.SetFloat("Direction", 0f);
-            animator.SetFloat("Angle", 0f);
-        }
     }
 
-    private bool IsInPivot()
+    private void TPPMovement(Vector3 direction)
     {
-        return stateInfo.fullPathHash == m_LocomotionPivotLId || stateInfo.fullPathHash == m_LocomotionPivotRId;
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _mainCamera.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _tppTurnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        _characterController.Move(moveDir * _speed * Time.deltaTime);
     }
 
-    private bool IsInLocomotion()
+    private void AimMovement(Vector3 direction)
     {
-        return stateInfo.fullPathHash == m_LocomotionId;
-    }
-
-    private void StickToWorldspace(Transform root, Transform camera, ref float directionOut, ref float speedOut, ref float angleOut, bool isPivoting)
-    {
-        Vector3 rootDirection = root.forward;
-
-        Vector3 stickDirection = new Vector3(horizontal, 0, vertical);
-
-        if (inputManager.MovementControls().magnitude > 0)
-        {
-            speedOut = stickDirection.sqrMagnitude + sprintValue;
-        }
-        else
-        {
-            speedOut = 0;
-        }
-
-        Vector3 CameraDirection = camera.forward;
-        CameraDirection.y = 0.0f;
-
-        Quaternion referentialShift;
-        if (cameraSwitch.playerIsInShootPose || cameraSwitch.playerAim)
-        {
-            referentialShift = transform.rotation;
-        }
-        else
-        {
-            referentialShift = Quaternion.FromToRotation(Vector3.forward, CameraDirection);
-        }
-
-
-        Vector3 moveDirection = referentialShift * stickDirection;
-        Vector3 axisSign = Vector3.Cross(moveDirection, rootDirection);
-
-        float angleRootToMove = Vector3.Angle(rootDirection, moveDirection) * (axisSign.y >= 0 ? -1f : 1f);
-
-        if (!isPivoting)
-        {
-            angleOut = angleRootToMove;
-        }
-
-        angleRootToMove /= 180f;
-
-        directionOut = angleRootToMove * directionSpeed;
+        direction = _mainCamera.forward * direction.z + _mainCamera.right * direction.x;
+        _characterController.Move(direction * _speed * Time.deltaTime);
     }
 }

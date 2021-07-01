@@ -12,10 +12,6 @@ public class Wave45Anim : StateMachineBehaviour
         _bossWaves = animator.GetComponent<BossWaves>();
         _combatLogic = animator.GetComponent<BossCombatLogic>();
         _bossWaves.ActiveWave(false);
-    }
-
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        _bossWaves.ScaleWave(false);
+        _bossWaves.StartWave(false);
     }
 }

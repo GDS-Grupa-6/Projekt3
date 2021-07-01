@@ -82,7 +82,7 @@ public class BossCombatLaser : MonoBehaviour
                 Dash dash = _hit.collider.GetComponent<Dash>();
                 PlayerData playerData = _hit.collider.GetComponent<PlayerData>();
 
-                if (_isGhostMode && dash.playerDashing && playerData.currentHealth != playerData.maxHealth)
+                if (_isGhostMode && dash.playerDashing)
                 {
                     playerData.Heal(_laserHeal);
                 }

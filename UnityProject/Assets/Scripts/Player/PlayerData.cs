@@ -1,54 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Dash))]
 public class PlayerData : MonoBehaviour
 {
-    public float maxHealth = 100;
+    [SerializeField] private float _maxHealth = 100;
+    [SerializeField] private Slider _healthSlider;
+    [SerializeField] private TextMeshProUGUI _sliderText;
 
-    [HideInInspector] public float currentHealth;
-    private Dash dash;
+    private float _currentHealth;
+    private Dash _dash;
 
     private void Start()
     {
-        dash = GetComponent<Dash>();
+        _dash = GetComponent<Dash>();
         SetHealth();
     }
 
     public void TakeDamage(float damageValue)
     {
-        if (!dash.playerDashing)
+        if (!_dash.playerDashing)
         {
-            if (currentHealth - damageValue < 0)
+            if (_currentHealth - damageValue < 0)
             {
-                currentHealth = 0;
-                Debug.Log("<color=red>Gracz umarł</color>");
+                _currentHealth = 0;
             }
             else
             {
-                currentHealth -= damageValue;
-                Debug.Log($"<color=red>Gracz otrzymał: {damageValue} obrażeń i ma teraz {currentHealth} życia</color>");
+                _currentHealth -= damageValue;
             }
+
+            _healthSlider.value = _currentHealth;
+            _sliderText.SetText($"{_currentHealth}/{_maxHealth}");
         }
     }
 
     public void Heal(float healValue)
     {
-        if (currentHealth + healValue > maxHealth)
+        if (_currentHealth + healValue > _maxHealth)
         {
-            currentHealth = maxHealth;
+            _currentHealth = _maxHealth;
         }
         else
         {
-            currentHealth += healValue;
+            _currentHealth += healValue;
         }
-
-        Debug.Log($"<color=green>Gracz wleczył się o: {healValue} i ma teraz {currentHealth} życia</color>");
     }
 
     private void SetHealth()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
+        _healthSlider.maxValue = _maxHealth;
+        _healthSlider.value = _currentHealth;
+        _sliderText.SetText($"{_currentHealth}/{_maxHealth}");
     }
 }
