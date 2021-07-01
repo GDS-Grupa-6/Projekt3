@@ -5,37 +5,58 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class MeleLogic : MonoBehaviour
 {
-    [SerializeField] private InputManager _inputManager;
+    public InputManager inputManager;
+
     [SerializeField] private CameraSwitch _cameraSwitch;
     [Header("Attacks settings")]
     [SerializeField] private Vector2 _rayCastOffset;
-    [SerializeField] private MeleStates[] _meleStates;
+    public MeleStates[] meleStates;
+
+    [HideInInspector] public bool canStartNextSequence;
+    [HideInInspector] public MeleStates currentState;
+    [HideInInspector] public int comboPoints;
 
     private Animator _animator;
-    private MeleStates _currentState;
     private Vector3 _rayPos;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _inputManager.inputSystem.Player.Mele.performed += _ => MeleAttack();
-        _currentState = _meleStates[0];
+        currentState = meleStates[0];
+        canStartNextSequence = true;
+        comboPoints = 0;
+    }
+
+    private void Update()
+    {
+        if (inputManager.PlayerAttacked() && canStartNextSequence)
+        {
+            canStartNextSequence = false;
+            _animator.SetTrigger("Attack");
+        }
     }
 
     private void MeleAttack()
     {
         _rayPos = new Vector3(transform.position.x + _rayCastOffset.x, transform.position.y + _rayCastOffset.y, transform.position.z);
         RaycastHit hit;
-        if (Physics.Raycast(_rayPos, transform.forward, out hit, _currentState.range))
+        if (Physics.Raycast(_rayPos, transform.forward, out hit, currentState.range))
         {
             Debug.Log(hit.transform.gameObject.name);
         }
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        _currentState = _meleStates[0];
+        if (currentState == null)
+        {
+            currentState = meleStates[0];
+        }
+
         _rayPos = new Vector3(transform.position.x + _rayCastOffset.x, transform.position.y + _rayCastOffset.y, transform.position.z);
-        Debug.DrawLine(_rayPos, _rayPos + transform.forward * _currentState.range);
+        Debug.DrawLine(_rayPos, _rayPos + transform.forward * currentState.range);
     }
+#endif
+
 }

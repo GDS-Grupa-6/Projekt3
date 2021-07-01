@@ -38,4 +38,9 @@ public class InputManager : MonoBehaviour
     {
         return inputSystem.Camera.MouseLook.ReadValue<Vector2>();
     }
+
+    public bool PlayerAttacked()
+    {
+        return inputSystem.Player.Mele.triggered;
+    }
 }

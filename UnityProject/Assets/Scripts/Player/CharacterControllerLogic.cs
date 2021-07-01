@@ -79,7 +79,6 @@ public class CharacterControllerLogic : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _gravity = -2f;
-            Debug.Log("grounded");
         }
         else
         {

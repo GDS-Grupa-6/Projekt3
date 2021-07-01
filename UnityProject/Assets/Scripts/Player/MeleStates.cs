@@ -7,8 +7,8 @@ public enum State { Attack, DoubleAttack, TriplleAttack, QuatroAttack, MegaAttac
 [System.Serializable]
 public class MeleStates
 {
-    public State state;
+    [Range(0, 4)] public int stateNumber;
     public float power;
     public float range;
-    public float pointsForAttack;
+    public int pointsForAttack;
 }
