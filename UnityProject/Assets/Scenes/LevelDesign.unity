@@ -323,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parabolaJumpHeight: 10
   _jumpSpeed: 5
+  _speed: 3
   player: {fileID: 0}
   timeParabolaJump: 0
   parabolaJumpEnded: 0
@@ -454,7 +455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startLaserPos: {fileID: 0}
   _bossRotateSpeed: 10
-  _laserBossPositions: []
   maxNumberOfSpin: 4
   _changeModeTime: 5
   _laserPower: 10
@@ -475,16 +475,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e0d545a77a5a04592a5925b91aae82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerOfArena: {fileID: 0}
+  distancePlayerIsNear: 15
+  _centerOfArena: {fileID: 0}
+  _arenaEdges: []
+  _weponCollider: {fileID: 0}
+  maxRandomOfStrikesNumber: 4
+  chanceToJumpBossToPlayer: 49
   bossPhase: 0
   bossFirstPhaseState: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   distanceToPlayer: 0
-  targetTransform: {fileID: 0}
+  startPhase: 0
+  jumpToPlayer: 0
+  animationRepeds: 0
+--- !u!114 &1034712404 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3014909498975795479, guid: f499c98ef900efd48a2affe46717fbde, type: 3}
+  m_PrefabInstance: {fileID: 3014909499037436246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af32602603eca1479ec12a64ad89d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1090037939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5068871600465712880, guid: b6b104e8e3c0722489d022fd5ac60ea5, type: 3}
   m_PrefabInstance: {fileID: 786006083520648364}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1137187344 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5063736201448827129, guid: 31825b1f179a6014db4daeebb9c67d64, type: 3}
+  m_PrefabInstance: {fileID: 5063736202884873673}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771e2508fe62af14ca3099d1d58988fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1353380191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1226,18 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1788475609}
+    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 1788475610}
+    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: _cameraSwitch
+      value: 
+      objectReference: {fileID: 1137187344}
+    - target: {fileID: 738399390, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: _inputManager
+      value: 
+      objectReference: {fileID: 1034712404}
     - target: {fileID: 1286131578958400676, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: mainCam
       value: 
