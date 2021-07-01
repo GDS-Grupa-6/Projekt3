@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Mele",
+                    "type": "Button",
+                    "id": "8b115b0f-7d3a-4890-8528-ac2d852ee327",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -143,6 +151,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "293da254-78c8-4fbc-8478-f3c5a734ee34",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "Mele",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
