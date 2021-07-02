@@ -13,9 +13,13 @@ public class PlayerData : MonoBehaviour
 
     private float _currentHealth;
     private Dash _dash;
+    private Animator _animator;
+
+    [HideInInspector] public bool hitTaken;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _dash = GetComponent<Dash>();
         SetHealth();
     }
@@ -24,6 +28,9 @@ public class PlayerData : MonoBehaviour
     {
         if (!_dash.playerDashing)
         {
+            hitTaken = true;
+            _animator.SetTrigger("Hit");
+
             if (_currentHealth - damageValue < 0)
             {
                 _currentHealth = 0;

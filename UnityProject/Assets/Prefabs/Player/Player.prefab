@@ -1722,30 +1722,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9abf449279b684889f3f181639f46d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputManager: {fileID: 0}
+  inputManager: {fileID: 0}
   _cameraSwitch: {fileID: 0}
+  _comboBar: {fileID: 0}
+  _comboBarText: {fileID: 0}
+  _pointsNeededToExtraAttack: 100
   _rayCastOffset: {x: 0, y: 0.5}
-  _meleStates:
-  - state: 0
-    power: 5
-    range: 3
-    pointsForAttack: 2
-  - state: 1
+  meleStates:
+  - stateNumber: 0
     power: 10
-    range: 0.5
-    pointsForAttack: 4
-  - state: 2
+    range: 10
+    pointsForAttack: 5
+  - stateNumber: 1
     power: 15
-    range: 0.5
-    pointsForAttack: 6
-  - state: 3
+    range: 10
+    pointsForAttack: 10
+  - stateNumber: 2
     power: 20
-    range: 0.5
-    pointsForAttack: 8
-  - state: 4
-    power: 30
+    range: 10
+    pointsForAttack: 15
+  - stateNumber: 3
+    power: 25
+    range: 10
+    pointsForAttack: 20
+  canStartNextSequence: 0
+  currentState:
+    stateNumber: 0
+    power: 0
     range: 0
-    pointsForAttack: -100
+    pointsForAttack: 0
 --- !u!1 &3528294590469404068
 GameObject:
   m_ObjectHideFlags: 0

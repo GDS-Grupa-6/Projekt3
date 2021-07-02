@@ -34,20 +34,25 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchState()
     {
-        if (playerIsInShootPose)
+        if (!_player.GetComponent<PlayerData>().hitTaken)
         {
-            if (playerAim)
+            if (playerIsInShootPose)
             {
-                SwitchToCamera(CameraID.AIM);
+                if (playerAim)
+                {
+                    SwitchToCamera(CameraID.AIM);
+                }
+                else if (!playerAim)
+                {
+                    SwitchToCamera(CameraID.TPP);
+                }
+                _player.GetComponent<Animator>().SetBool("ChangePos", false);
             }
-            else if (!playerAim)
+            else if (!playerIsInShootPose)
             {
-                SwitchToCamera(CameraID.TPP);
+                SwitchToCamera(CameraID.Shoot);
+                _player.GetComponent<Animator>().SetBool("ChangePos", true);
             }
-        }
-        else if (!playerIsInShootPose)
-        {
-            SwitchToCamera(CameraID.Shoot);
         }
     }
 

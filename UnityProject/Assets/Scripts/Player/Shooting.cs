@@ -82,7 +82,7 @@ public class Shooting : MonoBehaviour
     {
         var obj = Instantiate(bulletPrifab, gun.transform.position, Quaternion.identity);
         Rigidbody rb = obj.GetComponent<Rigidbody>();
-        rb.velocity = -gun.GetComponent<Gun>().targetTransform.up * shootForce;
+        rb.velocity = gun.GetComponent<Gun>().targetTransform.forward * shootForce;
     }
 
     private void SetGFX(bool setActive)
