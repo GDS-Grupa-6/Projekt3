@@ -1724,6 +1724,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputManager: {fileID: 0}
   _cameraSwitch: {fileID: 0}
+  _comboBar: {fileID: 0}
+  _comboBarText: {fileID: 0}
+  _pointsNeededToExtraAttack: 100
   _rayCastOffset: {x: 0, y: 0.5}
   meleStates:
   - stateNumber: 0
@@ -1738,7 +1741,7 @@ MonoBehaviour:
     power: 20
     range: 10
     pointsForAttack: 15
-  - stateNumber: 0
+  - stateNumber: 3
     power: 25
     range: 10
     pointsForAttack: 20

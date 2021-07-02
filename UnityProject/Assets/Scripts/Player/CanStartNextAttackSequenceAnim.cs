@@ -22,19 +22,9 @@ public class CanStartNextAttackSequenceAnim : StateMachineBehaviour
         {
             _changeState = false;
             animator.SetBool("MeleInput", true);
-            Debug.Log($"Attak za: {_meleLogic.currentState.power}"); //zadaj damage
-            _meleLogic.comboPoints += _meleLogic.currentState.pointsForAttack;
+            _meleLogic.MeleAttack();
             ChangeStateMele();
         }
-        /* else
-         {
-             _meleLogic.canStartNextSequence = true; //chyba do idla trzeba przenieœæ
-         }*/
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
     }
 
     private void ChangeStateMele()
@@ -43,9 +33,5 @@ public class CanStartNextAttackSequenceAnim : StateMachineBehaviour
         {
             _meleLogic.currentState = _meleLogic.meleStates[_meleLogic.currentState.stateNumber + 1];
         }
-      /*  else
-        {
-            _meleLogic.currentState = _meleLogic.meleStates[0]; //chyba do idla trzeba przenieœæ
-        }*/
     }
 }

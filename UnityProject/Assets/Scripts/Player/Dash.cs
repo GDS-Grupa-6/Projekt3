@@ -12,29 +12,31 @@ public class Dash : MonoBehaviour
     [SerializeField] private float cooldownTime = 1f;
     [SerializeField] private GameObject ghostFormVFX;
     [SerializeField] private Transform mainCam;
- 
+
     [HideInInspector] public bool playerDashing;
-    private CharacterController characterController;
-    private InputManager inputManager;
-    private Animator animator;
-    private CharacterControllerLogic characterControllerLogic;
-    private CameraSwitch cameraSwitch;
+    private CharacterController _characterController;
+    private InputManager _inputManager;
+    private Animator _animator;
+    private CharacterControllerLogic _characterControllerLogic;
+    private CameraSwitch _cameraSwitch;
+    private PlayerData _playerData;
 
     void Start()
     {
-        characterControllerLogic = GetComponent<CharacterControllerLogic>();
-        animator = GetComponent<Animator>();
-        characterController = GetComponent<CharacterController>();
-        inputManager = FindObjectOfType<InputManager>();
-        cameraSwitch = FindObjectOfType<CameraSwitch>();
+        _playerData = GetComponent<PlayerData>();
+        _characterControllerLogic = GetComponent<CharacterControllerLogic>();
+        _animator = GetComponent<Animator>();
+        _characterController = GetComponent<CharacterController>();
+        _inputManager = FindObjectOfType<InputManager>();
+        _cameraSwitch = FindObjectOfType<CameraSwitch>();
         ghostFormVFX.SetActive(false);
     }
 
     void Update()
     {
-        if (inputManager.PlayerDash() && !playerDashing)
+        if (_inputManager.PlayerDash() && !playerDashing && !_playerData.hitTaken)
         {
-            characterControllerLogic.enabled = false;
+            _characterControllerLogic.enabled = false;
             playerDashing = true;
             StartCoroutine(DashCourutine());
         }
@@ -44,29 +46,31 @@ public class Dash : MonoBehaviour
     {
         float startTime = Time.time;
         ghostFormVFX.SetActive(true);
+        _animator.SetBool("ChangePos", true);
 
         while (Time.time < startTime + dashTime)
         {
-            float horizontal = inputManager.MovementControls().x;
-            float vertical = inputManager.MovementControls().y;
+            float horizontal = _inputManager.MovementControls().x;
+            float vertical = _inputManager.MovementControls().y;
 
-            if (cameraSwitch.playerIsInShootPose || cameraSwitch.playerAim)
+            if (_cameraSwitch.playerIsInShootPose || _cameraSwitch.playerAim)
             {
                 Vector3 move = transform.right * horizontal + transform.forward * vertical;
-                characterController.Move(move * dashSpeed * Time.deltaTime);
+                _characterController.Move(move * dashSpeed * Time.deltaTime);
             }
-            else if (!cameraSwitch.playerIsInShootPose && !cameraSwitch.playerAim)
+            else if (!_cameraSwitch.playerIsInShootPose && !_cameraSwitch.playerAim)
             {
                 Vector3 inputs = new Vector3(horizontal, 0, vertical).normalized;
                 float targetAngle = Mathf.Atan2(inputs.x, inputs.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0, targetAngle, 0);
-                characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+                _characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
             }
 
             yield return null;
         }
 
-        characterControllerLogic.enabled = true;
+        _characterControllerLogic.enabled = true;
+        _animator.SetBool("ChangePos", false);
         StartCoroutine(CooldownCorutine());
     }
 
