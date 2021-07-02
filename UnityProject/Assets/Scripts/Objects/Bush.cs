@@ -8,9 +8,12 @@ public class Bush : MonoBehaviour
     [SerializeField] private bool _schowHud;
     [SerializeField] private Transform _hudPos;
     [SerializeField] private Slider _healthBar;
+    [SerializeField] private bool _canHeal;
+    [SerializeField] private float _healTime = 3;
     [SerializeField] private float _maxHealth;
 
     private float _currentHealth;
+    private bool _healing;
 
     void Awake()
     {
@@ -38,11 +41,25 @@ public class Bush : MonoBehaviour
         {
             _currentHealth -= value;
             _healthBar.value = _currentHealth;
+
+            if (_canHeal && !_healing)
+            {
+                _healing = true;
+                StartCoroutine(HealCourutine());
+            }
         }
         else
         {
             _currentHealth = 0;
             Destroy(this.gameObject);
         }
+    }
+
+    private IEnumerator HealCourutine()
+    {
+        yield return new WaitForSeconds(_healTime);
+        _currentHealth = _maxHealth;
+        _healthBar.value = _currentHealth;
+        _healing = false;
     }
 }
