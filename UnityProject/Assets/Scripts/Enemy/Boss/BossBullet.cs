@@ -30,7 +30,7 @@ public class BossBullet : MonoBehaviour
             playerData.TakeDamage(power);
         }
 
-        if (other.tag != this.gameObject.tag && other.tag != "Boss")
+        if (other.tag != this.gameObject.tag && other.tag != "Boss" && other.tag != "EnterTrigger")
         {
             Destroy(this.gameObject);
         }
