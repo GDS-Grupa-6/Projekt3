@@ -69,7 +69,6 @@ public class CharacterControllerLogic : MonoBehaviour
     private void AimMovement(Vector3 direction)
     {
         direction = _mainCamera.forward * direction.z + _mainCamera.right * direction.x;
-        _gravity = -9.81f * Time.deltaTime;
         _characterController.Move(new Vector3(direction.x, 0, direction.z) * _speed * Time.deltaTime);
     }
 

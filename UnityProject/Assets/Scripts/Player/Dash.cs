@@ -14,6 +14,7 @@ public class Dash : MonoBehaviour
     [SerializeField] private Transform mainCam;
 
     [HideInInspector] public bool playerDashing;
+    [HideInInspector] public bool canDash;
     private CharacterController _characterController;
     private InputManager _inputManager;
     private Animator _animator;
@@ -34,7 +35,7 @@ public class Dash : MonoBehaviour
 
     void Update()
     {
-        if (_inputManager.PlayerDash() && !playerDashing && !_playerData.hitTaken)
+        if (_inputManager.PlayerDash() && !playerDashing && !_playerData.hitTaken && canDash)
         {
             _characterControllerLogic.enabled = false;
             playerDashing = true;

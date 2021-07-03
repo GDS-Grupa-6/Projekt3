@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: 2651221146415526003}
   - component: {fileID: 2651221146415526004}
   - component: {fileID: 2651221146415526005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e0d545a77a5a04592a5925b91aae82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distancePlayerIsNear: 20
+  distancePlayerIsNear: 10
   _centerOfArena: {fileID: 0}
   _arenaEdges:
   - {fileID: 0}
@@ -1060,17 +1060,17 @@ MonoBehaviour:
   _bullet: {fileID: 1079154908989322109, guid: 1079f8f96ced3994687d90321d1f7e05, type: 3}
   _bulletStartPos: {fileID: 2651221145284649873}
   _bulletPower: 10
-  _bulletSpeed: 1
+  _bulletSpeed: 2
   _bulletFlyHeight: 10
   _arenaThreeCornersPositions:
-  - {x: 63, y: 0, z: 0}
-  - {x: 108, y: 10, z: 2}
-  - {x: 0, y: 0, z: 41}
+  - {x: 3, y: 0, z: 0}
+  - {x: 47, y: 1, z: 3}
+  - {x: 0, y: 0, z: 47}
   _arenaCenter: {fileID: 0}
-  _numberOfRandomBullets: 5
-  _numberOfToPlayerBullets: 5
-  _timeToSpawnNextBullet: 2
-  _nuberOfMegaPukeBullets: 10
+  _numberOfRandomBullets: 20
+  _numberOfToPlayerBullets: 10
+  _timeToSpawnNextBullet: 0.5
+  _nuberOfMegaPukeBullets: 40
   _timeToSpawnNextBulletInMegaPuke: 0.2
   pukeEnd: 0
   megaPukeEnd: 0

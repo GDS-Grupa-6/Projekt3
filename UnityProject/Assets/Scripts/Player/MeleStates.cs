@@ -9,6 +9,5 @@ public class MeleStates
 {
     [Range(0, 4)] public int stateNumber;
     public float power;
-    public float range;
     public int pointsForAttack;
 }
