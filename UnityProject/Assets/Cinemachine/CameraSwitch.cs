@@ -15,6 +15,7 @@ public class CameraSwitch : MonoBehaviour
     [HideInInspector] public bool playerIsInShootPose;
     [HideInInspector] public bool playerAim;
     [HideInInspector] public Transform targetEnemy;
+    [HideInInspector] public bool canSwitchCameraState;
 
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!_player.GetComponent<PlayerData>().hitTaken)
+        if (!_player.GetComponent<PlayerData>().hitTaken && canSwitchCameraState)
         {
             if (playerIsInShootPose)
             {

@@ -9,12 +9,15 @@ using UnityEngine.UI;
 public class MeleLogic : MonoBehaviour
 {
     public InputManager inputManager;
-    [SerializeField] private CameraSwitch _cameraSwitch;
+    public CameraSwitch cameraSwitch;
     [SerializeField] private Slider _comboBar;
     [SerializeField] private TextMeshProUGUI _comboBarText;
+    [Header("Attack point settings")]
+    [SerializeField] private Transform _attackPoint;
+    [SerializeField] private float _attackRange;
+    [SerializeField] private LayerMask _targetLayers;
     [Header("Attacks settings")]
     [SerializeField] private int _pointsNeededToExtraAttack;
-    [SerializeField] private Vector2 _rayCastOffset;
     public MeleStates[] meleStates;
 
     [HideInInspector] public bool canStartNextSequence;
@@ -37,7 +40,7 @@ public class MeleLogic : MonoBehaviour
 
     private void Update()
     {
-        if (inputManager.PlayerAttacked() && canStartNextSequence && !_animator.GetBool("ChangePos") && !_playerData.hitTaken)
+        if (inputManager.PlayerAttacked() && canStartNextSequence && !_animator.GetBool("ChangePos") && !_playerData.hitTaken && !cameraSwitch.playerIsInShootPose)
         {
             canStartNextSequence = false;
             _animator.SetTrigger("Attack");
@@ -46,25 +49,27 @@ public class MeleLogic : MonoBehaviour
 
     public void MeleAttack()
     {
-        _rayPos = new Vector3(transform.position.x + _rayCastOffset.x, transform.position.y + _rayCastOffset.y, transform.position.z);
-        RaycastHit hit;
-        if (Physics.Raycast(_rayPos, transform.forward, out hit, currentState.range))
+        Collider[] hitTargets = Physics.OverlapSphere(_attackPoint.position, _attackRange, _targetLayers);
+
+        if (hitTargets.Length == 1)
         {
-            if (hit.transform.gameObject.tag == "Boss" ||
-                hit.transform.gameObject.tag == "Bush")
+            transform.LookAt(new Vector3(hitTargets[0].transform.position.x, transform.position.y, hitTargets[0].transform.position.z));
+        }
+
+        foreach (var item in hitTargets)
+        {
+            if (item.tag == "Boss")
             {
-                if (hit.transform.gameObject.tag == "Boss")
-                {
-                    hit.transform.gameObject.GetComponent<BossData>().TakeDamage(currentState.power);
-                }
-                else if (hit.transform.gameObject.tag == "Bush")
-                {
-                    hit.transform.gameObject.GetComponent<Bush>().TakeDamage(currentState.power);
-                }
-                AddPoints();
+                item.GetComponent<BossData>().TakeDamage(currentState.power);
             }
+            else if (item.tag == "Bush")
+            {
+                item.GetComponent<Bush>().TakeDamage(currentState.power);
+            }
+            AddPoints();
         }
     }
+
 
     private void AddPoints()
     {
@@ -91,13 +96,12 @@ public class MeleLogic : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if (currentState == null)
+        if (_attackPoint == null)
         {
-            currentState = meleStates[0];
+            return;
         }
 
-        _rayPos = new Vector3(transform.position.x + _rayCastOffset.x, transform.position.y + _rayCastOffset.y, transform.position.z);
-        Debug.DrawLine(_rayPos, _rayPos + transform.forward * currentState.range);
+        Gizmos.DrawSphere(_attackPoint.position, _attackRange);
     }
 #endif
 
