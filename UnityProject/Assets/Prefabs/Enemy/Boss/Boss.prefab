@@ -992,11 +992,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511ff99ca861e9945be9e5241ff6af52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 3
   _centerOfArena: {fileID: 0}
   _jumpHeight: 10
   _jumpSpeed: 2
-  _bossJump: 0
-  _bossMoveTarget: {x: 0, y: 0, z: 0}
+  bossJump: 0
+  moveBoss: 0
+  bossMoveTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &4969205015599857904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,6 +1013,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wave360: {fileID: 3917056503527200040}
   wave45: {fileID: 5051249140924224157}
+  _minDistanceToFollowPlayer: 10000
+  _attackRange: 3
+  _maxNumberOfStrikes: 5
 --- !u!1 &2651221146448974260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1028,7 @@ GameObject:
   - component: {fileID: 2651221146448974264}
   - component: {fileID: 2651221146448974263}
   - component: {fileID: 2651221146448974262}
+  - component: {fileID: 187580636621474644}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -1106,6 +1112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &187580636621474644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651221146448974260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a893e3143fcfca944ab2632dc14adb27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _power: 10
 --- !u!1 &2885239751029845218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2540521571832313432
 Transform:
   m_ObjectHideFlags: 0
@@ -1215,7 +1234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e33dea287756c42b84f7beef824567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 10
+  _power: 10
 --- !u!1 &2885239751041512852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,7 +1254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2540521571913183022
 Transform:
   m_ObjectHideFlags: 0
@@ -1325,4 +1344,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e33dea287756c42b84f7beef824567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 10
+  _power: 10

@@ -1,13 +1,8 @@
 using UnityEngine;
 
-public class Wave : MonoBehaviour
+public class BossWepon : MonoBehaviour
 {
-    [SerializeField] private float _power;
-
-    private void Awake()
-    {
-        DesactiveWave();
-    }
+    [SerializeField] private float _power = 10;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,15 +15,5 @@ public class Wave : MonoBehaviour
                 playerData.TakeDamage(_power);
             }
         }
-    }
-
-    public void ActiveWave()
-    {
-        this.gameObject.SetActive(true);
-    }
-
-    public void DesactiveWave()
-    {
-        this.gameObject.SetActive(false);
     }
 }
