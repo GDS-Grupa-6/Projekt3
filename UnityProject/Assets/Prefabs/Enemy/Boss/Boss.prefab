@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 2651221144557504546}
   - component: {fileID: 2651221144557504549}
   - component: {fileID: 2651221144557504548}
-  - component: {fileID: 2651221144557504547}
   m_Layer: 0
   m_Name: O_O
   m_TagString: Untagged
@@ -212,19 +211,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2651221144557504547
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221144557504545}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2651221144621660328
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +420,8 @@ GameObject:
   - component: {fileID: 2651221145024865155}
   - component: {fileID: 2651221145024865158}
   - component: {fileID: 2651221145024865157}
-  m_Layer: 0
+  - component: {fileID: 3666632542766945119}
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,6 +491,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &3666632542766945119
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651221145024865154}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2651221145284649872
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,13 +787,10 @@ GameObject:
   - component: {fileID: 2651221146415526031}
   - component: {fileID: 2651221146415526027}
   - component: {fileID: 2651221146415526029}
-  - component: {fileID: 2651221146415526001}
-  - component: {fileID: 2651221146415526000}
-  - component: {fileID: 2651221146415526028}
-  - component: {fileID: 2651221146415526002}
-  - component: {fileID: 2651221146415526003}
-  - component: {fileID: 2651221146415526004}
   - component: {fileID: 2651221146415526005}
+  - component: {fileID: 2165504979606350353}
+  - component: {fileID: 7726772312196119566}
+  - component: {fileID: 4969205015599857904}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Boss
@@ -953,142 +951,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2651221146415526001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146415526026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3e0d545a77a5a04592a5925b91aae82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distancePlayerIsNear: 10
-  _centerOfArena: {fileID: 0}
-  _arenaEdges:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _weponCollider: {fileID: 2651221146448974262}
-  maxRandomOfStrikesNumber: 4
-  chanceToJumpBossToPlayer: 49
-  bossPhase: 0
-  bossFirstPhaseState: 0
-  targetPosition: {x: 0, y: 0, z: 0}
-  distanceToPlayer: 0
-  startPhase: 0
-  jumpToPlayer: 0
-  animationRepeds: 0
---- !u!114 &2651221146415526000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146415526026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 414820243e8431044a80bf16d620c2fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startLaserPos: {fileID: 2651221144427082931}
-  _bossRotateSpeed: 50
-  maxNumberOfSpin: 4
-  _changeModeTime: 5
-  _laserPower: 10
-  _laserHeal: 10
-  _normalLaserMaretial: {fileID: 2100000, guid: acf9cf814d5111e41ae14d706e6bcd79, type: 2}
-  _ghostLaserMaterial: {fileID: 2100000, guid: 8c7a4024400a72144976c95d9ab06ab2, type: 2}
-  spinNumber: 0
-  targetLaserJump: {fileID: 0}
---- !u!114 &2651221146415526028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146415526026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4939099f749160643adb6cd1dce0161e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parabolaJumpHeight: 10
-  _jumpSpeed: 2
-  _speed: 3
-  player: {fileID: 0}
-  timeParabolaJump: 10
-  parabolaJumpEnded: 0
---- !u!114 &2651221146415526002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146415526026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a20faa5b00d5c044e8e31b9701c986ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _wave360: {fileID: 2885239751041512853}
-  _wave45: {fileID: 2885239751029845219}
-  maxScaleWave360: {x: 1500, y: 1500, z: 1500}
-  _growTimeWave360: 10
-  _powerWave360: 10
-  maxScaleWave45: {x: 1500, y: 1500, z: 1500}
-  _growTimeWave45: 10
-  _powerWave45: 10
-  wave360Transform: {fileID: 0}
-  wave45Transform: {fileID: 0}
---- !u!114 &2651221146415526003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146415526026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbab96bc77647a34294e60d1a91783f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
-  _bullet: {fileID: 1079154908989322109, guid: 1079f8f96ced3994687d90321d1f7e05, type: 3}
-  _bulletStartPos: {fileID: 2651221145284649873}
-  _bulletPower: 10
-  _bulletSpeed: 2
-  _bulletFlyHeight: 10
-  _arenaThreeCornersPositions:
-  - {x: 3, y: 0, z: 0}
-  - {x: 47, y: 1, z: 3}
-  - {x: 0, y: 0, z: 47}
-  _arenaCenter: {fileID: 0}
-  _numberOfRandomBullets: 20
-  _numberOfToPlayerBullets: 10
-  _timeToSpawnNextBullet: 0.5
-  _nuberOfMegaPukeBullets: 40
-  _timeToSpawnNextBulletInMegaPuke: 0.2
-  pukeEnd: 0
-  megaPukeEnd: 0
---- !u!114 &2651221146415526004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146415526026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 934c5303f01a982429615cd3fd376c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthSlider: {fileID: 2651221146001302707}
-  _sliderText: {fileID: 2651221144941861375}
-  _maxHealth: 100
 --- !u!136 &2651221146415526005
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1103,6 +965,48 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2165504979606350353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651221146415526026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5428446f8ae50342b18789954c09d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthSlider: {fileID: 2651221146001302707}
+  _sliderText: {fileID: 2651221144941861375}
+  _maxHealth: 100
+--- !u!114 &7726772312196119566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651221146415526026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511ff99ca861e9945be9e5241ff6af52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _centerOfArena: {fileID: 0}
+  _jumpHeight: 10
+  _jumpSpeed: 5
+--- !u!114 &4969205015599857904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651221146415526026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c108d7ea398bf564ca2a81a43309dc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2651221146448974260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1019,6 @@ GameObject:
   - component: {fileID: 2651221146448974264}
   - component: {fileID: 2651221146448974263}
   - component: {fileID: 2651221146448974262}
-  - component: {fileID: 2651221146448974265}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -1199,19 +1102,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2651221146448974265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221146448974260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80393707e2ab7a4995a95127e91318e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 10
 --- !u!1 &2885239751029845218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1114,6 @@ GameObject:
   - component: {fileID: 1508254515164822013}
   - component: {fileID: 3677912799437638967}
   - component: {fileID: 2651221145255498166}
-  - component: {fileID: 2885239751029845219}
   m_Layer: 0
   m_Name: Wave45
   m_TagString: Untagged
@@ -1309,19 +1198,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 0
   m_Mesh: {fileID: -5345760584941703707, guid: 8990aaa1181e81d4987a6f928dd19c04, type: 3}
---- !u!114 &2885239751029845219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2885239751029845218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c825043dbe2e0c468c7f0c369e5d43a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 0
 --- !u!1 &2885239751041512852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1210,6 @@ GameObject:
   - component: {fileID: 1508254515044098187}
   - component: {fileID: 3677912799381935169}
   - component: {fileID: 2651221145132943560}
-  - component: {fileID: 2885239751041512853}
   m_Layer: 0
   m_Name: Wave360
   m_TagString: Untagged
@@ -1419,16 +1294,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 0
   m_Mesh: {fileID: -5287425419667122880, guid: e7b303f4251b036469b268d50f314d9d, type: 3}
---- !u!114 &2885239751041512853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2885239751041512852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c825043dbe2e0c468c7f0c369e5d43a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 0

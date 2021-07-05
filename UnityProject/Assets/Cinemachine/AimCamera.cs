@@ -7,13 +7,10 @@ public class AimCamera : CinemachineExtension
     [Space(10)]
     [SerializeField] private float rotationXOffset;
     [SerializeField] private float rotationYOffset;
-
-    private CameraSwitch cameraSwitch;
+    [SerializeField] private CameraSwitch cameraSwitch;
 
     void Awake()
     {
-        cameraSwitch = FindObjectOfType<CameraSwitch>();
-
         base.Awake();
     }
 
