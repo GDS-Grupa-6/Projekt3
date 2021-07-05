@@ -17,7 +17,7 @@ public class StartBossFightTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             _bossHUD.SetActive(true);
-            _combatLogic.ChangeBossPhase(BossPhases.First);
+            _combatLogic.SetCombatState(BossCobatStates.StartFight);
         }
     }
 }
