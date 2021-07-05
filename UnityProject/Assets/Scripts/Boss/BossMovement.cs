@@ -14,17 +14,17 @@ public class BossMovement : MonoBehaviour
     [HideInInspector] public bool bossJump;
     [HideInInspector] public bool moveBoss;
     [HideInInspector] public Vector3 bossMoveTarget;
+    [HideInInspector] public GameObject player;
 
     private Vector3 _bossStartJumpPos;
     private float _timeParabolaJump;
     private Animator _animator;
-    private GameObject _player;
     private Rigidbody _rb;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _player = FindObjectOfType<CharacterController>().gameObject;
+        player = FindObjectOfType<CharacterController>().gameObject;
         _animator = GetComponent<Animator>();
         bossMoveTarget = _centerOfArena.localPosition;
     }
@@ -59,7 +59,7 @@ public class BossMovement : MonoBehaviour
 
     private void Move()
     {
-        bossMoveTarget = new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z);
+        bossMoveTarget = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, bossMoveTarget, Time.deltaTime * _speed);
         transform.LookAt(bossMoveTarget);
     }
@@ -83,6 +83,6 @@ public class BossMovement : MonoBehaviour
 
     public float DistanceToPlayer()
     {
-        return Vector3.Distance(transform.position, _player.transform.position);
+        return Vector3.Distance(transform.position, player.transform.position);
     }
 }

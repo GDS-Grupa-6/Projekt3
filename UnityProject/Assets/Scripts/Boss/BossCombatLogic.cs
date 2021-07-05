@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum BossCobatStates { empty, StartFight, Strikes, Locked }
+public enum BossCobatStates { empty, StartFight, Strikes, Locked, JumpToPlayer, Puke }
 
 [RequireComponent(typeof(BossMovement))]
 [RequireComponent(typeof(Animator))]
@@ -10,9 +10,11 @@ public class BossCombatLogic : MonoBehaviour
     public Wave wave360;
     public Wave wave45;
     [Header("Strike options")]
-    [SerializeField] private float _minDistanceToFollowPlayer;
     [SerializeField] private float _attackRange;
     [SerializeField] private int _maxNumberOfStrikes = 5;
+    [Header("\"Player is far\" options")]
+    [SerializeField] private float _playerIsFarDistance;
+    [SerializeField] [Range(0, 100)] private int _chanceToPuke;
 
     private BossCobatStates _currentState;
     private BossMovement _bossMovement;
@@ -50,11 +52,20 @@ public class BossCombatLogic : MonoBehaviour
 
     public void CheckDistanceForStates()
     {
-        if (_bossMovement.DistanceToPlayer() > _minDistanceToFollowPlayer)
+        if (_bossMovement.DistanceToPlayer() >= _playerIsFarDistance)
         {
-            //stany poza zasiêgiem
+            int random = Random.Range(0, 100);
+
+            if (random <= _chanceToPuke)
+            {
+                SetCombatState(BossCobatStates.Puke);
+            }
+            else
+            {
+                SetCombatState(BossCobatStates.JumpToPlayer);
+            }
         }
-        else if(_bossMovement.DistanceToPlayer() <= _minDistanceToFollowPlayer)
+        else if (_bossMovement.DistanceToPlayer() < _playerIsFarDistance)
         {
             SetCombatState(BossCobatStates.Strikes);
         }
@@ -77,6 +88,11 @@ public class BossCombatLogic : MonoBehaviour
             case BossCobatStates.Locked:
                 _bossMovement.moveBoss = false;
                 _animator.SetBool("MoveBoss", _bossMovement.moveBoss);
+                break;
+            case BossCobatStates.JumpToPlayer:
+                _bossMovement.bossMoveTarget = _bossMovement.player.transform.position;
+                _animator.SetTrigger("JumpToPlayer");
+                _bossMovement.bossJump = true;
                 break;
             default:
                 break;
