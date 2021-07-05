@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum BossCobatStates { empty, StartFight, Strikes }
+public enum BossCobatStates { empty, StartFight, Strikes, Locked }
 
 [RequireComponent(typeof(BossMovement))]
 [RequireComponent(typeof(Animator))]
@@ -73,6 +73,10 @@ public class BossCombatLogic : MonoBehaviour
                 _numberOfStrikes = Random.Range(1, _maxNumberOfStrikes);
                 _animator.SetInteger("NumberOfStrikes", _numberOfStrikes);
                 _animator.SetTrigger("Strike");
+                break;
+            case BossCobatStates.Locked:
+                _bossMovement.moveBoss = false;
+                _animator.SetBool("MoveBoss", _bossMovement.moveBoss);
                 break;
             default:
                 break;

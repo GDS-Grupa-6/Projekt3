@@ -31,6 +31,7 @@ public class WaveAnim : StateMachineBehaviour
         else
         {
             _combatLogic.wave45.DesactiveWave();
+            _combatLogic.SetCombatState(BossCobatStates.Locked);
         }
     }
 }
