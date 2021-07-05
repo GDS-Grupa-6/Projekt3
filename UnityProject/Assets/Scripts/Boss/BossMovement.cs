@@ -50,6 +50,8 @@ public class BossMovement : MonoBehaviour
         else
         {
             _bossJump = false;
+            _timeParabolaJump = 0;
+            return;
         }
     }
 

@@ -7,6 +7,9 @@ public enum BossCobatStates { empty, StartFight }
 [RequireComponent(typeof(BossMovement))]
 public class BossCombatLogic : MonoBehaviour
 {
+    public Wave wave360;
+    public Wave wave45;
+
     private BossCobatStates _cobatStates;
     private BossMovement _bossMovement;
 
