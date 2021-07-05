@@ -58,4 +58,10 @@ public class GameUIManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ChangeScene(int index)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(index);
+    }
 }

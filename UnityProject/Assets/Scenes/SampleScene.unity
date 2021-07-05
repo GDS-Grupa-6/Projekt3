@@ -228,7 +228,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.1e-44, y: 0, z: 6.6e-44, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0.000000005581235}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -279,10 +279,6 @@ PrefabInstance:
     - target: {fileID: 1676882091236053650, guid: 71ae08867122c554b88f3a4770a3f77a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766577058036791691, guid: 71ae08867122c554b88f3a4770a3f77a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8775325235948749066, guid: 71ae08867122c554b88f3a4770a3f77a, type: 3}
       propertyPath: m_RootOrder
@@ -2495,6 +2491,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 686538877, guid: 9b2ae508e24ba39408138c3720785537, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 824551394856242209, guid: 9b2ae508e24ba39408138c3720785537, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2834,6 +2834,10 @@ PrefabInstance:
       propertyPath: _comboBar
       value: 
       objectReference: {fileID: 63724889341070002}
+    - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
+      propertyPath: cameraSwitch
+      value: 
+      objectReference: {fileID: 702853994}
     - target: {fileID: 5226204930808561756, guid: bb119ad3a8b079847b2c73c64a285121, type: 3}
       propertyPath: inputManager
       value: 

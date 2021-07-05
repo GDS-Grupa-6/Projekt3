@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &291379315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 291379316}
+  m_Layer: 6
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &291379316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291379315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.554, z: 0.743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3457854633381069685}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346169685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1612,7 @@ Transform:
   - {fileID: 2551082024120986635}
   - {fileID: 6626807268576849471}
   - {fileID: 8068229263547993234}
+  - {fileID: 291379316}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -52.11, z: 0}
@@ -1660,6 +1691,7 @@ MonoBehaviour:
   ghostFormVFX: {fileID: 7070799972896052573}
   mainCam: {fileID: 0}
   playerDashing: 0
+  canDash: 0
 --- !u!114 &3062151370372322937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1675,6 +1707,7 @@ MonoBehaviour:
   _maxHealth: 100
   _healthSlider: {fileID: 0}
   _sliderText: {fileID: 0}
+  hitTaken: 0
 --- !u!114 &8867831044546086814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1723,33 +1756,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 0}
-  _cameraSwitch: {fileID: 0}
+  cameraSwitch: {fileID: 0}
   _comboBar: {fileID: 0}
   _comboBarText: {fileID: 0}
+  _attackPoint: {fileID: 291379316}
+  _attackRange: 0.75
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 384
   _pointsNeededToExtraAttack: 100
-  _rayCastOffset: {x: 0, y: 0.5}
   meleStates:
   - stateNumber: 0
     power: 10
-    range: 10
     pointsForAttack: 5
   - stateNumber: 1
     power: 15
-    range: 10
     pointsForAttack: 10
   - stateNumber: 2
     power: 20
-    range: 10
     pointsForAttack: 15
   - stateNumber: 3
     power: 25
-    range: 10
     pointsForAttack: 20
   canStartNextSequence: 0
   currentState:
     stateNumber: 0
     power: 0
-    range: 0
     pointsForAttack: 0
 --- !u!1 &3528294590469404068
 GameObject:
