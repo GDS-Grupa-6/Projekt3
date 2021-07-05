@@ -1,57 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BossMovement : MonoBehaviour
 {
     [Header("Move points")]
-    [SerializeField] private Transform _centerOfArena;
+    [SerializeField] private float _speed;
     [Header("Jump options")]
+    [SerializeField] private Transform _centerOfArena;
     [SerializeField] private float _jumpHeight = 10f;
     [SerializeField] private float _jumpSpeed = 5f;
 
-    [HideInInspector] public bool _bossJump;
-    [HideInInspector] public Vector3 _bossMoveTarget;
+    [HideInInspector] public bool bossJump;
+    [HideInInspector] public bool moveBoss;
+    [HideInInspector] public Vector3 bossMoveTarget;
 
     private Vector3 _bossStartJumpPos;
     private float _timeParabolaJump;
     private Animator _animator;
+    private GameObject _player;
+    private Rigidbody _rb;
 
-    void Awake()
+    private void Awake()
     {
+        _rb = GetComponent<Rigidbody>();
+        _player = FindObjectOfType<CharacterController>().gameObject;
         _animator = GetComponent<Animator>();
-        _bossMoveTarget = _centerOfArena.localPosition;
+        bossMoveTarget = _centerOfArena.localPosition;
     }
 
-    void Update()
+    private void Update()
     {
-        _animator.SetBool("BossJump", _bossJump);
+        _animator.SetBool("BossJump", bossJump);
 
-        if (_bossJump)
+        if (bossJump)
         {
-            ParabolaJump(_bossMoveTarget, _bossStartJumpPos);
+            ParabolaJump(bossMoveTarget, _bossStartJumpPos);
         }
         else
         {
             _bossStartJumpPos = transform.position;
         }
-    }
 
-    public void ParabolaJump(Vector3 target, Vector3 startPos)
-    {
-        _timeParabolaJump += Time.deltaTime;
-        _timeParabolaJump = _timeParabolaJump % 5f;
-
-        if (Vector3.Distance(transform.position, target) > 1f)
+        if (moveBoss)
         {
-            transform.position = Parabola(startPos, target, _jumpHeight, (_timeParabolaJump / 5) * _jumpSpeed);
-        }
-        else
-        {
-            _bossJump = false;
-            _timeParabolaJump = 0;
-            return;
+            Move();
         }
     }
 
@@ -62,5 +55,34 @@ public class BossMovement : MonoBehaviour
         var mid = Vector3.Lerp(start, end, t);
 
         return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
+    }
+
+    private void Move()
+    {
+        bossMoveTarget = new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, bossMoveTarget, Time.deltaTime * _speed);
+        transform.LookAt(bossMoveTarget);
+    }
+
+    private void ParabolaJump(Vector3 target, Vector3 startPos)
+    {
+        _timeParabolaJump += Time.deltaTime;
+        _timeParabolaJump = _timeParabolaJump % 5f;
+
+        if (Vector3.Distance(transform.position, target) > 1f)
+        {
+            transform.position = Parabola(startPos, target, _jumpHeight, (_timeParabolaJump / 5) * _jumpSpeed);
+        }
+        else
+        {
+            bossJump = false;
+            _timeParabolaJump = 0;
+            return;
+        }
+    }
+
+    public float DistanceToPlayer()
+    {
+        return Vector3.Distance(transform.position, _player.transform.position);
     }
 }
