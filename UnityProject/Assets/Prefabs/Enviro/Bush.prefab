@@ -147,7 +147,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &7687287478875834722
 MonoBehaviour:
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 8758077154325466654}
   - component: {fileID: 8736381273718100932}
   - component: {fileID: 5884456644781911822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bush
   m_TagString: Bush
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8780489625301990448}
-  m_LocalRotation: {x: -0.009485534, y: -0.15329292, z: -0.026606837, w: 0.987777}
+  m_LocalRotation: {x: -0.009483898, y: -0.15328942, z: -0.026604543, w: 0.9877776}
   m_LocalPosition: {x: 25.74, y: 59.22, z: -109.69}
   m_LocalScale: {x: 1.7218, y: 1.3675, z: 1}
   m_Children:
@@ -483,4 +483,6 @@ MonoBehaviour:
   _schowHud: 1
   _hudPos: {fileID: 4897306217588294148}
   _healthBar: {fileID: 508557226149554740}
+  _canHeal: 0
+  _healTime: 3
   _maxHealth: 30
