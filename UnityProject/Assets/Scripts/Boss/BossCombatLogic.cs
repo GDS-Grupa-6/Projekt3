@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public enum BossCobatStates { empty, StartFight, Strikes, Locked, JumpToPlayer, Puke }
 
@@ -18,11 +19,14 @@ public class BossCombatLogic : MonoBehaviour
     [Header("Puke options")]
     [SerializeField] private GameObject _pukeSphere;
     [SerializeField] private GameObject _pukeFog;
+    [SerializeField] private int _numberOfBulletsInNormalPuke = 10;
+    [SerializeField] private int _numberOfBulletsInMegaPuke = 10;
 
     private BossCobatStates _currentState;
     private BossMovement _bossMovement;
     private int _numberOfStrikes;
     private Animator _animator;
+    private bool _pukeActive;
 
     private void Awake()
     {
@@ -53,6 +57,17 @@ public class BossCombatLogic : MonoBehaviour
             _bossMovement.moveBoss = false;
             _animator.SetBool("MoveBoss", _bossMovement.moveBoss);
         }
+    }
+
+    private IEnumerator PukeCourutine()
+    {
+        yield return null;
+    }
+
+    private void ActivePukeFog()
+    {
+        _pukeSphere.SetActive(true);
+        _pukeFog.SetActive(true);
     }
 
     public void CheckDistanceForStates()
@@ -99,6 +114,10 @@ public class BossCombatLogic : MonoBehaviour
                 _animator.SetTrigger("JumpToPlayer");
                 _bossMovement.bossJump = true;
                 break;
+            case BossCobatStates.Puke:
+                _animator.SetTrigger("Puke");
+                _bossMovement.bossJump = true;
+                break;
             default:
                 break;
         }
@@ -110,15 +129,19 @@ public class BossCombatLogic : MonoBehaviour
         _animator.SetInteger("NumberOfStrikes", _numberOfStrikes);
     }
 
-    public void ActivePukeFog()
-    {
-        _pukeSphere.SetActive(true);
-        _pukeFog.SetActive(true);
-    }
-
     public void DesactivePukeFog()
     {
         _pukeSphere.SetActive(false);
         _pukeFog.SetActive(false);
+    }
+
+    public void StartPuke()
+    {
+        if (!_pukeActive)
+        {
+            _pukeActive = true;
+            ActivePukeFog();
+            StartCoroutine(PukeCourutine());
+        }
     }
 }

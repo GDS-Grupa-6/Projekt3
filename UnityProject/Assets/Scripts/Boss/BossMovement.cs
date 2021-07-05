@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BossMovement : MonoBehaviour
 {
+    public GameObject player;
     [Header("Move points")]
     [SerializeField] private float _speed;
     [Header("Jump options")]
@@ -14,7 +15,6 @@ public class BossMovement : MonoBehaviour
     [HideInInspector] public bool bossJump;
     [HideInInspector] public bool moveBoss;
     [HideInInspector] public Vector3 bossMoveTarget;
-    [HideInInspector] public GameObject player;
 
     private Vector3 _bossStartJumpPos;
     private float _timeParabolaJump;
@@ -24,7 +24,6 @@ public class BossMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        player = FindObjectOfType<CharacterController>().gameObject;
         _animator = GetComponent<Animator>();
         bossMoveTarget = _centerOfArena.localPosition;
     }
@@ -60,8 +59,8 @@ public class BossMovement : MonoBehaviour
     private void Move()
     {
         bossMoveTarget = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        transform.LookAt(player.transform);
         transform.position = Vector3.MoveTowards(transform.position, bossMoveTarget, Time.deltaTime * _speed);
-        transform.LookAt(bossMoveTarget);
     }
 
     private void ParabolaJump(Vector3 target, Vector3 startPos)
