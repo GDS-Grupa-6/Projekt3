@@ -420,7 +420,6 @@ GameObject:
   - component: {fileID: 2651221145024865155}
   - component: {fileID: 2651221145024865158}
   - component: {fileID: 2651221145024865157}
-  - component: {fileID: 3666632542766945119}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
@@ -491,20 +490,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3666632542766945119
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651221145024865154}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2651221145284649872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,11 +1008,14 @@ MonoBehaviour:
   _pukeFog: {fileID: 6250971414153114398}
   _pukeBossPos: {fileID: 0}
   _bulletPrefab: {fileID: 1079154908989322109, guid: 1079f8f96ced3994687d90321d1f7e05, type: 3}
-  _numberOfBulletsInNormalPuke: 10
+  _numberOfAllBulletsInNormalPuke: 10
+  _numberOfRandomBulletsInNormalPuke: 5
   _timeToSpawnNextBulletInNormalPuke: 1
   _numberOfBulletsInMegaPuke: 10
+  _timeToSpawnNextBulletInMegaPuke: 0.2
   _bulletsStartPoint: {fileID: 2651221145284649873}
   _bulletsRandomPoints: []
+  destroyedBullets: 0
 --- !u!1 &2651221146448974260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1031,7 @@ GameObject:
   - component: {fileID: 187580636621474644}
   m_Layer: 0
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

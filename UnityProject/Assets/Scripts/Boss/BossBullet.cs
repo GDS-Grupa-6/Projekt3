@@ -21,7 +21,7 @@ public class BossBullet : MonoBehaviour
             other.GetComponent<PlayerData>().TakeDamage(_power);
         }
 
-        if (other.tag != "BossBullet" && other.tag != "PukeSphere")
+        if (other.tag != "BossBullet" && other.tag != "PukeSphere" && other.tag != "Boss")
         {
             Destroy(this.gameObject);
         }
