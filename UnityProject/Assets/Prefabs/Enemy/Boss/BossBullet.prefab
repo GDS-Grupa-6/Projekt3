@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1079154908989322083}
-  - component: {fileID: 1079154908989322108}
   - component: {fileID: 3077171304857008132}
   - component: {fileID: 3204425226031487032}
   - component: {fileID: 707537065694064358}
   - component: {fileID: 8896567772550846954}
+  - component: {fileID: 2128621492902030136}
   m_Layer: 0
   m_Name: BossBullet
   m_TagString: BossBullet
@@ -35,26 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1079154908989322108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079154908989322109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78bef95c742ba7d468c88b4a173f335d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 0
-  playerData: {fileID: 0}
-  endPosition: {x: 0, y: 0, z: 0}
-  startPosition: {x: 0, y: 0, z: 0}
-  speed: 0
-  flyHeight: 0
-  fly: 0
-  bossMovement: {fileID: 0}
 --- !u!33 &3077171304857008132
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -133,3 +113,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2128621492902030136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079154908989322109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4afadca6243044884fceca0e14164a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

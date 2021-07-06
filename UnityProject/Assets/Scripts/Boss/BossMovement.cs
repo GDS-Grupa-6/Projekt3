@@ -59,7 +59,7 @@ public class BossMovement : MonoBehaviour
     private void Move()
     {
         bossMoveTarget = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        transform.LookAt(player.transform);
+        transform.LookAt(bossMoveTarget);
         transform.position = Vector3.MoveTowards(transform.position, bossMoveTarget, Time.deltaTime * _speed);
     }
 
@@ -83,5 +83,11 @@ public class BossMovement : MonoBehaviour
     public float DistanceToPlayer()
     {
         return Vector3.Distance(transform.position, player.transform.position);
+    }
+
+    public void JumpToCenterOfArena()
+    {
+        bossMoveTarget = _centerOfArena.localPosition;
+        bossJump = true;
     }
 }

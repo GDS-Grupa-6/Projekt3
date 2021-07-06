@@ -1018,11 +1018,16 @@ MonoBehaviour:
   _attackRange: 3
   _maxNumberOfStrikes: 5
   _playerIsFarDistance: 15
-  _chanceToPuke: 0
+  _chanceToPuke: 100
   _pukeSphere: {fileID: 0}
   _pukeFog: {fileID: 6250971414153114398}
+  _pukeBossPos: {fileID: 0}
+  _bulletPrefab: {fileID: 1079154908989322109, guid: 1079f8f96ced3994687d90321d1f7e05, type: 3}
   _numberOfBulletsInNormalPuke: 10
+  _timeToSpawnNextBulletInNormalPuke: 1
   _numberOfBulletsInMegaPuke: 10
+  _bulletsStartPoint: {fileID: 2651221145284649873}
+  _bulletsRandomPoints: []
 --- !u!1 &2651221146448974260
 GameObject:
   m_ObjectHideFlags: 0
