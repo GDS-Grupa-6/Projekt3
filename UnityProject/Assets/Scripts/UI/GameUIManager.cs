@@ -12,9 +12,6 @@ public class GameUIManager : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         _pausePanel.SetActive(false);
     }
 
@@ -61,6 +58,8 @@ public class GameUIManager : MonoBehaviour
 
     public void ChangeScene(int index)
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         SceneManager.LoadScene(index);
     }

@@ -127,7 +127,7 @@ public class BossCombatLogic : MonoBehaviour
         var obj = Instantiate(_bulletPrefab);
         obj.transform.position = _bulletsStartPoint.localPosition;
         BossBullet bossBullet = obj.GetComponent<BossBullet>();
-        bossBullet.startPos = _bulletsStartPoint.localPosition;
+        bossBullet.startPos = _bulletsStartPoint.position;
         bossBullet.combatLogic = this;
 
         if (isRandom)
