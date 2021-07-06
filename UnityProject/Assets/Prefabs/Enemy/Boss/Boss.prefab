@@ -993,6 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511ff99ca861e9945be9e5241ff6af52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   _speed: 3
   _centerOfArena: {fileID: 0}
   _jumpHeight: 10
@@ -1000,7 +1001,6 @@ MonoBehaviour:
   bossJump: 0
   moveBoss: 0
   bossMoveTarget: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
 --- !u!114 &4969205015599857904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,8 +1143,8 @@ GameObject:
   - component: {fileID: 2540521571832313432}
   - component: {fileID: 1508254515164822013}
   - component: {fileID: 3677912799437638967}
-  - component: {fileID: 2651221145255498166}
   - component: {fileID: 5051249140924224157}
+  - component: {fileID: 126432184102474600}
   m_Layer: 0
   m_Name: Wave45
   m_TagString: Untagged
@@ -1215,20 +1215,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2651221145255498166
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2885239751029845218}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 0
-  m_Mesh: {fileID: -5345760584941703707, guid: 8990aaa1181e81d4987a6f928dd19c04, type: 3}
 --- !u!114 &5051249140924224157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,6 +1228,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _power: 10
+--- !u!135 &126432184102474600
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885239751029845218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.033
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2885239751041512852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,8 +1252,8 @@ GameObject:
   - component: {fileID: 2540521571913183022}
   - component: {fileID: 1508254515044098187}
   - component: {fileID: 3677912799381935169}
-  - component: {fileID: 2651221145132943560}
   - component: {fileID: 3917056503527200040}
+  - component: {fileID: 1971456069647223872}
   m_Layer: 0
   m_Name: Wave360
   m_TagString: Untagged
@@ -1325,20 +1324,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2651221145132943560
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2885239751041512852}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 0
-  m_Mesh: {fileID: -5287425419667122880, guid: e7b303f4251b036469b268d50f314d9d, type: 3}
 --- !u!114 &3917056503527200040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,6 +1337,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _power: 10
+--- !u!135 &1971456069647223872
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885239751041512852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.03250001
+  m_Center: {x: 0.00000011548401, y: -0.000000009313229, z: -0.0000000023283073}
 --- !u!1001 &7046408805996242901
 PrefabInstance:
   m_ObjectHideFlags: 0
