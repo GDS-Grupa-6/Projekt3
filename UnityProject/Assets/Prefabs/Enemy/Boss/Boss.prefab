@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 2651221145024865157}
   m_Layer: 7
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -965,7 +965,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 2651221146001302707}
   _sliderText: {fileID: 2651221144941861375}
-  _maxHealth: 100
+  _phaseIHealth: 100
+  _phaseIIHealth: 110
+  _phaseIIIHealth: 120
+  _healSpeed: 0.001
 --- !u!114 &7726772312196119566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,7 +1006,7 @@ MonoBehaviour:
   _attackRange: 3
   _maxNumberOfStrikes: 5
   _playerIsFarDistance: 15
-  _chanceToPuke: 100
+  _chanceToPuke: 64
   _pukeSphere: {fileID: 0}
   _pukeFog: {fileID: 6250971414153114398}
   _pukeBossPos: {fileID: 0}
@@ -1014,7 +1017,11 @@ MonoBehaviour:
   _numberOfBulletsInMegaPuke: 10
   _timeToSpawnNextBulletInMegaPuke: 0.2
   _bulletsStartPoint: {fileID: 2651221145284649873}
-  _bulletsRandomPoints: []
+  _bulletsRandomPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   destroyedBullets: 0
 --- !u!1 &2651221146448974260
 GameObject:
