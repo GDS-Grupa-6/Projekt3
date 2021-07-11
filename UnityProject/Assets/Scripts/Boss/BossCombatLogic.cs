@@ -8,6 +8,7 @@ public enum BossCobatStates { empty, StartFight, Strikes, Locked, JumpToPlayer, 
 public class BossCombatLogic : MonoBehaviour
 {
     public int changeAttackWhenFollowTime = 3;
+    [SerializeField] private Collider _weponCollider;
     [Header("Waves options")]
     public Wave wave360;
     public Wave wave45;
@@ -47,6 +48,7 @@ public class BossCombatLogic : MonoBehaviour
 
     private void Awake()
     {
+        OffWeponCollider();
         _pukeSphere.SetActive(false);
         _pukeFog.SetActive(false);
         _animator = GetComponent<Animator>();
@@ -72,7 +74,7 @@ public class BossCombatLogic : MonoBehaviour
     {
         if (_bossMovement.DistanceToPlayer() > _attackRange)
         {
-            _bossMovement.moveBoss = true;        
+            _bossMovement.moveBoss = true;
             _animator.SetBool("MoveBoss", _bossMovement.moveBoss);
         }
         else if (_bossMovement.DistanceToPlayer() <= _attackRange)
@@ -271,5 +273,15 @@ public class BossCombatLogic : MonoBehaviour
     {
         StopAllCoroutines();
         _timerIsActive = false;
+    }
+
+    public void OnWeponCollider()
+    {
+        _weponCollider.enabled = true;
+    }
+
+    public void OffWeponCollider()
+    {
+        _weponCollider.enabled = false;
     }
 }

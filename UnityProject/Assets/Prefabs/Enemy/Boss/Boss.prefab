@@ -983,11 +983,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   _speed: 3
+  _turnSmoothTime: 3
   _centerOfArena: {fileID: 0}
   _jumpHeight: 10
   _jumpSpeed: 2
   bossJump: 0
   moveBoss: 0
+  rotateBoss: 0
   bossMoveTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &4969205015599857904
 MonoBehaviour:
@@ -1001,6 +1003,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108d7ea398bf564ca2a81a43309dc19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeAttackWhenFollowTime: 3
+  _weponCollider: {fileID: 2651221146448974262}
   wave360: {fileID: 3917056503527200040}
   wave45: {fileID: 5051249140924224157}
   _attackRange: 3
@@ -1022,6 +1026,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  changeAttackFromMove: 0
+  timeToChangeAttack: 0
   destroyedBullets: 0
 --- !u!1 &2651221146448974260
 GameObject:

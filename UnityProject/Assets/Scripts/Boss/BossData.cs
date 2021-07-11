@@ -24,7 +24,6 @@ public class BossData : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-
         _bossPhase = BossPhases.I;
         _maxHealth = _phaseIHealth;
         _healthSlider.maxValue = _maxHealth;
