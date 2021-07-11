@@ -9,6 +9,7 @@ public class BossCombatLogic : MonoBehaviour
 {
     public int changeAttackWhenFollowTime = 3;
     [SerializeField] private Collider _weponCollider;
+    [SerializeField] private GameObject _bossBarell;
     [Header("Waves options")]
     public Wave wave360;
     public Wave wave45;
