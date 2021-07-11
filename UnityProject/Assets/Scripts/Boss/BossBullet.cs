@@ -48,7 +48,6 @@ public class BossBullet : MonoBehaviour
     private void OnDestroy()
     {
         combatLogic.destroyedBullets++;
-        Debug.Log(combatLogic.destroyedBullets);
     }
 
     private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)

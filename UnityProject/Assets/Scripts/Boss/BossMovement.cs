@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BossMovement : MonoBehaviour
 {
     public GameObject player;
     [Header("Move points")]
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speed = 3;
+    [SerializeField] private float _turnSmoothTime = 2f;
     [Header("Jump options")]
     [SerializeField] private Transform _centerOfArena;
     [SerializeField] private float _jumpHeight = 10f;
@@ -14,6 +16,7 @@ public class BossMovement : MonoBehaviour
 
     [HideInInspector] public bool bossJump;
     [HideInInspector] public bool moveBoss;
+    [HideInInspector] public bool rotateBoss;
     [HideInInspector] public Vector3 bossMoveTarget;
 
     private Vector3 _bossStartJumpPos;
@@ -45,6 +48,11 @@ public class BossMovement : MonoBehaviour
         {
             Move();
         }
+
+        if(rotateBoss)
+        {
+            RotateBoss();
+        }
     }
 
     private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
@@ -56,10 +64,16 @@ public class BossMovement : MonoBehaviour
         return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
     }
 
+    private void RotateBoss()
+    {
+        Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        var targetRotation = Quaternion.LookRotation(targetPos - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _turnSmoothTime * Time.deltaTime);
+    }
+
     private void Move()
     {
         bossMoveTarget = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        transform.LookAt(bossMoveTarget);
         transform.position = Vector3.MoveTowards(transform.position, bossMoveTarget, Time.deltaTime * _speed);
     }
 
