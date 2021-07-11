@@ -7,6 +7,7 @@ public enum BossCobatStates { empty, StartFight, Strikes, Locked, JumpToPlayer, 
 [RequireComponent(typeof(Animator))]
 public class BossCombatLogic : MonoBehaviour
 {
+    public int changeAttackWhenFollowTime = 3;
     [Header("Waves options")]
     public Wave wave360;
     public Wave wave45;
@@ -15,7 +16,7 @@ public class BossCombatLogic : MonoBehaviour
     [SerializeField] private int _maxNumberOfStrikes = 5;
     [Header("\"Player is far\" options")]
     [SerializeField] private float _playerIsFarDistance;
-    [SerializeField] [Range(0, 100)] private int _chanceToPuke;
+    [SerializeField] [Range(0, 100)] private int _chanceToPuke = 60;
     [Header("Puke options")]
     [SerializeField] private GameObject _pukeSphere;
     [SerializeField] private GameObject _pukeFog;
@@ -38,7 +39,10 @@ public class BossCombatLogic : MonoBehaviour
     private Animator _animator;
     private bool _pukeActive;
     private int _numberOffAllBullets;
+    private bool _timerIsActive;
 
+    [HideInInspector] public bool changeAttackFromMove;
+    [HideInInspector] public bool timeToChangeAttack;
     [HideInInspector] public int destroyedBullets;
 
     private void Awake()
@@ -46,6 +50,7 @@ public class BossCombatLogic : MonoBehaviour
         _pukeSphere.SetActive(false);
         _pukeFog.SetActive(false);
         _animator = GetComponent<Animator>();
+        _animator.SetInteger("MoveTime", changeAttackWhenFollowTime);
         _bossMovement = GetComponent<BossMovement>();
         _currentState = BossCobatStates.empty;
     }
@@ -148,24 +153,45 @@ public class BossCombatLogic : MonoBehaviour
         _pukeFog.SetActive(true);
     }
 
+    private IEnumerator MoveTimerCourutine()
+    {
+        for (int i = changeAttackWhenFollowTime; i >= 0; i--)
+        {
+            if (i == 0)
+            {
+                _bossMovement.moveBoss = false;
+                _timerIsActive = false;
+                changeAttackFromMove = true;
+            }
+            _animator.SetInteger("MoveTime", i);
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     public void CheckDistanceForStates()
     {
         if (_bossMovement.DistanceToPlayer() >= _playerIsFarDistance)
         {
-            int random = Random.Range(0, 100);
-
-            if (random <= _chanceToPuke)
-            {
-                SetCombatState(BossCobatStates.Puke);
-            }
-            else
-            {
-                SetCombatState(BossCobatStates.JumpToPlayer);
-            }
+            DistanceAttackStates();
         }
         else if (_bossMovement.DistanceToPlayer() < _playerIsFarDistance)
         {
             SetCombatState(BossCobatStates.Strikes);
+        }
+    }
+
+    public void DistanceAttackStates()
+    {
+        int random = Random.Range(0, 100);
+
+        if (random <= _chanceToPuke)
+        {
+            SetCombatState(BossCobatStates.Puke);
+        }
+        else
+        {
+            SetCombatState(BossCobatStates.JumpToPlayer);
         }
     }
 
@@ -188,11 +214,13 @@ public class BossCombatLogic : MonoBehaviour
                 _animator.SetBool("MoveBoss", _bossMovement.moveBoss);
                 break;
             case BossCobatStates.JumpToPlayer:
+                timeToChangeAttack = false;
                 _bossMovement.bossMoveTarget = _bossMovement.player.transform.position;
                 _animator.SetTrigger("JumpToPlayer");
                 _bossMovement.bossJump = true;
                 break;
             case BossCobatStates.Puke:
+                timeToChangeAttack = false;
                 _bossMovement.bossMoveTarget = _pukeBossPos.localPosition;
                 transform.eulerAngles = new Vector3(0f, 0f, 0f);
                 _animator.SetTrigger("Puke");
@@ -223,5 +251,20 @@ public class BossCombatLogic : MonoBehaviour
             ActivePukeFog();
             StartCoroutine(PukeCourutine());
         }
+    }
+
+    public void StartMoveTimer()
+    {
+        if (!_timerIsActive)
+        {
+            _timerIsActive = true;
+            StartCoroutine(MoveTimerCourutine());
+        }
+    }
+
+    public void StopMoveTimer()
+    {
+        StopAllCoroutines();
+        _timerIsActive = false;
     }
 }

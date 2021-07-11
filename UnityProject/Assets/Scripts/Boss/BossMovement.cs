@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BossMovement : MonoBehaviour
 {
     public GameObject player;
     [Header("Move points")]
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speed = 3;
     [Header("Jump options")]
     [SerializeField] private Transform _centerOfArena;
     [SerializeField] private float _jumpHeight = 10f;
