@@ -59,7 +59,12 @@ public class BossCombatLogic : MonoBehaviour
     {
         if (_currentState == BossCobatStates.Strikes)
         {
+            _bossMovement.rotateBoss = true;
             CheckStrikesDistance();
+        }
+        else
+        {
+            _bossMovement.rotateBoss = false;
         }
     }
 
@@ -67,7 +72,7 @@ public class BossCombatLogic : MonoBehaviour
     {
         if (_bossMovement.DistanceToPlayer() > _attackRange)
         {
-            _bossMovement.moveBoss = true;
+            _bossMovement.moveBoss = true;        
             _animator.SetBool("MoveBoss", _bossMovement.moveBoss);
         }
         else if (_bossMovement.DistanceToPlayer() <= _attackRange)
