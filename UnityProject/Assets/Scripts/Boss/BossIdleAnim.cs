@@ -7,6 +7,17 @@ public class BossIdleAnim : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _combatLogic = animator.GetComponent<BossCombatLogic>();
-        _combatLogic.CheckDistanceForStates();
+
+        animator.SetInteger("MoveTime", _combatLogic.changeAttackWhenFollowTime);
+
+        if (_combatLogic.changeAttackFromMove)
+        {
+            _combatLogic.DistanceAttackStates();
+            _combatLogic.changeAttackFromMove = false;
+        }
+        else
+        {
+            _combatLogic.CheckDistanceForStates();
+        }
     }
 }
