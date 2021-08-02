@@ -27,12 +27,20 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""TppCameraLook"",
+                    ""name"": ""CameraLook"",
                     ""type"": ""Value"",
                     ""id"": ""742bdcbc-b132-4abb-8aea-846b22591556"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""732aef4f-cfe6-4f36-bec0-79214532aa56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -153,7 +161,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""TppCameraLook"",
+                    ""action"": ""CameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -164,7 +172,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TppCameraLook"",
+                    ""action"": ""CameraLook"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -175,7 +183,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Pad"",
-                    ""action"": ""TppCameraLook"",
+                    ""action"": ""CameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -186,7 +194,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Pad"",
-                    ""action"": ""TppCameraLook"",
+                    ""action"": ""CameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -197,7 +205,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Pad"",
-                    ""action"": ""TppCameraLook"",
+                    ""action"": ""CameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -208,9 +216,31 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Pad"",
-                    ""action"": ""TppCameraLook"",
+                    ""action"": ""CameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13728719-8870-4880-b155-63f18e193483"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e031ca5c-4a1c-44f7-89ed-426074af1159"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -231,7 +261,8 @@ public class @Controls : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_TppCameraLook = m_Player.FindAction("TppCameraLook", throwIfNotFound: true);
+        m_Player_CameraLook = m_Player.FindAction("CameraLook", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,13 +313,15 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_TppCameraLook;
+    private readonly InputAction m_Player_CameraLook;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @TppCameraLook => m_Wrapper.m_Player_TppCameraLook;
+        public InputAction @CameraLook => m_Wrapper.m_Player_CameraLook;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -301,9 +334,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @TppCameraLook.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTppCameraLook;
-                @TppCameraLook.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTppCameraLook;
-                @TppCameraLook.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTppCameraLook;
+                @CameraLook.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraLook;
+                @CameraLook.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraLook;
+                @CameraLook.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraLook;
+                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -311,9 +347,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @TppCameraLook.started += instance.OnTppCameraLook;
-                @TppCameraLook.performed += instance.OnTppCameraLook;
-                @TppCameraLook.canceled += instance.OnTppCameraLook;
+                @CameraLook.started += instance.OnCameraLook;
+                @CameraLook.performed += instance.OnCameraLook;
+                @CameraLook.canceled += instance.OnCameraLook;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -339,6 +378,7 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnTppCameraLook(InputAction.CallbackContext context);
+        void OnCameraLook(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

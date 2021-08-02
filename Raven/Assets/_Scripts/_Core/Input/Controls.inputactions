@@ -14,12 +14,20 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TppCameraLook",
+                    "name": "CameraLook",
                     "type": "Value",
                     "id": "742bdcbc-b132-4abb-8aea-846b22591556",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "732aef4f-cfe6-4f36-bec0-79214532aa56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -140,7 +148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Kayboard and mouse",
-                    "action": "TppCameraLook",
+                    "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -151,7 +159,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TppCameraLook",
+                    "action": "CameraLook",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -162,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Pad",
-                    "action": "TppCameraLook",
+                    "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -173,7 +181,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Pad",
-                    "action": "TppCameraLook",
+                    "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -184,7 +192,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Pad",
-                    "action": "TppCameraLook",
+                    "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -195,9 +203,31 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Pad",
-                    "action": "TppCameraLook",
+                    "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "13728719-8870-4880-b155-63f18e193483",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e031ca5c-4a1c-44f7-89ed-426074af1159",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pad",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -27,6 +27,16 @@ namespace Raven.Input
         {
             return _controls.Player.Movement.ReadValue<Vector2>();
         }
+
+        public Vector2 GetMouseDelta()
+        {
+            return _controls.Player.CameraLook.ReadValue<Vector2>();
+        }
+
+        public bool DashButtonPressed()
+        {
+            return _controls.Player.Dash.triggered;
+        }
     }
 }
 
