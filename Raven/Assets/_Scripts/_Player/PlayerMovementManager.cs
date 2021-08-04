@@ -58,6 +58,15 @@ namespace Raven.Manager
                 SetMoveVector();
                 ActiveDash();
             }
+
+            if (_moveVector.magnitude > 0)
+            {
+                OnMove?.Invoke(_movementConfig.MoveSpeed);
+            }
+            else
+            {
+                OnMove?.Invoke(0);
+            }
         }
 
         public void FixedTick()
@@ -112,12 +121,6 @@ namespace Raven.Manager
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
                 _playerController.Move(moveDir.normalized * _movementConfig.MoveSpeed * Time.deltaTime);
-
-                OnMove?.Invoke(_movementConfig.MoveSpeed);
-            }
-            else
-            {
-                OnMove?.Invoke(0);
             }
         }
 
