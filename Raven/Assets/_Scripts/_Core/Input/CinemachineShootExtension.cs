@@ -10,8 +10,7 @@ namespace Raven.Core
     public class CinemachineShootExtension : CinemachineExtension
     {
         [SerializeField] private float _horizontalSpeed = 10f;
-        [SerializeField] private float _verticalSpeed = 10f;
-        [SerializeField] private float _clampAngle = 80f;
+        [SerializeField] private float _clampAngle = 20f;
 
         private InputController _inputController;
         private Vector3 _startRotation;
@@ -36,7 +35,6 @@ namespace Raven.Core
                     }
 
                     Vector2 deltaInput = _inputController.GetMouseDelta();
-                    _startRotation.x += deltaInput.x * _verticalSpeed * Time.deltaTime;
                     _startRotation.y += deltaInput.y * _horizontalSpeed * Time.deltaTime;
                     _startRotation.y = Mathf.Clamp(_startRotation.y, -_clampAngle, _clampAngle);
                     state.RawOrientation = Quaternion.Euler(-_startRotation.y, _playerMovementManager.PlayerTransform.eulerAngles.y, 0f);

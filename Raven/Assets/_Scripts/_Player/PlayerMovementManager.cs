@@ -1,6 +1,8 @@
 using Raven.Config;
 using Raven.Input;
 using System;
+using System.Collections;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +16,7 @@ namespace Raven.Manager
         private readonly MovementConfig _movementConfig;
         private readonly Transform _camTransform;
         private readonly CameraManager _cameraManager;
+        private readonly CoroutinesManager _coroutinesManager;
 
         private Vector3 _moveVector;
         private Vector3 _gravityVelocity;
@@ -22,13 +25,15 @@ namespace Raven.Manager
         private bool _dash;
         private float _dashTimer;
         private bool _fpp;
+        private bool _fppToTppDelay;
 
         public Transform PlayerTransform => _playerTransform;
 
         public event Action<float> OnMove;
         public event Action<bool> OnDash;
 
-        public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager)
+        public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager, 
+            CoroutinesManager p_coroutinesManager)
         {
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
@@ -36,6 +41,7 @@ namespace Raven.Manager
             _movementConfig = p_movementConfig;
             _camTransform = p_camTransform;
             _cameraManager = p_cameraManager;
+            _coroutinesManager = p_coroutinesManager;
 
             _cameraManager.OnAimChange += SetPov;
         }
@@ -154,7 +160,25 @@ namespace Raven.Manager
 
         private void SetPov(bool p_aim)
         {
-            _fpp = p_aim;
+            if (p_aim)
+            {
+                _fpp = p_aim;
+                _fppToTppDelay = true;
+            }
+            else
+            {
+                if (_fppToTppDelay)
+                {
+                    _fppToTppDelay = false;
+                    _coroutinesManager.StartCoroutine(FppToTppDelayCoroutine());
+                }
+            }
+        }
+
+        private IEnumerator FppToTppDelayCoroutine()
+        {
+            yield return new WaitForSeconds(_movementConfig.FppToTppDelayTime);
+            _fpp = false;
         }
     }
 }

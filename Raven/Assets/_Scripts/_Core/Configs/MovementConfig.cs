@@ -15,12 +15,15 @@ namespace Raven.Config
         [SerializeField, Range(0.1f, 0.5f)] private float _turnSmoothTime = 0.1f;
         [Space]
         [SerializeField, Range(-30, -1)] private float _gravityValue = -9.81f;
+        [Space]
+        [SerializeField, Range(0.1f, 1f)] private float _fppToTppDelayTime; 
 
         public float MoveSpeed => _moveSpeed;
         public float DashSpeed => _dashSpeed;
         public float DashTime => _dashTime;
         public float TurnSmoothTime => _turnSmoothTime;
         public float GravityValue => _gravityValue;
+        public float FppToTppDelayTime => _fppToTppDelayTime;
     }
 }
 
