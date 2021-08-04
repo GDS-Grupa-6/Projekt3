@@ -6,13 +6,14 @@ using Zenject;
 
 namespace Raven.Manager
 {
-    public class PlayerMovementManager : IFixedTickable, ITickable
+    public class PlayerMovementManager : IFixedTickable, ITickable, IDisposable
     {
-        private Transform _playerTransform;
-        private CharacterController _playerController;
-        private InputController _inputController;
-        private MovementConfig _movementConfig;
-        private Transform _camTransform;
+        private readonly Transform _playerTransform;
+        private readonly CharacterController _playerController;
+        private readonly InputController _inputController;
+        private readonly MovementConfig _movementConfig;
+        private readonly Transform _camTransform;
+        private readonly CameraManager _cameraManager;
 
         private Vector3 _moveVector;
         private Vector3 _gravityVelocity;
@@ -20,17 +21,28 @@ namespace Raven.Manager
         private float _turnSmoothVelocity;
         private bool _dash;
         private float _dashTimer;
+        private bool _fpp;
+
+        public Transform PlayerTransform => _playerTransform;
 
         public event Action<float> OnMove;
         public event Action<bool> OnDash;
 
-        public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform)
+        public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager)
         {
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
             _inputController = p_player.GetComponent<InputController>();
             _movementConfig = p_movementConfig;
             _camTransform = p_camTransform;
+            _cameraManager = p_cameraManager;
+
+            _cameraManager.OnAimChange += SetPov;
+        }
+
+        public void Dispose()
+        {
+            _cameraManager.OnAimChange -= SetPov;
         }
 
         public void Tick()
@@ -48,7 +60,14 @@ namespace Raven.Manager
 
             if (!_dash)
             {
-                TppMovement(_moveVector);
+                if (_fpp)
+                {
+                   FppMove(_moveVector);
+                }
+                else
+                {
+                    TppMovement(_moveVector);
+                }
             }
             else
             {
@@ -96,6 +115,14 @@ namespace Raven.Manager
             }
         }
 
+        private void FppMove(Vector3 p_moveVector)
+        {
+            Vector3 move = _playerTransform.right * p_moveVector.x + _playerTransform.forward * p_moveVector.z;
+
+            _playerTransform.Rotate(Vector3.up * _inputController.GetMouseDelta().x);
+            _playerController.Move(move * _movementConfig.MoveSpeed * Time.deltaTime);
+        }
+
         private void ActiveDash()
         {
             _dash = _inputController.DashButtonPressed();
@@ -107,7 +134,15 @@ namespace Raven.Manager
             if (_dashTimer <= _movementConfig.DashTime)
             {
                 _dashTimer += Time.deltaTime;
-                _playerController.Move(_playerTransform.forward * _movementConfig.DashSpeed * Time.deltaTime);
+
+                if (_moveVector.magnitude > 0)
+                {
+                    _playerController.Move(_moveVector * _movementConfig.DashSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    _playerController.Move(_playerTransform.forward * _movementConfig.DashSpeed * Time.deltaTime);
+                }
             }
             else
             {
@@ -115,6 +150,11 @@ namespace Raven.Manager
                 _dashTimer = 0f;
                 OnDash?.Invoke(_dash);
             }
+        }
+
+        private void SetPov(bool p_aim)
+        {
+            _fpp = p_aim;
         }
     }
 }
