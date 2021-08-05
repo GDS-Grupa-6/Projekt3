@@ -3,6 +3,7 @@ using Raven.Config;
 using Raven.Input;
 using Raven.Manager;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Raven.Core
@@ -15,13 +16,14 @@ namespace Raven.Core
         [SerializeField] private Animator _playerAnimator;
         [SerializeField] private GameObject _shootCamera;
         [SerializeField] private CinemachineFreeLook _tppCamera;
+        [SerializeField] private Slider _playerEnergySlider;
+        [SerializeField] private Slider _playerLifeSlider;
 
         [Header("-----Configs-----")]
         [SerializeField] private MovementConfig _movementConfig;
 
         public override void InstallBindings()
         {
-            Container.Bind<InputController>().FromComponentOn(_player).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerAnimatorManager>().AsSingle().WithArguments(_playerAnimator).NonLazy();
             Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform).NonLazy();

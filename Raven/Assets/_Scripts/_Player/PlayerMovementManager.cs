@@ -33,11 +33,11 @@ namespace Raven.Manager
         public event Action<bool> OnDash;
 
         public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager, 
-            CoroutinesManager p_coroutinesManager)
+            CoroutinesManager p_coroutinesManager, InputController p_inputController)
         {
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
-            _inputController = p_player.GetComponent<InputController>();
+            _inputController = p_inputController;
             _movementConfig = p_movementConfig;
             _camTransform = p_camTransform;
             _cameraManager = p_cameraManager;
