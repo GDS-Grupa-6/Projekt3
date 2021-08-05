@@ -49,6 +49,38 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""State1"",
+                    ""type"": ""Button"",
+                    ""id"": ""33c6f681-377a-4319-96af-0586ea2332ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""State2"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9520450-9f54-482c-bfb4-a8421771226e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""State3"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf232b82-63f9-49dc-b4bc-c4f8f6610f76"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""State4"",
+                    ""type"": ""Button"",
+                    ""id"": ""138eb9b0-328e-47a5-948e-a99369451264"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -271,6 +303,50 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a57084c-9571-4edb-87ea-48373f2c160c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""State1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f2a2c67-1b08-4dc7-888f-8b2c71f561f5"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""State2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63cd34cc-8362-446a-b085-90392cf0617b"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""State3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""471ba992-01be-4ffe-818b-6fe2fd41bfe4"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""State4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -294,6 +370,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_CameraLook = m_Player.FindAction("CameraLook", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_State1 = m_Player.FindAction("State1", throwIfNotFound: true);
+        m_Player_State2 = m_Player.FindAction("State2", throwIfNotFound: true);
+        m_Player_State3 = m_Player.FindAction("State3", throwIfNotFound: true);
+        m_Player_State4 = m_Player.FindAction("State4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -347,6 +427,10 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_CameraLook;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_State1;
+    private readonly InputAction m_Player_State2;
+    private readonly InputAction m_Player_State3;
+    private readonly InputAction m_Player_State4;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -355,6 +439,10 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @CameraLook => m_Wrapper.m_Player_CameraLook;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @State1 => m_Wrapper.m_Player_State1;
+        public InputAction @State2 => m_Wrapper.m_Player_State2;
+        public InputAction @State3 => m_Wrapper.m_Player_State3;
+        public InputAction @State4 => m_Wrapper.m_Player_State4;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -376,6 +464,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @State1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState1;
+                @State1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState1;
+                @State1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState1;
+                @State2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState2;
+                @State2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState2;
+                @State2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState2;
+                @State3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState3;
+                @State3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState3;
+                @State3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState3;
+                @State4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
+                @State4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
+                @State4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -392,6 +492,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @State1.started += instance.OnState1;
+                @State1.performed += instance.OnState1;
+                @State1.canceled += instance.OnState1;
+                @State2.started += instance.OnState2;
+                @State2.performed += instance.OnState2;
+                @State2.canceled += instance.OnState2;
+                @State3.started += instance.OnState3;
+                @State3.performed += instance.OnState3;
+                @State3.canceled += instance.OnState3;
+                @State4.started += instance.OnState4;
+                @State4.performed += instance.OnState4;
+                @State4.canceled += instance.OnState4;
             }
         }
     }
@@ -420,5 +532,9 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnCameraLook(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnState1(InputAction.CallbackContext context);
+        void OnState2(InputAction.CallbackContext context);
+        void OnState3(InputAction.CallbackContext context);
+        void OnState4(InputAction.CallbackContext context);
     }
 }

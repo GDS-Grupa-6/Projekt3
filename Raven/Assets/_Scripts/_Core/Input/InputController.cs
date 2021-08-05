@@ -44,6 +44,26 @@ namespace Raven.Input
 
             return x == 1;
         }
+
+        public bool State1ButtonPressed()
+        {
+            return _controls.Player.State1.triggered;
+        }
+
+        public bool State2ButtonPressed()
+        {
+            return _controls.Player.State2.triggered;
+        }
+
+        public bool State3ButtonPressed()
+        {
+            return _controls.Player.State3.triggered;
+        }
+
+        public bool State4ButtonPressed()
+        {
+            return _controls.Player.State4.triggered;
+        }
     }
 }
 

@@ -3,6 +3,7 @@ using Raven.Input;
 using System;
 using System.Collections;
 using System.Diagnostics.Eventing.Reader;
+using Raven.UI;
 using UnityEngine;
 using Zenject;
 
@@ -17,6 +18,8 @@ namespace Raven.Manager
         private readonly Transform _camTransform;
         private readonly CameraManager _cameraManager;
         private readonly CoroutinesManager _coroutinesManager;
+        private readonly PlayerStatesManager _playerStatesManager;
+        private readonly PlayerHudManager _playerHudManager;
 
         private Vector3 _moveVector;
         private Vector3 _gravityVelocity;
@@ -33,7 +36,7 @@ namespace Raven.Manager
         public event Action<bool> OnDash;
 
         public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager, 
-            CoroutinesManager p_coroutinesManager, InputController p_inputController)
+            CoroutinesManager p_coroutinesManager, InputController p_inputController, PlayerStatesManager p_playerStatesManager, PlayerHudManager p_playerHudManager)
         {
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
@@ -42,6 +45,8 @@ namespace Raven.Manager
             _camTransform = p_camTransform;
             _cameraManager = p_cameraManager;
             _coroutinesManager = p_coroutinesManager;
+            _playerStatesManager = p_playerStatesManager;
+            _playerHudManager = p_playerHudManager;
 
             _cameraManager.OnAimChange += SetPov;
         }
@@ -56,7 +61,11 @@ namespace Raven.Manager
             if (!_dash)
             {
                 SetMoveVector();
-                ActiveDash();
+
+                if (_inputController.DashButtonPressed())
+                {
+                    ActiveDash();
+                }
             }
 
             if (_moveVector.magnitude > 0)
@@ -134,8 +143,11 @@ namespace Raven.Manager
 
         private void ActiveDash()
         {
-            _dash = _inputController.DashButtonPressed();
-            OnDash?.Invoke(_dash);
+            if (_playerHudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost))
+            {
+                _dash = true;
+                OnDash?.Invoke(true);
+            }
         }
 
         private void Dash()
