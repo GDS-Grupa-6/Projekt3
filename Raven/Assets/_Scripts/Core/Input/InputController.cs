@@ -64,6 +64,13 @@ namespace Raven.Input
         {
             return _controls.Player.State4.triggered;
         }
+
+        public bool DashButtonHold()
+        {
+            float x = _controls.Player.DashHold.ReadValue<float>();
+
+            return x == 1;
+        }
     }
 }
 

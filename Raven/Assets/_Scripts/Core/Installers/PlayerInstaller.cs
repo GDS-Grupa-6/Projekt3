@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Raven.Core
+namespace Raven.Core.Installer
 {
     public class PlayerInstaller : MonoInstaller
     {

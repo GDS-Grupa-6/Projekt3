@@ -19,7 +19,6 @@ namespace Raven.Manager
         private readonly CameraManager _cameraManager;
         private readonly CoroutinesManager _coroutinesManager;
         private readonly PlayerStatesManager _playerStatesManager;
-        private readonly PlayerHudManager _playerHudManager;
 
         private Vector3 _moveVector;
         private Vector3 _gravityVelocity;
@@ -29,14 +28,21 @@ namespace Raven.Manager
         private float _dashTimer;
         private bool _fpp;
         private bool _fppToTppDelay;
+        private bool _gravity;
 
+        public CharacterController PlayerController => _playerController;
         public Transform PlayerTransform => _playerTransform;
+        public bool Dash { get => _dash; set => _dash = value; }
+        public bool GravityBool { get => _gravity; set => _gravity = value; }
+        public Vector3 MoveVector => _moveVector;
+        public bool Fpp => _fpp;
 
         public event Action<float> OnMove;
-        public event Action<bool> OnDash;
+        public Action<bool> OnDash;
 
-        public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager, 
-            CoroutinesManager p_coroutinesManager, InputController p_inputController, PlayerStatesManager p_playerStatesManager, PlayerHudManager p_playerHudManager)
+        [Inject]
+        public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager,
+            CoroutinesManager p_coroutinesManager, InputController p_inputController, PlayerStatesManager p_playerStatesManager)
         {
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
@@ -46,26 +52,29 @@ namespace Raven.Manager
             _cameraManager = p_cameraManager;
             _coroutinesManager = p_coroutinesManager;
             _playerStatesManager = p_playerStatesManager;
-            _playerHudManager = p_playerHudManager;
 
-            _cameraManager.OnAimChange += SetPov;
+            _cameraManager.OnAimChange += SetFpp;
+
+            _gravity = true;
         }
 
         public void Dispose()
         {
-            _cameraManager.OnAimChange -= SetPov;
+            _cameraManager.OnAimChange -= SetFpp;
         }
 
         public void Tick()
         {
+            if (_gravity)
+            {
+                Gravity();
+            }
+
+            SetMoveVector();
+
             if (!_dash)
             {
-                SetMoveVector();
-
-                if (_inputController.DashButtonPressed())
-                {
-                    ActiveDash();
-                }
+                _playerStatesManager.CurrentBehaviour.ActiveDash(this);
             }
 
             if (_moveVector.magnitude > 0)
@@ -80,30 +89,30 @@ namespace Raven.Manager
 
         public void FixedTick()
         {
-            Gravity();
-
             if (!_dash)
             {
                 if (_fpp)
                 {
-                   FppMove(_moveVector);
+                    FppMove(_moveVector, _movementConfig.MoveSpeed);
                 }
                 else
                 {
-                    TppMovement(_moveVector);
+                    TppMovement(_moveVector, _movementConfig.MoveSpeed);
                 }
             }
             else
             {
-                Dash();
+                _playerStatesManager.CurrentBehaviour.Dash(this);
             }
         }
 
+        #region Movement Scripts
+
         private void Gravity()
         {
-            if (_playerController.isGrounded)
+            if (!_playerController.isGrounded)
             {
-                _currentGravity += _movementConfig.GravityValue * Time.fixedDeltaTime;
+                _currentGravity += _movementConfig.GravityValue * Time.deltaTime;
             }
             else
             {
@@ -111,7 +120,7 @@ namespace Raven.Manager
             }
 
             _gravityVelocity = new Vector3(0, _currentGravity, 0);
-            _playerController.Move(_gravityVelocity * Time.fixedDeltaTime);
+            _playerController.Move(_gravityVelocity * Time.deltaTime);
         }
 
         private void SetMoveVector()
@@ -119,7 +128,7 @@ namespace Raven.Manager
             _moveVector = new Vector3(_inputController.GetMovementAxis().x, 0, _inputController.GetMovementAxis().y).normalized;
         }
 
-        private void TppMovement(Vector3 p_moveVector)
+        public void TppMovement(Vector3 p_moveVector, float p_speed)
         {
             if (p_moveVector.magnitude > 0)
             {
@@ -129,51 +138,21 @@ namespace Raven.Manager
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-                _playerController.Move(moveDir.normalized * _movementConfig.MoveSpeed * Time.deltaTime);
+                _playerController.Move(moveDir.normalized * p_speed * Time.deltaTime);
             }
         }
 
-        private void FppMove(Vector3 p_moveVector)
+        public void FppMove(Vector3 p_moveVector, float p_speed)
         {
             Vector3 move = _playerTransform.right * p_moveVector.x + _playerTransform.forward * p_moveVector.z;
 
             _playerTransform.Rotate(Vector3.up * _inputController.GetMouseDelta().x);
-            _playerController.Move(move * _movementConfig.MoveSpeed * Time.deltaTime);
+            _playerController.Move(move * p_speed * Time.deltaTime);
         }
 
-        private void ActiveDash()
-        {
-            if (_playerHudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost))
-            {
-                _dash = true;
-                OnDash?.Invoke(true);
-            }
-        }
+        #endregion
 
-        private void Dash()
-        {
-            if (_dashTimer <= _movementConfig.DashTime)
-            {
-                _dashTimer += Time.deltaTime;
-
-                if (_moveVector.magnitude > 0)
-                {
-                    _playerController.Move(_moveVector * _movementConfig.DashSpeed * Time.deltaTime);
-                }
-                else
-                {
-                    _playerController.Move(_playerTransform.forward * _movementConfig.DashSpeed * Time.deltaTime);
-                }
-            }
-            else
-            {
-                _dash = false;
-                _dashTimer = 0f;
-                OnDash?.Invoke(_dash);
-            }
-        }
-
-        private void SetPov(bool p_aim)
+        private void SetFpp(bool p_aim)
         {
             if (p_aim)
             {

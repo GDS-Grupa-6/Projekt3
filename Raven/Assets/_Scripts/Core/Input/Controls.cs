@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/_Scripts/_Core/Input/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_Scripts/Core/Input/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -81,6 +81,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""DashHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a421831-ad06-4002-bd21-c7c7ed4befa6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -347,6 +355,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""State4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""436de17b-1e43-497a-bbfb-7f2a13f7dd60"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""DashHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f20b1978-3d89-4466-a1e1-0d0c08073e24"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""DashHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -374,6 +404,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_State2 = m_Player.FindAction("State2", throwIfNotFound: true);
         m_Player_State3 = m_Player.FindAction("State3", throwIfNotFound: true);
         m_Player_State4 = m_Player.FindAction("State4", throwIfNotFound: true);
+        m_Player_DashHold = m_Player.FindAction("DashHold", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -431,6 +462,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_State2;
     private readonly InputAction m_Player_State3;
     private readonly InputAction m_Player_State4;
+    private readonly InputAction m_Player_DashHold;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -443,6 +475,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @State2 => m_Wrapper.m_Player_State2;
         public InputAction @State3 => m_Wrapper.m_Player_State3;
         public InputAction @State4 => m_Wrapper.m_Player_State4;
+        public InputAction @DashHold => m_Wrapper.m_Player_DashHold;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -476,6 +509,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @State4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
                 @State4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
                 @State4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
+                @DashHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashHold;
+                @DashHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashHold;
+                @DashHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashHold;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -504,6 +540,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @State4.started += instance.OnState4;
                 @State4.performed += instance.OnState4;
                 @State4.canceled += instance.OnState4;
+                @DashHold.started += instance.OnDashHold;
+                @DashHold.performed += instance.OnDashHold;
+                @DashHold.canceled += instance.OnDashHold;
             }
         }
     }
@@ -536,5 +575,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnState2(InputAction.CallbackContext context);
         void OnState3(InputAction.CallbackContext context);
         void OnState4(InputAction.CallbackContext context);
+        void OnDashHold(InputAction.CallbackContext context);
     }
 }

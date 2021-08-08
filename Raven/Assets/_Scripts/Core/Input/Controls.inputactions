@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "DashHold",
+                    "type": "Button",
+                    "id": "4a421831-ad06-4002-bd21-c7c7ed4befa6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold"
                 }
             ],
             "bindings": [
@@ -332,6 +340,28 @@
                     "processors": "",
                     "groups": "Kayboard and mouse",
                     "action": "State4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "436de17b-1e43-497a-bbfb-7f2a13f7dd60",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "DashHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f20b1978-3d89-4466-a1e1-0d0c08073e24",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pad",
+                    "action": "DashHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
