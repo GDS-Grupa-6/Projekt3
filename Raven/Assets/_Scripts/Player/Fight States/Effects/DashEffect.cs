@@ -5,6 +5,8 @@ namespace Raven.Player
 {
     public class DashEffect : MonoBehaviour
     {
+        [SerializeField, Tooltip("Set same value in config")] private float _debugRadius = 4f;
+
         private PlayerFightStateConfig _config;
 
         private float _timer;
@@ -37,7 +39,7 @@ namespace Raven.Player
         public void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _config.EffectRadius);
+            Gizmos.DrawWireSphere(transform.position, _debugRadius);
         }
 #endif
     }
