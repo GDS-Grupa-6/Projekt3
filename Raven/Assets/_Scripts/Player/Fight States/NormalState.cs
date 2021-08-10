@@ -24,6 +24,13 @@ namespace Raven.Player
             _hudManager = p_hudManager;
         }
 
+        public void Shoot(Transform p_shootPoint, Transform p_lookAt)
+        {
+           var obj = GameObject.Instantiate(_playerStatesManager.CurrentConfig.BulletPrefab);
+           obj.transform.position = p_shootPoint.position;
+           obj.transform.LookAt(p_lookAt);
+        }
+
         public void ActiveDash(PlayerMovementManager p_movementManager)
         {
             if (!_inputController.DashButtonPressed()) return;

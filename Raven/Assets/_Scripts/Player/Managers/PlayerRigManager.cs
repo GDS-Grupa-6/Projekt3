@@ -12,15 +12,18 @@ namespace Raven.Player
 
         private Rig _rig;
         private GameObject _rigTarget;
+        private GameObject _cameraLock;
 
         private bool _activeWeight;
-        private float _lerpTimer;
+
+        public GameObject RigTarget => _rigTarget;
 
         public PlayerRigManager(CameraManager p_cameraManager, Rig p_rig, GameObject p_rigTarget)
         {
             _rig = p_rig;
             _rigTarget = p_rigTarget;
             _cameraManager = p_cameraManager;
+            _cameraLock = _cameraManager.ShootCameraLock;
 
             _rig.weight = 0;
 
@@ -36,30 +39,27 @@ namespace Raven.Player
         {
             if (_activeWeight)
             {
-                WeightLerp(1f);
+                _rig.weight = 1;
             }
             else
             {
-                WeightLerp(0f);
+                _rig.weight = 0;
             }
+
+            _rigTarget.transform.position = GetRaycastHitPosition();
+        }
+
+        public Vector3 GetRaycastHitPosition()
+        {
+            RaycastHit hit;
+            Physics.Raycast(_cameraLock.transform.position, _cameraLock.transform.forward, out hit);
+
+            return hit.point;
         }
 
         private void ActiveWeight(bool p_aim)
         {
             _activeWeight = p_aim;
-        }
-
-        private void WeightLerp(float p_value)
-        {
-            if (!Mathf.Approximately(_rig.weight, p_value))
-            {
-                _lerpTimer = Time.deltaTime * 10f;
-                _rig.weight = Mathf.Lerp(_rig.weight, p_value, _lerpTimer);
-            }
-            else
-            {
-                _lerpTimer = 0;
-            }
         }
     }
 }

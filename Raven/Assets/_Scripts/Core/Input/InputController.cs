@@ -45,24 +45,9 @@ namespace Raven.Input
             return x == 1;
         }
 
-        public bool State1ButtonPressed()
+        public bool ActiveStateButtonPressed()
         {
-            return _controls.Player.State1.triggered;
-        }
-
-        public bool State2ButtonPressed()
-        {
-            return _controls.Player.State2.triggered;
-        }
-
-        public bool State3ButtonPressed()
-        {
-            return _controls.Player.State3.triggered;
-        }
-
-        public bool State4ButtonPressed()
-        {
-            return _controls.Player.State4.triggered;
+            return _controls.Player.ActiveState.triggered;
         }
 
         public bool DashButtonHold()
@@ -70,6 +55,11 @@ namespace Raven.Input
             float x = _controls.Player.DashHold.ReadValue<float>();
 
             return x == 1;
+        }
+
+        public bool ShootButtonPressed()
+        {
+            return _controls.Player.Shoot.triggered;
         }
     }
 }

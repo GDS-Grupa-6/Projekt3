@@ -7,11 +7,11 @@ namespace Raven.Player
     {
         [SerializeField, Tooltip("Set same value in config")] private float _debugRadius = 4f;
 
-        private PlayerFightStateConfig _config;
+        private PlayerStateConfig _config;
 
         private float _timer;
 
-        public void Initialize(PlayerFightStateConfig p_config)
+        public void Initialize(PlayerStateConfig p_config)
         {
             _config = p_config;
         }

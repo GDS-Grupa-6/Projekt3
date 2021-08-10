@@ -10,9 +10,9 @@ namespace Raven.Container
     [CreateAssetMenu(fileName = "Player States Container", menuName = "Containers/Player/Player States", order = 0)]
     public class PlayerStatesContainer : ScriptableObject
     {
-        [SerializeField] private PlayerFightStateConfig[] _configs;
+        [SerializeField] private PlayerStateConfig[] _configs;
 
-        public PlayerFightStateConfig FindStateConfig(PlayerStateName p_playerStateName)
+        public PlayerStateConfig FindStateConfig(PlayerStateName p_playerStateName)
         {
             for (int i = 0; i < _configs.Length; i++)
             {
