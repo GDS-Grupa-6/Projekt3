@@ -51,33 +51,9 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Hold""
                 },
                 {
-                    ""name"": ""State1"",
+                    ""name"": ""ActiveState"",
                     ""type"": ""Button"",
                     ""id"": ""33c6f681-377a-4319-96af-0586ea2332ae"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press""
-                },
-                {
-                    ""name"": ""State2"",
-                    ""type"": ""Button"",
-                    ""id"": ""d9520450-9f54-482c-bfb4-a8421771226e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press""
-                },
-                {
-                    ""name"": ""State3"",
-                    ""type"": ""Button"",
-                    ""id"": ""bf232b82-63f9-49dc-b4bc-c4f8f6610f76"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press""
-                },
-                {
-                    ""name"": ""State4"",
-                    ""type"": ""Button"",
-                    ""id"": ""138eb9b0-328e-47a5-948e-a99369451264"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -89,6 +65,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""75089a3c-28fe-41fe-a7ec-6a20692bd180"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -315,44 +299,22 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8a57084c-9571-4edb-87ea-48373f2c160c"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""State1"",
+                    ""action"": ""ActiveState"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8f2a2c67-1b08-4dc7-888f-8b2c71f561f5"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""id"": ""b711273d-0e64-49ab-aa02-60d60032af4b"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""State2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""63cd34cc-8362-446a-b085-90392cf0617b"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""State3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""471ba992-01be-4ffe-818b-6fe2fd41bfe4"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Kayboard and mouse"",
-                    ""action"": ""State4"",
+                    ""groups"": ""Pad"",
+                    ""action"": ""ActiveState"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -375,6 +337,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Pad"",
                     ""action"": ""DashHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9179bc7-f219-45f1-8d3a-6c46c3c55e88"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1722f5f-fe7c-4395-9304-8e11874d5b52"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -400,11 +384,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_CameraLook = m_Player.FindAction("CameraLook", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_State1 = m_Player.FindAction("State1", throwIfNotFound: true);
-        m_Player_State2 = m_Player.FindAction("State2", throwIfNotFound: true);
-        m_Player_State3 = m_Player.FindAction("State3", throwIfNotFound: true);
-        m_Player_State4 = m_Player.FindAction("State4", throwIfNotFound: true);
+        m_Player_ActiveState = m_Player.FindAction("ActiveState", throwIfNotFound: true);
         m_Player_DashHold = m_Player.FindAction("DashHold", throwIfNotFound: true);
+        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -458,11 +440,9 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_CameraLook;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_State1;
-    private readonly InputAction m_Player_State2;
-    private readonly InputAction m_Player_State3;
-    private readonly InputAction m_Player_State4;
+    private readonly InputAction m_Player_ActiveState;
     private readonly InputAction m_Player_DashHold;
+    private readonly InputAction m_Player_Shoot;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -471,11 +451,9 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @CameraLook => m_Wrapper.m_Player_CameraLook;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
-        public InputAction @State1 => m_Wrapper.m_Player_State1;
-        public InputAction @State2 => m_Wrapper.m_Player_State2;
-        public InputAction @State3 => m_Wrapper.m_Player_State3;
-        public InputAction @State4 => m_Wrapper.m_Player_State4;
+        public InputAction @ActiveState => m_Wrapper.m_Player_ActiveState;
         public InputAction @DashHold => m_Wrapper.m_Player_DashHold;
+        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -497,21 +475,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                @State1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState1;
-                @State1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState1;
-                @State1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState1;
-                @State2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState2;
-                @State2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState2;
-                @State2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState2;
-                @State3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState3;
-                @State3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState3;
-                @State3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState3;
-                @State4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
-                @State4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
-                @State4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnState4;
+                @ActiveState.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveState;
+                @ActiveState.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveState;
+                @ActiveState.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveState;
                 @DashHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashHold;
                 @DashHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashHold;
                 @DashHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashHold;
+                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -528,21 +500,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
-                @State1.started += instance.OnState1;
-                @State1.performed += instance.OnState1;
-                @State1.canceled += instance.OnState1;
-                @State2.started += instance.OnState2;
-                @State2.performed += instance.OnState2;
-                @State2.canceled += instance.OnState2;
-                @State3.started += instance.OnState3;
-                @State3.performed += instance.OnState3;
-                @State3.canceled += instance.OnState3;
-                @State4.started += instance.OnState4;
-                @State4.performed += instance.OnState4;
-                @State4.canceled += instance.OnState4;
+                @ActiveState.started += instance.OnActiveState;
+                @ActiveState.performed += instance.OnActiveState;
+                @ActiveState.canceled += instance.OnActiveState;
                 @DashHold.started += instance.OnDashHold;
                 @DashHold.performed += instance.OnDashHold;
                 @DashHold.canceled += instance.OnDashHold;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -571,10 +537,8 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnCameraLook(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-        void OnState1(InputAction.CallbackContext context);
-        void OnState2(InputAction.CallbackContext context);
-        void OnState3(InputAction.CallbackContext context);
-        void OnState4(InputAction.CallbackContext context);
+        void OnActiveState(InputAction.CallbackContext context);
         void OnDashHold(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

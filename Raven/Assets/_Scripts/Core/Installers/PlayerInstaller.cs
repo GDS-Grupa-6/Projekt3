@@ -2,8 +2,10 @@ using Cinemachine;
 using Raven.Config;
 using Raven.Container;
 using Raven.Manager;
+using Raven.Player;
 using Raven.UI;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 using Zenject;
 
@@ -19,6 +21,12 @@ namespace Raven.Core.Installer
         [SerializeField] private CinemachineFreeLook _tppCamera;
         [SerializeField] private Slider _playerEnergySlider;
         [SerializeField] private Slider _playerLifeSlider;
+        [SerializeField] private Image _viewFinder;
+        [SerializeField] private Rig _playerRig;
+        [SerializeField] private GameObject _rigTarget;
+        [SerializeField] private GameObject _shootCameraLock;
+        [SerializeField] private Transform _oneHandShootPoint;
+        [SerializeField] private Transform _twoHandsShootPoint;
 
         [Header("-----Configs-----")]
         [SerializeField] private MovementConfig _movementConfig;
@@ -29,11 +37,12 @@ namespace Raven.Core.Installer
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer).NonLazy();
-            Container.BindInterfacesAndSelfTo<PlayerHudManager>().AsSingle().WithArguments(_playerEnergySlider, _playerLifeSlider, _playerDataConfig).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer, _player, _oneHandShootPoint, _twoHandsShootPoint).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerHudManager>().AsSingle().WithArguments(_playerEnergySlider, _playerLifeSlider, _viewFinder, _playerDataConfig).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerAnimatorManager>().AsSingle().WithArguments(_playerAnimator).NonLazy();
-            Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform).NonLazy();
+            Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform, _shootCameraLock).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerRigManager>().AsSingle().WithArguments(_playerRig, _rigTarget).NonLazy();
         }
     }
 }

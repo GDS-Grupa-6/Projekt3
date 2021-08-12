@@ -16,15 +16,19 @@ namespace Raven.Manager
 
         private bool _setPlayerRotation;
 
+        public GameObject ShootCameraLock;
+
         public event Action<bool> OnAimChange;
 
-        public CameraManager(InputController p_inputController, GameObject p_shootCamera, CinemachineFreeLook p_tppCamera, GameObject p_player, Transform p_mainCamera)
+        public CameraManager(InputController p_inputController, GameObject p_shootCamera, CinemachineFreeLook p_tppCamera,
+            GameObject p_player, Transform p_mainCamera, GameObject p_shootCameraLock)
         {
             _inputController = p_inputController;
             _shootCamera = p_shootCamera;
             _tppCamera = p_tppCamera;
             _playerTransform = p_player.GetComponent<Transform>();
             _mainCamera = p_mainCamera;
+            ShootCameraLock = p_shootCameraLock;
 
             OnAimChange += SetCameras;
         }
