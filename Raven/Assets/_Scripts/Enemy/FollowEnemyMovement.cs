@@ -1,18 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Raven.Config;
 using UnityEngine;
 
-public class FollowEnemyMovement : MonoBehaviour
+namespace Raven.Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FollowEnemyMovement : MonoBehaviour
     {
-        
-    }
+        private EnemyConfig _enemyConfig;
+        private Transform _playerTransform;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private List<Vector3> _pathPoints = new List<Vector3>();
+
+        private float _timer;
+        private float _delta = 1;
+
+        public void Construct(EnemyConfig p_enemyConfig, GameObject p_player)
+        {
+            _enemyConfig = p_enemyConfig;
+            _playerTransform = p_player.GetComponent<Transform>();
+        }
+
+        private void Awake()
+        {
+            StartCoroutine(MoveDeltaCoroutine());
+        }
+
+        private void Update()
+        {
+            CalculateMovePoint();
+            transform.LookAt(_playerTransform);
+            transform.position += CalculateMovePoint() * _enemyConfig.MoveSpeed * Time.deltaTime;
+        }
+
+        private Vector3 CalculateMovePoint()
+        {
+            return transform.forward + transform.right * _delta;
+        }
+
+        private IEnumerator MoveDeltaCoroutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(1);
+                if (_delta - 1 > -2)
+                {
+                    _delta--;
+                }
+                else
+                {
+                    _delta = 1;
+                }
+            }
+        }
     }
 }
+
