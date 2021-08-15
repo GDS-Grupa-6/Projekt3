@@ -22,19 +22,27 @@ namespace Raven.Enemy
         {
             if (other.tag == "Player")
             {
-                RaycastHit[] hits = Physics.SphereCastAll(transform.position, _config.ExplodeRadius, transform.forward);
-
-                _playerDataManager.TakeDamage(_config.Power);
-
-                for (int i = 0; i < hits.Length; i++)
-                {
-                    if (hits[i].collider.tag == "Enemy" && hits[i].collider.gameObject != this.gameObject)
-                    {
-                        Debug.Log($"Hit: {hits[i].collider.gameObject.name}");
-                    }
-                }
+                Explode();
 
                 Destroy(Mother);
+            }
+        }
+
+        public void Explode()
+        {
+            Debug.Log("Explode");
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, _config.ExplodeRadius, transform.forward);
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i].collider.tag == "Enemy" && hits[i].collider.gameObject != this.gameObject)
+                {
+                    Debug.Log($"Hit: {hits[i].collider.gameObject.name}");
+                }
+                else if (hits[i].collider.tag == "Player")
+                {
+                    _playerDataManager.TakeDamage(_config.Power);
+                }
             }
         }
 
