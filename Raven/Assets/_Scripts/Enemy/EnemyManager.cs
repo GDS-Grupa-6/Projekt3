@@ -74,6 +74,10 @@ namespace Raven.Manager
 
             if (_currentHealth <= 0)
             {
+                if (_enemyConfig.EnemyType == EnemyType.Kamikaze)
+                {
+                    GetComponentInChildren<EnemyExplode>().Explode();
+                }
                 Dead();
             }
         }
