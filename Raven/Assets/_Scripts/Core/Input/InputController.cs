@@ -11,6 +11,8 @@ namespace Raven.Input
         private void Awake()
         {
             _controls = new Controls();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void OnEnable()

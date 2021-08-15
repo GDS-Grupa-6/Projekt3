@@ -37,6 +37,7 @@ namespace Raven.Core.Installer
 
         public override void InstallBindings()
         {
+            Container.Bind<PlayerDataManager>().AsSingle().WithArguments(_playerDataConfig);
             Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer, _player, _oneHandShootPoint, _twoHandsShootPoint).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerHudManager>().AsSingle().WithArguments(_playerEnergySlider, _playerLifeSlider, _viewFinder, _playerDataConfig).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform).NonLazy();

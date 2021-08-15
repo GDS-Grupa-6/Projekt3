@@ -46,7 +46,14 @@ namespace Raven.Player
                 _rig.weight = 0;
             }
 
-            _rigTarget.transform.position = GetRaycastHitPosition();
+            if (GetRaycastHitPosition() == Vector3.zero)
+            {
+                _rigTarget.transform.position = _cameraLock.transform.forward * 1000f;
+            }
+            else
+            {
+                _rigTarget.transform.position = GetRaycastHitPosition();
+            }
         }
 
         public Vector3 GetRaycastHitPosition()

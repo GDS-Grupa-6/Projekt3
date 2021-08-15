@@ -27,6 +27,7 @@ namespace Raven.Player
         public void Shoot(Transform p_shootPoint, Transform p_lookAt)
         {
            var obj = GameObject.Instantiate(_playerStatesManager.CurrentConfig.BulletPrefab);
+           obj.GetComponent<Bullet>().Initialization(_playerStatesManager);
            obj.transform.position = p_shootPoint.position;
            obj.transform.LookAt(p_lookAt);
         }
