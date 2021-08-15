@@ -73,6 +73,17 @@ namespace Raven.UI
             return true;
         }
 
+        public bool TrySubtractHealth(float p_value)
+        {
+            if (_healthSlider.value - p_value < 0)
+            {
+                return false;
+            }
+
+            _healthSlider.value -= p_value;
+            return true;
+        }
+
         private void SetSlidersValues()
         {
             _energySlider.maxValue = _playerDataConfig.MaxEnergyValue;

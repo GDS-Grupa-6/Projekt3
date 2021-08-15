@@ -1,21 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using Raven.Manager;
+using Raven.Player;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
+    private PlayerStatesManager _playerStatesManager;
 
     private bool _stop;
 
+    public void Initialization(PlayerStatesManager p_playerStatesManager)
+    {
+        _playerStatesManager = p_playerStatesManager;
+    }
+
     void Update()
     {
-        if (!_stop)
-            transform.position += transform.forward * _speed * Time.deltaTime;
+        transform.position += transform.forward * _playerStatesManager.CurrentConfig.BulletSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         _stop = true;
+
+        if (other.tag == "Enemy")
+        {
+            other.GetComponentInParent<EnemyManager>().TakeDamage(_playerStatesManager.CurrentConfig.bulletPower);
+        }
+
+        Destroy(this.gameObject);
     }
 }
