@@ -23,6 +23,7 @@ namespace Raven.Player
         private readonly FireState _fireState;
         private readonly GameObject _player;
         private readonly PlayerRigManager _playerRigManager;
+        private readonly PlayerHudManager _playerHudManager;
 
         private Transform _oneHandShootPoint;
         private Transform _twoHandsShootPoint;
@@ -49,6 +50,7 @@ namespace Raven.Player
             _playerRigManager = p_playerRigManager;
             _oneHandShootPoint = p_one;
             _twoHandsShootPoint = p_two;
+            _playerHudManager = p_hudManager;
 
             _normalState.Initialize(p_inputController, p_hudManager, this);
             _fireState.Initialize(p_inputController, p_hudManager, this);
@@ -66,16 +68,7 @@ namespace Raven.Player
         {
             if (_inputController.ActiveStateButtonPressed() && (_unlockedStates[CollectibleName.FireDash] || _unlockedStates[CollectibleName.FireShoot]))
             {
-                if (_currentConfig.PlayerStateName == PlayerStateName.Normal)
-                {
-                    _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Fire);
-                    _currentBehaviour = _fireState;
-                }
-                else
-                {
-                    _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
-                    _currentBehaviour = _normalState;
-                }
+              ChangeState();
             }
 
             if (_currentBehaviour == _fireState && !_unlockedStates[CollectibleName.FireShoot])
@@ -97,9 +90,36 @@ namespace Raven.Player
             _canShoot = true;
         }
 
+        public void ChangeState()
+        {
+            if (_currentConfig.PlayerStateName == PlayerStateName.Normal)
+            {
+                _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Fire);
+                _currentBehaviour = _fireState;
+                _coroutinesManager.StartCoroutine(EnergySubtractCoroutine(), _player);
+            }
+            else
+            {
+                _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
+                _currentBehaviour = _normalState;
+            }
+        }
+
         public void UnlockState(CollectibleName p_collectibleName)
         {
             _unlockedStates[p_collectibleName] = true;
+        }
+
+        private IEnumerator EnergySubtractCoroutine()
+        {
+            while (_currentBehaviour == _fireState)
+            {
+                if (!_playerHudManager.TrySubtractEnergy(2f))
+                {
+                    ChangeState();
+                }
+                yield return new WaitForSeconds(1f);
+            }
         }
     }
 }
