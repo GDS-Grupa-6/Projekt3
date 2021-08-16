@@ -58,19 +58,6 @@ namespace Raven.Manager
             }
 
             _currentHealth -= p_value;
-            _coroutinesManager.StartCoroutine(HitCoroutine(), this.gameObject);
-        }
-
-        private void Dead()
-        {
-            Destroy(this.gameObject);
-        }
-
-        private IEnumerator HitCoroutine()
-        {
-            _enemyGfxTransform.GetComponent<MeshRenderer>().materials[0] = _redMaterial;
-            yield return new WaitForSeconds(1.5f);
-            _enemyGfxTransform.GetComponent<MeshRenderer>().materials[0] = _gfxMaterial;
 
             if (_currentHealth <= 0)
             {
@@ -81,6 +68,20 @@ namespace Raven.Manager
                 Dead();
             }
         }
+
+        private void Dead()
+        {
+            Destroy(this.gameObject);
+        }
+
+        /*private IEnumerator HitCoroutine()
+        {
+            _enemyGfxTransform.GetComponent<MeshRenderer>().materials[0] = _redMaterial;
+            yield return new WaitForSeconds(1.5f);
+            _enemyGfxTransform.GetComponent<MeshRenderer>().materials[0] = _gfxMaterial;
+
+            
+        }*/
 
         public class EnemyFactory : PlaceholderFactory<EnemyManager> { }
     }

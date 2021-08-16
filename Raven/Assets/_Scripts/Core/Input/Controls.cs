@@ -73,6 +73,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Take"",
+                    ""type"": ""Button"",
+                    ""id"": ""e87cf5bd-12df-4612-a39d-c816b0e77ad4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -299,7 +307,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8a57084c-9571-4edb-87ea-48373f2c160c"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Kayboard and mouse"",
@@ -361,6 +369,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ffcf122-d4c8-4f60-99fa-0b32721a3330"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""Take"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cddcf3b-aab2-4f27-84af-8f1111e547e4"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Take"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -387,6 +417,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_ActiveState = m_Player.FindAction("ActiveState", throwIfNotFound: true);
         m_Player_DashHold = m_Player.FindAction("DashHold", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_Take = m_Player.FindAction("Take", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -443,6 +474,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ActiveState;
     private readonly InputAction m_Player_DashHold;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_Take;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -454,6 +486,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @ActiveState => m_Wrapper.m_Player_ActiveState;
         public InputAction @DashHold => m_Wrapper.m_Player_DashHold;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @Take => m_Wrapper.m_Player_Take;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -484,6 +517,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Take.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTake;
+                @Take.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTake;
+                @Take.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTake;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -509,6 +545,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Take.started += instance.OnTake;
+                @Take.performed += instance.OnTake;
+                @Take.canceled += instance.OnTake;
             }
         }
     }
@@ -540,5 +579,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnActiveState(InputAction.CallbackContext context);
         void OnDashHold(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnTake(InputAction.CallbackContext context);
     }
 }

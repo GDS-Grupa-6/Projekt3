@@ -35,7 +35,6 @@ namespace Raven.Enemy
             _navMesh.speed = _enemyConfig.MoveSpeed;
 
             EnemyExplode enemyExplode = _gfxTransform.gameObject.AddComponent<EnemyExplode>();
-            enemyExplode.Mother = this.gameObject;
             enemyExplode.Initialization(_enemyConfig, p_playerDataManager);
 
             _gfxTarget.Add(new Vector3(-0.00754f, 0.00151f, 0));

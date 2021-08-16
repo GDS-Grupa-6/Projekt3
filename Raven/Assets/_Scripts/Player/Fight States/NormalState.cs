@@ -34,11 +34,14 @@ namespace Raven.Player
 
         public void ActiveDash(PlayerMovementManager p_movementManager)
         {
-            if (!_inputController.DashButtonPressed()) return;
-            if (!_hudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost)) return;
+            if (_playerStatesManager.UnlockedStates[CollectibleName.Dash])
+            {
+                if (!_inputController.DashButtonPressed()) return;
+                if (!_hudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost)) return;
 
-            p_movementManager.Dash = true;
-            p_movementManager.OnDash?.Invoke(true);
+                p_movementManager.Dash = true;
+                p_movementManager.OnDash?.Invoke(true);
+            }
         }
 
         public void Dash(PlayerMovementManager p_movementManager)
