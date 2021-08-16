@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using Raven.Config;
+using Raven.Manager;
 using Raven.UI;
 using UnityEngine;
 
@@ -12,11 +13,13 @@ namespace Raven.Player
     {
         private PlayerDataConfig _config;
         private PlayerHudManager _playerHudManager;
+        private PlayerMovementManager _playerMovementManager;
 
         private float _currentHealth;
 
-        public PlayerDataManager(PlayerDataConfig p_config, PlayerHudManager p_playerHudManager)
+        public PlayerDataManager(PlayerDataConfig p_config, PlayerHudManager p_playerHudManager, PlayerMovementManager p_playerMovementManager)
         {
+            _playerMovementManager = p_playerMovementManager;
             _config = p_config;
             _playerHudManager = p_playerHudManager;
             _currentHealth = _config.MaxHealthValue;
@@ -24,15 +27,18 @@ namespace Raven.Player
 
         public void TakeDamage(float p_value)
         {
-            if (_currentHealth - p_value <= 0)
+            if (!_playerMovementManager.Dash)
             {
-                _playerHudManager.TrySubtractHealth(_currentHealth);
-                Dead();
-                return;
-            }
+                if (_currentHealth - p_value <= 0)
+                {
+                    _playerHudManager.TrySubtractHealth(_currentHealth);
+                    Dead();
+                    return;
+                }
 
-            _currentHealth -= p_value;
-            _playerHudManager.TrySubtractHealth(p_value);
+                _currentHealth -= p_value;
+                _playerHudManager.TrySubtractHealth(p_value);
+            }
         }
 
         private void Dead()

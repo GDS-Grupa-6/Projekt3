@@ -40,7 +40,7 @@ namespace Raven.Input
             return _controls.Player.Dash.triggered;
         }
 
-        public bool AimButtonPressed()
+        public bool AimButtonHold()
         {
             float x = _controls.Player.Aim.ReadValue<float>();
 
@@ -62,6 +62,11 @@ namespace Raven.Input
         public bool ShootButtonPressed()
         {
             return _controls.Player.Shoot.triggered;
+        }
+
+        public bool TakeButtonPressed()
+        {
+            return _controls.Player.Take.triggered;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Raven.Config;
+using Raven.Manager;
 using Raven.Player;
 using UnityEngine;
 using Zenject;
@@ -7,8 +8,6 @@ namespace Raven.Enemy
 {
     public class EnemyExplode : MonoBehaviour
     {
-        [HideInInspector] public GameObject Mother;
-
         private PlayerDataManager _playerDataManager;
         private EnemyConfig _config;
 
@@ -24,7 +23,7 @@ namespace Raven.Enemy
             {
                 Explode();
 
-                Destroy(Mother);
+                GetComponentInParent<EnemyManager>().TakeDamage(_config.MaxHealth);
             }
         }
 
