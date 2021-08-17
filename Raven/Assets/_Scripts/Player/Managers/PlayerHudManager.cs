@@ -1,30 +1,50 @@
 using System;
+using System.Collections;
 using Raven.Config;
+using Raven.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Raven.UI
 {
-    public class PlayerHudManager : ITickable
+    public class PlayerHudManager : ITickable, IDisposable
     {
-        private PlayerDataConfig _playerDataConfig;
+        private readonly PlayerDataConfig _playerDataConfig;
+        private CameraManager _cameraManager;
+        private CoroutinesManager _coroutinesManager;
 
-        private Slider _energySlider;
-        private Slider _healthSlider;
+        private readonly Slider _energySlider;
+        private readonly Slider _healthSlider;
+        private Image _viewFinder;
 
         private float _energyRegenerationTimer;
         private float _startEnergyRegenerationTimer;
+        private Vector2 _screenCenter;
 
         private bool _regenerateEnergy;
 
-        public PlayerHudManager(Slider p_energySlider, Slider p_healthSlider, PlayerDataConfig p_playerDataConfig)
+        public PlayerHudManager(Slider p_energySlider, Slider p_healthSlider, Image p_viewFinder, 
+            PlayerDataConfig p_playerDataConfig, CameraManager p_cameraManager, CoroutinesManager p_coroutinesManager)
         {
             _energySlider = p_energySlider;
             _healthSlider = p_healthSlider;
             _playerDataConfig = p_playerDataConfig;
+            _viewFinder = p_viewFinder;
+            _cameraManager = p_cameraManager;
+            _coroutinesManager = p_coroutinesManager;
+
+            _screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            _viewFinder.transform.position = _screenCenter;
 
             SetSlidersValues();
+
+            _cameraManager.OnAimChange += SetViewFinder;
+        }
+
+        public void Dispose()
+        {
+            _cameraManager.OnAimChange -= SetViewFinder;
         }
 
         public void Tick()
@@ -50,6 +70,17 @@ namespace Raven.UI
             _startEnergyRegenerationTimer = 0;
             _regenerateEnergy = false;
 
+            return true;
+        }
+
+        public bool TrySubtractHealth(float p_value)
+        {
+            if (_healthSlider.value - p_value < 0)
+            {
+                return false;
+            }
+
+            _healthSlider.value -= p_value;
             return true;
         }
 
@@ -94,6 +125,25 @@ namespace Raven.UI
                 _regenerateEnergy = true;
                 _startEnergyRegenerationTimer = 0;
             }
+        }
+
+        private void SetViewFinder(bool p_aim)
+        {
+            if (p_aim)
+            {
+                _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _viewFinder.gameObject);
+            }
+            else
+            {
+                _coroutinesManager.StopAllCoroutines(_viewFinder.gameObject);
+                _viewFinder.gameObject.SetActive(false);
+            }
+        }
+
+        private IEnumerator SetViewFinderCoroutine()
+        {
+            yield return new WaitForSeconds(0.7f);
+            _viewFinder.gameObject.SetActive(true);
         }
     }
 }

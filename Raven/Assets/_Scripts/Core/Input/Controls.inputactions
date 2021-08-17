@@ -38,33 +38,9 @@
                     "interactions": "Hold"
                 },
                 {
-                    "name": "State1",
+                    "name": "ActiveState",
                     "type": "Button",
                     "id": "33c6f681-377a-4319-96af-0586ea2332ae",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
-                },
-                {
-                    "name": "State2",
-                    "type": "Button",
-                    "id": "d9520450-9f54-482c-bfb4-a8421771226e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
-                },
-                {
-                    "name": "State3",
-                    "type": "Button",
-                    "id": "bf232b82-63f9-49dc-b4bc-c4f8f6610f76",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
-                },
-                {
-                    "name": "State4",
-                    "type": "Button",
-                    "id": "138eb9b0-328e-47a5-948e-a99369451264",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -76,6 +52,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold"
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "75089a3c-28fe-41fe-a7ec-6a20692bd180",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Take",
+                    "type": "Button",
+                    "id": "e87cf5bd-12df-4612-a39d-c816b0e77ad4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -302,44 +294,22 @@
                 {
                     "name": "",
                     "id": "8a57084c-9571-4edb-87ea-48373f2c160c",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Kayboard and mouse",
-                    "action": "State1",
+                    "action": "ActiveState",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "8f2a2c67-1b08-4dc7-888f-8b2c71f561f5",
-                    "path": "<Keyboard>/2",
+                    "id": "b711273d-0e64-49ab-aa02-60d60032af4b",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Kayboard and mouse",
-                    "action": "State2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "63cd34cc-8362-446a-b085-90392cf0617b",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Kayboard and mouse",
-                    "action": "State3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "471ba992-01be-4ffe-818b-6fe2fd41bfe4",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Kayboard and mouse",
-                    "action": "State4",
+                    "groups": "Pad",
+                    "action": "ActiveState",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -362,6 +332,50 @@
                     "processors": "",
                     "groups": "Pad",
                     "action": "DashHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9179bc7-f219-45f1-8d3a-6c46c3c55e88",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1722f5f-fe7c-4395-9304-8e11874d5b52",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pad",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ffcf122-d4c8-4f60-99fa-0b32721a3330",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "Take",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6cddcf3b-aab2-4f27-84af-8f1111e547e4",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pad",
+                    "action": "Take",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

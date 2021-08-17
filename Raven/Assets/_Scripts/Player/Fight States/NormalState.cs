@@ -24,13 +24,24 @@ namespace Raven.Player
             _hudManager = p_hudManager;
         }
 
+        public void Shoot(Transform p_shootPoint, Transform p_lookAt)
+        {
+           var obj = GameObject.Instantiate(_playerStatesManager.CurrentConfig.BulletPrefab);
+           obj.GetComponent<Bullet>().Initialization(_playerStatesManager);
+           obj.transform.position = p_shootPoint.position;
+           obj.transform.LookAt(p_lookAt);
+        }
+
         public void ActiveDash(PlayerMovementManager p_movementManager)
         {
-            if (!_inputController.DashButtonPressed()) return;
-            if (!_hudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost)) return;
+            if (_playerStatesManager.UnlockedStates[CollectibleName.Dash])
+            {
+                if (!_inputController.DashButtonPressed()) return;
+                if (!_hudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost)) return;
 
-            p_movementManager.Dash = true;
-            p_movementManager.OnDash?.Invoke(true);
+                p_movementManager.Dash = true;
+                p_movementManager.OnDash?.Invoke(true);
+            }
         }
 
         public void Dash(PlayerMovementManager p_movementManager)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Raven.Config;
 using Raven.Container;
 using Raven.Core.Interface;
@@ -11,64 +12,114 @@ using Raven.UI;
 using UnityEngine;
 using Zenject;
 
-public class PlayerStatesManager : ITickable
+namespace Raven.Player
 {
-    private PlayerFightStateConfig _currentConfig;
-    private IPlayerState _currentBehaviour;
-    private readonly PlayerStatesContainer _playerStatesContainer;
-    private readonly InputController _inputController;
-
-    private NormalState _normalState;
-    private FireState _fireState;
-    private GhostState _ghostState;
-    private IceState _iceState;
-
-    public PlayerFightStateConfig CurrentConfig => _currentConfig;
-    public IPlayerState CurrentBehaviour => _currentBehaviour;
-
-    public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputController p_inputController, NormalState p_normalState,
-        FireState p_fireState, GhostState p_ghostState, IceState p_iceState, PlayerHudManager p_hudManager)
+    public class PlayerStatesManager : ITickable
     {
-        _playerStatesContainer = p_playerStatesContainer;
-        _inputController = p_inputController;
-        _normalState = p_normalState;
-        _fireState = p_fireState;
-        _ghostState = p_ghostState;
-        _iceState = p_iceState;
+        private readonly PlayerStatesContainer _playerStatesContainer;
+        private readonly InputController _inputController;
+        private readonly CoroutinesManager _coroutinesManager;
+        private readonly NormalState _normalState;
+        private readonly FireState _fireState;
+        private readonly GameObject _player;
+        private readonly PlayerRigManager _playerRigManager;
+        private readonly PlayerHudManager _playerHudManager;
 
-        _normalState.Initialize(p_inputController, p_hudManager, this);
-        _fireState.Initialize(p_inputController, p_hudManager, this);
-        _ghostState.Initialize(p_inputController, p_hudManager, this);
-        _iceState.Initialize(p_inputController, p_hudManager, this);
+        private Transform _oneHandShootPoint;
+        private Transform _twoHandsShootPoint;
+        private PlayerStateConfig _currentConfig;
+        private IPlayerState _currentBehaviour;
+        private bool _canShoot;
 
-        _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
-        _currentBehaviour = _normalState;
-    }
+        private Dictionary<CollectibleName, bool> _unlockedStates = new Dictionary<CollectibleName, bool>();
 
-    public void Tick()
-    {
-        if (_inputController.State1ButtonPressed())
+        public PlayerStateConfig CurrentConfig => _currentConfig;
+        public IPlayerState CurrentBehaviour => _currentBehaviour;
+        public Dictionary<CollectibleName, bool> UnlockedStates => _unlockedStates;
+
+        public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputController p_inputController,
+            NormalState p_normalState, FireState p_fireState, PlayerHudManager p_hudManager, CoroutinesManager p_coroutinesManager,
+            GameObject p_player, PlayerRigManager p_playerRigManager, Transform p_one, Transform p_two)
         {
+            _playerStatesContainer = p_playerStatesContainer;
+            _inputController = p_inputController;
+            _normalState = p_normalState;
+            _fireState = p_fireState;
+            _coroutinesManager = p_coroutinesManager;
+            _player = p_player;
+            _playerRigManager = p_playerRigManager;
+            _oneHandShootPoint = p_one;
+            _twoHandsShootPoint = p_two;
+            _playerHudManager = p_hudManager;
+
+            _normalState.Initialize(p_inputController, p_hudManager, this);
+            _fireState.Initialize(p_inputController, p_hudManager, this);
+
+            _unlockedStates.Add(CollectibleName.Dash, false);
+            _unlockedStates.Add(CollectibleName.FireDash, false);
+            _unlockedStates.Add(CollectibleName.FireShoot, false);
+
             _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
             _currentBehaviour = _normalState;
+            _canShoot = true;
         }
 
-        if (_inputController.State2ButtonPressed())
+        public void Tick()
         {
-            _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Fire);
-            _currentBehaviour = _fireState;
+            if (_inputController.ActiveStateButtonPressed() && (_unlockedStates[CollectibleName.FireDash] || _unlockedStates[CollectibleName.FireShoot]))
+            {
+              ChangeState();
+            }
+
+            if (_currentBehaviour == _fireState && !_unlockedStates[CollectibleName.FireShoot])
+            {
+                return;
+            }
+
+            if (_inputController.ShootButtonPressed() && _inputController.AimButtonHold() && _canShoot)
+            {
+                _coroutinesManager.StartCoroutine(ShootDelay(), _player);
+                _currentBehaviour.Shoot(_oneHandShootPoint, _playerRigManager.RigTarget.transform);
+            }
         }
 
-        if (_inputController.State3ButtonPressed())
+        private IEnumerator ShootDelay()
         {
-            _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Ghost);
-            _currentBehaviour = _ghostState;
+            _canShoot = false;
+            yield return new WaitForSeconds(_currentConfig.OneHandDelay);
+            _canShoot = true;
         }
 
-        if (_inputController.State4ButtonPressed())
+        public void ChangeState()
         {
-            _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Ice);
-            _currentBehaviour = _iceState;
+            if (_currentConfig.PlayerStateName == PlayerStateName.Normal)
+            {
+                _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Fire);
+                _currentBehaviour = _fireState;
+                _coroutinesManager.StartCoroutine(EnergySubtractCoroutine(), _player);
+            }
+            else
+            {
+                _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
+                _currentBehaviour = _normalState;
+            }
+        }
+
+        public void UnlockState(CollectibleName p_collectibleName)
+        {
+            _unlockedStates[p_collectibleName] = true;
+        }
+
+        private IEnumerator EnergySubtractCoroutine()
+        {
+            while (_currentBehaviour == _fireState)
+            {
+                if (!_playerHudManager.TrySubtractEnergy(2f))
+                {
+                    ChangeState();
+                }
+                yield return new WaitForSeconds(1f);
+            }
         }
     }
 }
