@@ -96,7 +96,7 @@ namespace Raven.Manager
             {
                 if (_enemyConfig.EnemyType == EnemyType.Kamikaze)
                 {
-                    GetComponentInChildren<EnemyExplode>().Explode();
+                    GetComponentInChildren<Explode>().ExplodeBehaviour();
                 }
 
                 Dead();
