@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
-            other.GetComponentInParent<EnemyManager>().TakeDamage(_playerStatesManager.CurrentConfig.bulletPower);
+            other.GetComponentInParent<EnemyController>().TakeDamage(_playerStatesManager.CurrentConfig.bulletPower);
         }
 
         Destroy(this.gameObject);

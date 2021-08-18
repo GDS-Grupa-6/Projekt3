@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using Raven.Config;
 using Raven.Manager;
 using Raven.Player;
@@ -8,12 +9,15 @@ namespace Raven.Enemy
 {
     public class EnemyExplode : MonoBehaviour
     {
-        private PlayerDataManager _playerDataManager;
-        private EnemyConfig _config;
+        [InfoBox("Set this component on GFX object of enemy")]
+        [SerializeField] private EnemyConfig _config;
+        [SerializeField] private GameObject _effectPrefab;
 
-        public void Initialization(EnemyConfig p_config, PlayerDataManager p_playerDataManager)
+        private PlayerDataManager _playerDataManager;
+
+        [Inject]
+        public void Construct(PlayerDataManager p_playerDataManager)
         {
-            _config = p_config;
             _playerDataManager = p_playerDataManager;
         }
 
@@ -21,15 +25,12 @@ namespace Raven.Enemy
         {
             if (other.tag == "Player")
             {
-                Explode();
-
-                GetComponentInParent<EnemyManager>().TakeDamage(_config.MaxHealth);
+                GetComponentInParent<EnemyController>().TakeDamage(_config.MaxHealth);
             }
         }
 
         public void Explode()
         {
-            Debug.Log("Explode");
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, _config.ExplodeRadius, transform.forward);
 
             for (int i = 0; i < hits.Length; i++)
@@ -40,6 +41,9 @@ namespace Raven.Enemy
                 }
                 else if (hits[i].collider.tag == "Player")
                 {
+                    var obj = Instantiate(_effectPrefab);
+                    obj.transform.position = transform.position;
+
                     _playerDataManager.TakeDamage(_config.Power);
                 }
             }
