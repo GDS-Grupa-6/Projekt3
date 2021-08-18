@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private PlayerStatesManager _playerStatesManager;
 
     private bool _stop;
+    private float _lifeTimer;
 
     public void Initialization(PlayerStatesManager p_playerStatesManager)
     {
@@ -16,10 +17,17 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * _playerStatesManager.CurrentConfig.BulletSpeed * Time.deltaTime;
+
+        if (_lifeTimer >= _playerStatesManager.CurrentConfig.BulletLifeTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Collectible") return;
+
         _stop = true;
 
         if (other.tag == "Enemy")

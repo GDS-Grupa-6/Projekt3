@@ -13,6 +13,7 @@ namespace Raven.Config
         [Space]
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private float _bulletSpeed = 5f;
+        [SerializeField] private float _bulletLifeTime = 5f;
         [SerializeField] private float _bulletPower = 5f;
         [SerializeField] private float _oneHandDelay = 1f;
         [SerializeField] private float _twoHandsDelay = 0.5f;
@@ -26,6 +27,7 @@ namespace Raven.Config
         [ShowIf("_dashHasEffect"), SerializeField] private float _effectPower = 4f;
         [ShowIf("_dashHasEffect"), SerializeField] private float _effectTime = 1f;
 
+        public float BulletLifeTime => _bulletLifeTime;
         public float BulletSpeed => _bulletSpeed;
         public float bulletPower => _bulletPower;
         public float EffectRadius => _effectRadius;
