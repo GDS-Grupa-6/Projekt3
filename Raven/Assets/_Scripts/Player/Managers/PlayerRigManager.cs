@@ -46,22 +46,22 @@ namespace Raven.Player
                 _rig.weight = 0;
             }
 
-            if (GetRaycastHitPosition() == Vector3.zero)
+            if (GetRaycastHit().point == Vector3.zero || GetRaycastHit().collider.tag == "Collectible")
             {
                 _rigTarget.transform.position = _cameraLock.transform.forward * 1000f;
             }
             else
             {
-                _rigTarget.transform.position = GetRaycastHitPosition();
+                _rigTarget.transform.position = GetRaycastHit().point;
             }
         }
 
-        public Vector3 GetRaycastHitPosition()
+        public RaycastHit GetRaycastHit()
         {
             RaycastHit hit;
             Physics.Raycast(_cameraLock.transform.position, _cameraLock.transform.forward, out hit);
 
-            return hit.point;
+            return hit;
         }
 
         private void ActiveWeight(bool p_aim)
