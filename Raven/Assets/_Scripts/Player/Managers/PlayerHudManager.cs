@@ -93,7 +93,7 @@ namespace Raven.UI
             _healthSlider.value = _playerDataConfig.MaxHealthValue;
         }
 
-        private void AddEnergy(float p_value)
+        private void AddEnergy(int p_value)
         {
             _energySlider.value += p_value;
         }
@@ -102,13 +102,13 @@ namespace Raven.UI
         {
             if (_energySlider.value < _energySlider.maxValue)
             {
-                if (_energyRegenerationTimer < 1)
+                if (_energyRegenerationTimer < _playerDataConfig.RegenerationTime)
                 {
                     _energyRegenerationTimer += Time.deltaTime;
                 }
                 else
                 {
-                    AddEnergy(2);
+                    AddEnergy(_playerDataConfig.RegenerationValue);
                     _energyRegenerationTimer = 0;
                 }
             }
@@ -116,7 +116,7 @@ namespace Raven.UI
 
         private void TimerToEnergyRegeneration()
         {
-            if (_startEnergyRegenerationTimer < 2)
+            if (_startEnergyRegenerationTimer < _playerDataConfig.TimeToStartRegeneration)
             {
                 _startEnergyRegenerationTimer += Time.deltaTime;
             }

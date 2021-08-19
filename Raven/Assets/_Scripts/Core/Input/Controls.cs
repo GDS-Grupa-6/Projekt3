@@ -28,7 +28,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""CameraLook"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""742bdcbc-b132-4abb-8aea-846b22591556"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

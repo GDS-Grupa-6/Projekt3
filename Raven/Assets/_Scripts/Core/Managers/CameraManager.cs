@@ -65,7 +65,7 @@ namespace Raven.Manager
         private void SetPlayerRotation()
         {
             _setPlayerRotation = false;
-            _playerTransform.eulerAngles = new Vector3(0f, _mainCamera.eulerAngles.y, 0f);
+            _playerTransform.Rotate(0f, _inputController.GetMouseDelta().y, 0f);
         }
     }
 }
