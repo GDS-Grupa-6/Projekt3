@@ -1,3 +1,4 @@
+using System;
 using Raven.Input;
 using UnityEngine;
 using Zenject;
@@ -18,6 +19,8 @@ namespace Raven.Player
         private PlayerStatesManager _playerStatesManager;
         private InputController _inputController;
 
+        public event Action<CollectibleName> OnUnlock;
+
         [Inject]
         public void Construt(PlayerStatesManager p_playerStatesManager, InputController p_inputController)
         {
@@ -35,6 +38,7 @@ namespace Raven.Player
                 if (_inputController.TakeButtonPressed())
                 {
                     _playerStatesManager.UnlockState(_collectibleName);
+                    OnUnlock?.Invoke(_collectibleName);
                     Destroy(this.gameObject);
                 }
             }
