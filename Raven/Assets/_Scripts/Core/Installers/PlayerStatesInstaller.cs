@@ -10,8 +10,6 @@ namespace Raven.Core.Installer
         {
             Container.Bind<NormalState>().AsSingle().NonLazy();
             Container.Bind<FireState>().AsSingle().NonLazy();
-            Container.Bind<GhostState>().AsSingle().NonLazy();
-            Container.Bind<IceState>().AsSingle().NonLazy();
         }
     }
 }

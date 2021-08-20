@@ -55,7 +55,7 @@ public class PlayerAnimatorManager : IDisposable, ITickable
 
     private void SetDirectionFloat()
     {
-        _animator.SetFloat("DirectionX", _inputController.GetMovementAxis().x);
-        _animator.SetFloat("DirectionY", _inputController.GetMovementAxis().y);
+        _animator.SetFloat("DirectionX", _inputController.GetMovementAxis().x, 0.1f, Time.deltaTime);
+        _animator.SetFloat("DirectionY", _inputController.GetMovementAxis().y, 0.1f, Time.deltaTime);
     }
 }

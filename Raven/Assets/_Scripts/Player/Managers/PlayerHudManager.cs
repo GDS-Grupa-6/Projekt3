@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using Raven.Config;
 using Raven.Manager;
+using Raven.Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -13,6 +15,7 @@ namespace Raven.UI
         private readonly PlayerDataConfig _playerDataConfig;
         private CameraManager _cameraManager;
         private CoroutinesManager _coroutinesManager;
+        private Collectible[] _collectibles;
 
         private readonly Slider _energySlider;
         private readonly Slider _healthSlider;
@@ -22,10 +25,13 @@ namespace Raven.UI
         private float _startEnergyRegenerationTimer;
         private Vector2 _screenCenter;
 
+        private TextMeshProUGUI[] _inputTexts;
+
         private bool _regenerateEnergy;
 
-        public PlayerHudManager(Slider p_energySlider, Slider p_healthSlider, Image p_viewFinder, 
-            PlayerDataConfig p_playerDataConfig, CameraManager p_cameraManager, CoroutinesManager p_coroutinesManager)
+        public PlayerHudManager(Slider p_energySlider, Slider p_healthSlider, Image p_viewFinder,
+            PlayerDataConfig p_playerDataConfig, CameraManager p_cameraManager, CoroutinesManager p_coroutinesManager,
+            TextMeshProUGUI[] p_inputTexts, Collectible[] p_collectibles)
         {
             _energySlider = p_energySlider;
             _healthSlider = p_healthSlider;
@@ -33,6 +39,9 @@ namespace Raven.UI
             _viewFinder = p_viewFinder;
             _cameraManager = p_cameraManager;
             _coroutinesManager = p_coroutinesManager;
+            _inputTexts = p_inputTexts;
+            _collectibles = p_collectibles;
+
 
             _screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
             _viewFinder.transform.position = _screenCenter;
@@ -40,11 +49,26 @@ namespace Raven.UI
             SetSlidersValues();
 
             _cameraManager.OnAimChange += SetViewFinder;
+            _cameraManager.OnAimChange += AimTextHud;
+
+            _inputTexts[0].color = Color.grey;
+            _inputTexts[2].color = Color.grey;
+
+            for (int i = 0; i < _collectibles.Length; i++)
+            {
+                _collectibles[i].OnUnlock += UnlockText;
+            }
         }
 
         public void Dispose()
         {
             _cameraManager.OnAimChange -= SetViewFinder;
+            _cameraManager.OnAimChange -= AimTextHud;
+
+            for (int i = 0; i < _collectibles.Length; i++)
+            {
+                _collectibles[i].OnUnlock -= UnlockText;
+            }
         }
 
         public void Tick()
@@ -73,6 +97,17 @@ namespace Raven.UI
             return true;
         }
 
+        public bool TrySubtractHealth(float p_value)
+        {
+            if (_healthSlider.value - p_value < 0)
+            {
+                return false;
+            }
+
+            _healthSlider.value -= p_value;
+            return true;
+        }
+
         private void SetSlidersValues()
         {
             _energySlider.maxValue = _playerDataConfig.MaxEnergyValue;
@@ -82,7 +117,7 @@ namespace Raven.UI
             _healthSlider.value = _playerDataConfig.MaxHealthValue;
         }
 
-        private void AddEnergy(float p_value)
+        private void AddEnergy(int p_value)
         {
             _energySlider.value += p_value;
         }
@@ -91,13 +126,13 @@ namespace Raven.UI
         {
             if (_energySlider.value < _energySlider.maxValue)
             {
-                if (_energyRegenerationTimer < 1)
+                if (_energyRegenerationTimer < _playerDataConfig.RegenerationTime)
                 {
                     _energyRegenerationTimer += Time.deltaTime;
                 }
                 else
                 {
-                    AddEnergy(2);
+                    AddEnergy(_playerDataConfig.RegenerationValue);
                     _energyRegenerationTimer = 0;
                 }
             }
@@ -105,7 +140,7 @@ namespace Raven.UI
 
         private void TimerToEnergyRegeneration()
         {
-            if (_startEnergyRegenerationTimer < 2)
+            if (_startEnergyRegenerationTimer < _playerDataConfig.TimeToStartRegeneration)
             {
                 _startEnergyRegenerationTimer += Time.deltaTime;
             }
@@ -133,6 +168,38 @@ namespace Raven.UI
         {
             yield return new WaitForSeconds(0.7f);
             _viewFinder.gameObject.SetActive(true);
+        }
+
+        private void AimTextHud(bool p_aim)
+        {
+            if (p_aim)
+            {
+                _inputTexts[1].SetText("LPM");
+            }
+            else
+            {
+                _inputTexts[1].SetText("PPM");
+            }
+        }
+
+        private void UnlockText(CollectibleName p_collectibleName)
+        {
+            switch (p_collectibleName)
+            {
+                case CollectibleName.Dash:
+                    _inputTexts[0].color = Color.white;
+                    break;
+
+                case CollectibleName.FireDash:
+                    _inputTexts[0].color = Color.white;
+                    _inputTexts[2].color = Color.white;
+                    break;
+
+                case CollectibleName.FireShoot:
+                    _inputTexts[2].color = Color.white;
+
+                    break;
+            }
         }
     }
 }

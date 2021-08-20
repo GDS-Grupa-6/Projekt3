@@ -11,6 +11,8 @@ namespace Raven.Input
         private void Awake()
         {
             _controls = new Controls();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void OnEnable()
@@ -38,31 +40,16 @@ namespace Raven.Input
             return _controls.Player.Dash.triggered;
         }
 
-        public bool AimButtonPressed()
+        public bool AimButtonHold()
         {
             float x = _controls.Player.Aim.ReadValue<float>();
 
             return x == 1;
         }
 
-        public bool State1ButtonPressed()
+        public bool ActiveStateButtonPressed()
         {
-            return _controls.Player.State1.triggered;
-        }
-
-        public bool State2ButtonPressed()
-        {
-            return _controls.Player.State2.triggered;
-        }
-
-        public bool State3ButtonPressed()
-        {
-            return _controls.Player.State3.triggered;
-        }
-
-        public bool State4ButtonPressed()
-        {
-            return _controls.Player.State4.triggered;
+            return _controls.Player.ActiveState.triggered;
         }
 
         public bool DashButtonHold()
@@ -70,6 +57,16 @@ namespace Raven.Input
             float x = _controls.Player.DashHold.ReadValue<float>();
 
             return x == 1;
+        }
+
+        public bool ShootButtonPressed()
+        {
+            return _controls.Player.Shoot.triggered;
+        }
+
+        public bool TakeButtonPressed()
+        {
+            return _controls.Player.Take.triggered;
         }
     }
 }
