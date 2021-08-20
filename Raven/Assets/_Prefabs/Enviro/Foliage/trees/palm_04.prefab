@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7480100285264332283}
   - component: {fileID: 5792046940677311070}
   - component: {fileID: 8612443006712512148}
-  - component: {fileID: 1773109979953895915}
+  - component: {fileID: 6248349825854066228}
   m_Layer: 0
   m_Name: palm_04
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1773109979953895915
-MeshCollider:
+--- !u!65 &6248349825854066228
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5295164768969071483, guid: cfd4701b1ae7f9c4b8ecc96b09d2650c, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.9170834, y: 1.4815829, z: 0.9846326}
+  m_Center: {x: 0.04057032, y: 0.5874789, z: -0.03100425}
