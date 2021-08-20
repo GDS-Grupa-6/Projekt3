@@ -13,7 +13,7 @@ namespace Raven.Enemy
         [SerializeField] private GameObject _effectPrefab;
         [HideIf("_effectOnEnemy"), SerializeField] private float _power = 2;
         [HideIf("_effectOnEnemy"), SerializeField] private float _explodeRadius = 5;
-        [HideIf("_effectOnEnemy"), SerializeField] private Transform _effectPosition;
+        [SerializeField] private Transform _effectPosition;
         [SerializeField] private bool _effectOnEnemy;
         [ShowIf("_effectOnEnemy"), SerializeField] private EnemyConfig _config;
 
@@ -31,6 +31,7 @@ namespace Raven.Enemy
             {
                 _currentPower = _config.Power;
                 _currentExplodeRadius = _config.ExplodeRadius;
+                _currentEffectPosition = _effectPosition.position;
             }
             else
             {
@@ -52,6 +53,9 @@ namespace Raven.Enemy
         {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, _currentExplodeRadius, transform.forward, _currentExplodeRadius);
 
+            var obj = Instantiate(_effectPrefab);
+            obj.transform.position = _currentEffectPosition;
+
             for (int i = 0; i < hits.Length; i++)
             {
                 if (hits[i].collider.tag == "Enemy" && hits[i].collider.gameObject != this.gameObject)
@@ -61,9 +65,6 @@ namespace Raven.Enemy
                 else if (hits[i].collider.tag == "Player")
                 {
                     if (_effectOnEnemy) _currentEffectPosition = transform.position;
-
-                    var obj = Instantiate(_effectPrefab);
-                    obj.transform.position = _currentEffectPosition;
 
                     _playerDataManager.TakeDamage(_currentPower);
                 }

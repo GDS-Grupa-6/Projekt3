@@ -13,6 +13,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0019560428
   m_Center: {x: 0.000002432207, y: -0.00039504218, z: 0.00010072498}
+--- !u!114 &97186786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517136604269349372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc6738d30ecf804fbf3fd2abb834d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectPrefab: {fileID: 3777265546122994993, guid: 1840cb871d2f95643bebb8c26eab23dd, type: 3}
+  _power: 2
+  _explodeRadius: 5
+  _effectPosition: {fileID: 4288748148883444550}
+  _effectOnEnemy: 1
+  _config: {fileID: 11400000, guid: 20bbfdca699737d458690f9cfad0efa9, type: 2}
 --- !u!1 &4327405959459760530
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,7 +56,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4327405959459760530}
-  m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 3.8, z: -57.4}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children:
@@ -62,8 +80,8 @@ MonoBehaviour:
   _enemyGfxTransform: {fileID: 4288748148883444550}
   _gfxMaterial: {fileID: 2100000, guid: 589f3f1e6c3dab54cb27baad997f6c8a, type: 2}
   _redMaterial: {fileID: 2100000, guid: 2e625ad1ee776b4438f9240924a53e75, type: 2}
-  _staticActivator: 0
-  _activateRadius: 0
+  _staticActivator: 1
+  _activateRadius: 23
 --- !u!195 &4327405959459760531
 NavMeshAgent:
   m_ObjectHideFlags: 0

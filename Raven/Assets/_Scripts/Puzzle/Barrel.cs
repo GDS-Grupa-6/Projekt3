@@ -9,7 +9,6 @@ namespace Raven.Puzzle
     [RequireComponent(typeof(Explode))]
     public class Barrel : MonoBehaviour
     {
-        [SerializeField] private Transform _effectPosition;
         [SerializeField] private GameObject[] _destroyable;
 
         private Collider _collider;
