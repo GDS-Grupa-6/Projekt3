@@ -5291,6 +5291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1923270915}
+  - component: {fileID: 1923270916}
   m_Layer: 0
   m_Name: MeshEffects
   m_TagString: Untagged
@@ -5333,6 +5334,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1923270916
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923270914}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b8fbceac1c858d42a300718da4a8e84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1924219813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10397,19 +10417,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4831498698992466582, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99983543
+      value: 0.9998355
       objectReference: {fileID: 0}
     - target: {fileID: 4831498698992466582, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.018141465
+      value: -0.01814147
       objectReference: {fileID: 0}
     - target: {fileID: 4831498698992466582, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000001192093
+      value: -0.00000008940697
       objectReference: {fileID: 0}
     - target: {fileID: 4831498698992466582, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000074505815
+      value: 0.000000011175871
       objectReference: {fileID: 0}
     - target: {fileID: 4831498699123171948, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_FollowOffset.y
