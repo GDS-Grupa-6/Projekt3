@@ -3,6 +3,7 @@ using Raven.Input;
 using System;
 using System.Collections;
 using System.Diagnostics.Eventing.Reader;
+using ModestTree;
 using Raven.Player;
 using Raven.UI;
 using UnityEngine;
@@ -146,8 +147,6 @@ namespace Raven.Manager
         public void FppMove(Vector3 p_moveVector, float p_speed)
         {
             Vector3 move = _playerTransform.right * p_moveVector.x + _playerTransform.forward * p_moveVector.z;
-
-            _playerTransform.Rotate(Vector3.up * _inputController.GetMouseDelta().x);
             _playerController.Move(move * p_speed * Time.deltaTime);
         }
 
