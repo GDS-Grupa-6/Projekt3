@@ -23,7 +23,7 @@ namespace Raven.Player
             _rig = p_rig;
             _rigTarget = p_rigTarget;
             _cameraManager = p_cameraManager;
-            _cameraLock = _cameraManager.RayLock;
+            _cameraLock = _cameraManager.ShootCameraLock;
 
             _rig.weight = 0;
 

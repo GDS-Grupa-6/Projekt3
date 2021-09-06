@@ -22,7 +22,7 @@ namespace Raven.Core.Installer
         [SerializeField] private CinemachineFreeLook _tppCamera;
         [SerializeField] private Rig _playerRig;
         [SerializeField] private GameObject _rigTarget;
-        [SerializeField] private GameObject _rayLock;
+        [SerializeField] private GameObject _shootCameraLock;
         [SerializeField] private Transform _oneHandShootPoint;
         [SerializeField] private Transform _twoHandsShootPoint;
         [Space, Header("HUD")]
@@ -47,7 +47,7 @@ namespace Raven.Core.Installer
                 _inputTexts, _collectibles).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerAnimatorManager>().AsSingle().WithArguments(_playerAnimator).NonLazy();
-            Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform, _rayLock).NonLazy();
+            Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform, _shootCameraLock, _movementConfig).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerRigManager>().AsSingle().WithArguments(_playerRig, _rigTarget).NonLazy();
         }
     }
