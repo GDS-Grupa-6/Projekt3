@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4327405959459760534}
   - component: {fileID: 4327405959459760532}
   - component: {fileID: 4327405959459760531}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FollowSkull
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
   _gfxMaterial: {fileID: 2100000, guid: 589f3f1e6c3dab54cb27baad997f6c8a, type: 2}
   _redMaterial: {fileID: 2100000, guid: 2e625ad1ee776b4438f9240924a53e75, type: 2}
   _staticActivator: 1
-  _activateRadius: 14
+  _activateRadius: 30
 --- !u!195 &4327405959459760531
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -170,6 +170,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cb9ba095ee7897b45b6cb374b57a9212, type: 3}
       propertyPath: m_Name
       value: GFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cb9ba095ee7897b45b6cb374b57a9212, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cb9ba095ee7897b45b6cb374b57a9212, type: 3}
       propertyPath: m_TagString
