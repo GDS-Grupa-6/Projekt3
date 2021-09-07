@@ -13,13 +13,15 @@ namespace Raven.Player
         private Rig _rig;
         private GameObject _rigTarget;
         private GameObject _cameraLock;
+        private LayerMask _rayLayerMask;
 
         private bool _activeWeight;
 
         public GameObject RigTarget => _rigTarget;
 
-        public PlayerRigManager(CameraManager p_cameraManager, Rig p_rig, GameObject p_rigTarget)
+        public PlayerRigManager(CameraManager p_cameraManager, Rig p_rig, GameObject p_rigTarget, LayerMask p_rayMask)
         {
+            _rayLayerMask = p_rayMask;
             _rig = p_rig;
             _rigTarget = p_rigTarget;
             _cameraManager = p_cameraManager;
@@ -46,21 +48,14 @@ namespace Raven.Player
                 _rig.weight = 0;
             }
 
-            if (GetRaycastHit().point == Vector3.zero || GetRaycastHit().collider.tag == "Collectible")
-            {
-                _rigTarget.transform.position = _cameraLock.transform.forward * 1000f;
-            }
-            else
-            {
-                _rigTarget.transform.position = GetRaycastHit().point;
-            }
+            _rigTarget.transform.position = GetRaycastHit().point;
         }
 
         public RaycastHit GetRaycastHit()
         {
             RaycastHit hit;
-            Physics.Raycast(_cameraLock.transform.position, _cameraLock.transform.forward, out hit);
-
+            Physics.Raycast(_cameraLock.transform.position, _cameraLock.transform.forward, out hit,999, _rayLayerMask);
+            Debug.Log(hit.collider.name);
             return hit;
         }
 

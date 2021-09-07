@@ -102,7 +102,7 @@ namespace Raven.Puzzle
                 {
                     if (_stayOpenForAWhile)
                     {
-                        StayOpen();
+                        StayOpenWhile();
                     }
                     else if (!_stayOpen )
                     {
@@ -112,7 +112,7 @@ namespace Raven.Puzzle
             }
         }
 
-        private void StayOpen()
+        private void StayOpenWhile()
         {
             if (_openTimer < _stayOpenTime)
             {
@@ -183,9 +183,10 @@ namespace Raven.Puzzle
         private void OnTriggerEnter(Collider p_other)
         {
             if (_openingDoor) return;
-
+            Debug.Log(p_other.tag + " "+_activatorType);
             if (_activatorType == ActivatorType.Torch && p_other.tag == "FireBullet")
             {
+                Debug.Log("aa");
                 _openingDoor = true;
                 _fire.SetActive(true);
             }
