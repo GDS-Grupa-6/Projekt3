@@ -152,20 +152,20 @@ namespace Raven.UI
         {
             if (p_aim)
             {
-                _viewFinder.transform.position = Camera.main.WorldToScreenPoint(_rigTarget.transform.position);
+                _viewFinder.transform.position = Vector3.Lerp(_viewFinder.transform.position, Camera.main.WorldToScreenPoint(_rigTarget.transform.position), Time.deltaTime * 10);
                 _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _viewFinder.gameObject);
             }
             else
             {
                 _coroutinesManager.StopAllCoroutines(_viewFinder.gameObject);
-                _viewFinder.gameObject.SetActive(false);
+                _viewFinder.transform.parent.gameObject.SetActive(false);
             }
         }
 
         private IEnumerator SetViewFinderCoroutine()
         {
             yield return new WaitForSeconds(0.7f);
-            _viewFinder.gameObject.SetActive(true);
+            _viewFinder.transform.parent.gameObject.SetActive(true);
         }
 
         private void AimTextHud(bool p_aim)
