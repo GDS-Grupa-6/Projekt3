@@ -158,14 +158,14 @@ namespace Raven.UI
             else
             {
                 _coroutinesManager.StopAllCoroutines(_viewFinder.gameObject);
-                _viewFinder.transform.parent.gameObject.SetActive(false);
+                _viewFinder.gameObject.SetActive(false);
             }
         }
 
         private IEnumerator SetViewFinderCoroutine()
         {
             yield return new WaitForSeconds(0.7f);
-            _viewFinder.transform.parent.gameObject.SetActive(true);
+            _viewFinder.gameObject.SetActive(true);
         }
 
         private void AimTextHud(bool p_aim)

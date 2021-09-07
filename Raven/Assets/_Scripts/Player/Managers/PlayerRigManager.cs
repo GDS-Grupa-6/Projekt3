@@ -12,7 +12,6 @@ namespace Raven.Player
 
         private Rig _rig;
         private GameObject _rigTarget;
-        private GameObject _cameraLock;
         private LayerMask _rayLayerMask;
 
         private bool _activeWeight;
@@ -25,7 +24,6 @@ namespace Raven.Player
             _rig = p_rig;
             _rigTarget = p_rigTarget;
             _cameraManager = p_cameraManager;
-            _cameraLock = _cameraManager.ShootCameraLock;
 
             _rig.weight = 0;
 
@@ -54,8 +52,7 @@ namespace Raven.Player
         public RaycastHit GetRaycastHit()
         {
             RaycastHit hit;
-            Physics.Raycast(_cameraLock.transform.position, _cameraLock.transform.forward, out hit,999, _rayLayerMask);
-            Debug.Log(hit.collider.name);
+            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,9999, _rayLayerMask);
             return hit;
         }
 

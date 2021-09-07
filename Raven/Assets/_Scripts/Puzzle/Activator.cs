@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -70,7 +67,7 @@ namespace Raven.Puzzle
                     PushPart();
                 }
             }
-            
+
             if (_closingDoor)
             {
                 CloseDoor();
@@ -104,7 +101,7 @@ namespace Raven.Puzzle
                     {
                         StayOpenWhile();
                     }
-                    else if (!_stayOpen )
+                    else if (!_stayOpen)
                     {
                         _closingDoor = true;
                     }
@@ -131,7 +128,7 @@ namespace Raven.Puzzle
             if (_closeTimer <= _closeTime)
             {
                 _closeTimer += Time.deltaTime;
-                float percent = _openTimer / _closeTime;
+                float percent = _closeTimer / _closeTime;
 
                 _doorTransform.position = _doorDestiny - _doorShift * percent;
             }
@@ -170,7 +167,7 @@ namespace Raven.Puzzle
             if (_backPartTimer <= _closeTime)
             {
                 _backPartTimer += Time.deltaTime;
-                float percent = _pushPartTimer / _closeTime;
+                float percent = _backPartTimer / _closeTime;
 
                 transform.position = _partDestiny - _partShift * percent;
             }
@@ -183,10 +180,9 @@ namespace Raven.Puzzle
         private void OnTriggerEnter(Collider p_other)
         {
             if (_openingDoor) return;
-            Debug.Log(p_other.tag + " "+_activatorType);
+
             if (_activatorType == ActivatorType.Torch && p_other.tag == "FireBullet")
             {
-                Debug.Log("aa");
                 _openingDoor = true;
                 _fire.SetActive(true);
             }
@@ -196,15 +192,15 @@ namespace Raven.Puzzle
             }
         }
 
-    /*    private void OnTriggerStay(Collider p_other)
-        {
-            if (_openingDoor) return;
-
-            if (_activatorType == ActivatorType.Lever && p_other.tag == "Player")
+        /*    private void OnTriggerStay(Collider p_other)
             {
-                _closingDoor = false;
-            }
-        }*/
+                if (_openingDoor) return;
+
+                if (_activatorType == ActivatorType.Lever && p_other.tag == "Player")
+                {
+                    _closingDoor = false;
+                }
+            }*/
 
         private void OnTriggerExit(Collider p_collider)
         {
