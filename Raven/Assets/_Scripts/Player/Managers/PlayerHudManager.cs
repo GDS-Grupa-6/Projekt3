@@ -23,16 +23,17 @@ namespace Raven.UI
 
         private float _energyRegenerationTimer;
         private float _startEnergyRegenerationTimer;
-        private Vector2 _screenCenter;
 
         private TextMeshProUGUI[] _inputTexts;
 
         private bool _regenerateEnergy;
+        private GameObject _rigTarget;
 
         public PlayerHudManager(Slider p_energySlider, Slider p_healthSlider, Image p_viewFinder,
             PlayerDataConfig p_playerDataConfig, CameraManager p_cameraManager, CoroutinesManager p_coroutinesManager,
-            TextMeshProUGUI[] p_inputTexts, Collectible[] p_collectibles)
+            TextMeshProUGUI[] p_inputTexts, Collectible[] p_collectibles, PlayerRigManager p_playerRigManager)
         {
+            _rigTarget = p_playerRigManager.RigTarget;
             _energySlider = p_energySlider;
             _healthSlider = p_healthSlider;
             _playerDataConfig = p_playerDataConfig;
@@ -41,10 +42,6 @@ namespace Raven.UI
             _coroutinesManager = p_coroutinesManager;
             _inputTexts = p_inputTexts;
             _collectibles = p_collectibles;
-
-
-            _screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-            _viewFinder.transform.position = _screenCenter;
 
             SetSlidersValues();
 
@@ -155,6 +152,7 @@ namespace Raven.UI
         {
             if (p_aim)
             {
+                _viewFinder.transform.position = Camera.main.WorldToScreenPoint(_rigTarget.transform.position);
                 _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _viewFinder.gameObject);
             }
             else
