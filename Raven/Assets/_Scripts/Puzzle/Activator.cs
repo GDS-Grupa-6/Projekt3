@@ -11,7 +11,6 @@ namespace Raven.Puzzle
         [SerializeField] private ActivatorType _activatorType;
         [Space]
         [SerializeField, ShowIf("_activatorType", ActivatorType.Lever)] private Vector3 _partShift;
-        [SerializeField, ShowIf("_activatorType", ActivatorType.Lever)] private bool _closeAfterLeavePart;
         [Space]
         [SerializeField, HideIf("_activatorType", ActivatorType.Lever)] private GameObject _fire;
         [Space]
@@ -20,7 +19,7 @@ namespace Raven.Puzzle
         [Space]
         [SerializeField] private float _openTime;
         [SerializeField] private float _closeTime;
-        [SerializeField] private bool _stayOpenForAWhile;
+        [SerializeField, HideIf("_activatorType", ActivatorType.Lever)] private bool _stayOpenForAWhile;
         [SerializeField, ShowIf("_stayOpenForAWhile")] private float _stayOpenTime;
         [SerializeField, HideIf("_stayOpenForAWhile")] private bool _stayOpen;
         [Space]
@@ -29,14 +28,18 @@ namespace Raven.Puzzle
 
         private bool _closingDoor;
         private bool _openingDoor;
-        private float _openTimer;
-        private float _closeTimer;
-        private float _pushPartTimer;
-        private float _backPartTimer;
+        private bool _doorAreOpened;
+        private bool _doorAreClosed = true;
+
+        private float _timer;
+        private float _stayOpenTimer;
+
         private Vector3 _doorDestiny;
         private Vector3 _doorStartPos;
         private Vector3 _partDestiny;
         private Vector3 _partStartPos;
+
+        private float _percent;
 
         private void Awake()
         {
@@ -61,21 +64,11 @@ namespace Raven.Puzzle
             if (_openingDoor)
             {
                 OpenDoor();
-
-                if (_activatorType == ActivatorType.Lever)
-                {
-                    PushPart();
-                }
             }
 
             if (_closingDoor)
             {
                 CloseDoor();
-
-                if (_activatorType == ActivatorType.Lever)
-                {
-                    PartToStarPosition();
-                }
             }
         }
 
@@ -83,97 +76,84 @@ namespace Raven.Puzzle
         {
             if (_closingDoor) return;
 
-            if (_openTimer <= _openTime)
-            {
-                _openTimer += Time.deltaTime;
-                float percent = _openTimer / _openTime;
+            _doorAreClosed = false;
 
-                _doorTransform.position = _doorStartPos + _doorShift * percent;
+            if (_timer <= _openTime && !_doorAreOpened)
+            {
+                _percent = _timer / _openTime;
+                _timer += Time.deltaTime;
+                
+                _doorTransform.position = _doorStartPos + _doorShift * _percent;
+
+                if (_activatorType == ActivatorType.Lever)
+                {
+                    transform.position = _partStartPos + _partShift * _percent;
+                }
             }
             else
             {
-                _openingDoor = false;
-                _openTimer = 0;
+                _doorAreOpened = true;
+                _timer = _closeTime - _percent * _closeTime;
 
-                if (_activatorType != ActivatorType.Lever)
+                if (_stayOpenForAWhile)
                 {
-                    if (_stayOpenForAWhile)
-                    {
-                        StayOpenWhile();
-                    }
-                    else if (!_stayOpen)
-                    {
-                        _closingDoor = true;
-                    }
+                    StayOpenWhile();
+                }
+                else if (!_stayOpen && _activatorType == ActivatorType.Torch)
+                {
+                    _openingDoor = false;
+                    _doorAreOpened = false;
+                    _closingDoor = true;
+                }
+                else
+                {
+                    _openingDoor = false;
                 }
             }
         }
 
         private void StayOpenWhile()
         {
-            if (_openTimer < _stayOpenTime)
+            if (_stayOpenTimer < _stayOpenTime)
             {
-                _openTimer += Time.deltaTime;
+                _stayOpenTimer += Time.deltaTime;
             }
             else
             {
-                _openTimer = 0;
                 _openingDoor = false;
+                _doorAreOpened = false;
                 _closingDoor = true;
+                _stayOpenTimer = 0;
             }
         }
 
         private void CloseDoor()
         {
-            if (_closeTimer <= _closeTime)
-            {
-                _closeTimer += Time.deltaTime;
-                float percent = _closeTimer / _closeTime;
+            _doorAreOpened = false;
 
-                _doorTransform.position = _doorDestiny - _doorShift * percent;
+            if (_timer <= _closeTime)
+            {
+                _percent = _timer / _closeTime;
+                _timer += Time.deltaTime;
+
+                _doorTransform.position = _doorDestiny - _doorShift * _percent;
+
+                if (_activatorType == ActivatorType.Lever)
+                {
+                    transform.position = _partDestiny - _partShift * _percent;
+                }
             }
             else
             {
                 _closingDoor = false;
+                _doorAreClosed = true;
 
-                _closeTimer = 0;
+                _timer = _openTime - _percent * _openTime;
 
                 if (_activatorType == ActivatorType.Torch)
                 {
                     _fire.SetActive(false);
                 }
-            }
-        }
-
-        private void PushPart()
-        {
-            if (_closingDoor) return;
-
-            if (_pushPartTimer <= _openTime)
-            {
-                _pushPartTimer += Time.deltaTime;
-                float percent = _pushPartTimer / _openTime;
-
-                transform.position = _partStartPos + _partShift * percent;
-            }
-            else
-            {
-                _pushPartTimer = 0;
-            }
-        }
-
-        private void PartToStarPosition()
-        {
-            if (_backPartTimer <= _closeTime)
-            {
-                _backPartTimer += Time.deltaTime;
-                float percent = _backPartTimer / _closeTime;
-
-                transform.position = _partDestiny - _partShift * percent;
-            }
-            else
-            {
-                _backPartTimer = 0;
             }
         }
 
@@ -188,25 +168,27 @@ namespace Raven.Puzzle
             }
             else if (_activatorType == ActivatorType.Lever && p_other.tag == "Player")
             {
+                _closingDoor = false;
+
+                if (!_doorAreClosed)
+                {
+                    _timer = _openTime - _percent * _openTime;
+                }
+                else
+                {
+                    _timer = 0;
+                }
+                
                 _openingDoor = true;
             }
         }
 
-        /*    private void OnTriggerStay(Collider p_other)
-            {
-                if (_openingDoor) return;
-
-                if (_activatorType == ActivatorType.Lever && p_other.tag == "Player")
-                {
-                    _closingDoor = false;
-                }
-            }*/
-
         private void OnTriggerExit(Collider p_collider)
         {
-            if (_closeAfterLeavePart && _activatorType == ActivatorType.Lever && p_collider.tag == "Player")
+            if (!_stayOpen && !_closingDoor && _activatorType == ActivatorType.Lever && p_collider.tag == "Player")
             {
                 _openingDoor = false;
+                _timer = _closeTime - _percent * _closeTime;
                 _closingDoor = true;
             }
         }
