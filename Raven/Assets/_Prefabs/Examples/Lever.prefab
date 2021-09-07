@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3111024474063670350}
   - component: {fileID: 3111024474063670349}
   - component: {fileID: 3111024474063670348}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 3111024474798018537}
   - component: {fileID: 3111024474798018534}
   - component: {fileID: 3111024474798018533}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Laver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3111024474798018532}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.75, y: 0.102, z: 16.47}
   m_LocalScale: {x: 3, y: 0.2, z: 3}
   m_Children:
@@ -154,15 +154,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activatorType: 1
-  _leverPartTransform: {fileID: 3111024474798018537}
   _partShift: {x: 0, y: -0.18, z: 0}
-  _closeAfterLeavePart: 1
   _fire: {fileID: 0}
   _doorTransform: {fileID: 0}
   _doorShift: {x: 0, y: 0, z: 18.5}
   _openTime: 5
-  _closeTime: 5
+  _closeTime: 2
   _stayOpenForAWhile: 0
-  _stayOpenTime: 0
+  _stayOpenTime: 3
   _stayOpen: 0
   _gizmoRadius: 0.2
