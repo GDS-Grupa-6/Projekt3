@@ -18,6 +18,7 @@ namespace Raven.Player
 
         private PlayerStatesManager _playerStatesManager;
         private InputController _inputController;
+        private bool _canTake;
 
         public event Action<CollectibleName> OnUnlock;
 
@@ -26,21 +27,26 @@ namespace Raven.Player
         {
             _inputController = p_inputController;
             _playerStatesManager = p_playerStatesManager;
+
+            _infoUiTransform.position = Camera.main.WorldToScreenPoint(_infoUiLockTransform.position);
         }
 
-        private void OnTriggerStay(Collider p_collider)
+        public void Update()
+        {
+            if (_canTake && _inputController.TakeButtonPressed())
+            {
+                _playerStatesManager.UnlockState(_collectibleName);
+                OnUnlock?.Invoke(_collectibleName);
+                Destroy(this.gameObject);
+            }
+        }
+
+        private void OnTriggerEnter(Collider p_collider)
         {
             if (p_collider.tag == "Player")
             {
-                _infoUiTransform.position = Camera.main.WorldToScreenPoint(_infoUiLockTransform.position);
                 _canvas.SetActive(true);
-
-                if (_inputController.TakeButtonPressed())
-                {
-                    _playerStatesManager.UnlockState(_collectibleName);
-                    OnUnlock?.Invoke(_collectibleName);
-                    Destroy(this.gameObject);
-                }
+                _canTake = true;
             }
         }
 
@@ -49,6 +55,7 @@ namespace Raven.Player
             if (p_collider.tag == "Player")
             {
                 _canvas.SetActive(false);
+                _canTake = false;
             }
         }
     }
