@@ -13,8 +13,11 @@ namespace Raven.Config
         [Space]
         [SerializeField, Range(-30, -1)] private float _gravityValue = -9.81f;
         [Space]
-        [SerializeField, Range(0.1f, 1f)] private float _fppToTppDelayTime; 
+        [SerializeField, Range(0.1f, 1f)] private float _fppToTppDelayTime;
+        [Space]
+        [SerializeField, Range(0.1f, 20f)] private float _fppMouseSensitivity;
 
+        public float FppMouseSensitivity => _fppMouseSensitivity;
         public float MoveSpeed => _moveSpeed;
         public float TurnSmoothTime => _turnSmoothTime;
         public float GravityValue => _gravityValue;

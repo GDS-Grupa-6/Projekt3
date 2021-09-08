@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
 {
     private PlayerStatesManager _playerStatesManager;
 
-    private bool _stop;
     private float _lifeTimer;
 
     public void Initialization(PlayerStatesManager p_playerStatesManager)
@@ -26,9 +25,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Collectible") return;
-
-        _stop = true;
+        if (other.tag == "Collectible" || other.tag == "Laver") return;
 
         if (other.tag == "Enemy")
         {
