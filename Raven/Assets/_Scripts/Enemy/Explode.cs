@@ -72,6 +72,11 @@ namespace Raven.Enemy
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
+            if (_effectOnEnemy && !_config.ExplodeAfterDead)
+            {
+              return;
+            }
+
             Gizmos.color = Color.red;
 
             Gizmos.DrawWireSphere(transform.position, _effectOnEnemy ? _config.ExplodeRadius : _explodeRadius);

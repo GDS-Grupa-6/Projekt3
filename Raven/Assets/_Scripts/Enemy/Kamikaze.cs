@@ -41,14 +41,11 @@ namespace Raven.Enemy
             _gfxTarget.Add(new Vector3(0.00754f, 0.00151f, 0));
             _gfxTarget.Add(new Vector3(0, 0.00151f, 0));
             _currentGfxTarget = _gfxTarget[0];
-        }
 
-        public void Start()
-        {
             _coroutinesManager.StartCoroutine(DodgeWaitCoroutine(), _enemy);
         }
 
-        public void Update()
+        public void Behaviour()
         {
             float distance = Vector3.Distance(_enemy.transform.position, _playerTransform.position);
             Vector3 lookAtVector3 = _playerTransform.position;
@@ -56,7 +53,7 @@ namespace Raven.Enemy
 
             _gfxTransform.LookAt(lookAtVector3);
 
-            if (distance > 8 || (distance <= 8 && !_charge))
+            if (distance > _enemyConfig.ChargeDistance || (distance <= _enemyConfig.ChargeDistance && !_charge))
             {
                 _navMesh.SetDestination(_playerTransform.position);
 
@@ -103,18 +100,18 @@ namespace Raven.Enemy
             if (_chargeTimer < _enemyConfig.ChargeTime)
             {
                 _chargeTimer += Time.deltaTime;
-                _gfxTransform.position += _gfxTransform.forward * _enemyConfig.MoveSpeed * _enemyConfig.SpeedModifier * Time.deltaTime;
+                _gfxTransform.position += _gfxTransform.forward * _enemyConfig.MoveSpeed * _enemyConfig.ChargeSpeedModifier * Time.deltaTime;
             }
             else
             {
                 _charge = false;
                 _chargeTimer = 0;
-                ReturnPosition();
+                GfxReturnPosition();
                 _coroutinesManager.StartCoroutine(ChargeWaitCoroutine(), _enemy);
             }
         }
 
-        private void ReturnPosition()
+        private void GfxReturnPosition()
         {
             _enemy.transform.position = _gfxTransform.position;
             _gfxTransform.position = _gfxTarget[_gfxTarget.Count - 1];
