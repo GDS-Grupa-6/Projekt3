@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4327405959459760532}
   - component: {fileID: 4327405959459760531}
   m_Layer: 8
-  m_Name: FollowSkull
+  m_Name: KamikazeSkull
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,8 +80,9 @@ MonoBehaviour:
   _enemyGfxTransform: {fileID: 4288748148883444550}
   _gfxMaterial: {fileID: 2100000, guid: 589f3f1e6c3dab54cb27baad997f6c8a, type: 2}
   _redMaterial: {fileID: 2100000, guid: 2e625ad1ee776b4438f9240924a53e75, type: 2}
-  _staticActivator: 1
-  _activateRadius: 10
+  _activateRadius: 43.85
+  _activateAngle: 90
+  _shootPoint: {fileID: 0}
 --- !u!195 &4327405959459760531
 NavMeshAgent:
   m_ObjectHideFlags: 0

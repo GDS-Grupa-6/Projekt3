@@ -10,14 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2473c0e789ec50c4eabb85fcc03b118c, type: 3}
-  m_Name: Follow Enemy Config
+  m_Name: Shooter Config
   m_EditorClassIdentifier: 
-  _enemyType: 0
+  _enemyType: 1
   _maxHealth: 5
   _power: 5
+  _explodeAfterDead: 0
   _moveSpeed: 5
   _maxDodgeWaitTime: 5
-  _speedModifier: 5
+  _chargeSpeedModifier: 5
+  _chargeDistance: 8
   _explodeRadius: 3
   _chargeTime: 1
   _chargeWaitTime: 3
+  _bullet: {fileID: 1135407926906639462, guid: 06a91876ff0ac9548b4269a52dae5aac, type: 3}
+  _bulletSpeed: 10
+  _shootDistance: 8
+  _shootDelayTime: 2
+  _isStatic: 0
