@@ -43,6 +43,7 @@ namespace Raven.Player
 
         private void OnTriggerEnter(Collider p_collider)
         {
+            Debug.Log("a");
             if (p_collider.tag == "Player")
             {
                 _canvas.SetActive(true);
