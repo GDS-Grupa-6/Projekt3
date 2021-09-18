@@ -1449,10 +1449,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 2629962926161105148, guid: 1cc2ffbf93830ae43bda9eea056a5e08, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cc2ffbf93830ae43bda9eea056a5e08, type: 3}
 --- !u!224 &927450268 stripped
@@ -1547,7 +1543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7213428986780194292, guid: ea47712be3579064d82cbb5ea8bfee85, type: 3}
       propertyPath: _activateRadius
-      value: 16.7
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 7213428986780194294, guid: ea47712be3579064d82cbb5ea8bfee85, type: 3}
       propertyPath: m_RootOrder
@@ -1674,6 +1670,14 @@ PrefabInstance:
     - target: {fileID: 4327405959459760530, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327405959459760532, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
+      propertyPath: _activateAngle
+      value: 32.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327405959459760532, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
+      propertyPath: _activateRadius
+      value: 23.53
       objectReference: {fileID: 0}
     - target: {fileID: 4327405959459760534, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
       propertyPath: m_RootOrder
@@ -6792,7 +6796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5072486843181423991, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.023195695
+      value: -0.023195697
       objectReference: {fileID: 0}
     - target: {fileID: 5072486843181423991, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}
       propertyPath: m_LocalRotation.y

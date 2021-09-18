@@ -24,7 +24,7 @@ namespace Raven.Manager
         [Space]
         [SerializeField, BoxGroup("-----POV-----")] private float _activateRadius;
         [SerializeField, BoxGroup("-----POV-----")] private float _activateAngle = 90;
-        [Space] 
+        [Space]
         [SerializeField, BoxGroup("-----FOR SHOOTER-----"), ShowIf("_isShooter")] private Transform _shootPoint;
 
         private bool _isShooter => _enemyConfig.EnemyType == EnemyType.Shooter;
@@ -72,20 +72,25 @@ namespace Raven.Manager
                 return;
             }
 
-            RaycastHit[] hit = Physics.SphereCastAll(_enemyGfxTransform.position, _activateRadius, _enemyGfxTransform.forward);
+            RaycastHit hit;
+            Physics.SphereCast(_enemyGfxTransform.position, _activateRadius, _enemyGfxTransform.forward, out hit);
 
-            for (int i = 0; i < hit.Length; i++)
+            if (hit.collider == null)
             {
-                if (hit[i].collider.gameObject.tag == "Player")
-                {
-                    Vector3 povDir = hit[i].collider.transform.position - _enemyGfxTransform.position;
+                return;
+            }
 
-                    if (Vector3.Angle(povDir, _enemyGfxTransform.forward) <= _activateAngle / 2)
-                    {
-                        _active = true;
-                    }
+
+            if (hit.collider.tag == "Player")
+            {
+                Vector3 povDir = hit.collider.transform.position - _enemyGfxTransform.position;
+
+                if (Vector3.Angle(povDir, _enemyGfxTransform.forward) <= _activateAngle / 2)
+                {
+                    _active = true;
                 }
             }
+
         }
 
         public void TakeDamage(float p_value)
