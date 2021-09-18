@@ -1,3 +1,4 @@
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace Raven.Puzzle
         [Space]
         [SerializeField] private float _openTime;
         [SerializeField] private float _closeTime;
-        [SerializeField, HideIf("_activatorType", ActivatorType.Lever)] private bool _stayOpenForAWhile;
+        [SerializeField] private bool _stayOpenForAWhile;
         [SerializeField, ShowIf("_stayOpenForAWhile")] private float _stayOpenTime;
         [SerializeField, HideIf("_stayOpenForAWhile")] private bool _stayOpen;
         [Space]
@@ -187,10 +188,24 @@ namespace Raven.Puzzle
         {
             if (!_stayOpen && !_closingDoor && _activatorType == ActivatorType.Lever && p_collider.tag == "Player")
             {
+                if (_stayOpenForAWhile)
+                {
+                    StartCoroutine(CloseDelayCoroutine());
+                    return;
+                }
+
                 _openingDoor = false;
                 _timer = _closeTime - _percent * _closeTime;
                 _closingDoor = true;
             }
+        }
+
+        private IEnumerator CloseDelayCoroutine()
+        {
+            _openingDoor = false;
+            yield return new WaitForSeconds(_stayOpenTime);
+            _timer = _closeTime - _percent * _closeTime;
+            _closingDoor = true;
         }
 
 #if UNITY_EDITOR

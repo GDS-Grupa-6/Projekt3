@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography.X509Certificates;
 using Raven.Config;
 using Raven.Container;
@@ -25,11 +26,13 @@ namespace Raven.Player
         private readonly PlayerRigManager _playerRigManager;
         private readonly PlayerHudManager _playerHudManager;
 
+        private GameObject _secondWeapon;
         private Transform _oneHandShootPoint;
         private Transform _twoHandsShootPoint;
         private PlayerStateConfig _currentConfig;
         private IPlayerState _currentBehaviour;
         private bool _canShoot;
+        private bool _leftHandShoot;
 
         private Dictionary<CollectibleName, bool> _unlockedStates = new Dictionary<CollectibleName, bool>();
 
@@ -39,7 +42,7 @@ namespace Raven.Player
 
         public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputController p_inputController,
             NormalState p_normalState, FireState p_fireState, PlayerHudManager p_hudManager, CoroutinesManager p_coroutinesManager,
-            GameObject p_player, PlayerRigManager p_playerRigManager, Transform p_one, Transform p_two)
+            GameObject p_player, PlayerRigManager p_playerRigManager, Transform p_one, Transform p_two, GameObject p_secondWeapon)
         {
             _playerStatesContainer = p_playerStatesContainer;
             _inputController = p_inputController;
@@ -51,27 +54,29 @@ namespace Raven.Player
             _oneHandShootPoint = p_one;
             _twoHandsShootPoint = p_two;
             _playerHudManager = p_hudManager;
+            _secondWeapon = p_secondWeapon;
 
             _normalState.Initialize(p_inputController, p_hudManager, this);
             _fireState.Initialize(p_inputController, p_hudManager, this);
 
             _unlockedStates.Add(CollectibleName.Dash, false);
-            _unlockedStates.Add(CollectibleName.FireDash, false);
-            _unlockedStates.Add(CollectibleName.FireShoot, false);
+            _unlockedStates.Add(CollectibleName.FireState, false);
+            _unlockedStates.Add(CollectibleName.SecondWeapon, false);
 
             _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
             _currentBehaviour = _normalState;
             _canShoot = true;
+            _secondWeapon.SetActive(false);
         }
 
         public void Tick()
         {
-            if (_inputController.ActiveStateButtonPressed() && (_unlockedStates[CollectibleName.FireDash] || _unlockedStates[CollectibleName.FireShoot]))
+            if (_inputController.ActiveStateButtonPressed() && _unlockedStates[CollectibleName.FireState])
             {
-              ChangeState();
+                ChangeState();
             }
 
-            if (_currentBehaviour == _fireState && !_unlockedStates[CollectibleName.FireShoot])
+            if (_currentBehaviour == _fireState && !_unlockedStates[CollectibleName.FireState])
             {
                 return;
             }
@@ -79,14 +84,39 @@ namespace Raven.Player
             if (_inputController.ShootButtonPressed() && _inputController.AimButtonHold() && _canShoot)
             {
                 _coroutinesManager.StartCoroutine(ShootDelay(), _player);
-                _currentBehaviour.Shoot(_oneHandShootPoint, _playerRigManager.RigTarget.transform);
+
+                if (_unlockedStates[CollectibleName.SecondWeapon])
+                {
+                    if (_leftHandShoot)
+                    {
+                        _currentBehaviour.Shoot(_twoHandsShootPoint, _playerRigManager.RigTarget.transform);
+                    }
+                    else
+                    {
+                        _currentBehaviour.Shoot(_oneHandShootPoint, _playerRigManager.RigTarget.transform);
+                    }
+                }
+                else
+                {
+                    _currentBehaviour.Shoot(_oneHandShootPoint, _playerRigManager.RigTarget.transform);
+                }
             }
         }
 
         private IEnumerator ShootDelay()
         {
             _canShoot = false;
-            yield return new WaitForSeconds(_currentConfig.OneHandDelay);
+
+            if (_unlockedStates[CollectibleName.SecondWeapon])
+            {
+                yield return new WaitForSeconds(_currentConfig.TwoHandsDelay);
+                _leftHandShoot = _leftHandShoot == false ? true : false;
+            }
+            else
+            {
+                yield return new WaitForSeconds(_currentConfig.OneHandDelay);
+            }
+         
             _canShoot = true;
         }
 
@@ -108,6 +138,12 @@ namespace Raven.Player
         public void UnlockState(CollectibleName p_collectibleName)
         {
             _unlockedStates[p_collectibleName] = true;
+
+            if (p_collectibleName == CollectibleName.SecondWeapon)
+            {
+                _playerRigManager.SecondWeapon = true;
+                _secondWeapon.SetActive(true);
+            }
         }
 
         private IEnumerator EnergySubtractCoroutine()
