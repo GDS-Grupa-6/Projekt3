@@ -152,7 +152,7 @@ namespace Raven.UI
         {
             if (p_aim)
             {
-                _viewFinder.transform.position = Vector3.Lerp(_viewFinder.transform.position, Camera.main.WorldToScreenPoint(_rigTarget.transform.position), Time.deltaTime * 10);
+               // _viewFinder.transform.position = Vector3.Lerp(_viewFinder.transform.position, Camera.main.WorldToScreenPoint(_rigTarget.transform.position), Time.deltaTime * 10);
                 _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _viewFinder.gameObject);
             }
             else
