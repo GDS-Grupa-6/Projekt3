@@ -10,17 +10,17 @@ namespace Raven.Player
 {
     public class NormalState : IPlayerState
     {
-        private InputController _inputController;
+        private InputManager _inputManager;
         private PlayerHudManager _hudManager;
         private PlayerStatesManager _playerStatesManager;
 
         private float _dashTimer;
 
-        public void Initialize(InputController p_inputController, PlayerHudManager p_hudManager,
+        public void Initialize(InputManager pInputManager, PlayerHudManager p_hudManager,
             PlayerStatesManager p_playerStatesManager)
         {
             _playerStatesManager = p_playerStatesManager;
-            _inputController = p_inputController;
+            _inputManager = pInputManager;
             _hudManager = p_hudManager;
         }
 
@@ -36,7 +36,7 @@ namespace Raven.Player
         {
             if (_playerStatesManager.UnlockedStates[CollectibleName.Dash])
             {
-                if (!_inputController.DashButtonPressed()) return;
+                if (!_inputManager.DashButtonPressed()) return;
                 if (!_hudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost)) return;
 
                 p_movementManager.Dash = true;

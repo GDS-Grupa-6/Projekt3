@@ -18,7 +18,7 @@ namespace Raven.Player
     public class PlayerStatesManager : ITickable
     {
         private readonly PlayerStatesContainer _playerStatesContainer;
-        private readonly InputController _inputController;
+        private readonly InputManager _inputManager;
         private readonly CoroutinesManager _coroutinesManager;
         private readonly NormalState _normalState;
         private readonly FireState _fireState;
@@ -40,12 +40,12 @@ namespace Raven.Player
         public IPlayerState CurrentBehaviour => _currentBehaviour;
         public Dictionary<CollectibleName, bool> UnlockedStates => _unlockedStates;
 
-        public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputController p_inputController,
+        public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputManager pInputManager,
             NormalState p_normalState, FireState p_fireState, PlayerHudManager p_hudManager, CoroutinesManager p_coroutinesManager,
             GameObject p_player, PlayerRigManager p_playerRigManager, Transform p_one, Transform p_two, GameObject p_secondWeapon)
         {
             _playerStatesContainer = p_playerStatesContainer;
-            _inputController = p_inputController;
+            _inputManager = pInputManager;
             _normalState = p_normalState;
             _fireState = p_fireState;
             _coroutinesManager = p_coroutinesManager;
@@ -56,8 +56,8 @@ namespace Raven.Player
             _playerHudManager = p_hudManager;
             _secondWeapon = p_secondWeapon;
 
-            _normalState.Initialize(p_inputController, p_hudManager, this);
-            _fireState.Initialize(p_inputController, p_hudManager, this);
+            _normalState.Initialize(pInputManager, p_hudManager, this);
+            _fireState.Initialize(pInputManager, p_hudManager, this);
 
             _unlockedStates.Add(CollectibleName.Dash, false);
             _unlockedStates.Add(CollectibleName.FireState, false);
@@ -71,7 +71,7 @@ namespace Raven.Player
 
         public void Tick()
         {
-            if (_inputController.ActiveStateButtonPressed() && _unlockedStates[CollectibleName.FireState])
+            if (_inputManager.ActiveStateButtonPressed() && _unlockedStates[CollectibleName.FireState])
             {
                 ChangeState();
             }
@@ -81,7 +81,7 @@ namespace Raven.Player
                 return;
             }
 
-            if (_inputController.ShootButtonPressed() && _inputController.AimButtonHold() && _canShoot)
+            if (_inputManager.ShootButtonPressed() && _inputManager.AimButtonHold() && _canShoot)
             {
                 _coroutinesManager.StartCoroutine(ShootDelay(), _player);
 

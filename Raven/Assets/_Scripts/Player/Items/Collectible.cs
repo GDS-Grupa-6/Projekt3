@@ -17,15 +17,15 @@ namespace Raven.Player
         [SerializeField] private Transform _infoUiLockTransform;
 
         private PlayerStatesManager _playerStatesManager;
-        private InputController _inputController;
+        private InputManager _inputManager;
         private bool _canTake;
 
         public event Action<CollectibleName> OnUnlock;
 
         [Inject]
-        public void Construt(PlayerStatesManager p_playerStatesManager, InputController p_inputController)
+        public void Construt(PlayerStatesManager p_playerStatesManager, InputManager pInputManager)
         {
-            _inputController = p_inputController;
+            _inputManager = pInputManager;
             _playerStatesManager = p_playerStatesManager;
 
             _infoUiTransform.position = Camera.main.WorldToScreenPoint(_infoUiLockTransform.position);
@@ -33,7 +33,7 @@ namespace Raven.Player
 
         public void Update()
         {
-            if (_canTake && _inputController.TakeButtonPressed())
+            if (_canTake && _inputManager.TakeButtonPressed())
             {
                 _playerStatesManager.UnlockState(_collectibleName);
                 OnUnlock?.Invoke(_collectibleName);

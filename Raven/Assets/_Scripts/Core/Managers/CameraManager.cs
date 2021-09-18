@@ -9,7 +9,7 @@ namespace Raven.Manager
 {
     public class CameraManager : ITickable, IDisposable
     {
-        private InputController _inputController;
+        private InputManager _inputManager;
         private GameObject _shootCamera;
         private CinemachineFreeLook _tppCamera;
         private Transform _playerTransform;
@@ -24,11 +24,11 @@ namespace Raven.Manager
 
         public event Action<bool> OnAimChange;
 
-        public CameraManager(InputController p_inputController, GameObject p_shootCamera, CinemachineFreeLook p_tppCamera,
+        public CameraManager(InputManager pInputManager, GameObject p_shootCamera, CinemachineFreeLook p_tppCamera,
             GameObject p_player, Transform p_mainCamera, GameObject p_ShootCameraLock, MovementConfig p_movementConfig)
         {
             _movementConfig = p_movementConfig;
-            _inputController = p_inputController;
+            _inputManager = pInputManager;
             _shootCamera = p_shootCamera;
             _tppCamera = p_tppCamera;
             _playerTransform = p_player.GetComponent<Transform>();
@@ -45,7 +45,7 @@ namespace Raven.Manager
 
         public void Tick()
         {
-            OnAimChange?.Invoke(_inputController.AimButtonHold());
+            OnAimChange?.Invoke(_inputManager.AimButtonHold());
         }
 
         private void SetCameras(bool p_aim)
@@ -72,10 +72,10 @@ namespace Raven.Manager
 
         private void ShootCameraRotation()
         {
-            if (_inputController.GetMouseDelta().sqrMagnitude >= 1f)
+            if (_inputManager.GetMouseDelta().sqrMagnitude >= 1f)
             {
-                _cinemachineTargetYaw += _inputController.GetMouseDelta().x * Time.deltaTime * _movementConfig.FppMouseSensitivity;
-                _cinemachineTargetPitch += _inputController.GetMouseDelta().y * Time.deltaTime * _movementConfig.FppMouseSensitivity;
+                _cinemachineTargetYaw += _inputManager.GetMouseDelta().x * Time.deltaTime * _movementConfig.FppMouseSensitivity;
+                _cinemachineTargetPitch += _inputManager.GetMouseDelta().y * Time.deltaTime * _movementConfig.FppMouseSensitivity;
             }
 
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
