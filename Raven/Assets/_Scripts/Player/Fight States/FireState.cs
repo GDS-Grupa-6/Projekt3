@@ -33,7 +33,7 @@ namespace Raven.Player
 
         public void ActiveDash(PlayerMovementManager p_movementManager)
         {
-            if (_playerStatesManager.UnlockedStates[CollectibleName.FireDash])
+            if (_playerStatesManager.UnlockedStates[CollectibleName.FireState])
             {
                 if (!_inputController.DashButtonPressed()) return;
                 if (!_hudManager.TrySubtractEnergy(_playerStatesManager.CurrentConfig.DashCost)) return;

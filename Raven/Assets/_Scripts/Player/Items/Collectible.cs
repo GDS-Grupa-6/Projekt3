@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Raven.Player
 {
-    public enum CollectibleName { Dash, FireShoot, FireDash }
+    public enum CollectibleName { Dash, FireState, SecondWeapon }
 
     [RequireComponent(typeof(Collider))]
     public class Collectible : MonoBehaviour
@@ -43,7 +43,6 @@ namespace Raven.Player
 
         private void OnTriggerEnter(Collider p_collider)
         {
-            Debug.Log("a");
             if (p_collider.tag == "Player")
             {
                 _canvas.SetActive(true);
