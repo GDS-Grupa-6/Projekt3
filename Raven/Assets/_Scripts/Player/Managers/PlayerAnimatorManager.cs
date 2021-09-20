@@ -9,15 +9,15 @@ public class PlayerAnimatorManager : IDisposable, ITickable
     private Animator _animator;
     private PlayerMovementManager _playerMovementManager;
     private CameraManager _cameraManager;
-    private InputController _inputController;
+    private InputManager _inputManager;
 
     [Inject]
-    public PlayerAnimatorManager(Animator p_animator, PlayerMovementManager p_playerMovementManager, CameraManager p_cameraManager, InputController p_inputController)
+    public PlayerAnimatorManager(Animator p_animator, PlayerMovementManager p_playerMovementManager, CameraManager p_cameraManager, InputManager pInputManager)
     {
         _animator = p_animator;
         _playerMovementManager = p_playerMovementManager;
         _cameraManager = p_cameraManager;
-        _inputController = p_inputController;
+        _inputManager = pInputManager;
 
         _playerMovementManager.OnMove += SetSpeedParameter;
         _playerMovementManager.OnDash += SetDashParameter;
@@ -55,7 +55,7 @@ public class PlayerAnimatorManager : IDisposable, ITickable
 
     private void SetDirectionFloat()
     {
-        _animator.SetFloat("DirectionX", _inputController.GetMovementAxis().x, 0.1f, Time.deltaTime);
-        _animator.SetFloat("DirectionY", _inputController.GetMovementAxis().y, 0.1f, Time.deltaTime);
+        _animator.SetFloat("DirectionX", _inputManager.GetMovementAxis().x, 0.1f, Time.deltaTime);
+        _animator.SetFloat("DirectionY", _inputManager.GetMovementAxis().y, 0.1f, Time.deltaTime);
     }
 }

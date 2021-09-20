@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Raven.Player
 {
-    public class PlayerDataManager
+    public class PlayerDataManager: IDisposable
     {
         private PlayerDataConfig _config;
         private PlayerHudManager _playerHudManager;
@@ -23,6 +23,18 @@ namespace Raven.Player
             _config = p_config;
             _playerHudManager = p_playerHudManager;
             _currentHealth = _config.MaxHealthValue;
+
+            _playerHudManager.OnAddHealth += SetCurrentHealth;
+        }
+
+        public void Dispose()
+        {
+            _playerHudManager.OnAddHealth -= SetCurrentHealth;
+        }
+
+        private void SetCurrentHealth(float p_value)
+        {
+            _currentHealth = p_value;
         }
 
         public void TakeDamage(float p_value)

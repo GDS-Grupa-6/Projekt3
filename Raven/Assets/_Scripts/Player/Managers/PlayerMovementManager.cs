@@ -15,7 +15,7 @@ namespace Raven.Manager
     {
         private readonly Transform _playerTransform;
         private readonly CharacterController _playerController;
-        private readonly InputController _inputController;
+        private readonly InputManager _inputManager;
         private readonly MovementConfig _movementConfig;
         private readonly Transform _camTransform;
         private readonly CameraManager _cameraManager;
@@ -44,11 +44,11 @@ namespace Raven.Manager
 
         [Inject]
         public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager,
-            CoroutinesManager p_coroutinesManager, InputController p_inputController, PlayerStatesManager p_playerStatesManager)
+            CoroutinesManager p_coroutinesManager, InputManager pInputManager, PlayerStatesManager p_playerStatesManager)
         {
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
-            _inputController = p_inputController;
+            _inputManager = pInputManager;
             _movementConfig = p_movementConfig;
             _camTransform = p_camTransform;
             _cameraManager = p_cameraManager;
@@ -127,7 +127,7 @@ namespace Raven.Manager
 
         private void SetMoveVector()
         {
-            _moveVector = new Vector3(_inputController.GetMovementAxis().x, 0, _inputController.GetMovementAxis().y).normalized;
+            _moveVector = new Vector3(_inputManager.GetMovementAxis().x, 0, _inputManager.GetMovementAxis().y).normalized;
         }
 
         public void TppMovement(Vector3 p_moveVector, float p_speed)
