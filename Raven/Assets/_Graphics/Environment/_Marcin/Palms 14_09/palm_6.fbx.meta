@@ -3,12 +3,22 @@ guid: 41fbdb88a68646746bb7f1556b552481
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: palm_leaves_basic
+    second: {fileID: 2100000, guid: c0009d982e091794aa3b46bc7e1fc49c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: palm_trunk_variant
+    second: {fileID: 2100000, guid: 01057373b5275e540bdedcffe736dc8d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
