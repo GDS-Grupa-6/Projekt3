@@ -232,8 +232,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3111024474798018537}
-  - component: {fileID: 3111024474798018534}
-  - component: {fileID: 3111024474798018533}
   m_Layer: 10
   m_Name: PressurePlate
   m_TagString: Laver
@@ -257,42 +255,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3111024474798018534
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3111024474798018532}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 25, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3111024474798018533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3111024474798018532}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfc29e2c80eb19e4a86f304862e9e2f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activatorType: 1
-  _partShift: {x: 0, y: -0.18, z: 0}
-  _fire: {fileID: 0}
-  _doorTransform: {fileID: 0}
-  _doorShift: {x: 0, y: 0, z: 0}
-  _openTime: 5
-  _closeTime: 2
-  _stayOpenForAWhile: 0
-  _stayOpenTime: 3
-  _stayOpen: 0
-  _gizmoRadius: 0.2
 --- !u!1 &5464803073607112068
 GameObject:
   m_ObjectHideFlags: 0
@@ -14782,8 +14744,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5902513521757171011}
-  - component: {fileID: 558843781091661872}
-  - component: {fileID: 4128974769256077365}
   m_Layer: 0
   m_Name: inside
   m_TagString: Untagged
@@ -14806,42 +14766,6 @@ Transform:
   m_Father: {fileID: 8238809516744649232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 63.5, z: 0}
---- !u!65 &558843781091661872
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6530818053187762169}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4128974769256077365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6530818053187762169}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfc29e2c80eb19e4a86f304862e9e2f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activatorType: 1
-  _partShift: {x: 0, y: -0.18, z: 0}
-  _fire: {fileID: 0}
-  _doorTransform: {fileID: 0}
-  _doorShift: {x: 0, y: 0, z: 0}
-  _openTime: 5
-  _closeTime: 2
-  _stayOpenForAWhile: 0
-  _stayOpenTime: 3
-  _stayOpen: 0
-  _gizmoRadius: 0.2
 --- !u!1 &8583448608638054881
 GameObject:
   m_ObjectHideFlags: 0
