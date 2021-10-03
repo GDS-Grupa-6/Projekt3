@@ -81,6 +81,9 @@ MonoBehaviour:
   _redMaterial: {fileID: 2100000, guid: 2e625ad1ee776b4438f9240924a53e75, type: 2}
   _activateRadius: 16.89
   _activateAngle: 26.8
+  _whatCanSee:
+    serializedVersion: 2
+    m_Bits: 0
   _shootPoint: {fileID: 4960124806649694391}
 --- !u!195 &7213428986780194291
 NavMeshAgent:
@@ -199,8 +202,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0019560428
-  m_Center: {x: 0.000002432207, y: -0.00039504218, z: 0.00010072498}
+  m_Radius: 0.0023257178
+  m_Center: {x: 0.0000024321675, y: -0.00041636077, z: 0.000100724996}
 --- !u!114 &6347040526428082050
 MonoBehaviour:
   m_ObjectHideFlags: 0
