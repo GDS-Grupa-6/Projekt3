@@ -3295,7 +3295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (17)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -3483,7 +3483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636045362856993884, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
       propertyPath: m_Name
-      value: Torch
+      value: Puzzle_Switch_Eye
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
@@ -3949,47 +3949,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 132.95
+      value: 132.75049
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.83
+      value: 9.946225
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 151.79
+      value: 151.8763
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.96624905
+      value: 0.9927815
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.24756598
+      value: -0.053453255
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.002476415
+      value: -0.10710838
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.07118854
+      value: 0.0074489354
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -28.559
+      value: -6.001
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -2.612
+      value: -12.395
       objectReference: {fileID: 0}
     - target: {fileID: 1251187039555511835, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 9.092
+      value: 1.512
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (22)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -4129,7 +4129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (2)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -4493,7 +4493,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -4559,6 +4559,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _openTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.y
+      value: 7.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorTransform
+      value: 
+      objectReference: {fileID: 5600600654180008143}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
 --- !u!4 &3453202991348717199 stripped
@@ -5149,7 +5169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (6)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -6373,7 +6393,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever (1)
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -6446,6 +6466,30 @@ PrefabInstance:
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _openTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _closeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorTransform
+      value: 
+      objectReference: {fileID: 1076771695364167067}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenForAWhile
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
@@ -7259,7 +7303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (15)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -7333,7 +7377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (25)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -9906,7 +9950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (3)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -10256,7 +10300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (20)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -11708,7 +11752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (5)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -12577,7 +12621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -13453,7 +13497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (9)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -14875,7 +14919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (8)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -15615,7 +15659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (21)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -16389,7 +16433,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -16462,6 +16506,38 @@ PrefabInstance:
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _openTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _partShift.y
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorTransform
+      value: 
+      objectReference: {fileID: 4217725234863667024}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenForAWhile
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
@@ -16597,7 +16673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (1)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -16909,6 +16985,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5355333131323736470}
     m_Modifications:
+    - target: {fileID: 287667652952251400, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 552732323223875274, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -48.46
@@ -16977,9 +17057,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -20.64
       objectReference: {fileID: 0}
+    - target: {fileID: 1514010245287456874, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007857476574171573, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2182285284582451920, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.y
       value: 49.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272217930527463451, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2378408180558000716, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17021,6 +17113,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -28.358
       objectReference: {fileID: 0}
+    - target: {fileID: 2641396639275458806, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3450866254458190412, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -49.08
@@ -17033,6 +17129,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -22.74
       objectReference: {fileID: 0}
+    - target: {fileID: 3825293496975194845, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4494025662258028647, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -47.09
@@ -17044,6 +17144,14 @@ PrefabInstance:
     - target: {fileID: 4494025662258028647, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -20.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652576438754478354, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755297114038287135, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5234509140172402657, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17181,6 +17289,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -20.27
       objectReference: {fileID: 0}
+    - target: {fileID: 7459100193107107565, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639569685611412701, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8322958928202730564, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -43.97
@@ -17204,6 +17320,14 @@ PrefabInstance:
     - target: {fileID: 8513140253471683788, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703988723093657342, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9038565401473216118, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9095960637181267641, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17442,7 +17566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (19)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -17664,7 +17788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (18)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -18026,7 +18150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (4)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -18314,7 +18438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (13)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -18610,7 +18734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (11)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -19120,7 +19244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (3)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -19392,7 +19516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (1)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -22460,7 +22584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (14)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -22816,6 +22940,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -71.613
       objectReference: {fileID: 0}
+    - target: {fileID: 927851139646551152, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1195291254848523023, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.y
       value: 48.74
@@ -22832,9 +22960,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -20.64
       objectReference: {fileID: 0}
+    - target: {fileID: 1514010245287456874, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007857476574171573, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2182285284582451920, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.y
       value: 49.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272217930527463451, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2378408180558000716, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22860,6 +23000,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -22.72
       objectReference: {fileID: 0}
+    - target: {fileID: 3825293496975194845, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4494025662258028647, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -47.09
@@ -22871,6 +23015,14 @@ PrefabInstance:
     - target: {fileID: 4494025662258028647, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -20.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652576438754478354, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755297114038287135, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5234509140172402657, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -23008,6 +23160,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -20.27
       objectReference: {fileID: 0}
+    - target: {fileID: 7639569685611412701, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8322958928202730564, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -43.97
@@ -23031,6 +23187,14 @@ PrefabInstance:
     - target: {fileID: 8513140253471683788, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703988723093657342, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9038565401473216118, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9095960637181267641, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24965,7 +25129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (2)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -25055,7 +25219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636045362856993884, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
       propertyPath: m_Name
-      value: Torch
+      value: Puzzle_Switch_Eye
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
@@ -25339,7 +25503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (5)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -26308,7 +26472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (23)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -27582,7 +27746,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -27647,6 +27811,14 @@ PrefabInstance:
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.y
+      value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenForAWhile
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
@@ -27812,7 +27984,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -27881,6 +28053,38 @@ PrefabInstance:
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _openTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _closeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.y
+      value: -6.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _partShift.y
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenTime
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorTransform
+      value: 
+      objectReference: {fileID: 8283110609998892634}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenForAWhile
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
@@ -32422,7 +32626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (12)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -32440,7 +32644,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -32472,7 +32676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.20000002
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32514,6 +32718,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.194
       objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _openTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _closeTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _partShift.y
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorTransform
+      value: 
+      objectReference: {fileID: 73248389621108397}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
 --- !u!4 &9105526321984960278 stripped
@@ -32660,7 +32892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (24)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -33444,7 +33676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018532, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_Name
-      value: Lever
+      value: PressurePlate
       objectReference: {fileID: 0}
     - target: {fileID: 3111024474798018533, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: _openTime
@@ -33529,6 +33761,38 @@ PrefabInstance:
     - target: {fileID: 3111024474798018537, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _openTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _closeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorShift.y
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _doorTransform
+      value: 
+      objectReference: {fileID: 4303334097031088436}
+    - target: {fileID: 7825505084124798530, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
+      propertyPath: _stayOpenForAWhile
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6f9997bcb9fc4fbf985d7b6033219, type: 3}
@@ -34470,6 +34734,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5355333131323736470}
     m_Modifications:
+    - target: {fileID: 287667652952251400, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 552732323223875274, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -47.5
@@ -34545,6 +34813,10 @@ PrefabInstance:
     - target: {fileID: 2378408180558000716, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -24.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047280048529385718, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3450866254458190412, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35203,7 +35475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (7)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -35639,7 +35911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (16)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -35923,7 +36195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (10)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -36589,7 +36861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (26)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -40052,7 +40324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636045362856993884, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
       propertyPath: m_Name
-      value: Torch (1)
+      value: Puzzle_Switch_Eye
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
@@ -40524,7 +40796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636045362856993884, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
       propertyPath: m_Name
-      value: Torch
+      value: Puzzle_Switch_Eye
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a857bd712f2e564fb0dcf88d4db74af, type: 3}
@@ -45024,7 +45296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
@@ -45678,7 +45950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921457406756632241, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_Name
-      value: Torch_Decoration_Placeholder (4)
+      value: Torch_Lamp
       objectReference: {fileID: 0}
     - target: {fileID: 5389859442928990980, guid: 74edd2a7c8cf36344b82eaaa3bd9f309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -47244,6 +47516,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5355333131323736470}
     m_Modifications:
+    - target: {fileID: 287667652952251400, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 552732323223875274, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -50.826
@@ -47267,6 +47543,10 @@ PrefabInstance:
     - target: {fileID: 627637075703137970, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -24.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 927851139646551152, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1195291254848523023, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47332,6 +47612,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -32.159
       objectReference: {fileID: 0}
+    - target: {fileID: 1514010245287456874, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007857476574171573, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2182285284582451920, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51
@@ -47356,6 +47644,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -22.43
       objectReference: {fileID: 0}
+    - target: {fileID: 2641396639275458806, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3450866254458190412, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51.02
@@ -47368,6 +47660,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -24.58
       objectReference: {fileID: 0}
+    - target: {fileID: 3825293496975194845, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4494025662258028647, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51.5
@@ -47379,6 +47675,14 @@ PrefabInstance:
     - target: {fileID: 4494025662258028647, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -20.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652576438754478354, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755297114038287135, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5234509140172402657, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -47432,6 +47736,10 @@ PrefabInstance:
       propertyPath: _destroyable.Array.data[0]
       value: 
       objectReference: {fileID: 8724622084494689958}
+    - target: {fileID: 6372015950840962957, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6408510707932664974, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -47487,6 +47795,14 @@ PrefabInstance:
     - target: {fileID: 7011792958618183271, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.z
       value: -19.902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459100193107107565, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639569685611412701, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7840728157236888663, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47551,6 +47867,10 @@ PrefabInstance:
     - target: {fileID: 8513140253471683788, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -30.611
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703988723093657342, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9095960637181267641, guid: b8cb7a53ad9ef9d48b8d712b8bcdd095, type: 3}
       propertyPath: m_LocalPosition.x
