@@ -74,7 +74,7 @@ namespace Raven.Manager
 
             SetMoveVector();
 
-            if (!_dash)
+            if (!_dash && _playerController.isGrounded)
             {
                 _playerStatesManager.CurrentBehaviour.ActiveDash(this);
             }

@@ -13,6 +13,7 @@ namespace Raven.Player
         private InputManager _inputManager;
         private PlayerHudManager _hudManager;
         private PlayerStatesManager _playerStatesManager;
+        private CharacterController _characterController;
 
         private float _dashTimer;
 
