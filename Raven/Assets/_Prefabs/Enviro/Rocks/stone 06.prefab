@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3172462257064548957}
   - component: {fileID: 856298370136436375}
   - component: {fileID: 3379350626592089564}
+  - component: {fileID: 3476705299532049959}
   m_Layer: 0
   m_Name: stone 06
   m_TagString: Untagged
@@ -96,3 +97,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5465736699835161979, guid: bacfe020572e7f140bdff84309bbf7cf, type: 3}
+--- !u!208 &3476705299532049959
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216766453761822530}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.7480001, y: 1.0320001, z: 1.687}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.16000001, y: 0.628, z: 0.022000002}
+  m_TimeToStationary: 0.5
