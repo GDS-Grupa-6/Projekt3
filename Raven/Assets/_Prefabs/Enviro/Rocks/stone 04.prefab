@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 132038702383522940}
   - component: {fileID: 2752244498065821878}
   - component: {fileID: 3490881805077260218}
+  - component: {fileID: 7888838582201282134}
   m_Layer: 0
   m_Name: stone 04
   m_TagString: Untagged
@@ -96,3 +97,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1708867441934792758, guid: 982f9ce8de2c7dc4eabda569cf50ff3f, type: 3}
+--- !u!208 &7888838582201282134
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409327198894502243}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.0600001, y: 0.85600007, z: 0.97800004}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.040000003, y: 0.84400004, z: 0.014}
+  m_TimeToStationary: 0.5
