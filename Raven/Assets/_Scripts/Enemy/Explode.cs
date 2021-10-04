@@ -49,18 +49,18 @@ namespace Raven.Enemy
 
         public void ExplodeBehaviour()
         {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, _currentExplodeRadius, transform.forward, _currentExplodeRadius);
+            Collider[] hits = Physics.OverlapSphere(transform.position, _currentExplodeRadius);
 
             var obj = Instantiate(_effectPrefab);
             obj.transform.position = _effectPosition.position;
 
             for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider.tag == "Enemy" && hits[i].collider.gameObject != this.gameObject)
+                if (hits[i].tag == "Enemy" && hits[i].gameObject != this.gameObject)
                 {
-                    hits[i].collider.gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
                 }
-                else if (hits[i].collider.tag == "Player")
+                else if (hits[i].tag == "Player")
                 {
                     if (_effectOnEnemy) _currentEffectPosition = transform.position;
 
