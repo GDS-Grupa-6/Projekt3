@@ -17,12 +17,18 @@ namespace Raven.Manager
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private EnemyConfig _enemyConfig;
-        [SerializeField] private Transform _enemyGfxTransform;
-        [SerializeField] private Material _gfxMaterial;
-        [SerializeField] private Material _redMaterial;
-        [SerializeField] private bool _staticActivator;
+        [Space]
+        [SerializeField, BoxGroup("-----GFX-----")] private Transform _enemyGfxTransform;
+        [SerializeField, BoxGroup("-----GFX-----")] private Material _gfxMaterial;
+        [SerializeField, BoxGroup("-----GFX-----")] private Material _redMaterial;
+        [Space]
+        [SerializeField, BoxGroup("-----POV-----")] private float _activateRadius;
+        [SerializeField, BoxGroup("-----POV-----")] private float _activateAngle = 90;
+        [SerializeField, BoxGroup("-----POV-----")] private LayerMask _whatCanSee;
+        [Space]
+        [SerializeField, BoxGroup("-----FOR SHOOTER-----"), ShowIf("_isShooter")] private Transform _shootPoint;
 
-        [ShowIf("_staticActivator"), SerializeField] private float _activateRadius;
+        private bool _isShooter => _enemyConfig.EnemyType == EnemyType.Shooter;
 
         private Transform _player;
         private CoroutinesManager _coroutinesManager;
@@ -30,8 +36,6 @@ namespace Raven.Manager
         private IEnemy _enemyBehaviour;
         private bool _active;
         private float _currentHealth;
-
-
 
         [Inject]
         public void Construct(PlayerMovementManager p_playerMovementManager, CoroutinesManager p_coroutinesManager, PlayerDataManager p_playerDataManager)
@@ -55,28 +59,32 @@ namespace Raven.Manager
                     break;
 
                 case EnemyType.Shooter:
-                    //TODO behaviour
+                    _enemyBehaviour = new Shooter(_enemyConfig, _player, navMesh,
+                        _enemyGfxTransform, _playerDataManager, gameObject, _shootPoint);
                     break;
             }
-        }
-
-        public void ActivateEnemy()
-        {
-            _active = true;
-            _enemyBehaviour.Start();
         }
 
         private void Update()
         {
             if (_active)
             {
-                _enemyBehaviour.Update();
+                _enemyBehaviour.Behaviour();
+                return;
             }
-            else if (_staticActivator)
-            {
-                RaycastHit[] hits = Physics.SphereCastAll(transform.position, _activateRadius, transform.forward,_activateRadius);
 
-                if (hits.Any(x => x.collider.gameObject.tag == "Player"))
+            RaycastHit[] hit = Physics.SphereCastAll(_enemyGfxTransform.position, _activateRadius, _enemyGfxTransform.forward,_activateRadius,_whatCanSee);
+
+            if (hit.Length == 0)
+            {
+                return;
+            }
+
+            if (hit[0].collider.tag == "Player")
+            {
+                Vector3 povDir = hit[0].collider.transform.position - _enemyGfxTransform.position;
+
+                if (Vector3.Angle(povDir, _enemyGfxTransform.forward) <= _activateAngle / 2)
                 {
                     _active = true;
                 }
@@ -94,7 +102,7 @@ namespace Raven.Manager
 
             if (_currentHealth <= 0)
             {
-                if (_enemyConfig.EnemyType == EnemyType.Kamikaze)
+                if (_enemyConfig.ExplodeAfterDead)
                 {
                     GetComponentInChildren<Explode>().ExplodeBehaviour();
                 }
@@ -108,25 +116,27 @@ namespace Raven.Manager
             Destroy(this.gameObject);
         }
 
-        /*private IEnumerator HitCoroutine()
-        {
-            _enemyGfxTransform.GetComponent<MeshRenderer>().materials[0] = _redMaterial;
-            yield return new WaitForSeconds(1.5f);
-            _enemyGfxTransform.GetComponent<MeshRenderer>().materials[0] = _gfxMaterial;
-        }*/
-
 #if UNITY_EDITOR
+        private void DrawPOVCone()
+        {
+            Gizmos.color = Color.green;
+            Quaternion upRayRotation = Quaternion.AngleAxis(-_activateAngle / 2 + 270, Vector3.up);
+            Quaternion downRayRotation = Quaternion.AngleAxis(_activateAngle / 2 + 270, Vector3.up);
+
+            Vector3 upRayDirection = upRayRotation * transform.right * _activateRadius;
+            Vector3 downRayDirection = downRayRotation * transform.right * _activateRadius;
+
+            Gizmos.DrawRay(transform.position, upRayDirection);
+            Gizmos.DrawRay(transform.position, downRayDirection);
+            Gizmos.DrawLine(transform.position + downRayDirection, transform.position + transform.forward * _activateRadius);
+            Gizmos.DrawLine(transform.position + upRayDirection, transform.position + transform.forward * _activateRadius);
+        }
+
         private void OnDrawGizmos()
         {
-            if (_staticActivator)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(transform.position, _activateRadius);
-            }
+            DrawPOVCone();
         }
 #endif
-
-        public class EnemyFactory : PlaceholderFactory<EnemyController> { }
     }
 }
 

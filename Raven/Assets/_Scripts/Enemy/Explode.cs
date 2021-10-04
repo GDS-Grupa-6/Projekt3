@@ -9,7 +9,6 @@ namespace Raven.Enemy
 {
     public class Explode : MonoBehaviour
     {
-        [InfoBox("Set this component on GFX object of enemy")]
         [SerializeField] private GameObject _effectPrefab;
         [HideIf("_effectOnEnemy"), SerializeField] private float _power = 2;
         [HideIf("_effectOnEnemy"), SerializeField] private float _explodeRadius = 5;
@@ -31,12 +30,11 @@ namespace Raven.Enemy
             {
                 _currentPower = _config.Power;
                 _currentExplodeRadius = _config.ExplodeRadius;
-                _currentEffectPosition = _effectPosition.position;
             }
             else
             {
-                _currentPower = _power;
                 _currentEffectPosition = _effectPosition.position;
+                _currentPower = _power;
                 _currentExplodeRadius = _explodeRadius;
             }
         }
@@ -54,7 +52,7 @@ namespace Raven.Enemy
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, _currentExplodeRadius, transform.forward, _currentExplodeRadius);
 
             var obj = Instantiate(_effectPrefab);
-            obj.transform.position = _currentEffectPosition;
+            obj.transform.position = _effectPosition.position;
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -74,6 +72,11 @@ namespace Raven.Enemy
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
+            if (_effectOnEnemy && !_config.ExplodeAfterDead)
+            {
+              return;
+            }
+
             Gizmos.color = Color.red;
 
             Gizmos.DrawWireSphere(transform.position, _effectOnEnemy ? _config.ExplodeRadius : _explodeRadius);

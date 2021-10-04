@@ -8,7 +8,6 @@ namespace Raven.Core.Interfaces
 {
     public interface IEnemy
     {
-        void Start();
-        void Update();
+        void Behaviour();
     }
 }

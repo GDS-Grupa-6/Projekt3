@@ -10,22 +10,27 @@ namespace Raven.Player
     {
         private CameraManager _cameraManager;
 
-        private Rig _rig;
+        private Rig[] _rigs;
         private GameObject _rigTarget;
-        private GameObject _cameraLock;
+        private LayerMask _rayLayerMask;
 
         private bool _activeWeight;
 
         public GameObject RigTarget => _rigTarget;
 
-        public PlayerRigManager(CameraManager p_cameraManager, Rig p_rig, GameObject p_rigTarget)
+        public bool SecondWeapon;
+
+        public PlayerRigManager(CameraManager p_cameraManager, Rig[] p_rigs, GameObject p_rigTarget, LayerMask p_rayMask)
         {
-            _rig = p_rig;
+            _rayLayerMask = p_rayMask;
+            _rigs = p_rigs;
             _rigTarget = p_rigTarget;
             _cameraManager = p_cameraManager;
-            _cameraLock = _cameraManager.RayLock;
 
-            _rig.weight = 0;
+            foreach (var rig in _rigs)
+            {
+                rig.weight = 0;
+            }
 
             _cameraManager.OnAimChange += ActiveWeight;
         }
@@ -39,28 +44,33 @@ namespace Raven.Player
         {
             if (_activeWeight)
             {
-                _rig.weight = 1;
+                if (SecondWeapon)
+                {
+                    foreach (var rig in _rigs)
+                    {
+                        rig.weight = 1;
+                    }
+                }
+                else
+                {
+                    _rigs[0].weight = 1;
+                }
             }
             else
             {
-                _rig.weight = 0;
+                foreach (var rig in _rigs)
+                {
+                    rig.weight = 0;
+                }
             }
 
-            if (GetRaycastHit().point == Vector3.zero || GetRaycastHit().collider.tag == "Collectible")
-            {
-                _rigTarget.transform.position = _cameraLock.transform.forward * 1000f;
-            }
-            else
-            {
-                _rigTarget.transform.position = GetRaycastHit().point;
-            }
+            _rigTarget.transform.position = GetRaycastHit().point;
         }
 
         public RaycastHit GetRaycastHit()
         {
             RaycastHit hit;
-            Physics.Raycast(_cameraLock.transform.position, _cameraLock.transform.forward, out hit);
-
+            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,9999, _rayLayerMask);
             return hit;
         }
 

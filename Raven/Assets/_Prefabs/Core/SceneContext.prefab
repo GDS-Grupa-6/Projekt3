@@ -78,19 +78,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d8c3fe31dc9e241bba933f8e4993ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shootRaycastHits:
+    serializedVersion: 2
+    m_Bits: 2487
   _player: {fileID: 0}
   _mainCameraTransform: {fileID: 0}
   _playerAnimator: {fileID: 0}
   _shootCamera: {fileID: 0}
   _tppCamera: {fileID: 0}
-  _playerEnergySlider: {fileID: 0}
-  _playerLifeSlider: {fileID: 0}
-  _viewFinder: {fileID: 0}
   _playerRig: {fileID: 0}
   _rigTarget: {fileID: 0}
   _shootCameraLock: {fileID: 0}
   _oneHandShootPoint: {fileID: 0}
   _twoHandsShootPoint: {fileID: 0}
+  _inputTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerEnergySlider: {fileID: 0}
+  _playerLifeSlider: {fileID: 0}
+  _viewFinder: {fileID: 0}
+  _collectibles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _movementConfig: {fileID: 11400000, guid: 0eb0dce979efce743ac2faec874f3a1f, type: 2}
   _playerDataConfig: {fileID: 11400000, guid: 69c7ac15dfce8794d8937db9b585a238, type: 2}
   _playerStatesContainer: {fileID: 11400000, guid: 06ef226f13ffb194a821eba7c44d7ccf, type: 2}

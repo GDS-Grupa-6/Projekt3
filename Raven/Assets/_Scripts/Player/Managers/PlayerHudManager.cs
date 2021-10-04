@@ -15,36 +15,38 @@ namespace Raven.UI
         private readonly PlayerDataConfig _playerDataConfig;
         private CameraManager _cameraManager;
         private CoroutinesManager _coroutinesManager;
-        private Collectible[] _collectibles;
+        private Player.Collectible[] _collectibles;
 
         private readonly Slider _energySlider;
         private readonly Slider _healthSlider;
-        private Image _viewFinder;
+        private readonly Image _viewFinder;
+        private readonly TextMeshProUGUI _energyCounterText;
+        private readonly TextMeshProUGUI _healthCounterText;
 
         private float _energyRegenerationTimer;
         private float _startEnergyRegenerationTimer;
-        private Vector2 _screenCenter;
 
         private TextMeshProUGUI[] _inputTexts;
 
         private bool _regenerateEnergy;
+        private GameObject _rigTarget;
 
-        public PlayerHudManager(Slider p_energySlider, Slider p_healthSlider, Image p_viewFinder,
-            PlayerDataConfig p_playerDataConfig, CameraManager p_cameraManager, CoroutinesManager p_coroutinesManager,
-            TextMeshProUGUI[] p_inputTexts, Collectible[] p_collectibles)
+        public event Action<float> OnAddHealth;
+
+        public PlayerHudManager(PlayerHudReferences p_hudReferences,PlayerDataConfig p_playerDataConfig, CameraManager p_cameraManager, CoroutinesManager p_coroutinesManager,
+                                Player.Collectible[] p_collectibles, PlayerRigManager p_playerRigManager)
         {
-            _energySlider = p_energySlider;
-            _healthSlider = p_healthSlider;
+            _rigTarget = p_playerRigManager.RigTarget;
+            _energySlider = p_hudReferences.EnergySlider;
+            _healthSlider = p_hudReferences.HealthSlider;
+            _energyCounterText = p_hudReferences.EnergyCounterText;
+            _healthCounterText = p_hudReferences.HealthCounterText;
             _playerDataConfig = p_playerDataConfig;
-            _viewFinder = p_viewFinder;
+            _viewFinder = p_hudReferences.ViewFinder;
             _cameraManager = p_cameraManager;
             _coroutinesManager = p_coroutinesManager;
-            _inputTexts = p_inputTexts;
+            _inputTexts = p_hudReferences.InputTexts;
             _collectibles = p_collectibles;
-
-
-            _screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-            _viewFinder.transform.position = _screenCenter;
 
             SetSlidersValues();
 
@@ -56,7 +58,7 @@ namespace Raven.UI
 
             for (int i = 0; i < _collectibles.Length; i++)
             {
-                _collectibles[i].OnUnlock += UnlockText;
+                _collectibles[i].OnUnlock += UnlockUiText;
             }
         }
 
@@ -67,7 +69,7 @@ namespace Raven.UI
 
             for (int i = 0; i < _collectibles.Length; i++)
             {
-                _collectibles[i].OnUnlock -= UnlockText;
+                _collectibles[i].OnUnlock -= UnlockUiText;
             }
         }
 
@@ -81,6 +83,9 @@ namespace Raven.UI
             {
                 EnergyRegeneration();
             }
+
+            _healthCounterText.SetText($"{_healthSlider.value}/{_healthSlider.maxValue}");
+            _energyCounterText.SetText($"{_energySlider.value}/{_energySlider.maxValue}");
         }
 
         public bool TrySubtractEnergy(float p_value)
@@ -108,6 +113,31 @@ namespace Raven.UI
             return true;
         }
 
+        public void AddEnergy(int p_value)
+        {
+            if (_energySlider.value + p_value > _energySlider.maxValue)
+            {
+                _energySlider.value = _energySlider.maxValue;
+                return;
+            }
+
+            _energySlider.value += p_value;
+        }
+
+        public void AddHealth(int p_value)
+        {
+            if (_healthSlider.value + p_value > _healthSlider.maxValue)
+            {
+                _healthSlider.value = _healthSlider.maxValue;
+            }
+            else
+            {
+                _healthSlider.value += p_value;
+            }
+            
+            OnAddHealth?.Invoke(_healthSlider.value);
+        }
+
         private void SetSlidersValues()
         {
             _energySlider.maxValue = _playerDataConfig.MaxEnergyValue;
@@ -115,11 +145,6 @@ namespace Raven.UI
 
             _healthSlider.maxValue = _playerDataConfig.MaxHealthValue;
             _healthSlider.value = _playerDataConfig.MaxHealthValue;
-        }
-
-        private void AddEnergy(int p_value)
-        {
-            _energySlider.value += p_value;
         }
 
         private void EnergyRegeneration()
@@ -155,6 +180,7 @@ namespace Raven.UI
         {
             if (p_aim)
             {
+               // _viewFinder.transform.position = Vector3.Lerp(_viewFinder.transform.position, Camera.main.WorldToScreenPoint(_rigTarget.transform.position), Time.deltaTime * 10);
                 _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _viewFinder.gameObject);
             }
             else
@@ -182,7 +208,7 @@ namespace Raven.UI
             }
         }
 
-        private void UnlockText(CollectibleName p_collectibleName)
+        private void UnlockUiText(CollectibleName p_collectibleName)
         {
             switch (p_collectibleName)
             {
@@ -190,14 +216,9 @@ namespace Raven.UI
                     _inputTexts[0].color = Color.white;
                     break;
 
-                case CollectibleName.FireDash:
+                case CollectibleName.FireState:
                     _inputTexts[0].color = Color.white;
                     _inputTexts[2].color = Color.white;
-                    break;
-
-                case CollectibleName.FireShoot:
-                    _inputTexts[2].color = Color.white;
-
                     break;
             }
         }

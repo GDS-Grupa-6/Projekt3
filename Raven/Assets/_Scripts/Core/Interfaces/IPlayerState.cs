@@ -9,7 +9,7 @@ namespace Raven.Core.Interface
 {
     public interface IPlayerState
     {
-        void Initialize(InputController p_inputController, PlayerHudManager p_hudManager,
+        void Initialize(InputManager pInputManager, PlayerHudManager p_hudManager,
             PlayerStatesManager p_playerStatesManager);
         void ActiveDash(PlayerMovementManager p_movementManager);
         void Dash(PlayerMovementManager p_movementManager);

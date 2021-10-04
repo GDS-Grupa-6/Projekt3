@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570dcf5569375ed4fa489da5e18e7aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectPosition: {fileID: 150516568957904780}
   _destroyable:
   - {fileID: 0}
 --- !u!114 &3213701320839035569
@@ -157,8 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectPrefab: {fileID: 3777265546122994993, guid: 1840cb871d2f95643bebb8c26eab23dd, type: 3}
-  _power: 2
-  _explodeRadius: 3
+  _power: 20
+  _explodeRadius: 8
   _effectPosition: {fileID: 150516568957904780}
   _effectOnEnemy: 0
   _config: {fileID: 0}

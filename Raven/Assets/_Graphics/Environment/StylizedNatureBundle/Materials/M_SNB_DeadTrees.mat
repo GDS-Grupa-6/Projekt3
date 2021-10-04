@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: M_SNB_DeadTrees
   m_Shader: {fileID: 4800000, guid: 4e9aa94b7854f7f4d8bf69448ee6b3be, type: 3}
   m_ShaderKeywords: _LOD_FADE_CROSSFADE_ON _NORMALMAP
@@ -35,14 +36,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _Cutoff: 0
+    - _EmissionStrength: 0
     - _HeightBrightness: 3
     - _HeightGradient: 8
     - _HeightStartGradient: 2.5
     - _NormalStrength: 1
-    - _TrunkBrightness: 0.5
+    - _TrunkBrightness: 0.333
     - _WindTrunkAmplitude: 0.03
     - _WindTrunkSpeed: 0.3
     - __dirty: 0
     m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _TrunkColorVariation: {r: 0.5157212, g: 0.47058564, b: 0.7075472, a: 0}
+  m_BuildTextureStacks: []
