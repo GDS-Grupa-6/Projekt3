@@ -73,16 +73,16 @@ namespace Raven.Manager
                 return;
             }
 
-            RaycastHit[] hit = Physics.SphereCastAll(_enemyGfxTransform.position, _activateRadius, _enemyGfxTransform.forward,_activateRadius,_whatCanSee);
+            Collider[] hit = Physics.OverlapSphere(_enemyGfxTransform.position, _activateRadius, _whatCanSee);
 
             if (hit.Length == 0)
             {
                 return;
             }
 
-            if (hit[0].collider.tag == "Player")
+            if (hit[0].tag == "Player")
             {
-                Vector3 povDir = hit[0].collider.transform.position - _enemyGfxTransform.position;
+                Vector3 povDir = hit[0].transform.position - _enemyGfxTransform.position;
 
                 if (Vector3.Angle(povDir, _enemyGfxTransform.forward) <= _activateAngle / 2)
                 {
