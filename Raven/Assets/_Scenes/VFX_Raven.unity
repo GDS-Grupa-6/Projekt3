@@ -3447,6 +3447,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 29.541
       objectReference: {fileID: 0}
+    - target: {fileID: 9163660381770599328, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163660381770599328, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9163660381770599342, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -5655,7 +5663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1339785364
 Transform:
   m_ObjectHideFlags: 0
@@ -8307,6 +8315,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2695860780526752119, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+      propertyPath: m_Name
+      value: normal_state_vfx
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180971419154464705, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180971419154464705, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180971419154464705, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468158818126496951, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+      propertyPath: m_Name
+      value: normal_state_vfx
+      objectReference: {fileID: 0}
     - target: {fileID: 7817806714087019046, guid: 33583217aea10a149b788b918a52eabe, type: 3}
       propertyPath: m_Name
       value: Player

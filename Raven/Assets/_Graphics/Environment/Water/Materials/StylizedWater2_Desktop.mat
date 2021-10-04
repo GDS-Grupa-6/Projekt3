@@ -9,9 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: StylizedWater2_Desktop
   m_Shader: {fileID: 4800000, guid: f04c9486b297dd848909db26983c9ddb, type: 3}
-  m_ShaderKeywords: ADVANCED_LIGHTING _ADVANCED_SHADING _CAUSTICS _DEPTH_TEX _DISTANCE_NORMALS
-    _FOAM _NORMALMAP _RECEIVE_SHADOWS_OFF _REFRACTION _SHARP_INERSECTION _SIMPLE_LIGHTING
-    _TRANSLUCENCY _WAVES _WORLDSPACEUV_ON
+  m_ShaderKeywords: ADVANCED_LIGHTING _CAUSTICS _DEPTH_TEX _DISTANCE_NORMALS _FOAM
+    _NORMALMAP _REFRACTION _SHARP_INERSECTION _SIMPLE_LIGHTING _TRANSLUCENCY _WAVES
+    _WORLDSPACEUV_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -163,8 +163,8 @@ Material:
     - _RimRize: 1
     - _RimTiling: 0.025
     - _SHARP_INERSECTIONOn: 1
-    - _ShadingMode: 1
-    - _ShadowStrength: 1
+    - _ShadingMode: 0
+    - _ShadowStrength: 0.5
     - _ShoreLineLength: 0
     - _ShoreLineWaveDistance: 23
     - _ShoreLineWaveStr: 1
@@ -172,7 +172,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SparkleIntensity: 0
-    - _SparkleSize: 0.302
+    - _SparkleSize: 0.325
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SunReflectionDistortion: 0.49
