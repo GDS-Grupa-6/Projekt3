@@ -13,5 +13,17 @@ public class PlayerHudReferences : MonoBehaviour
     public TextMeshProUGUI HealthCounterText;
     [Space(10)]
     public Image ViewFinder;
-    public TextMeshProUGUI[] InputTexts;
+    [Space(10)]
+    public Image DashImage;
+    public GameObject DashLocked;
+    public Image StateImage;
+    public GameObject StateLocked;
+    public Image Weapon2Image;
+    [Space(10)]
+    public Sprite DashSprite;
+    public Sprite FireSprite;
+    public Sprite NormalStateSprite;
+    [Space(10)]
+    public GameObject PopUp;
+    public TextMeshProUGUI PopUpText;
 }

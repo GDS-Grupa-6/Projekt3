@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 197333083826000138}
   - component: {fileID: 2691435333311096256}
   - component: {fileID: 5520678674394040361}
+  - component: {fileID: 1082531574126343628}
   m_Layer: 0
   m_Name: Cliff 03
   m_TagString: Untagged
@@ -96,3 +97,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2978419386359614756, guid: b807e554ccc1d4948bcaf12d456c0960, type: 3}
+--- !u!208 &1082531574126343628
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492651090942018581}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.61600006, y: 0.223, z: 0.81700003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.036000002, y: 0.165, z: -0.011000001}
+  m_TimeToStationary: 0.5
