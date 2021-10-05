@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6981825539507510969}
   - component: {fileID: 7272214445130895719}
+  - component: {fileID: 262879640881693055}
   m_Layer: 0
   m_Name: palm_03
   m_TagString: Untagged
@@ -45,6 +46,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.83029884, y: 1.5942764, z: 0.8709005}
   m_Center: {x: 0.065948814, y: 0.62573624, z: -0.023054779}
+--- !u!208 &262879640881693055
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759629567184602115}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &7776535744009470484
 PrefabInstance:
   m_ObjectHideFlags: 0

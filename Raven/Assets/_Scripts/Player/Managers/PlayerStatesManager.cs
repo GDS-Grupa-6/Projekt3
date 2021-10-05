@@ -133,6 +133,8 @@ namespace Raven.Player
                 _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
                 _currentBehaviour = _normalState;
             }
+
+            _playerHudManager.ChangeStateImage(_currentConfig.PlayerStateName);
         }
 
         public void UnlockState(CollectibleName p_collectibleName)
