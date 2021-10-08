@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyType: 0
   _maxHealth: 5
-  _power: 5
+  _power: 15
   _explodeAfterDead: 1
-  _moveSpeed: 5
+  _moveSpeed: 7
   _maxDodgeWaitTime: 5
-  _speedModifier: 5
-  _chargeDistance: 8
+  _chargeSpeedModifier: 5
+  _chargeDistance: 6
   _explodeRadius: 3
-  _chargeTime: 1
+  _chargeTime: 2
   _chargeWaitTime: 3
+  _bullet: {fileID: 0}
+  _bulletSpeed: 10
   _shootDistance: 8
+  _shootDelayTime: 2
+  _isStatic: 0
