@@ -16,17 +16,10 @@ namespace Raven.UI
         private CameraManager _cameraManager;
         private CoroutinesManager _coroutinesManager;
         private Player.Collectible[] _collectibles;
-
-        private readonly Slider _energySlider;
-        private readonly Slider _healthSlider;
-        private readonly Image _viewFinder;
-        private readonly TextMeshProUGUI _energyCounterText;
-        private readonly TextMeshProUGUI _healthCounterText;
+        PlayerHudReferences _playerHudReferences;
 
         private float _energyRegenerationTimer;
         private float _startEnergyRegenerationTimer;
-
-        private TextMeshProUGUI[] _inputTexts;
 
         private bool _regenerateEnergy;
         private GameObject _rigTarget;
@@ -37,39 +30,29 @@ namespace Raven.UI
                                 Player.Collectible[] p_collectibles, PlayerRigManager p_playerRigManager)
         {
             _rigTarget = p_playerRigManager.RigTarget;
-            _energySlider = p_hudReferences.EnergySlider;
-            _healthSlider = p_hudReferences.HealthSlider;
-            _energyCounterText = p_hudReferences.EnergyCounterText;
-            _healthCounterText = p_hudReferences.HealthCounterText;
+            _playerHudReferences = p_hudReferences;
             _playerDataConfig = p_playerDataConfig;
-            _viewFinder = p_hudReferences.ViewFinder;
             _cameraManager = p_cameraManager;
             _coroutinesManager = p_coroutinesManager;
-            _inputTexts = p_hudReferences.InputTexts;
             _collectibles = p_collectibles;
 
             SetSlidersValues();
 
             _cameraManager.OnAimChange += SetViewFinder;
-            _cameraManager.OnAimChange += AimTextHud;
-
-            _inputTexts[0].color = Color.grey;
-            _inputTexts[2].color = Color.grey;
 
             for (int i = 0; i < _collectibles.Length; i++)
             {
-                _collectibles[i].OnUnlock += UnlockUiText;
+                _collectibles[i].OnUnlock += UnlockHud;
             }
         }
 
         public void Dispose()
         {
             _cameraManager.OnAimChange -= SetViewFinder;
-            _cameraManager.OnAimChange -= AimTextHud;
 
             for (int i = 0; i < _collectibles.Length; i++)
             {
-                _collectibles[i].OnUnlock -= UnlockUiText;
+                _collectibles[i].OnUnlock -= UnlockHud;
             }
         }
 
@@ -84,18 +67,18 @@ namespace Raven.UI
                 EnergyRegeneration();
             }
 
-            _healthCounterText.SetText($"{_healthSlider.value}/{_healthSlider.maxValue}");
-            _energyCounterText.SetText($"{_energySlider.value}/{_energySlider.maxValue}");
+            _playerHudReferences.HealthCounterText.SetText($"{ _playerHudReferences.HealthSlider.value}/{ _playerHudReferences.HealthSlider.maxValue}");
+            _playerHudReferences.EnergyCounterText.SetText($"{ _playerHudReferences.EnergySlider.value}/{ _playerHudReferences.EnergySlider.maxValue}");
         }
 
         public bool TrySubtractEnergy(float p_value)
         {
-            if (_energySlider.value - p_value < 0)
+            if (_playerHudReferences.EnergySlider.value - p_value < 0)
             {
                 return false;
             }
 
-            _energySlider.value -= p_value;
+            _playerHudReferences.EnergySlider.value -= p_value;
             _startEnergyRegenerationTimer = 0;
             _regenerateEnergy = false;
 
@@ -104,52 +87,64 @@ namespace Raven.UI
 
         public bool TrySubtractHealth(float p_value)
         {
-            if (_healthSlider.value - p_value < 0)
+            if (_playerHudReferences.HealthSlider.value - p_value < 0)
             {
                 return false;
             }
 
-            _healthSlider.value -= p_value;
+            _playerHudReferences.HealthSlider.value -= p_value;
             return true;
         }
 
         public void AddEnergy(int p_value)
         {
-            if (_energySlider.value + p_value > _energySlider.maxValue)
+            if (_playerHudReferences.EnergySlider.value + p_value > _playerHudReferences.EnergySlider.maxValue)
             {
-                _energySlider.value = _energySlider.maxValue;
+                _playerHudReferences.EnergySlider.value = _playerHudReferences.EnergySlider.maxValue;
                 return;
             }
 
-            _energySlider.value += p_value;
+            _playerHudReferences.EnergySlider.value += p_value;
         }
 
         public void AddHealth(int p_value)
         {
-            if (_healthSlider.value + p_value > _healthSlider.maxValue)
+            if (_playerHudReferences.HealthSlider.value + p_value > _playerHudReferences.HealthSlider.maxValue)
             {
-                _healthSlider.value = _healthSlider.maxValue;
+                _playerHudReferences.HealthSlider.value = _playerHudReferences.HealthSlider.maxValue;
             }
             else
             {
-                _healthSlider.value += p_value;
+                _playerHudReferences.HealthSlider.value += p_value;
             }
             
-            OnAddHealth?.Invoke(_healthSlider.value);
+            OnAddHealth?.Invoke(_playerHudReferences.HealthSlider.value);
+        }
+
+        public void ChangeStateImage(PlayerStateName p_playerStateName)
+        {
+            if (p_playerStateName == PlayerStateName.Fire)
+            {
+                _playerHudReferences.StateImage.sprite = _playerHudReferences.NormalStateSprite;
+            }
+            else
+            {
+                _playerHudReferences.StateImage.sprite = _playerHudReferences.FireSprite;
+            }
         }
 
         private void SetSlidersValues()
         {
-            _energySlider.maxValue = _playerDataConfig.MaxEnergyValue;
-            _energySlider.value = _playerDataConfig.MaxEnergyValue;
+            _playerHudReferences.EnergySlider.maxValue = _playerDataConfig.MaxEnergyValue;
+            _playerHudReferences.EnergySlider.value = _playerDataConfig.MaxEnergyValue;
 
-            _healthSlider.maxValue = _playerDataConfig.MaxHealthValue;
-            _healthSlider.value = _playerDataConfig.MaxHealthValue;
+            _playerHudReferences.HealthSlider.maxValue = _playerDataConfig.MaxHealthValue;
+            _playerHudReferences.HealthSlider.value = _playerDataConfig.MaxHealthValue;
         }
 
         private void EnergyRegeneration()
         {
-            if (_energySlider.value < _energySlider.maxValue)
+            if (_playerHudReferences.EnergySlider.value < _playerHudReferences.EnergySlider.maxValue)
             {
                 if (_energyRegenerationTimer < _playerDataConfig.RegenerationTime)
                 {
@@ -180,47 +175,51 @@ namespace Raven.UI
         {
             if (p_aim)
             {
-               // _viewFinder.transform.position = Vector3.Lerp(_viewFinder.transform.position, Camera.main.WorldToScreenPoint(_rigTarget.transform.position), Time.deltaTime * 10);
-                _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _viewFinder.gameObject);
+                _coroutinesManager.StartCoroutine(SetViewFinderCoroutine(), _playerHudReferences.ViewFinder.gameObject);
             }
             else
             {
-                _coroutinesManager.StopAllCoroutines(_viewFinder.gameObject);
-                _viewFinder.gameObject.SetActive(false);
+                _coroutinesManager.StopAllCoroutines(_playerHudReferences.ViewFinder.gameObject);
+                _playerHudReferences.ViewFinder.gameObject.SetActive(false);
             }
         }
 
         private IEnumerator SetViewFinderCoroutine()
         {
             yield return new WaitForSeconds(0.7f);
-            _viewFinder.gameObject.SetActive(true);
+            _playerHudReferences.ViewFinder.gameObject.SetActive(true);
         }
 
-        private void AimTextHud(bool p_aim)
-        {
-            if (p_aim)
-            {
-                _inputTexts[1].SetText("LPM");
-            }
-            else
-            {
-                _inputTexts[1].SetText("PPM");
-            }
-        }
-
-        private void UnlockUiText(CollectibleName p_collectibleName)
+        private void UnlockHud(CollectibleName p_collectibleName)
         {
             switch (p_collectibleName)
             {
                 case CollectibleName.Dash:
-                    _inputTexts[0].color = Color.white;
+                    _playerHudReferences.DashImage.sprite = _playerHudReferences.DashSprite;
+                    _playerHudReferences.DashLocked.SetActive(false);
+                    _coroutinesManager.StartCoroutine(PopUpCoroutine("Dash unlocked"),this);
                     break;
-
                 case CollectibleName.FireState:
-                    _inputTexts[0].color = Color.white;
-                    _inputTexts[2].color = Color.white;
+                    _playerHudReferences.StateImage.sprite = _playerHudReferences.FireSprite;
+                    _playerHudReferences.StateLocked.SetActive(false);
+                    _coroutinesManager.StartCoroutine(PopUpCoroutine("Fire state unlocked"), this);
+                    break;
+                case CollectibleName.SecondWeapon:
+                    _playerHudReferences.Weapon2Image.color = Color.white;
+                    _coroutinesManager.StartCoroutine(PopUpCoroutine("Second pistol picked up"), this);
+                    break;
+                default:
                     break;
             }
+        }
+
+        private IEnumerator PopUpCoroutine(string p_text)
+        {
+            _playerHudReferences.PopUpText.SetText(p_text);
+            _playerHudReferences.PopUp.SetActive(true);
+
+            yield return new WaitForSeconds(2f);
+            _playerHudReferences.PopUp.SetActive(false);
         }
     }
 }
