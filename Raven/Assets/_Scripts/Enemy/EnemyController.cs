@@ -103,8 +103,16 @@ namespace Raven.Manager
             if (_currentHealth <= 0)
             {
                 if (_enemyConfig.ExplodeAfterDead)
-                {                  
-                   _enemyGfxTransform.GetComponent<Explode>().ExplodeBehaviour();
+                {
+                    try
+                    {
+                        _enemyGfxTransform.GetComponent<Explode>().ExplodeBehaviour();
+                    }
+                    catch (System.Exception)
+                    {
+
+                        throw;
+                    }              
                 }
 
                 Dead();
