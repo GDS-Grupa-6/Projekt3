@@ -76,8 +76,6 @@ namespace Raven.Manager
                 Gravity();
             }
 
-            Debug.Log(IsGrounded());
-
             SetMoveVector();
 
             if (!_dash && IsGrounded())
