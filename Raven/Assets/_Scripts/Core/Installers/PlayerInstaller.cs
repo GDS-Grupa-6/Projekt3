@@ -29,6 +29,7 @@ namespace Raven.Core.Installer
         [SerializeField] private GameObject _secondWeapon;
         [SerializeField] private PlayerHudReferences _hudReferences;
         [SerializeField] private Player.Collectible[] _collectibles;
+        [SerializeField] private Transform _playerGroundCheck;
 
         [Header("-----Configs-----")]
         [SerializeField] private MovementConfig _movementConfig;
@@ -42,7 +43,7 @@ namespace Raven.Core.Installer
             Container.Bind<PlayerDataManager>().AsSingle().WithArguments(_playerDataConfig);
             Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer, _player, _oneHandShootPoint, _twoHandsShootPoint, _secondWeapon).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerHudManager>().AsSingle().WithArguments(_hudReferences, _playerDataConfig, _collectibles).NonLazy();
-            Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform, _playerGroundCheck).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerAnimatorManager>().AsSingle().WithArguments(_playerAnimator).NonLazy();
             Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform, _shootCameraLock, _movementConfig).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerRigManager>().AsSingle().WithArguments(_playerRigs, _rigTarget, _shootRaycastHits).NonLazy();

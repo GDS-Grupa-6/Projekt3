@@ -58,7 +58,10 @@ namespace Raven.Enemy
             {
                 if (hits[i].tag == "Enemy" && hits[i].gameObject != this.gameObject)
                 {
-                    hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    if (hits[i].gameObject.GetComponent<EnemyController>())
+                    {
+                        hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    }
                 }
                 else if (hits[i].tag == "Player")
                 {
@@ -74,7 +77,7 @@ namespace Raven.Enemy
         {
             if (_effectOnEnemy && !_config.ExplodeAfterDead)
             {
-              return;
+                return;
             }
 
             Gizmos.color = Color.red;

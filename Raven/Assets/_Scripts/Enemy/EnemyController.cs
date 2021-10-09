@@ -104,7 +104,7 @@ namespace Raven.Manager
             {
                 if (_enemyConfig.ExplodeAfterDead)
                 {
-                    GetComponentInChildren<Explode>().ExplodeBehaviour();
+                    _enemyGfxTransform.GetComponent<Explode>().ExplodeBehaviour();
                 }
 
                 Dead();
