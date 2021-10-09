@@ -58,7 +58,15 @@ namespace Raven.Enemy
             {
                 if (hits[i].tag == "Enemy" && hits[i].gameObject != this.gameObject)
                 {
-                    hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    try
+                    {
+                        hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    }
+                    catch (System.Exception)
+                    {
+
+                        throw;
+                    }
                 }
                 else if (hits[i].tag == "Player")
                 {
