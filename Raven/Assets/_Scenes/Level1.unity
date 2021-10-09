@@ -2356,6 +2356,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4892162874423266418, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 5080345041069393042, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.08
@@ -2559,6 +2563,10 @@ PrefabInstance:
     - target: {fileID: 6665478945195643065, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: _doorTransform
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686243401677146152, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 6971125636949352234, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: _stayOpenTime
@@ -4247,6 +4255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
+--- !u!4 &1121478198 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6724921509194085899, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+  m_PrefabInstance: {fileID: 7817806714788116033}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1126550490
 GameObject:
   m_ObjectHideFlags: 0
@@ -6978,6 +6991,10 @@ PrefabInstance:
       propertyPath: _oneHandShootPoint
       value: 
       objectReference: {fileID: 787451607}
+    - target: {fileID: 5885417759013556698, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
+      propertyPath: _playerGroundCheck
+      value: 
+      objectReference: {fileID: 1121478198}
     - target: {fileID: 5885417759013556698, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
       propertyPath: _playerEnergySlider
       value: 
