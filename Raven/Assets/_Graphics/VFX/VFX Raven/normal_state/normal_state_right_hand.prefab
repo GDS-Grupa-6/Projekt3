@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 85872179352306177}
   - component: {fileID: 5185835146403006889}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Low)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5921471430954364213}
   - component: {fileID: 4360858098065705894}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Up)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.0345006e-37, z: 4.5905e-41, w: 0.0000004763417}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 1
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4711602809636035225}
   - component: {fileID: 7858131102592878198}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Back)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,8 +1048,8 @@ ParticleSystem:
         m_RotationOrder: 0
     rateOverDistance:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 15
+      minMaxState: 0
+      scalar: 1
       minScalar: 50
       maxCurve:
         serializedVersion: 2
@@ -4822,7 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5018346934035939400}
   - component: {fileID: 7738481036672716350}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Front)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4914,9 +4914,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 805926712035634812}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Lights
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
