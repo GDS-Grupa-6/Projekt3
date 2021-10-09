@@ -11,6 +11,7 @@ namespace Raven.Core
     public class Menu : MonoBehaviour
     {
         [SerializeField] private Button _startButton;
+        [SerializeField] private Button _exitButton;
         [SerializeField] private CanvasGroup _storyPanel;
         [SerializeField] private TextMeshProUGUI _storyText;
         [SerializeField] private CanvasGroup _playerHud;
@@ -49,9 +50,15 @@ namespace Raven.Core
         public void Button_StartGame()
         {
             _startButton.interactable = false;
+            _exitButton.interactable = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _start = true;
+        }
+
+        public void Button_ExitGame()
+        {
+            Application.Quit();
         }
 
         private void StartGame()
