@@ -8,6 +8,7 @@ using Raven.Player;
 using Raven.UI;
 using UnityEngine;
 using Zenject;
+using System.Linq;
 
 namespace Raven.Manager
 {
@@ -21,6 +22,8 @@ namespace Raven.Manager
         private readonly CameraManager _cameraManager;
         private readonly CoroutinesManager _coroutinesManager;
         private readonly PlayerStatesManager _playerStatesManager;
+
+        private Transform _groundCheck;
 
         private Vector3 _moveVector;
         private Vector3 _gravityVelocity;
@@ -44,8 +47,9 @@ namespace Raven.Manager
 
         [Inject]
         public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager,
-            CoroutinesManager p_coroutinesManager, InputManager pInputManager, PlayerStatesManager p_playerStatesManager)
+            CoroutinesManager p_coroutinesManager, InputManager pInputManager, PlayerStatesManager p_playerStatesManager, Transform p_groundCheck)
         {
+            _groundCheck = p_groundCheck;
             _playerTransform = p_player.GetComponent<Transform>();
             _playerController = p_player.GetComponent<CharacterController>();
             _inputManager = pInputManager;
@@ -72,9 +76,11 @@ namespace Raven.Manager
                 Gravity();
             }
 
+            Debug.Log(IsGrounded());
+
             SetMoveVector();
 
-            if (!_dash && _playerController.isGrounded)
+            if (!_dash && IsGrounded())
             {
                 _playerStatesManager.CurrentBehaviour.ActiveDash(this);
             }
@@ -173,6 +179,18 @@ namespace Raven.Manager
         {
             yield return new WaitForSeconds(_movementConfig.FppToTppDelayTime);
             _fpp = false;
+        }
+
+        private bool IsGrounded()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(_groundCheck.position, Vector3.down, 1);
+            
+            if (hits.Any(x => x.collider.tag == "Ground") || hits.Any(x => x.collider.tag == "Laver"))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
