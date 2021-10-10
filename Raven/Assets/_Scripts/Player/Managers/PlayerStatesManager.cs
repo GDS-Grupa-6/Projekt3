@@ -40,6 +40,8 @@ namespace Raven.Player
         public IPlayerState CurrentBehaviour => _currentBehaviour;
         public Dictionary<CollectibleName, bool> UnlockedStates => _unlockedStates;
 
+        public event Action OnShoot;
+
         public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputManager pInputManager,
             NormalState p_normalState, FireState p_fireState, PlayerHudManager p_hudManager, CoroutinesManager p_coroutinesManager,
             GameObject p_player, PlayerRigManager p_playerRigManager, Transform p_one, Transform p_two, GameObject p_secondWeapon)
@@ -100,6 +102,8 @@ namespace Raven.Player
                 {
                     _currentBehaviour.Shoot(_oneHandShootPoint, _playerRigManager.RigTarget.transform);
                 }
+
+                OnShoot?.Invoke();
             }
         }
 
