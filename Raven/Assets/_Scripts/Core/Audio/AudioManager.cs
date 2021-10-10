@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Raven.Core
 {
-    public enum AudioNames { Idle, Inpact, Charge, Shoot, Explosion, Dead, Walk, Dash, FireDash }
+    public enum AudioNames { Idle, Inpact, Charge, Shoot, Explosion, Dead, Walk, Dash, FireDash, FireStateEnter, FiresStateExit }
 
     public class AudioManager : IDisposable
     {
@@ -26,6 +26,7 @@ namespace Raven.Core
             _playerMovementManager.OnMove += PlayWalk;
             _playerMovementManager.OnDashStart += PlayDash;
             _playerStatesManager.OnShoot += PlayShoot;
+            _playerStatesManager.OnChangeState += PlayChangeState;
             _playerDataManager.OnDead += PlayDead;
             _playerDataManager.OnTakeDamage += PlayDamage;
         }
@@ -35,6 +36,7 @@ namespace Raven.Core
             _playerMovementManager.OnMove -= PlayWalk;
             _playerMovementManager.OnDashStart -= PlayDash;
             _playerStatesManager.OnShoot -= PlayShoot;
+            _playerStatesManager.OnChangeState -= PlayChangeState;
             _playerDataManager.OnDead -= PlayDead;
             _playerDataManager.OnTakeDamage -= PlayDamage;
         }
@@ -57,7 +59,7 @@ namespace Raven.Core
         {
             if (p_speed > 0 && !_playerMovementManager.Dash)
             {
-                if (_references.PlayerMoveSource.clip != GetCurrenAudioClipConditions(_references.AudioClipConditions,AudioNames.Walk).AudioClip)
+                if (_references.PlayerMoveSource.clip != GetCurrenAudioClipConditions(_references.AudioClipConditions, AudioNames.Walk).AudioClip)
                 {
                     PlaySound(GetCurrenAudioClipConditions(_references.AudioClipConditions, AudioNames.Walk), _references.PlayerMoveSource);
                 }
@@ -108,6 +110,18 @@ namespace Raven.Core
         private void PlayDead()
         {
             PlaySound(GetCurrenAudioClipConditions(_references.AudioClipConditions, AudioNames.Dead), _references.PlayerEffectSource);
+        }
+
+        private void PlayChangeState(PlayerStateName p_state)
+        {
+            if (p_state == PlayerStateName.Fire)
+            {
+                PlaySound(GetCurrenAudioClipConditions(_references.AudioClipConditions, AudioNames.FireStateEnter), _references.PlayerEffectSource);
+            }
+            else
+            {
+                PlaySound(GetCurrenAudioClipConditions(_references.AudioClipConditions, AudioNames.FiresStateExit), _references.PlayerEffectSource);
+            }
         }
     }
 

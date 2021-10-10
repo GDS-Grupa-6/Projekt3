@@ -41,6 +41,7 @@ namespace Raven.Player
         public Dictionary<CollectibleName, bool> UnlockedStates => _unlockedStates;
 
         public event Action OnShoot;
+        public event Action<PlayerStateName> OnChangeState;
 
         public PlayerStatesManager(PlayerStatesContainer p_playerStatesContainer, InputManager pInputManager,
             NormalState p_normalState, FireState p_fireState, PlayerHudManager p_hudManager, CoroutinesManager p_coroutinesManager,
@@ -137,6 +138,8 @@ namespace Raven.Player
                 _currentConfig = _playerStatesContainer.FindStateConfig(PlayerStateName.Normal);
                 _currentBehaviour = _normalState;
             }
+
+            OnChangeState?.Invoke(_currentConfig.PlayerStateName);
 
             _playerHudManager.ChangeStateImage(_currentConfig.PlayerStateName);
         }
