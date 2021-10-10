@@ -31,6 +31,11 @@ MonoBehaviour:
   _effectPosition: {fileID: 4288748148883444550}
   _effectOnEnemy: 1
   _config: {fileID: 11400000, guid: 20bbfdca699737d458690f9cfad0efa9, type: 2}
+  _explodeClip:
+    AudioName: 4
+    AudioClip: {fileID: 8300000, guid: 19aea61c25df0fa489c39f6ac822c3b9, type: 3}
+    Volume: 1
+    Loop: 0
 --- !u!1 &4327405959459760530
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +99,18 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: 222cbb39d9b17654f88f683bcfb936cf, type: 3}
     Volume: 1
     Loop: 1
+  - AudioName: 2
+    AudioClip: {fileID: 8300000, guid: c2fe8820ef5b28944a365160b020d82d, type: 3}
+    Volume: 1
+    Loop: 0
+  - AudioName: 1
+    AudioClip: {fileID: 8300000, guid: f3e139662b85c5e46913a5682ccde508, type: 3}
+    Volume: 1
+    Loop: 0
+  - AudioName: 5
+    AudioClip: {fileID: 8300000, guid: 0152201e0b18b174399ceb4744163c70, type: 3}
+    Volume: 1
+    Loop: 0
   _audioSource:
   - {fileID: 7530441986195264576}
   - {fileID: 6919587269613924000}

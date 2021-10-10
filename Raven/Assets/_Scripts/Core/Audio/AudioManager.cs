@@ -17,6 +17,7 @@ namespace Raven.Core
 
         public void PlaySound(AudioClipConditions p_clipOptions, AudioSource p_audioSource)
         {
+            p_audioSource.Stop();
             p_audioSource.loop = p_clipOptions.Loop;
             p_audioSource.clip = p_clipOptions.AudioClip;
             p_audioSource.volume = p_clipOptions.Volume;
