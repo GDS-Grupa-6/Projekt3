@@ -2577,6 +2577,24 @@ PrefabInstance:
     - {fileID: 4586472083308793354, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
     - {fileID: 8918603599876049510, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+--- !u!1 &676000039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5885417759013556693, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
+  m_PrefabInstance: {fileID: 5885417759030067987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &676000040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676000039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3833539efce2606458bbd6fa63f3190a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioReferences: {fileID: 845897349}
 --- !u!1 &723649354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 845897348}
+  - component: {fileID: 845897349}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -2931,6 +2950,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &845897349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845897347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1e017a3f346194f9855e6f821f4558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &852353972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6568,6 +6599,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5885417759013556692, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
+      propertyPath: _monoInstallers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885417759013556692, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
+      propertyPath: _monoInstallers.Array.data[2]
+      value: 
+      objectReference: {fileID: 676000040}
     - target: {fileID: 5885417759013556693, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
       propertyPath: m_Name
       value: SceneContext
