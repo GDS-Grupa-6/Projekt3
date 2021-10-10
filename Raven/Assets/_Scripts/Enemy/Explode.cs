@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using Raven.Config;
+using Raven.Core;
 using Raven.Manager;
 using Raven.Player;
 using UnityEngine;
@@ -15,15 +16,18 @@ namespace Raven.Enemy
         [SerializeField] private Transform _effectPosition;
         [SerializeField] private bool _effectOnEnemy;
         [ShowIf("_effectOnEnemy"), SerializeField] private EnemyConfig _config;
+        [SerializeField] private AudioClipConditions _explodeClip;
 
         private PlayerDataManager _playerDataManager;
         private float _currentPower;
         private Vector3 _currentEffectPosition;
         private float _currentExplodeRadius;
+        private AudioManager _audioManager;
 
         [Inject]
-        public void Construct(PlayerDataManager p_playerDataManager)
+        public void Construct(PlayerDataManager p_playerDataManager, AudioManager p_audioManager)
         {
+            _audioManager = p_audioManager;
             _playerDataManager = p_playerDataManager;
 
             if (_effectOnEnemy)
@@ -53,12 +57,16 @@ namespace Raven.Enemy
 
             var obj = Instantiate(_effectPrefab);
             obj.transform.position = _effectPosition.position;
+            obj.GetComponent<ExplodeEffect>().Init(_audioManager);
 
             for (int i = 0; i < hits.Length; i++)
             {
                 if (hits[i].tag == "Enemy" && hits[i].gameObject != this.gameObject)
                 {
-                    hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    if (hits[i].gameObject.GetComponent<EnemyController>())
+                    {
+                        hits[i].gameObject.GetComponent<EnemyController>().TakeDamage(_currentPower);
+                    }
                 }
                 else if (hits[i].tag == "Player")
                 {
@@ -74,7 +82,7 @@ namespace Raven.Enemy
         {
             if (_effectOnEnemy && !_config.ExplodeAfterDead)
             {
-              return;
+                return;
             }
 
             Gizmos.color = Color.red;
