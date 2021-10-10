@@ -1,6 +1,6 @@
 using Raven.Config;
+using Raven.Core;
 using Raven.Core.Interfaces;
-using Raven.Manager;
 using Raven.Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,12 +16,18 @@ namespace Raven.Enemy
         private NavMeshAgent _navMesh;
         private Transform _shootPoint;
         private PlayerDataManager _playerDataManager;
+        private AudioManager _audioManager;
+        private AudioClipConditions[] _audioClipConditions;
+        private AudioSource[] _audioSource;
 
         private float _timer;
 
-        public Shooter(EnemyConfig p_enemyConfig, Transform p_player, NavMeshAgent p_navMesh,
-            Transform p_gfxTransform, PlayerDataManager p_playerDataManager, GameObject p_enemy, Transform p_shootPoint)
+        public Shooter(EnemyConfig p_enemyConfig, Transform p_player, NavMeshAgent p_navMesh, Transform p_gfxTransform, PlayerDataManager p_playerDataManager, GameObject p_enemy, Transform p_shootPoint,
+             AudioManager p_audioManager, AudioClipConditions[] p_audioClipConditions, AudioSource[] p_audioSource)
         {
+            _audioSource = p_audioSource;
+            _audioManager = p_audioManager;
+            _audioClipConditions = p_audioClipConditions;
             _playerDataManager = p_playerDataManager;
             _shootPoint = p_shootPoint;
             _enemy = p_enemy;
@@ -64,6 +70,7 @@ namespace Raven.Enemy
             }
             else
             {
+                _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClipConditions, AudioNames.Shoot), _audioSource[1]);
                 var obj = Object.Instantiate(_enemyConfig.Bullet, _shootPoint.position, _shootPoint.rotation);
                 obj.GetComponent<Bullet>().Initialization(_enemyConfig.BulletSpeed, _playerDataManager, _enemyConfig, _gfxTransform.gameObject);
                 _timer = 0;

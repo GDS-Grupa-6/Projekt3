@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using NaughtyAttributes;
 using Raven.Config;
+using Raven.Core;
 using Raven.Core.Interfaces;
 using Raven.Enemy;
 using Raven.Player;
@@ -27,9 +24,12 @@ namespace Raven.Manager
         [SerializeField, BoxGroup("-----POV-----")] private LayerMask _whatCanSee;
         [Space]
         [SerializeField, BoxGroup("-----FOR SHOOTER-----"), ShowIf("_isShooter")] private Transform _shootPoint;
+        [Space]
+        [SerializeField, BoxGroup("-----Audio-----")] private AudioClipConditions[] _audioClips;
 
         private bool _isShooter => _enemyConfig.EnemyType == EnemyType.Shooter;
 
+        private AudioManager _audioManager;
         private Transform _player;
         private CoroutinesManager _coroutinesManager;
         private PlayerDataManager _playerDataManager;
@@ -37,9 +37,12 @@ namespace Raven.Manager
         private bool _active;
         private float _currentHealth;
 
+        [SerializeField] private AudioSource[] _audioSource;
+
         [Inject]
-        public void Construct(PlayerMovementManager p_playerMovementManager, CoroutinesManager p_coroutinesManager, PlayerDataManager p_playerDataManager)
+        public void Construct(PlayerMovementManager p_playerMovementManager, CoroutinesManager p_coroutinesManager, PlayerDataManager p_playerDataManager, AudioManager p_audioManager)
         {
+            _audioManager = p_audioManager;
             _coroutinesManager = p_coroutinesManager;
             _player = p_playerMovementManager.PlayerTransform;
             _playerDataManager = p_playerDataManager;
@@ -51,16 +54,18 @@ namespace Raven.Manager
         {
             NavMeshAgent navMesh = GetComponent<NavMeshAgent>();
 
+            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Idle), _audioSource[0]);
+
             switch (_enemyConfig.EnemyType)
             {
                 case EnemyType.Kamikaze:
                     _enemyBehaviour = new Kamikaze(_enemyConfig, _player, navMesh,
-                           _enemyGfxTransform, _coroutinesManager, _playerDataManager, gameObject);
+                           _enemyGfxTransform, _coroutinesManager, _playerDataManager, gameObject, _audioManager, _audioClips, _audioSource);
                     break;
 
                 case EnemyType.Shooter:
                     _enemyBehaviour = new Shooter(_enemyConfig, _player, navMesh,
-                        _enemyGfxTransform, _playerDataManager, gameObject, _shootPoint);
+                        _enemyGfxTransform, _playerDataManager, gameObject, _shootPoint, _audioManager, _audioClips, _audioSource);
                     break;
             }
         }
@@ -99,6 +104,7 @@ namespace Raven.Manager
             }
 
             _currentHealth -= p_value;
+            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Inpact), _audioSource[0]);
 
             if (_currentHealth <= 0)
             {
@@ -113,6 +119,7 @@ namespace Raven.Manager
 
         private void Dead()
         {
+            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Dead), _audioSource[0]);
             Destroy(this.gameObject);
         }
 
