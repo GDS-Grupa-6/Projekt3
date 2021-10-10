@@ -1,13 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEngine;
 
-public class AudioManager
+namespace Raven.Core
 {
-    private AudioReferences _references;
+    public enum AudioNames { Idle, Inpact, Charge, Shoot, Explosion, Dead, Walk }
 
-    public AudioManager(AudioReferences p_references)
+    public class AudioManager
     {
-        _references = p_references;
+        private AudioReferences _references;
+
+        public AudioManager(AudioReferences p_references)
+        {
+            _references = p_references;
+        }
+
+        public void PlaySound(AudioClipConditions p_clipOptions, AudioSource p_audioSource)
+        {
+            p_audioSource.loop = p_clipOptions.Loop;
+            p_audioSource.clip = p_clipOptions.AudioClip;
+            p_audioSource.volume = p_clipOptions.Volume;
+            p_audioSource.Play();
+        }
+
+        public AudioClipConditions GetCurrenAudioClipConditions(AudioClipConditions[] p_audioClips, AudioNames p_clipName)
+        {
+            return p_audioClips.First(x => x.AudioName == p_clipName);
+        }
+    }
+
+    [Serializable]
+    public class AudioClipConditions
+    {
+        public AudioNames AudioName;
+        public AudioClip AudioClip;
+        [Range(0, 1)] public float Volume = 1;
+        public bool Loop;
     }
 }
