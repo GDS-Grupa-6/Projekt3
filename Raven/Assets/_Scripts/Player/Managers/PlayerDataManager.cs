@@ -17,6 +17,9 @@ namespace Raven.Player
 
         private float _currentHealth;
 
+        public event Action OnTakeDamage;
+        public event Action OnDead;
+
         public PlayerDataManager(PlayerDataConfig p_config, PlayerHudManager p_playerHudManager, PlayerMovementManager p_playerMovementManager)
         {
             _playerMovementManager = p_playerMovementManager;
@@ -39,6 +42,8 @@ namespace Raven.Player
 
         public void TakeDamage(float p_value)
         {
+            OnTakeDamage?.Invoke();
+
             if (!_playerMovementManager.Dash)
             {
                 if (_currentHealth - p_value <= 0)
@@ -55,6 +60,7 @@ namespace Raven.Player
 
         private void Dead()
         {
+            OnDead?.Invoke();
             Debug.Log("PlayerDead");
         }
     }

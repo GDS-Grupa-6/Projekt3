@@ -44,6 +44,7 @@ namespace Raven.Manager
 
         public event Action<float> OnMove;
         public Action<bool> OnDash;
+        public event Action<PlayerStateName> OnDashStart;
 
         [Inject]
         public PlayerMovementManager(GameObject p_player, MovementConfig p_movementConfig, Transform p_camTransform, CameraManager p_cameraManager,
@@ -81,6 +82,7 @@ namespace Raven.Manager
             if (!_dash && IsGrounded())
             {
                 _playerStatesManager.CurrentBehaviour.ActiveDash(this);
+                OnDashStart?.Invoke(_playerStatesManager.CurrentConfig.PlayerStateName);
             }
 
             if (_moveVector.magnitude > 0)
