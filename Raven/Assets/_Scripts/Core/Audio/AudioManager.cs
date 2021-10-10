@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Raven.Core
 {
-    public enum AudioNames { Idle, Inpact, Charge, Shoot, Explosion, Dead, Walk }
+    public enum AudioNames { Idle, Inpact, Charge, Shoot, Explosion, Dead, Walk, Dash, FireDash }
 
     public class AudioManager
     {
