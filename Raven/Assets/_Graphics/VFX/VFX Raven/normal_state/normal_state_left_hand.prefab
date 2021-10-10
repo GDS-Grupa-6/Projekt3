@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5131583685209375287}
   - component: {fileID: 2999018695074210980}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Up)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6086824911947855259}
   - component: {fileID: 8653656042301794676}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Back)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453346023254715651}
   - component: {fileID: 5975589922074437291}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Low)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,6 +2195,24 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
+          time: 0.32520017
+          value: 1
+          inSlope: -0.0147249475
+          outSlope: -0.0147249475
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.32072583
+          outWeight: 0.12425992
+        - serializedVersion: 3
+          time: 0.54996735
+          value: 0
+          inSlope: -0
+          outSlope: -0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.30058384
+          outWeight: 0.8942749
+        - serializedVersion: 3
           time: 1
           value: 0
           inSlope: 0
@@ -2230,7 +2248,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_Range: {x: 1, y: 8}
+    m_Range: {x: 0.25, y: 1}
   ForceModule:
     enabled: 0
     x:
@@ -4822,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5818361798181711690}
   - component: {fileID: 9114965998935056700}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light (Front)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4914,7 +4932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2176783278572372350}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}

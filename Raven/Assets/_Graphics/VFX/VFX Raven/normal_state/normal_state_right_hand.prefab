@@ -2195,6 +2195,24 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
+          time: 0.32520017
+          value: 1
+          inSlope: -0.0147249475
+          outSlope: -0.0147249475
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.32072583
+          outWeight: 0.12425992
+        - serializedVersion: 3
+          time: 0.54996735
+          value: 0
+          inSlope: -0
+          outSlope: -0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.30058384
+          outWeight: 0.8942749
+        - serializedVersion: 3
           time: 1
           value: 0
           inSlope: 0
@@ -2230,7 +2248,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_Range: {x: 1, y: 8}
+    m_Range: {x: 0.25, y: 0.75}
   ForceModule:
     enabled: 0
     x:
@@ -4916,7 +4934,7 @@ GameObject:
   - component: {fileID: 805926712035634812}
   m_Layer: 3
   m_Name: Point Lights
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
