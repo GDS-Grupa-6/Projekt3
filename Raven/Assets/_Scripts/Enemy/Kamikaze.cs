@@ -1,4 +1,5 @@
 using Raven.Config;
+using Raven.Core;
 using Raven.Core.Interfaces;
 using Raven.Manager;
 using Raven.Player;
@@ -25,10 +26,16 @@ namespace Raven.Enemy
         private bool _dodge;
         private float _chargeTimer;
         private bool _charge = true;
+        private AudioManager _audioManager;
+        private AudioClipConditions[] _audioClipConditions;
+        private AudioSource[] _audioSource;
 
-        public Kamikaze(EnemyConfig p_enemyConfig, Transform p_player, NavMeshAgent p_navMesh,
-            Transform p_gfxTransform, CoroutinesManager p_coroutinesManager, PlayerDataManager p_playerDataManager, GameObject p_enemy)
+        public Kamikaze(EnemyConfig p_enemyConfig, Transform p_player, NavMeshAgent p_navMesh, Transform p_gfxTransform, CoroutinesManager p_coroutinesManager, 
+            PlayerDataManager p_playerDataManager, GameObject p_enemy, AudioManager p_audioManager, AudioClipConditions[] p_audioClipConditions, AudioSource[] p_audioSource)
         {
+            _audioSource = p_audioSource;
+            _audioManager = p_audioManager;
+            _audioClipConditions = p_audioClipConditions;
             _enemy = p_enemy;
             _coroutinesManager = p_coroutinesManager;
             _gfxTransform = p_gfxTransform;
@@ -97,6 +104,11 @@ namespace Raven.Enemy
 
         private void Charge()
         {
+            if (_audioSource[0].clip != _audioManager.GetCurrenAudioClipConditions(_audioClipConditions, AudioNames.Charge).AudioClip)
+            {
+                _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClipConditions, AudioNames.Charge), _audioSource[0]);
+            }
+
             if (_chargeTimer < _enemyConfig.ChargeTime)
             {
                 _chargeTimer += Time.deltaTime;
@@ -104,6 +116,7 @@ namespace Raven.Enemy
             }
             else
             {
+                _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClipConditions, AudioNames.Idle), _audioSource[0]);
                 _charge = false;
                 _chargeTimer = 0;
                 GfxReturnPosition();

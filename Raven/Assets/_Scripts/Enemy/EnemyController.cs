@@ -37,7 +37,7 @@ namespace Raven.Manager
         private bool _active;
         private float _currentHealth;
 
-        private AudioSource _audioSource;
+        [SerializeField] private AudioSource[] _audioSource;
 
         [Inject]
         public void Construct(PlayerMovementManager p_playerMovementManager, CoroutinesManager p_coroutinesManager, PlayerDataManager p_playerDataManager, AudioManager p_audioManager)
@@ -47,8 +47,6 @@ namespace Raven.Manager
             _player = p_playerMovementManager.PlayerTransform;
             _playerDataManager = p_playerDataManager;
 
-            _audioSource = GetComponent<AudioSource>();
-
             _currentHealth = _enemyConfig.MaxHealth;
         }
 
@@ -56,18 +54,18 @@ namespace Raven.Manager
         {
             NavMeshAgent navMesh = GetComponent<NavMeshAgent>();
 
-            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Idle), _audioSource);
+            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Idle), _audioSource[0]);
 
             switch (_enemyConfig.EnemyType)
             {
                 case EnemyType.Kamikaze:
                     _enemyBehaviour = new Kamikaze(_enemyConfig, _player, navMesh,
-                           _enemyGfxTransform, _coroutinesManager, _playerDataManager, gameObject);
+                           _enemyGfxTransform, _coroutinesManager, _playerDataManager, gameObject, _audioManager, _audioClips, _audioSource);
                     break;
 
                 case EnemyType.Shooter:
                     _enemyBehaviour = new Shooter(_enemyConfig, _player, navMesh,
-                        _enemyGfxTransform, _playerDataManager, gameObject, _shootPoint);
+                        _enemyGfxTransform, _playerDataManager, gameObject, _shootPoint, _audioManager, _audioClips, _audioSource);
                     break;
             }
         }
@@ -106,6 +104,7 @@ namespace Raven.Manager
             }
 
             _currentHealth -= p_value;
+            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Inpact), _audioSource[0]);
 
             if (_currentHealth <= 0)
             {
@@ -120,6 +119,7 @@ namespace Raven.Manager
 
         private void Dead()
         {
+            _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Dead), _audioSource[0]);
             Destroy(this.gameObject);
         }
 
