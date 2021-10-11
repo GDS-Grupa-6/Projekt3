@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1251187039555511835}
   - component: {fileID: 4130962638224622389}
   m_Layer: 0
-  m_Name: Torch_Decoration_Placeholder
+  m_Name: Torch_Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,6 +111,86 @@ PrefabInstance:
     - target: {fileID: 6703301943735817726, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524052919944, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524052919951, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524052919951, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.scrollSpeed.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524052919951, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.positionAmount.scalar
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524052919951, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.6862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524109265681, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524109265681, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524109265681, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.scrollSpeed.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524109265681, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.positionAmount.scalar
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676524109265682, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525527113675, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525527113678, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525527113678, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.quality
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525527113678, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525527113678, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.scrollSpeed.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525527113678, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: NoiseModule.positionAmount.scalar
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 41.333332
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 11.333333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df9c956b23d6d37459618ee662106099, type: 3}
