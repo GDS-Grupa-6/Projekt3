@@ -63,7 +63,7 @@ namespace Raven.Player
         private void Dead()
         {
             OnDead?.Invoke();
-            Debug.Log("PlayerDead");
+            _deadPanelAnimator.SetTrigger("FadeIn");
         }
     }
 }

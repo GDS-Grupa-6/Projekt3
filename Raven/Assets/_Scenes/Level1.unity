@@ -7469,6 +7469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2853b7d944eb32a4fb9ed0a981987191, type: 3}
+--- !u!95 &1106009819623936532 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 278604483, guid: 2853b7d944eb32a4fb9ed0a981987191, type: 3}
+  m_PrefabInstance: {fileID: 1106009819623936531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1216841495228873650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7775,6 +7780,10 @@ PrefabInstance:
       propertyPath: _playerReferences
       value: 
       objectReference: {fileID: 1850336363}
+    - target: {fileID: 5885417759013556698, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
+      propertyPath: _deadPanelAnimator
+      value: 
+      objectReference: {fileID: 1106009819623936532}
     - target: {fileID: 5885417759013556698, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
       propertyPath: _oneHandShootPoint
       value: 
