@@ -24,8 +24,7 @@ namespace Raven.Core.Installer
         [SerializeField] private GameObject _shootCameraLock;      
         [SerializeField] private PlayerHudReferences _hudReferences;
         [SerializeField] private Player.Collectible[] _collectibles;
-
-      
+        [SerializeField] private Animator _deadPanelAnimator;
 
         [Header("-----Configs-----")]
         [SerializeField] private MovementConfig _movementConfig;
@@ -36,7 +35,7 @@ namespace Raven.Core.Installer
 
         public override void InstallBindings()
         {
-            Container.Bind<PlayerDataManager>().AsSingle().WithArguments(_playerDataConfig);
+            Container.Bind<PlayerDataManager>().AsSingle().WithArguments(_playerDataConfig, _deadPanelAnimator);
             Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer, _playerReferences).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerHudManager>().AsSingle().WithArguments(_hudReferences, _playerDataConfig, _collectibles).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_playerReferences.Player, _movementConfig, _mainCameraTransform, _playerReferences.PlayerGroundCheck).NonLazy();
