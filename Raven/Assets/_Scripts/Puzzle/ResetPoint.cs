@@ -11,6 +11,8 @@ public class ResetPoint : MonoBehaviour
     private PlayerDataManager _playerDataManager;
 
     [SerializeField] private int _damage = 10;
+    
+    private AudioSource _audiosource;
 
     public Vector3 ResetPosition { get; set; }
     public Quaternion ResetRotation { get; set; }
@@ -25,6 +27,11 @@ public class ResetPoint : MonoBehaviour
         _playerDataManager = p_playerDataManager;
     }
 
+    private void Awake()
+    {
+        _audiosource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -32,6 +39,7 @@ public class ResetPoint : MonoBehaviour
             ResetPanel.SetTrigger("FadeIn");
             _inputManager.CanInput = false;
             _playerDataManager.TakeDamage(_damage);
+            _audiosource.Play();
         }    
     }
 
