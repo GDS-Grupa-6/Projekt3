@@ -6546,6 +6546,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7817806714087019048, guid: 33583217aea10a149b788b918a52eabe, type: 3}
   m_PrefabInstance: {fileID: 7817806714788116033}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1850336363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8632056012210830970, guid: 33583217aea10a149b788b918a52eabe, type: 3}
+  m_PrefabInstance: {fileID: 7817806714788116033}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850336359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf04dbbc8121e424b91230ca5041555a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1890969434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7854,6 +7865,10 @@ PrefabInstance:
       propertyPath: _playerLifeSlider
       value: 
       objectReference: {fileID: 927450273}
+    - target: {fileID: 5885417759013556698, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
+      propertyPath: _playerReferences
+      value: 
+      objectReference: {fileID: 1850336363}
     - target: {fileID: 5885417759013556698, guid: c5900aee1cddd0145a8cb69bf64cef98, type: 3}
       propertyPath: _oneHandShootPoint
       value: 
