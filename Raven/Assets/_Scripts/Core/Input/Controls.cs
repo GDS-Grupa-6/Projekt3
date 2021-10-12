@@ -81,6 +81,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""05acfd0e-e9a8-40b5-8737-f5da8a392916"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -391,6 +399,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Take"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25641d9e-6d84-46ae-96da-20eb5d04717b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard and mouse"",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -418,6 +437,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_DashHold = m_Player.FindAction("DashHold", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Take = m_Player.FindAction("Take", throwIfNotFound: true);
+        m_Player_ESC = m_Player.FindAction("ESC", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -475,6 +495,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_DashHold;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Take;
+    private readonly InputAction m_Player_ESC;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -487,6 +508,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @DashHold => m_Wrapper.m_Player_DashHold;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Take => m_Wrapper.m_Player_Take;
+        public InputAction @ESC => m_Wrapper.m_Player_ESC;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -520,6 +542,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Take.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTake;
                 @Take.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTake;
                 @Take.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTake;
+                @ESC.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnESC;
+                @ESC.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnESC;
+                @ESC.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnESC;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -548,6 +573,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Take.started += instance.OnTake;
                 @Take.performed += instance.OnTake;
                 @Take.canceled += instance.OnTake;
+                @ESC.started += instance.OnESC;
+                @ESC.performed += instance.OnESC;
+                @ESC.canceled += instance.OnESC;
             }
         }
     }
@@ -580,5 +608,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnDashHold(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnTake(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
     }
 }

@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "05acfd0e-e9a8-40b5-8737-f5da8a392916",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -376,6 +384,17 @@
                     "processors": "",
                     "groups": "Pad",
                     "action": "Take",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25641d9e-6d84-46ae-96da-20eb5d04717b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard and mouse",
+                    "action": "ESC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
