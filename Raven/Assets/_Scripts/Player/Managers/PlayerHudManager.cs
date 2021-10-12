@@ -121,6 +121,20 @@ namespace Raven.UI
             OnAddHealth?.Invoke(_playerHudReferences.HealthSlider.value);
         }
 
+        public void AddMaxHelthEnergy(int p_hAdd, int p_eAdd)
+        {
+            int maxH = (int)_playerHudReferences.HealthSlider.maxValue;
+            int maxE = (int)_playerHudReferences.EnergySlider.maxValue;
+
+            maxH += p_hAdd;
+            maxE += p_eAdd;
+
+            _playerHudReferences.HealthSlider.maxValue = maxH;
+            _playerHudReferences.HealthSlider.value = maxH;
+            _playerHudReferences.EnergySlider.maxValue = maxE;
+            _playerHudReferences.EnergySlider.value = maxE;
+        }
+
         public void ChangeStateImage(PlayerStateName p_playerStateName)
         {
             if (p_playerStateName == PlayerStateName.Fire)

@@ -37,6 +37,10 @@ namespace Raven.Core
         private void Awake()
         {
             _menuCanvasGroup = GetComponent<CanvasGroup>();
+            _startButton.interactable = true;
+            _exitButton.interactable = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private void Update()

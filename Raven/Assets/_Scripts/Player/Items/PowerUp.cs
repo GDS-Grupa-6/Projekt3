@@ -1,4 +1,5 @@
 using ModestTree;
+using NaughtyAttributes;
 using Raven.Player;
 using Raven.UI;
 using UnityEngine;
@@ -25,17 +26,17 @@ namespace Raven.Collectible.PowerUp
 
         private void Update()
         {
-            RaycastHit[] hits=
-            Physics.SphereCastAll(transform.position, _activeRadius, transform.forward);
+            Collider[] hits =
+            Physics.OverlapSphere(transform.position, _activeRadius);
 
             for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider == null)
+                if (hits[i] == null)
                 {
                     continue;
                 }
 
-                if (hits[i].collider.tag == "Player")
+                if (hits[i].tag == "Player")
                 {
                     _playerTransform = hits[i].transform;
                 }

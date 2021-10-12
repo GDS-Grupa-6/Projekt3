@@ -16,20 +16,15 @@ namespace Raven.Core.Installer
     {
         [SerializeField] private LayerMask _shootRaycastHits;
         [Header("-----References-----")]
-        [SerializeField] private GameObject _player;
-        [SerializeField] private Transform _mainCameraTransform;
-        [SerializeField] private Animator _playerAnimator;
+        [SerializeField] private PlayerReferences _playerReferences;
+        [SerializeField] private Transform _mainCameraTransform;   
         [SerializeField] private GameObject _shootCamera;
-        [SerializeField] private CinemachineFreeLook _tppCamera;
-        [SerializeField] private Rig[] _playerRigs;
+        [SerializeField] private CinemachineFreeLook _tppCamera;    
         [SerializeField] private GameObject _rigTarget;
-        [SerializeField] private GameObject _shootCameraLock;
-        [SerializeField] private Transform _oneHandShootPoint;
-        [SerializeField] private Transform _twoHandsShootPoint;
-        [SerializeField] private GameObject _secondWeapon;
+        [SerializeField] private GameObject _shootCameraLock;      
         [SerializeField] private PlayerHudReferences _hudReferences;
         [SerializeField] private Player.Collectible[] _collectibles;
-        [SerializeField] private Transform _playerGroundCheck;
+        [SerializeField] private Animator _deadPanelAnimator;
 
         [Header("-----Configs-----")]
         [SerializeField] private MovementConfig _movementConfig;
@@ -40,13 +35,13 @@ namespace Raven.Core.Installer
 
         public override void InstallBindings()
         {
-            Container.Bind<PlayerDataManager>().AsSingle().WithArguments(_playerDataConfig);
-            Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer, _player, _oneHandShootPoint, _twoHandsShootPoint, _secondWeapon).NonLazy();
+            Container.Bind<PlayerDataManager>().AsSingle().WithArguments(_playerDataConfig, _deadPanelAnimator);
+            Container.BindInterfacesAndSelfTo<PlayerStatesManager>().AsSingle().WithArguments(_playerStatesContainer, _playerReferences).NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerHudManager>().AsSingle().WithArguments(_hudReferences, _playerDataConfig, _collectibles).NonLazy();
-            Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_player, _movementConfig, _mainCameraTransform, _playerGroundCheck).NonLazy();
-            Container.BindInterfacesAndSelfTo<PlayerAnimatorManager>().AsSingle().WithArguments(_playerAnimator).NonLazy();
-            Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _player, _mainCameraTransform, _shootCameraLock, _movementConfig).NonLazy();
-            Container.BindInterfacesAndSelfTo<PlayerRigManager>().AsSingle().WithArguments(_playerRigs, _rigTarget, _shootRaycastHits).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerMovementManager>().AsSingle().WithArguments(_playerReferences.Player, _movementConfig, _mainCameraTransform, _playerReferences.PlayerGroundCheck).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerAnimatorManager>().AsSingle().WithArguments(_playerReferences.PlayerAnimator).NonLazy();
+            Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().WithArguments(_shootCamera, _tppCamera, _playerReferences.Player, _mainCameraTransform, _shootCameraLock, _movementConfig).NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerRigManager>().AsSingle().WithArguments(_playerReferences.PlayerRigs, _rigTarget, _shootRaycastHits).NonLazy();
         }
     }
 }
