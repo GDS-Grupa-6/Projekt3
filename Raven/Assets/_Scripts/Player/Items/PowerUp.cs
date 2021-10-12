@@ -1,4 +1,5 @@
 using ModestTree;
+using NaughtyAttributes;
 using Raven.Player;
 using Raven.UI;
 using UnityEngine;
@@ -6,13 +7,15 @@ using Zenject;
 
 namespace Raven.Collectible.PowerUp
 {
-    public enum PowerUpType { Energy, Hp }
+    public enum PowerUpType { Energy, Hp, AddHpEnergy }
     public class PowerUp : MonoBehaviour
     {
         [SerializeField] private PowerUpType _powerUpType;
         [SerializeField] private int _addValue;
         [SerializeField] private float _speed;
         [SerializeField] private float _activeRadius;
+        [SerializeField, ShowIf("_powerUpType", PowerUpType.AddHpEnergy)] private int _hpValue;
+        [SerializeField, ShowIf("_powerUpType", PowerUpType.AddHpEnergy)] private int _energyValue;
 
         private PlayerHudManager _playerHudManager;
         private Transform _playerTransform;
@@ -25,7 +28,7 @@ namespace Raven.Collectible.PowerUp
 
         private void Update()
         {
-            RaycastHit[] hits=
+            RaycastHit[] hits =
             Physics.SphereCastAll(transform.position, _activeRadius, transform.forward);
 
             for (int i = 0; i < hits.Length; i++)
@@ -61,6 +64,10 @@ namespace Raven.Collectible.PowerUp
 
                     case PowerUpType.Hp:
                         _playerHudManager.AddHealth(_addValue);
+                        break;
+
+                    case PowerUpType.AddHpEnergy:
+                        _playerHudManager.AddMaxHelthEnergy(_hpValue, _energyValue);
                         break;
                 }
 
