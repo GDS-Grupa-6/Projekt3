@@ -2116,6 +2116,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 277230094221447272, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 505760255512730078, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2440,6 +2444,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.244
       objectReference: {fileID: 0}
+    - target: {fileID: 4079108653491352957, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4196005142790133499, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -3.023
@@ -2683,6 +2691,10 @@ PrefabInstance:
     - target: {fileID: 6665478945195643065, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: _doorTransform
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6723761792292027767, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6874589536096724405, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2931,6 +2943,18 @@ PrefabInstance:
     - target: {fileID: 8525786176488049486, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949097181547058726, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949097181915363585, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029642789545737030, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9105526321984960278, guid: e1b5fca464d0a9443bf2805e443ecb0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3380,7 +3404,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 479c76c099a0ef74492c88fc0a31b343, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3762,11 +3786,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: da9d3bd3129200c40a593f6f3a25dc69, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
