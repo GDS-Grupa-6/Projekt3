@@ -7,6 +7,7 @@ using Raven.Player;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
+using System.Collections.Generic;
 
 namespace Raven.Manager
 {
@@ -16,8 +17,8 @@ namespace Raven.Manager
         [SerializeField] private EnemyConfig _enemyConfig;
         [Space]
         [SerializeField, BoxGroup("-----GFX-----")] private Transform _enemyGfxTransform;
-        [SerializeField, BoxGroup("-----GFX-----")] private Material _gfxMaterial;
-        [SerializeField, BoxGroup("-----GFX-----")] private Material _redMaterial;
+        [SerializeField, BoxGroup("-----GFX-----")] private SkinnedMeshRenderer _gfxSkinnedMesh;
+        [SerializeField, BoxGroup("-----GFX-----")] private float _changeColorTime = 2;
         [Space]
         [SerializeField, BoxGroup("-----POV-----")] private float _activateRadius;
         [SerializeField, BoxGroup("-----POV-----")] private float _activateAngle = 90;
@@ -36,6 +37,8 @@ namespace Raven.Manager
         private IEnemy _enemyBehaviour;
         private bool _active;
         private float _currentHealth;
+        private float _changeColorTimer = 0;
+        private bool _changeColor;
 
         [SerializeField] private AudioSource[] _audioSource;
 
@@ -67,6 +70,11 @@ namespace Raven.Manager
                     _enemyBehaviour = new Shooter(_enemyConfig, _player, navMesh,
                         _enemyGfxTransform, _playerDataManager, gameObject, _shootPoint, _audioManager, _audioClips, _audioSource);
                     break;
+            }
+
+            if (_changeColor)
+            {
+                TakeDameageChangeColorTimer();
             }
         }
 
@@ -105,6 +113,8 @@ namespace Raven.Manager
 
             _currentHealth -= p_value;
             _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Inpact), _audioSource[0]);
+            _changeColorTimer = 0;
+            _changeColor = true;
 
             if (_currentHealth <= 0)
             {
@@ -121,6 +131,18 @@ namespace Raven.Manager
         {
             _audioManager.PlaySound(_audioManager.GetCurrenAudioClipConditions(_audioClips, AudioNames.Dead), _audioSource[0]);
             Destroy(this.gameObject);
+        }
+
+        private void TakeDameageChangeColorTimer()
+        {
+            _gfxSkinnedMesh.material.color = Color.red;
+            _changeColorTimer += Time.deltaTime;
+
+            if (_changeColorTimer >= _changeColorTime)
+            {
+                _gfxSkinnedMesh.material.color = Color.white;
+                _changeColor = false;
+            }
         }
 
 #if UNITY_EDITOR
