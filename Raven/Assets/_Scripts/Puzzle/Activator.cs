@@ -27,6 +27,7 @@ namespace Raven.Puzzle
         [InfoBox("Transforms must be assigned", EInfoBoxType.Warning)]
         [SerializeField, Range(0.1f, 2), Tooltip("It's radius of gizmos spheres")] private float _gizmoRadius = 1f;
         [Space]
+        [SerializeField, HideIf("_activatorType", ActivatorType.Lever)] private AudioSource _torchAudioSource;
         [SerializeField] private AudioClip _openSound;
         [SerializeField] private AudioClip _closeSound;
 
@@ -164,6 +165,7 @@ namespace Raven.Puzzle
                 if (_activatorType == ActivatorType.Torch)
                 {
                     _fire.SetActive(false);
+                    _torchAudioSource.Stop();
                 }
 
                 _audioSource.Stop();
@@ -178,6 +180,7 @@ namespace Raven.Puzzle
             {
                 _openingDoor = true;
                 _fire.SetActive(true);
+                _torchAudioSource.Play();
                 PlaySound(_openSound);
             }
             else if (_activatorType == ActivatorType.Lever && p_other.tag == "Player")
