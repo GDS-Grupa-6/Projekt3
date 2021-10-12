@@ -12,8 +12,9 @@ public class PauseEndPanel : MonoBehaviour
     [SerializeField] private GameObject _reastartButton;
     [SerializeField] private GameObject _menu;
 
-    private CanvasGroup _canvasGroup;
+    [SerializeField] private CanvasGroup _canvasGroup;
     private InputManager _inputManager;
+    private Animator _animator;
 
     private bool _panelActive;
 
@@ -22,8 +23,8 @@ public class PauseEndPanel : MonoBehaviour
     {
         _inputManager = p_inputManager;
 
-        _canvasGroup = GetComponent<CanvasGroup>();
-
+        _animator = GetComponent<Animator>();
+        _animator.enabled = false;
         _canvasGroup.alpha = 0;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
@@ -56,11 +57,11 @@ public class PauseEndPanel : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-    
+
         _canvasGroup.alpha = 0;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
-        _pauseText.SetActive(false); 
+        _pauseText.SetActive(false);
         _panelActive = false;
     }
 
@@ -71,7 +72,12 @@ public class PauseEndPanel : MonoBehaviour
 
     public void SetCoreTextActive()
     {
+        _animator.enabled = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        _panelActive = true;
         _reastartButton.SetActive(false);
         _coreText.SetActive(true);
+        _animator.SetTrigger("FadeIn");
     }
 }
