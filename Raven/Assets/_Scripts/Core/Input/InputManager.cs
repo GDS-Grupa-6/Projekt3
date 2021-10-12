@@ -25,6 +25,11 @@ namespace Raven.Input
             _controls.Disable();
         }
 
+        public bool EscTrigerred()
+        {
+            return _controls.Player.ESC.triggered;
+        }
+
         public Vector2 GetMovementAxis()
         {
             if (!CanInput)
