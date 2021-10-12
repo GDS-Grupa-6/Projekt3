@@ -147,6 +147,10 @@ PrefabInstance:
       value: 26.9
       objectReference: {fileID: 0}
     - target: {fileID: 4327405959459760532, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
+      propertyPath: _gfxSkinnedMesh
+      value: 
+      objectReference: {fileID: 740989428}
+    - target: {fileID: 4327405959459760532, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
       propertyPath: _whatCanSee.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -3027,6 +3031,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 3.373, y: 43.579, z: -0.419}
+--- !u!137 &740989428 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3255798860640714480, guid: 72509c8700c58ff47b0bb348df5abe00, type: 3}
+  m_PrefabInstance: {fileID: 23738482}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &754907439 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4831498697385032636, guid: 9256365c036b4cd4b81af6f7ba8b735b, type: 3}

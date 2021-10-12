@@ -14805,8 +14805,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyConfig: {fileID: 11400000, guid: 48260839878081f4e8fdac6ba51b51e5, type: 2}
   _enemyGfxTransform: {fileID: 7174663071439531814}
-  _gfxMaterial: {fileID: 2100000, guid: 589f3f1e6c3dab54cb27baad997f6c8a, type: 2}
-  _redMaterial: {fileID: 2100000, guid: 2e625ad1ee776b4438f9240924a53e75, type: 2}
+  _gfxSkinnedMesh: {fileID: 1486718830743554879}
+  _changeColorTime: 2
   _activateRadius: 16.89
   _activateAngle: 26.8
   _whatCanSee:
@@ -29362,5 +29362,10 @@ Transform:
 --- !u!4 &4826565165346119920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5916bf7e7bc72154cb885d64e1696ba3, type: 3}
+  m_PrefabInstance: {fileID: 5004024818786862875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1486718830743554879 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3328093152658781148, guid: 5916bf7e7bc72154cb885d64e1696ba3, type: 3}
   m_PrefabInstance: {fileID: 5004024818786862875}
   m_PrefabAsset: {fileID: 0}
