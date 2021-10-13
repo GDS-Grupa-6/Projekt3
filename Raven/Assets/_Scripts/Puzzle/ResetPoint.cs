@@ -53,7 +53,7 @@ public class ResetPoint : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerTransform.position == null || !_active)
+        if (PlayerTransform == null || !_active)
         {
             return;
         }
