@@ -13,6 +13,7 @@ namespace Raven.Core
         [SerializeField] private Animator _playerHud;
         [SerializeField] private Animator _storyPanel;
         [SerializeField] private GameObject _menuCam;
+        [SerializeField] private Button _nextButton;
 
         private InputManager _inputManager;
         private Animator _animator;
@@ -57,6 +58,7 @@ namespace Raven.Core
         {
             _storyPanel.SetTrigger("NextPage");
             _currentPage++;
+            _nextButton.interactable = false;
 
             if (_currentPage == 4)
             {
