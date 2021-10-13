@@ -19,6 +19,8 @@ public class ResetPoint : MonoBehaviour
     public Transform PlayerTransform { get; set; }
     public Animator ResetPanel { get; set; }
 
+    private bool _active;
+
 
     [Inject]
     public void Construct(InputManager p_inputManager, PlayerDataManager p_playerDataManager)
@@ -40,11 +42,22 @@ public class ResetPoint : MonoBehaviour
             _inputManager.CanInput = false;
             _playerDataManager.TakeDamage(_damage);
             _audiosource.Play();
+            _active = true;
         }    
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _active = false;
     }
 
     private void Update()
     {
+        if (PlayerTransform.position == null || !_active)
+        {
+            return;
+        }
+
         if (ResetPanel.GetCurrentAnimatorStateInfo(0).IsTag("FadeOut"))
         {
             PlayerTransform.position = ResetPosition;
