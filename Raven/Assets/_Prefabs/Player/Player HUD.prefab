@@ -1644,6 +1644,7 @@ GameObject:
   - component: {fileID: 2629962925750653657}
   - component: {fileID: 7319189609371290415}
   - component: {fileID: 295497424}
+  - component: {fileID: 8742233717692371909}
   m_Layer: 5
   m_Name: Player HUD
   m_TagString: Untagged
@@ -1718,6 +1719,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!95 &8742233717692371909
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629962925750653662}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 720ef0d7f32c9d047a12d869d87f63c9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2629962925750740053
 GameObject:
   m_ObjectHideFlags: 0
