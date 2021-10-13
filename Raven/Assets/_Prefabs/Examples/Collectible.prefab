@@ -187,6 +187,8 @@ MonoBehaviour:
   _canvas: {fileID: 1621773462709820901}
   _infoUiTransform: {fileID: 1621773463204558482}
   _infoUiLockTransform: {fileID: 1621773462996682285}
+  _hpValue: 0
+  _energyValue: 0
 --- !u!65 &1621773462351956581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -596,7 +598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 780, y: 244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8061572877593742990
