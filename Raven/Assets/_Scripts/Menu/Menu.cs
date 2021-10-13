@@ -10,23 +10,13 @@ namespace Raven.Core
 {
     public class Menu : MonoBehaviour
     {
-        [SerializeField] private Button _startButton;
-        [SerializeField] private Button _exitButton;
-        [SerializeField] private CanvasGroup _storyPanel;
-        [SerializeField] private TextMeshProUGUI _storyText;
-        [SerializeField] private CanvasGroup _playerHud;
+        [SerializeField] private Animator _playerHud;
+        [SerializeField] private Animator _storyPanel;
         [SerializeField] private GameObject _menuCam;
-        [Space(10)]
-        [SerializeField] private float _fadeTime = 3;
 
-        private CanvasGroup _menuCanvasGroup;
         private InputManager _inputManager;
-
-        private bool _start;
-        private float _time;
-        private float _storyTime;
-        private bool _storyClose;
-        private float _hudTime;
+        private Animator _animator;
+        private int _currentPage = 1;
 
         [Inject]
         public void Construct(InputManager p_inputManager)
@@ -36,82 +26,49 @@ namespace Raven.Core
 
         private void Awake()
         {
-            _menuCanvasGroup = GetComponent<CanvasGroup>();
-            _startButton.interactable = true;
-            _exitButton.interactable = true;
+            _animator = GetComponent<Animator>();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            _inputManager.CanInput = false;
         }
 
         private void Update()
         {
-            if (_start)
+            if (_playerHud.GetCurrentAnimatorStateInfo(0).IsTag("End"))
+            {           
+                _inputManager.CanInput = true;
+                this.enabled = false;
+            }
+
+            if (_storyPanel.GetCurrentAnimatorStateInfo(0).IsTag("End"))
             {
-                StartGame();
+                _menuCam.SetActive(false);
+                _storyPanel.gameObject.SetActive(false);
             }
         }
 
         public void Button_StartGame()
         {
-            _startButton.interactable = false;
-            _exitButton.interactable = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            _start = true;
+            _animator.SetTrigger("FadeOut");
+            _storyPanel.SetTrigger("FadeIn");
+        }
+
+        public void Button_NextPage()
+        {
+            _storyPanel.SetTrigger("NextPage");
+            _currentPage++;
+
+            if (_currentPage == 4)
+            {
+                _playerHud.SetTrigger("FadeIn");
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         public void Button_ExitGame()
         {
             Application.Quit();
-        }
-
-        private void StartGame()
-        {
-            _time += Time.deltaTime;
-            float step = _time / (_fadeTime / 2);
-            _menuCanvasGroup.alpha = Mathf.Lerp(1, 0, step);
-
-            if (_menuCanvasGroup.alpha <= 0.2f)
-            {
-                _storyTime += Time.deltaTime;
-                float step1 = _storyTime / _fadeTime;
-                _storyPanel.alpha = Mathf.Lerp(0, 1, step1);
-            }
-
-            if (_storyPanel.alpha == 1 && !_storyClose)
-            {
-                _storyClose = true;
-                _storyTime = 0;
-            }
-
-            if (_storyClose)
-            {
-                _storyTime += Time.deltaTime;
-                float step1 = _storyTime / _fadeTime;
-                _storyPanel.alpha = Mathf.Lerp(1, 0, step1);
-
-                if (_storyPanel.alpha < 0.5f)
-                {
-                    _hudTime += Time.deltaTime;
-                    float step2 = _hudTime / _fadeTime;
-                    _playerHud.alpha = Mathf.Lerp(0, 1, step2);
-                }
-
-                if (_storyPanel.alpha < 0.2f)
-                {
-                    _menuCam.SetActive(false);
-                }
-
-                if (_playerHud.alpha > 0.4)
-                {
-                    _inputManager.CanInput = true;
-                }
-
-                if (_playerHud.alpha == 1)
-                {
-                    gameObject.SetActive(false);
-                }
-            }
         }
     }
 }
