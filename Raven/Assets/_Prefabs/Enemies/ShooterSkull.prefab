@@ -14820,7 +14820,7 @@ MonoBehaviour:
     Loop: 1
   - AudioName: 3
     AudioClip: {fileID: 8300000, guid: f9d3c49d93cea35419918ab84d58613b, type: 3}
-    Volume: 1
+    Volume: 0.24
     Loop: 0
   - AudioName: 5
     AudioClip: {fileID: 8300000, guid: 0152201e0b18b174399ceb4744163c70, type: 3}
@@ -14828,7 +14828,7 @@ MonoBehaviour:
     Loop: 0
   - AudioName: 1
     AudioClip: {fileID: 8300000, guid: f3e139662b85c5e46913a5682ccde508, type: 3}
-    Volume: 1
+    Volume: 0.4
     Loop: 0
   _audioSource:
   - {fileID: 1519013999819101395}
@@ -14842,7 +14842,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7213428986780194290}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.0025
+  m_Radius: 0.008
   m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
@@ -14854,7 +14854,7 @@ NavMeshAgent:
   m_Height: 0.01
   m_BaseOffset: 0.007
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!82 &1519013999819101395
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14875,8 +14875,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 10
-  MaxDistance: 11
+  MinDistance: 22.529839
+  MaxDistance: 22.52984
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -14971,8 +14971,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 10
-  MaxDistance: 11
+  MinDistance: 23.599724
+  MaxDistance: 23.599726
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

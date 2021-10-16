@@ -200,7 +200,7 @@ namespace Raven.UI
 
         private IEnumerator SetViewFinderCoroutine()
         {
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.25f);
             _playerHudReferences.ViewFinder.gameObject.SetActive(true);
         }
 

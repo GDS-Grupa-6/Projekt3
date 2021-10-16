@@ -30,6 +30,7 @@ namespace Raven.Puzzle
         [SerializeField, HideIf("_activatorType", ActivatorType.Lever)] private AudioSource _torchAudioSource;
         [SerializeField] private AudioClip _openSound;
         [SerializeField] private AudioClip _closeSound;
+        [SerializeField] private AudioSource _doorAudioSource;
 
         private bool _closingDoor;
         private bool _openingDoor;
@@ -107,7 +108,7 @@ namespace Raven.Puzzle
                 if (_stayOpenForAWhile)
                 {
                     StayOpenWhile();
-                    _audioSource.Stop();
+                    _doorAudioSource.Stop();
                 }
                 else if (!_stayOpen && _activatorType == ActivatorType.Torch)
                 {
@@ -118,7 +119,7 @@ namespace Raven.Puzzle
                 else
                 {
                     _openingDoor = false;
-                    _audioSource.Stop();
+                    _doorAudioSource.Stop();
                 }
             }
         }
@@ -135,6 +136,7 @@ namespace Raven.Puzzle
                 _doorAreOpened = false;
                 _closingDoor = true;
                 _stayOpenTimer = 0;
+                _play = true;
                 PlaySound(_closeSound);
             }
         }
@@ -168,7 +170,7 @@ namespace Raven.Puzzle
                     _torchAudioSource.Stop();
                 }
 
-                _audioSource.Stop();
+                _doorAudioSource.Stop();
             }
         }
 
@@ -181,6 +183,7 @@ namespace Raven.Puzzle
                 _openingDoor = true;
                 _fire.SetActive(true);
                 _torchAudioSource.Play();
+                _play = true;
                 PlaySound(_openSound);
             }
             else if (_activatorType == ActivatorType.Lever && p_other.tag == "Player")
@@ -197,6 +200,7 @@ namespace Raven.Puzzle
                 }
                 
                 _openingDoor = true;
+                _play = true;
                 PlaySound(_openSound);
             }
         }
@@ -214,6 +218,7 @@ namespace Raven.Puzzle
                 _openingDoor = false;
                 _timer = _closeTime - _percent * _closeTime;
                 _closingDoor = true;
+                _play = true;
                 PlaySound(_closeSound);
             }
         }
@@ -224,6 +229,7 @@ namespace Raven.Puzzle
             yield return new WaitForSeconds(_stayOpenTime);
             _timer = _closeTime - _percent * _closeTime;
             _closingDoor = true;
+            _play = true;
             PlaySound(_closeSound);
         }
 
@@ -231,9 +237,9 @@ namespace Raven.Puzzle
         {
             if (_play)
             {
-                _audioSource.Stop();
-                _audioSource.clip = p_audioClip;
-                _audioSource.Play();
+                _doorAudioSource.Stop();
+                _doorAudioSource.clip = p_audioClip;
+                _doorAudioSource.Play();
                 _play = false;
             }
         }
