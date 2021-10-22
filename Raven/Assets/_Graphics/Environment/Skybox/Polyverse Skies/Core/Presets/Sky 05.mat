@@ -10,10 +10,11 @@ Material:
   m_Name: Sky 05
   m_Shader: {fileID: 4800000, guid: 6fc9318f5193c094c98c0d450cd61e3b, type: 3}
   m_ShaderKeywords: _BUILTINFOG_ON _CLOUDS_ON _ENABLEBUILTINFOG_ON _ENABLECLOUDSROTATION_ON
-    _ENABLECLOUDS_ON _ENABLEPATTERN_ON _ENABLESKYPATTERNOVERLAY_ON _ENABLESTARSSUNMASK_ON
-    _ENABLESTARSTWINKLING_ON _ENABLESTARS_ON _ENABLESUNMASK_ON _ENABLESUNMOONMASK_ON
-    _ENABLESUNMOON_ON _ENABLETWINKLING_ON _PATTERNOVERLAY_ON _STARS_ON _SUNORMOON_ON
-    _USECUBEMAP_ON _USEENVIRONMENTGRADIENT_ON _USESKYPATTERNOVERLAY_ON _USETEXTURE_ON
+    _ENABLECLOUDS_ON _ENABLEPATTERN_ON _ENABLESKYPATTERNOVERLAY_ON _ENABLESTARSROTATION_ON
+    _ENABLESTARSSUNMASK_ON _ENABLESTARSTWINKLING_ON _ENABLESTARS_ON _ENABLESUNMASK_ON
+    _ENABLESUNMOONMASK_ON _ENABLESUNMOON_ON _ENABLETWINKLING_ON _PATTERNOVERLAY_ON
+    _STARS_ON _SUNORMOON_ON _USECUBEMAP_ON _USEENVIRONMENTGRADIENT_ON _USESKYPATTERNOVERLAY_ON
+    _USETEXTURE_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -68,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MoonTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bca1a5f579c02d74dbc7e7f61cda640b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
@@ -182,9 +183,9 @@ Material:
     - _Clouds: 1
     - _CloudsCat: 1
     - _CloudsHeight: -0.195
-    - _CloudsIntensity: 0.05
+    - _CloudsIntensity: 0.045
     - _CloudsLitbySun: 0
-    - _CloudsRotation: 100
+    - _CloudsRotation: 225
     - _CloudsRotationSpeed: 0.1
     - _ColorsCat: 1
     - _Contrast: 2
@@ -207,7 +208,7 @@ Material:
     - _EnableSkyPatternOverlay: 1
     - _EnableStars: 1
     - _EnableStarsHeightMask: 0
-    - _EnableStarsRotation: 0
+    - _EnableStarsRotation: 1
     - _EnableStarsSunMask: 1
     - _EnableStarsTwinkling: 1
     - _EnableSun: 0
@@ -232,7 +233,7 @@ Material:
     - _FogFill: 0
     - _FogHeight: 0.25
     - _FogIntensity: 0.518
-    - _FogSmoothness: 0.725
+    - _FogSmoothness: 0.875
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -245,7 +246,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PatternCat: 1
-    - _PatternContrast: 0.845
+    - _PatternContrast: 0
     - _PatternOverlay: 1
     - _RoatationSpeed: 0.4
     - _Rotation: 0
@@ -263,11 +264,11 @@ Material:
     - _StarsHeightMask: 0.2
     - _StarsHeigntMask: 1
     - _StarsHorizonMask: 1
-    - _StarsIntensity: 1.23
+    - _StarsIntensity: 1.15
     - _StarsLayer: 3
     - _StarsMaskPower: 1
     - _StarsRotation: 360
-    - _StarsRotationSpeed: 0.5
+    - _StarsRotationSpeed: 0.01
     - _StarsSize: 0.25
     - _StarsSunMask: 0.03
     - _SunCat: 1
@@ -307,7 +308,7 @@ Material:
     - _Color2: {r: 0.059472326, g: 0.25068596, b: 0.8088235, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
-    - _EquatorColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EquatorColor: {r: 0.12403581, g: 0.3490566, b: 0.29203472, a: 1}
     - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
     - _GroundColor: {r: 0, g: 0.29411766, b: 0.18039216, a: 1}
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
