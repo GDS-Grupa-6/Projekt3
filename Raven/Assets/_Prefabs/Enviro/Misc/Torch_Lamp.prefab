@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1338565478598022104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 141533633961439308}
+  - component: {fileID: 1605061963723825945}
+  m_Layer: 7
+  m_Name: Flame Light (Grass)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &141533633961439308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338565478598022104}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 1.551}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4710115402103878968}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1605061963723825945
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338565478598022104}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 0.22744294, g: 0.4056604, b: 0.16328466, a: 1}
+  m_Intensity: 1.25
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.02
+    m_NormalBias: 0.1
+    m_NearPlane: 0.1
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 2
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 7.72e-43, y: 1.7967534e+22, z: 7.72e-43, w: -49.667816}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &2921457406756632241
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 231636364236256238, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 231636364236256238, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2165402441391262752, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_Layer
@@ -148,6 +245,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 7313676524006342466, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7313676524052919944, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -232,13 +333,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 7313676525741354868, guid: df9c956b23d6d37459618ee662106099, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 15497
+      value: 48265
       objectReference: {fileID: 0}
     - target: {fileID: 7313676525741354869, guid: df9c956b23d6d37459618ee662106099, type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -289,5 +394,10 @@ PrefabInstance:
 --- !u!4 &8729170793402113927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6703301943735817726, guid: df9c956b23d6d37459618ee662106099, type: 3}
+  m_PrefabInstance: {fileID: 2603879982438386297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4710115402103878968 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7313676524006342465, guid: df9c956b23d6d37459618ee662106099, type: 3}
   m_PrefabInstance: {fileID: 2603879982438386297}
   m_PrefabAsset: {fileID: 0}
