@@ -28,7 +28,7 @@ MonoBehaviour:
   detailScale: 0.35
   detailStrength: 0.5
   detailOffset: -0.5
-  density: 1
+  density: 0.25
   shape: 0
   border: 0.05
   verticalOffset: 0
@@ -42,12 +42,12 @@ MonoBehaviour:
   terrainFogHeight: 25
   terrainFogMinAltitude: 0
   terrainFogMaxAltitude: 150
-  albedo: {r: 0.27450982, g: 0.69803923, b: 0.5817318, a: 1}
+  albedo: {r: 0.27450982, g: 0.69803923, b: 0.53950155, a: 1}
   brightness: 1
   deepObscurance: 1
   specularColor: {r: 1, g: 1, b: 0.8, a: 1}
-  specularThreshold: 0.637
-  specularIntensity: 0.428
+  specularThreshold: 0.625
+  specularIntensity: 1
   turbulence: 0.73
   windDirection: {x: 0.02, y: 0, z: 0}
   lightDiffusionPower: 32
