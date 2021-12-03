@@ -68,6 +68,14 @@ namespace Raven.Core
             }
         }
 
+        public void Button_SkipStory()
+        {
+                _storyPanel.SetTrigger("SkipStory");
+                _playerHud.SetTrigger("FadeIn");
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+        }
+
         public void Button_ExitGame()
         {
             Application.Quit();
