@@ -149,7 +149,10 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: 36b69046645b683449befbc0177da636, type: 2}
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - Windows Store Apps
+    - Android
+    - WebGL
   m_PerPlatformDefaultQuality:
     Android: 1
     Lumin: 2
