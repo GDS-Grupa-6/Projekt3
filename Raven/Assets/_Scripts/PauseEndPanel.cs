@@ -11,6 +11,8 @@ public class PauseEndPanel : MonoBehaviour
     [SerializeField] private GameObject _pauseText;
     [SerializeField] private GameObject _reastartButton;
     [SerializeField] private GameObject _menu;
+    [SerializeField] private GameObject _HUD;
+    [SerializeField] private GameObject _MenuCamera;
 
     [SerializeField] private CanvasGroup _canvasGroup;
     private InputManager _inputManager;
@@ -35,13 +37,14 @@ public class PauseEndPanel : MonoBehaviour
 
     private void Update()
     {
-        if (_inputManager.EscTrigerred() && !_panelActive)
+        if (_inputManager.EscTrigerred() && !_panelActive && !_MenuCamera.activeSelf)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _panelActive = true;
             _pauseText.SetActive(true);
             _canvasGroup.alpha = 1;
+            _HUD.SetActive(false);
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
             Time.timeScale = 0;
@@ -63,6 +66,7 @@ public class PauseEndPanel : MonoBehaviour
         _canvasGroup.blocksRaycasts = false;
         _pauseText.SetActive(false);
         _panelActive = false;
+        _HUD.SetActive(true);
     }
 
     public void BUTTON_Exit()
